@@ -1,0 +1,52 @@
+<mat-toolbar color="primary" class="d-flex tool justify-content-between">
+
+  <!--  <mat-toolbar-row>-->
+  <div>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon (click)="sidenav.toggle()" >menu</mat-icon>
+    </button>
+    <img class="img-fluid" src="assets/logo.png" style="height: 50px" alt="">
+<!--    <span id="titre">SIGIF</span>-->
+  </div>
+  <div class=" align-items-center justify-content-center">
+    <mat-form-field class="input-group" appearance="fill">
+      <input matInput placeholder="Recherche" (keyup)="addNewItem(input.value)" #input>
+      <button mat-button type="button" matSuffix (click)="addNewItem(input.value)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+    <!--    <input matInput type="text" class="form-control" placeholder="Recherche" aria-label="Recipient's username" aria-describedby="button-addon2">-->
+    <!--    <button mat-button type="button">-->
+    <!--      <mat-icon>search</mat-icon>-->
+    <!--    </button>-->
+  </div>
+  <div>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+<!--    <span>{{userConnected.prenom}}  {{userConnected.nom}}</span>-->
+  </div>
+  <!--  </mat-toolbar-row>-->
+
+  <span class="example-spacer"></span>
+
+  <!--  <mat-toolbar-row>-->
+  <!--    <span>{{title}}</span>-->
+  <!--    <span class="example-spacer"></span>-->
+  <!--  </mat-toolbar-row>-->
+
+</mat-toolbar>
+<mat-sidenav-container>
+  <!-- Sidenav -->
+  <mat-sidenav [ngClass]="menuClass" #sidenav [mode]="isBiggerScreen() ? 'over' : 'side'" [(opened)]="opened" [fixedInViewport]="true"
+  >
+    <app-primary-menu (newItemEvent)="addItem($event)"></app-primary-menu>
+  </mat-sidenav>
+  <!-- Main content -->
+  <mat-sidenav-content>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

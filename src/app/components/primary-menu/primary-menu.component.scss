@@ -1,0 +1,31 @@
+@use '@angular/material' as mat;
+@import "src/styles/themeProp";
+
+.menuLabel{
+  margin-left: 0.5rem;
+  text-transform: capitalize;
+  font-size: large;
+}
+
+.active{
+  background-color: red;
+  opacity: 88%;
+}
+
+.active-link{
+  opacity: 80%;
+  background-color: mat.get-color-from-palette($primary-palette);
+  color: mat.get-color-from-palette($accent-palette);
+}
+.active-link:hover{
+  background-color: mat.get-color-from-palette($primary-palette);
+  color: mat.get-color-from-palette($primary-palette);
+  opacity: 88%;
+  //font-weight: bold;
+}
+
+.inactive-link:hover{
+  background-color: mat.get-color-from-palette($accent-palette);
+  //font-weight: bold;
+  //text-decoration: underline;
+}
