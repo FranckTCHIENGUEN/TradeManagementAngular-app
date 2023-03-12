@@ -1,0 +1,31 @@
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+  padding-bottom: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+.mat-row:active{
+
+}
+div.con{
+  padding-right: 1.5rem;
+  border-radius: 2rem;
+}
+th.mat-header-cell {
+  font-size: large;
+  border-radius: 2rem;
+  text-align: center;
+}
+.mat-row:hover{
+  background-color: black;
+  opacity: 100%;
+}
+
+.demo-row-is-clicked {
+  background-color: gray;
+}

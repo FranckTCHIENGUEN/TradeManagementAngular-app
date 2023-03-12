@@ -1,0 +1,40 @@
+<div mat-dialog-title>
+  <mat-toolbar color="primary">
+    <span>Details {{numeroDetail}}</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>pencil</mat-icon>
+    </button>
+  </mat-toolbar>
+</div>
+<div mat-dialog-content>
+  <div class="row">
+    <div class="row">
+      Client : <span>franck</span> (douala) - 671452193
+    </div>
+    <div class="row">
+      <div class="col divider">
+        Montant total : <span>2552 fcfa</span>
+      </div>
+      <div class="col divider divider-boder">
+        Avance : <span>2552 fcfa</span>
+      </div>
+      <div class="col divider divider-boder">
+        Reste a payer : <span>2552 fcfa</span>
+      </div>
+      <div class="col divider divider-boder">
+        Reste a donner : <span>2552 fcfa</span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+      <mat-tab label="Element de la commande / vente">Content 1</mat-tab>
+      <mat-tab label="Paiement">Content 2</mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()" cdkFocusInitial>Fermer</button>
+</div>
