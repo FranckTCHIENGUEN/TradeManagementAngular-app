@@ -1,8 +1,8 @@
 <div class="row mt-2 justify-content-center text-center">
   <h2>Enregistrer un {{typePersonne}}</h2>
 </div>
-<div class="row h-50 align-items-center justify-content-center">
-  <form class="w-25" #form  [formGroup]="saveForm" (ngSubmit)="formSubmit()">
+<div class="row h-100 align-items-center justify-content-center">
+  <form class="w-50" #form  [formGroup]="saveForm" (ngSubmit)="formSubmit()">
     <div class="col">
       <div class="col">
         <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="outline">
@@ -17,17 +17,17 @@
       <div class="col">
         <div class="row mt-2 justify-content-center">
           <ng-container formArrayName="contact">
-            <ng-container *ngFor="let comForm of contact.controls; let i = index">
+            <ng-container *ngFor="let contact of contact.controls; let i = index">
               <div class="lesson-form-row" [formGroupName]="i">
 
                 <div class="row mt-2 justify-content-center">
                   <div class="col-8">
                     <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
                       <mat-label class="">Telephone</mat-label>
-                      <span matPrefix>+1 &nbsp;</span>
+                      <span matPrefix>+237 &nbsp;</span>
                       <input type="tel" matInput formControlName="tel"
                              [errorStateMatcher]="matcher">
-                      <mat-error class="errorMessage" *ngIf="comForm.get('tel')?.hasError('required')">
+                      <mat-error class="errorMessage" *ngIf="contact.get('tel')?.hasError('required')">
                         le telephone est requit
                       </mat-error>
                     </mat-form-field>
@@ -41,8 +41,9 @@
           </ng-container>
           <div class="row mt-2  ">
             <div class="col-12 d-flex justify-content-center">
-              <button [disabled]="!nombreContact">
-                <mat-icon (click)="addLigne()" color="primary">
+              <button mat-button (click)="addLigne()" [disabled]="nombretel()">
+                Ajouter un Contact
+                <mat-icon  color="primary">
                 <span class="material-symbols-outlined">
                   add_circle
                 </span>
@@ -58,18 +59,34 @@
       <div class="col">
         <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
           <mat-label class="">Ville</mat-label>
-          <input type="text" matInput formControlName="tel"
+          <input type="text" matInput formControlName="ville"
                  [errorStateMatcher]="matcher">
           <mat-error class="errorMessage" *ngIf="saveForm.controls['ville'].hasError('required')">
-            le nom est requit
+            la ville est requit
           </mat-error>
         </mat-form-field>
       </div>
+      <div class="col">
+        <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+          <mat-label class="">Quartier</mat-label>
+          <input type="text" matInput formControlName="quartier"
+                 [errorStateMatcher]="matcher">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col">
+      <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+        <mat-label class="">Email</mat-label>
+        <input type="text" matInput formControlName="mail"
+               [errorStateMatcher]="matcher">
+        <mat-error class="errorMessage" *ngIf="saveForm.controls['mail'].hasError('email')">
+          le mail n'est pas correct
+        </mat-error>
+      </mat-form-field>
     </div>
     <div class="row mt-5">
-      <div class="col">
-        <button (click)="formSubmit()" mat-raised-button color="primary">Connexion</button>
-      </div>
+        <button (click)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
+
     </div>
   </form>
 </div>

@@ -49,7 +49,7 @@ const routes: Routes = [
           ]
         },
         {
-          path: 'founisseur',
+          path: 'fournisseur',
           children:[
             {
               path:'',

@@ -35,6 +35,7 @@ import { ProductDetailDialogComponent } from './components/product-detail-dialog
 import { ServiceDetailDialogComponent } from './components/service-detail-dialog/service-detail-dialog.component';
 import { SaveProductDialogComponent } from './components/save-product-dialog/save-product-dialog.component';
 import { SaveServiceDialogComponent } from './components/save-service-dialog/save-service-dialog.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
     declarations: [
@@ -43,35 +44,36 @@ import { SaveServiceDialogComponent } from './components/save-service-dialog/sav
         SavePersonDialogComponent,
         FilterComponent,
         ListViewDetailDialogComponent,
-        ViewProductComponent,
+
         ProductDetailDialogComponent,
         ServiceDetailDialogComponent,
         SaveProductDialogComponent,
         SaveServiceDialogComponent,
 
     ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-        ReactiveFormsModule,
-        MatListModule,
-        MatAutocompleteModule,
-        MatRadioModule,
-        MatDatepickerModule,
-        MatSelectModule,
-        MatCardModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MatToolbarModule,
-        MatTabsModule,
-        MatDialogModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatListModule,
+    MatAutocompleteModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatCardModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatToolbarModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatExpansionModule
+  ],
     providers: [],
     exports: [
         ListViewDetailDialogComponent,

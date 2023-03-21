@@ -38,6 +38,12 @@ export class VenteComponent {
     personne:['',[
       Validators.required
     ]],
+    type:['',[
+      Validators.required
+    ]],
+    etatCommande:['',[
+      Validators.required
+    ]],
 
     dateRetrait:[null,[
       Validators.required
@@ -45,7 +51,7 @@ export class VenteComponent {
     dateCommande:[null,[
       Validators.required
     ]],
-    montantTotal:[1,[
+    montantTotal:[0,[
       Validators.required
     ]],
     avance:[0,[
@@ -57,10 +63,10 @@ export class VenteComponent {
     resteAdonner:[0,[
       Validators.required
     ]],
-    modePaiement:[null,[
-      Validators.required
-    ]],
     ligneCom:this.formBuilder.array([
+
+    ]),
+    paiement:this.formBuilder.array([
 
     ]),
   })
@@ -91,6 +97,9 @@ export class VenteComponent {
   get ligneCom (){
     return this.saveForm.controls["ligneCom"] as FormArray;
   }
+  get paiement (){
+    return this.saveForm.controls["paiement"] as FormArray;
+  }
 
   ngOnInit() {
     this.filteredOptions = this.saveForm.controls["personne"].valueChanges.pipe(
@@ -102,6 +111,7 @@ export class VenteComponent {
     );
 
     this.addLigne();
+    this.addPaiement();
   }
 
   displayFn(user: User): string {
@@ -117,15 +127,34 @@ export class VenteComponent {
   addLigne() {
     const ligneComForm = this.formBuilder.group({
       objet: ['', Validators.required],
-      type:['',[
-        Validators.required
-      ]],
-      quantite: [1, Validators.required],
-      prixUnitaire: [1, Validators.required],
-      prixTotal: [1, Validators.required],
+      description: ['', Validators.required],
+      quantite: [0, Validators.required],
+      prixUnitaire: [0, Validators.required],
+      prixTotal: [0, Validators.required],
     });
 
     this.ligneCom.push(ligneComForm);
+    this.calculmontantTotal();
+    this.calculRestepayer();
+  }
+
+  addPaiement() {
+    const paiementForm = this.formBuilder.group({
+      objet: ['', Validators.required],
+      comptePayeur: ['', Validators.required],
+      resteAPayer:[0,[
+        Validators.required
+      ]],
+      resteAdonner:[0,[
+        Validators.required
+      ]],
+      modePaiement:[null,[
+        Validators.required
+      ]],
+      montant: [0, Validators.required],
+    });
+
+    this.paiement.push(paiementForm);
     this.calculmontantTotal();
     this.calculRestepayer();
   }
@@ -200,5 +229,24 @@ export class VenteComponent {
       disable=false;
     }
     return disable;
+  }
+
+  calculAvance(index:number) {
+    let montant:number = 0;
+    for (let i = 0; i < this.paiement.length; i++) {
+      montant = montant + this.paiement.at(i).get('montant')?.value;
+    }
+    console.log(montant)
+    this.saveForm.controls.avance.patchValue(montant);
+    this.calculRestepayer();
+    this.paiement.at(index).get("resteAPayer")?.patchValue(
+      ((this.saveForm.controls.montantTotal.value as number) - (this.saveForm.controls.avance.value as number)) as number
+    )
+
+    if (this.paiement.at(index).get("resteAPayer")?.value <0){
+      this.paiement.at(index).get("resteAdonner")?.patchValue(this.paiement.at(index).get("resteAPayer")?.value*(-1))
+      this.paiement.at(index).get("resteAPayer")?.patchValue(0);
+
+    }
   }
 }

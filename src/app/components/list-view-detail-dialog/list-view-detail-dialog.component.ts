@@ -14,4 +14,8 @@ export class ListViewDetailDialogComponent {
   closeDialog() {
     this.dialogRef.close();
   }
+
+  openDialogAddPaiement() {
+
+  }
 }

@@ -24,11 +24,11 @@ export class SavePersonDialogComponent {
     contact:this.formBuilder.array([
 
     ]),
-    ville:['',[
-      Validators.required
-    ]],
+    ville:[''],
     quartier:[''],
-    mail:[''],
+    mail:['',[
+      Validators.email
+    ]],
   })
   private _matcher = new MyErrorStateMatcher();
   private _nombreContact=0;
@@ -38,8 +38,11 @@ export class SavePersonDialogComponent {
     return this._saveForm.controls["contact"] as FormArray;
   }
 
-  get nombreContact(): number {
-    return this._nombreContact;
+  nombretel(): boolean {
+    if (this._nombreContact>=4){
+      return true;
+    }
+    return false;
   }
 
   constructor(private formBuilder:FormBuilder, private dialogRef: MatDialogRef<SavePersonDialogComponent>) { }
