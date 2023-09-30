@@ -1,0 +1,10 @@
+<div mat-dialog-title>
+  <mat-toolbar color="primary">
+    <span>Details bilan du {{date | date:"EEEE dd MMMM yyyy"}} </span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+</div>
+
+<div>
+  <app-list-view [tableColumns]="columns" [tableData]="donnees"></app-list-view>
+</div>

@@ -1,6 +1,16 @@
-import {Component, EventEmitter, HostListener, ViewChild} from '@angular/core';
+import {Component, EventEmitter, HostBinding, HostListener, ViewChild} from '@angular/core';
 import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data-link-transfert.service";
 import {MatSidenav} from "@angular/material/sidenav";
+import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
+import {AppCommandClientService} from "../../../services/commandClientService/app-command-client.service";
+import {Router} from "@angular/router";
+import {ConfirmDialogComponent} from "../../components/confirm-dialog/confirm-dialog.component";
+import {ConfirmDeleteDialogComponent} from "../../components/confirm-delete-dialog/confirm-delete-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {PersonViewDetailComponent} from "../../components/person-view-detail/person-view-detail.component";
+import {ViewenterpriseDialogComponent} from "../../components/viewenterprise-dialog/viewenterprise-dialog.component";
+import {FormControl} from "@angular/forms";
+import {OverlayContainer} from "@angular/cdk/overlay";
 
 @Component({
   selector: 'app-main-page',
@@ -15,19 +25,33 @@ export class MainPageComponent {
   @ViewChild('sidenav', {static: true})
   sidenav!: MatSidenav;
 
+  @HostBinding('class') className = '';
+
+  toggleControl = new FormControl(false);
+
   addNewItem(value: string) {
     this.dataTransfert.changeName(value.trim().toLowerCase());
 
   }
 
 
-  constructor(private dataTransfert:DataLinkTransfertService) { }
+  constructor(private dataTransfert:DataLinkTransfertService,
+              private router: Router,
+              private overlay: OverlayContainer,
+              private dialog: MatDialog,) { }
 
   ngOnInit(): void {
-    // this.dataTransfert.userConnected = JSON.parse(
-    //   sessionStorage.getItem("userData") as string
-    // );
-    // this.userConnected = this.dataTransfert.userConnected;
+
+    this.toggleControl.valueChanges.subscribe((darkMode) => {
+      const darkClassName = 'my-dark-theme';
+      this.className = darkMode ? darkClassName : '';
+      if (darkMode) {
+        this.overlay.getContainerElement().classList.add(darkClassName);
+      } else {
+        this.overlay.getContainerElement().classList.remove(darkClassName);
+      }
+    });
+
     if (window.innerWidth < 768) {
       this.sidenav.fixedTopGap = 55;
       this.opened = false;
@@ -39,9 +63,15 @@ export class MainPageComponent {
 
   private _event = new EventEmitter<any>;
   title: any;
+  private _userConnected: UtilisateurDto = JSON.parse(sessionStorage.getItem('userData') as string);
 
   get event(): EventEmitter<any> {
     return this._event;
+  }
+
+
+  get userConnected(): UtilisateurDto {
+    return this._userConnected;
   }
 
   @HostListener('window:resize', ['$event'])
@@ -69,5 +99,44 @@ export class MainPageComponent {
 
   addItem(event: string) {
     this.title = event;
+  }
+
+  callDialogDetailPerson() {
+    this.dialog.open(PersonViewDetailComponent, {
+      height: '60%',
+      width: '80%',
+      disableClose:false,
+      data: {
+        person: JSON.parse(sessionStorage.getItem('userData') as string),
+        typePersonne: "utilisateur"
+      },
+    });
+  }
+
+  callDialogDetailentreprise() {
+    let userConnected: UtilisateurDto = JSON.parse(sessionStorage.getItem('userData') as string);
+    this.dialog.open(ViewenterpriseDialogComponent, {
+      height: '60%',
+      width: '80%',
+      disableClose:false,
+      data: {
+        donnee: userConnected.entreprise,
+      },
+    });
+  }
+
+  deconnexion() {
+
+    this.dialog.open(ConfirmDeleteDialogComponent, {
+      disableClose:false,
+      data:{
+        message: "Voulez-vous quitter l'application ?"
+      }
+    }).afterClosed().subscribe(value => {
+      if (value=='oui'){
+        this.router.navigate(['']);
+      }
+    });
+
   }
 }

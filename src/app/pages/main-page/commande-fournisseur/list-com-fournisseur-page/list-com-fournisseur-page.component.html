@@ -1,1 +1,25 @@
-<app-list-view></app-list-view>
+
+
+<div class="row mb-3">
+  <div class="col-3">
+    <mat-slide-toggle [(ngModel)]="isChecked">Recherche avancée</mat-slide-toggle>
+  </div>
+  <div class="col-3">
+    <button  mat-raised-button color="accent" (click)="findAll()">
+      <mat-icon>
+            <span class="material-symbols-outlined">
+            refresh
+          </span></mat-icon>
+    </button>
+  </div>
+
+</div>
+<div class="containt">
+  <div *ngIf="isChecked==true" class="side">
+    <app-filter (objetFiltre)="filter($event)" typeEnregistrement="commande fournisseur"></app-filter>
+  </div>
+  <div [class]="isChecked ? 'content' : 'content2'">
+    <app-list-view *ngIf="display==true" type="commande fournisseur" [tableColumns]="columns" [tableData]="listeVente"></app-list-view>
+
+  </div>
+</div>

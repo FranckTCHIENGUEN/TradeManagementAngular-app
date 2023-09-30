@@ -1,32 +1,69 @@
-<div class="row" *ngFor="let data for listOfData">
-  <div class="col-3">
-    <mat-card class="example-card">
-      <mat-card-header>
-        <mat-card-title-group>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-subtitle>Large</mat-card-subtitle>
-          <img mat-card-lg-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"  alt="">
-        </mat-card-title-group>
-      </mat-card-header>
-      <mat-card-content>
-
-      </mat-card-content>
-      <mat-card-actions class=" h-25 d-flex justify-content-center align-items-center">
-        <div>
-          <p>
-            Prix / Montant generer
-          </p>
-          <p>
-        <span>
-          25 000 FCFA
+<div class="mt-5 h-100">
+  <div *ngIf="listOfData.length==0" class=" w-100 d-flex justify-content-center align-items-center">
+    <p> Aucune données trouvées</p>
+  </div>
+  <div class="row me-3" >
+    <div class="col-lg-3 col-xl-4 col-md-6 col-sm-6 mb-3" *ngFor="let data of listOfData">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title-group *ngIf="typeAffichage=='produit'">
+            <mat-card-title>{{data.designation}}</mat-card-title>
+            <mat-card-subtitle>{{data.category?.nom}}</mat-card-subtitle>
+            <img mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"  alt="">
+          </mat-card-title-group>
+          <mat-card-title-group *ngIf="typeAffichage=='service'">
+            <mat-card-title>{{data.serviceDto?.nom}}</mat-card-title>
+            <mat-card-subtitle>{{data.serviceDto?.category?.nom}}</mat-card-subtitle>
+            <img mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"  alt="">
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngIf="typeAffichage=='produit'">
+<!--            <p >-->
+<!--              Prix-->
+<!--            </p>-->
+            <p class="mt-3 d-flex justify-content-center align-items-center montant">
+        <span >
+         {{data.prixunitairettc}} FCFA
         </span>
-          </p>
+            </p>
 
-        </div>
+          </div>
+          <div *ngIf="typeAffichage=='service'">
+            <p >
+              Montant generer :
+            </p>
+            <p class="mt-3 d-flex justify-content-center align-items-center montant">
+              <span>
+                {{data.ca}} FCFA
+              </span>
+            </p>
 
-        <button color="primary" (click)="callDetail(data.id)" mat-button>Detail</button>
-      </mat-card-actions>
-    </mat-card>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class=" h-25 footer">
+          <div *ngIf="typeAffichage=='produit'">
+            <p style="font-size: large; font-weight: bold">
+              Quantité :
+              <span>
+                {{data.quantite}}
+              </span>
+            </p>
+          </div>
+          <div *ngIf="typeAffichage=='service'">
+            <p style="font-size: large; font-weight: bold">
+              Nombre d'utilisation :
+              <span>
+                {{data.useNumber}}
+              </span>
+            </p>
+          </div>
+
+          <button color="primary" (click)="callDetail(data)" mat-button>Detail</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
   </div>
 </div>
+
 

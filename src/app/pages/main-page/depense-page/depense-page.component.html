@@ -1,0 +1,25 @@
+<div id="appbar" >
+  <h1>Depenses</h1>
+  <div class="row">
+    <div class="col-4">
+      <button mat-raised-button color="primary" (click)="openDialogSave()">Nouvelle depense</button>
+    </div>
+    <div class="col-4">
+      <button  mat-raised-button color="accent" (click)="findAllDepenses()">
+        <mat-icon>
+            <span class="material-symbols-outlined">
+            refresh
+          </span>
+        </mat-icon>
+      </button>
+    </div>
+    <div class="col-4">
+      <button  mat-raised-button color="primary" (click)="opendoalogCategorie()">Voir les categories</button>
+    </div>
+  </div>
+</div>
+
+<div class="content-second mt-5">
+  <app-list-view *ngIf="display==true" [tableColumns]="columns" [tableData]="listeVente"></app-list-view>
+</div>
+

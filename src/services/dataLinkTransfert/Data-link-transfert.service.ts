@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
+import {UtilisateurDto} from "../../tm-api/src-api/models/utilisateur-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import {BehaviorSubject} from "rxjs";
 export class DataLinkTransfertService {
 
   private nameSource = new BehaviorSubject<string>('');
-  // userConnected:UtilisateursDto = {};
+  userConnected:UtilisateurDto = JSON.parse(sessionStorage.getItem('userData') as string) ;
   name = this.nameSource.asObservable()
   constructor() { }
   changeName(name: string) {

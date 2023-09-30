@@ -6,72 +6,111 @@
   <div class="row mt-2 justify-content-center">
       <form [formGroup]="saveForm">
         <div class="row mt-2 justify-content-center">
-            <mat-form-field class="mat-form-field example-full-width" appearance="fill">
+            <mat-form-field *ngIf="typeEnregistrement!='commande fournisseur'" class="mat-form-field example-full-width" appearance="fill">
               <mat-label>Nom du client</mat-label>
-              <input type="text" matInput formControlName="personne" [matAutocomplete]="auto">
-              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let option of personnes | async" [value]="option">
-                  {{option.name}}
-                </mat-option>
-              </mat-autocomplete>
+              <mat-select formControlName="personne" [(value)]="selected" placeholder="choisir le client">
+                <input type="text" placeholder="entrez un nom" class="filter-input" matInput #autocompletenameSelect  (input)="manageFilterPerson(autocompletenameSelect.value)">
+<!--                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">-->
+<!--                  <mat-option *ngFor="let option of filteredOptions |async" [value]="option">-->
+<!--                    {{option.nom}} {{option.prenom}}-->
+<!--                  </mat-option>-->
+<!--                </mat-autocomplete>-->
+                <mat-option *ngFor="let person of filteredOptions | async" [value]="person" >{{person.nom}} {{person.prenom}}</mat-option>
+              </mat-select>
+
               <button matSuffix color="primary" mat-raised-button (click)="nouveauClient()">Nouveau client</button>
             </mat-form-field>
-        </div>
-        <div class="row mt-2 justify-content-center ">
-          <div class="row mt-2 justify-content-center text-center">
-            <h3>Categorie commande</h3>
-          </div>
-          <div class="row mt-2 ">
-            <div class="col-12 d-flex justify-content-center">
-              <mat-radio-group formControlName="type" value="SERVICE">
-                <mat-radio-button value="SERVICE">
-                  SERVICE
-                </mat-radio-button>
-                <mat-radio-button value="PRODUIT">
-                  PRODUIT
-                </mat-radio-button>
-              </mat-radio-group>
-            </div>
+            <mat-form-field *ngIf="typeEnregistrement=='commande fournisseur'" class="mat-form-field example-full-width" appearance="fill">
+                <mat-label>Nom Fournisseur</mat-label>
+                <input type="text"
+                       placeholder="Saisir un nom"
+                       aria-label="Nom Client"
+                       matInput
+                       #input
+                       (input)="manageFilterPerson(input.value)"
+                       formControlName="personne"
+                       [matAutocomplete]="auto2">
+                <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" [displayWith]="displayFnFournisseur">
+                  <mat-option *ngFor="let option of filteredOptionsFournisseur | async" [value]="option">
+                    {{option.nom}} {{option.prenom}}
+                  </mat-option>
+                </mat-autocomplete>
 
-          </div>
+              <button matSuffix color="primary" mat-raised-button (click)="nouveauClient()">Nouveau fournisseur</button>
+            </mat-form-field>
         </div>
+
 
         <div class="row mt-2 justify-content-center">
-          <div class="row mt-2 d-flex justify-content-center">
+          <div class="row mt-2 d-flex title justify-content-center">
             <div class="col-12 d-flex justify-content-center">
-              <h3>Element de la commande</h3>
+              <h2>Element de la commande</h2>
             </div>
           </div>
+
           <div class="row mt-2 justify-content-center">
             <ng-container formArrayName="ligneCom">
               <ng-container *ngFor="let comForm of ligneCom.controls; let i = index">
                 <div class="lesson-form-row" [formGroupName]="i">
-                  <div class="row mt-2 d-flex justify-content-center">
-                    <div class="col-12 d-flex justify-content-center">
+                  <div class="row mt-2  justify-content-center">
+                    <div class="row  sub-title justify-content-center text-center">
                       <h3>Element {{1+i}}</h3>
+                    </div>
+                  </div>
+
+                  <div class="row mt-2 justify-content-center ">
+                    <div class="row mt-2  justify-content-center text-center">
+                      <h4>Categorie commande</h4>
+                    </div>
+                    <div class="row mt-2 ">
+                      <div class="col-12 d-flex justify-content-center">
+                        <mat-radio-group formControlName="type" value="SERVICE">
+                          <mat-radio-button *ngIf="typeEnregistrement!='commande fournisseur'" value="SERVICE">
+                            SERVICE
+                          </mat-radio-button>
+                          <mat-radio-button value="PRODUIT">
+                            PRODUIT
+                          </mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+
                     </div>
                   </div>
 
                   <div class="row mt-2 justify-content-center">
                     <div class="col-8">
-                      <div class="row mt-2 justify-content-center">
-                        <div class="col">
+                      <div  class="row mt-2 justify-content-center">
+                        <div *ngIf="ligneCom.at(i).get('type')?.value=='PRODUIT'" class="col">
                           <mat-form-field class="mat-form-field example-full-width" appearance="fill">
-                            <mat-label>{{type}}</mat-label>
-                            <input type="text" matInput formControlName="objet" [matAutocomplete]="auto">
-                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                              <mat-option *ngFor="let option of personnes | async" [value]="option">
-                                {{option.name}}
+                            <mat-label>{{ligneCom.at(i).get('type')?.value}}</mat-label>
+
+                            <input type="text" matInput formControlName="objet" (input)="manageChangeFilter(i)" [matAutocomplete]="autoElement">
+                            <mat-autocomplete  #autoElement="matAutocomplete" [displayWith]="displayFnElement">
+                              <mat-option  *ngFor="let option of filteredElement | async" [value]="option">
+                                {{option.designation}}
                               </mat-option>
                             </mat-autocomplete>
-                            <button matSuffix mat-raised-button color="primary" (click)="nouveau()">Nouveau</button>
+                            <button matSuffix mat-raised-button color="primary" (click)="nouveau(i)">Nouveau</button>
+                          </mat-form-field>
+                        </div>
+                        <div *ngIf="ligneCom.at(i).get('type')?.value=='SERVICE'" class="col">
+                          <mat-form-field class="mat-form-field example-full-width" appearance="fill">
+                            <mat-label>{{ligneCom.at(i).get('type')?.value}}</mat-label>
+                            <input type="text" matInput  (input)="manageChangeFilter(i)" formControlName="objet" [matAutocomplete]="autoElement2">
+                            <mat-autocomplete  #autoElement2="matAutocomplete" [displayWith]="displayFnElementService">
+                              <mat-option  *ngFor="let option of filteredElement2 | async" [value]="option.serviceDto">
+                                {{option.serviceDto?.nom}}
+                              </mat-option>
+                            </mat-autocomplete>
+                            <button matSuffix mat-raised-button color="primary" (click)="nouveau(i)">Nouveau</button>
                           </mat-form-field>
                         </div>
 
                         <div class="col">
                           <mat-form-field appearance="fill" floatLabel="always">
                             <mat-label>Quantité</mat-label>
-                            <input matInput (change)="calculmontant(i)" required="true" formControlName="quantite" type="number" min="1">
+                            <input matInput (input)="calculmontant(i)" required="true" formControlName="quantite" type="number" min="1">
+<!--                            <mat-hint *ngIf="saveForm.controls.type.value=='PRODUIT'">quantité en stock :  </mat-hint>-->
                           </mat-form-field>
                         </div>
                       </div>
@@ -85,21 +124,28 @@
                         <div class="col">
                           <mat-form-field appearance="fill">
                             <mat-label>Prix unitaire</mat-label>
-                            <input matInput required="true" (change)="calculmontant(i)" formControlName="prixUnitaire" type="number" min="1">
+                            <input matInput required="true" (input)="calculmontant(i)" formControlName="prixUnitaire" type="number" min="1">
                             <span matSuffix>FCFA&nbsp;</span>
                           </mat-form-field>
                         </div>
                         <div class="col">
                           <mat-form-field appearance="fill" floatLabel="always">
                             <mat-label>Montant</mat-label>
-                            <input matInput required="true" formControlName="prixTotal" readonly="true" type="number" min="1">
+                            <input matInput formControlName="prixTotal" readonly="true" type="number" min="1">
                             <span matSuffix>FCFA&nbsp;</span>
                           </mat-form-field>
                         </div>
                       </div>
                     </div>
                     <div class="col-2">
-                      <mat-icon color="accent" class="delete-btn" fontIcon="delete" (click)="deleteLigneCom(i)"></mat-icon>
+                      <button mat-raised-button color="warn" (click)="deleteLigneCom(i)">
+                        Supprimer l'element
+                        <mat-icon size="25" class="ms-2"  >
+                          <span class="material-symbols-outlined">
+                            delete
+                          </span>
+                        </mat-icon>
+                      </button>
                     </div>
                   </div>
 
@@ -108,7 +154,7 @@
             </ng-container>
             <div class="row mt-2  ">
               <div class="col-12 d-flex align-items-center justify-content-center">
-                <button mat-button (click)="addLigne()">
+                <button mat-raised-button  (click)="addLigne()">
                   Ajouter un Element
                   <mat-icon class="ms-2"  color="primary">
                 <span class="material-symbols-outlined">
@@ -123,14 +169,14 @@
           </div>
         </div>
         <div class="row mt-2 justify-content-center">
-          <div class="row mt-2 justify-content-center text-center">
+          <div class="row mt-2 title justify-content-center text-center">
             <h2>Details Financiers</h2>
           </div>
           <ng-container formArrayName="paiement">
             <ng-container *ngFor="let paieForm of paiement.controls; let i = index">
               <div class="lesson-form-row" [formGroupName]="i">
                 <div class="row mt-2 justify-content-center ">
-                  <div class="row mt-2 justify-content-center text-center">
+                  <div class="row sub-title mt-2 justify-content-center text-center">
                     <h3>Details Paiement {{1+i}}</h3>
                   </div>
 
@@ -141,21 +187,21 @@
                     <div class="col-3">
                       <mat-form-field appearance="fill">
                         <mat-label>Mode de paiement</mat-label>
-                        <mat-select formControlName="modePaiement" [(value)]="selected" placeholder="choisir un mode">
-                          <mat-option>None</mat-option>
-                          <mat-option value="option1">Option 1</mat-option>
-                          <mat-option value="option2">Option 2</mat-option>
-                          <mat-option value="option3">Option 3</mat-option>
+                        <mat-select formControlName="modePaiement"  placeholder="choisir un mode" (change)="calculmax(i)">
+                          <mat-option value="ORANGE_MONNEY" >ORANGE_MONNEY</mat-option>
+                          <mat-option value="MOBILE_MONNEY" >MOBILE_MONNEY</mat-option>
+                          <mat-option *ngIf="modeVisible == true" value="REMBOURSSEMENT" >REMBOURSSEMENT</mat-option>
+                          <mat-option value="ESPECE" >ESPECE</mat-option>
                         </mat-select>
                       </mat-form-field>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3" *ngIf="paiement.at(i).get('modePaiement')?.value != 'ESPECE' ">
                       <mat-form-field class="mat-form-field example-full-width" appearance="fill">
                         <mat-label>Compte payeur</mat-label>
-                        <input type="text" matInput formControlName="comptePayeur" [matAutocomplete]="auto">
-                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                          <mat-option *ngFor="let option of personnes | async" [value]="option">
-                            {{option.name}}
+                        <input type="text"  (input)="manageChangeFilterPaiement(i)" matInput formControlName="comptePayeur" [matAutocomplete]="autoPaiement">
+                        <mat-autocomplete #autoPaiement="matAutocomplete" [displayWith]="displayFnPaiement">
+                          <mat-option *ngFor="let option of filteredOptions | async" [value]="option.compteClientDto">
+                            {{option.nom}} {{option.prenom}}
                           </mat-option>
                         </mat-autocomplete>
                       </mat-form-field>
@@ -163,13 +209,20 @@
                     <div class="col-3">
                       <mat-form-field appearance="fill">
                         <mat-label>Montant</mat-label>
-                        <input matInput required="true" (change)="calculAvance(i)" formControlName="montant" type="number" min="1">
+                        <input matInput required="true" (input)="calculAvance(i)" formControlName="montant" [max]="calculmax(i)" type="number" min="0">
                         <span matSuffix>FCFA&nbsp;</span>
-                        <mat-hint>Max : </mat-hint>
+                        <mat-hint *ngIf="paiement.at(i).get('modePaiement')?.value == 'REMBOURSSEMENT' ">Max : {{calculmax(i)}} </mat-hint>
                       </mat-form-field>
                     </div>
                     <div class="col-2">
-                      <mat-icon color="accent" class="delete-btn" fontIcon="delete" (click)="deleteLigneCom(i)"></mat-icon>
+                      <button mat-raised-button color="warn" (click)="deleteLignePai(i)">
+                        Supprimer le Paiemenent
+                        <mat-icon size="25" class="ms-2" >
+                          <span class="material-symbols-outlined">
+                            delete
+                          </span>
+                        </mat-icon>
+                      </button>
                     </div>
                   </div>
 
@@ -178,9 +231,9 @@
           </ng-container>
           <div class="row mt-2  ">
             <div class="col-12 d-flex align-items-center justify-content-center">
-              <button mat-button (click)="addPaiement()">
+              <button mat-raised-button color="primary" (click)="addPaiement()">
                 Ajouter un Paiemenent
-                <mat-icon size="25" class="ms-2"  color="primary">
+                <mat-icon size="25" class="ms-2">
                 <span class="material-symbols-outlined">
                   add_circle
                 </span>
@@ -192,7 +245,7 @@
           </div>
         </div>
         <div class="row mt-2 justify-content-center">
-          <div class="row mt-2 justify-content-center text-center">
+          <div class="row mt-2 title d-flex align-items-center justify-content-center text-center">
             <h3>Details</h3>
           </div>
           <div class="row mt-2 justify-content-center">
@@ -206,14 +259,21 @@
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </div>
-            <div class="col-3">
+            <div *ngIf="typeEnregistrement!='vente'" class="col-3">
+              <mat-form-field appearance="fill">
+                <mat-label *ngIf="typeEnregistrement=='commande client'">Date de retrait</mat-label>
+                <mat-label *ngIf="typeEnregistrement=='commande fournissuer'">Date de livraison</mat-label>
+                <input  matInput formControlName="dateRetrait" [matDatepicker]="picker2">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-3" *ngIf="typeEnregistrement !='vente'">
               <mat-form-field appearance="fill">
                 <mat-label>Etat commande</mat-label>
-                <mat-select formControlName="etatCommande" [(value)]="selected" placeholder="choisir un mode">
-                  <mat-option>None</mat-option>
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option2">Option 2</mat-option>
-                  <mat-option value="option3">Option 3</mat-option>
+                <mat-select formControlName="etatCommande"  placeholder="choisir un mode">
+                  <mat-option *ngFor="let etat of etatCommande " [value]="etat" >{{etat}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -222,48 +282,37 @@
             <div class="col-3">
               <mat-form-field appearance="fill">
                 <mat-label>Montant total</mat-label>
-                <input matInput required="true" formControlName="montantTotal" [readonly]="true" type="number" min="1">
+                <input matInput formControlName="montantTotal" [readonly]="true" type="number" min="1">
                 <span matSuffix>FCFA&nbsp;</span>
               </mat-form-field>
             </div>
             <div class="col-3">
               <mat-form-field appearance="fill" floatLabel="always">
                 <mat-label>Avance</mat-label>
-                <input matInput required="true" readonly="true" (change)="calculRestepayer()" formControlName="avance" type="number" min="1">
-                <span matSuffix>FCFA&nbsp;</span>
-              </mat-form-field>
-            </div>
-            <div class="col-3">
-              <mat-form-field appearance="fill" floatLabel="always">
-                <mat-label>Reste a payer</mat-label>
-                <input matInput required="true" formControlName="resteAPayer" [readonly]="true" type="number" min="0">
+                <input matInput readonly="true" (change)="calculRestepayer()" formControlName="avance" type="number" min="1">
                 <span matSuffix>FCFA&nbsp;</span>
               </mat-form-field>
             </div>
             <div class="row mt-2 justify-content-center">
               <div class="col-3">
                 <mat-form-field appearance="fill" floatLabel="always">
-                  <mat-label>Reste a donner</mat-label>
-                  <input matInput required="true" formControlName="resteAdonner" [readonly]="true" type="number" min="0">
+                  <mat-label>Reste a payer</mat-label>
+                  <input matInput formControlName="resteAPayer" [readonly]="true" type="number" min="0">
                   <span matSuffix>FCFA&nbsp;</span>
                 </mat-form-field>
               </div>
               <div class="col-3">
-                <mat-form-field appearance="fill">
-                  <mat-label>Date de retrait</mat-label>
-                  <input  matInput formControlName="dateRetrait" [matDatepicker]="picker2">
-                  <mat-hint>MM/DD/YYYY</mat-hint>
-                  <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-                  <mat-datepicker #picker2></mat-datepicker>
+                <mat-form-field appearance="fill" floatLabel="always">
+                  <mat-label>Reste a donner</mat-label>
+                  <input matInput formControlName="resteAdonner" [readonly]="true" type="number" min="0">
+                  <span matSuffix>FCFA&nbsp;</span>
                 </mat-form-field>
               </div>
             </div>
-
           </div>
         </div>
-
         <div class="row mt-2 justify-content-center">
-          <button mat-flat-button color="primary" [disabled]="isDisable()" (click)="formSubmit()" >Enregistrer</button>
+          <button mat-flat-button color="primary"  (click)="formSubmit()" >Enregistrer</button>
         </div>
       </form>
   </div>

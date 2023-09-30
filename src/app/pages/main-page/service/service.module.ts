@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { ServiceRoutingModule } from './service-routing.module';
 import { ServiceComponent } from './service.component';
+import {MatButtonModule} from "@angular/material/button";
+import {ProduitPageModule} from "../produit-page/produit-page.module";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -11,7 +14,10 @@ import { ServiceComponent } from './service.component';
   ],
   imports: [
     CommonModule,
-    ServiceRoutingModule
+    ServiceRoutingModule,
+    MatButtonModule,
+    MatIconModule,
+    ProduitPageModule
   ]
 })
 export class ServiceModule { }

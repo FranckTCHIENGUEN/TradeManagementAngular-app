@@ -8,3 +8,17 @@
   font-size: large;
   text-align: end;
 }
+.ligneCom{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border:0.2rem solid #fc5802;
+  color: #000000;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  .text-center{
+    font-size: larger;
+  }
+}
+

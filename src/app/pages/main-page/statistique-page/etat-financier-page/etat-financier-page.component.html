@@ -1,0 +1,155 @@
+<app-filtre-stat (objetFiltre)="callApi($event)" typeFiltre="etat financier"></app-filtre-stat>
+
+<div class="mt-2 text-center" *ngIf="filtre.isMois==true && filtre.isAnnee==true">
+  Etat financier du mois de {{filtre.mois | date :"MMMM"}} {{filtre.annee1}}
+</div>
+
+<div class="mt-2 text-center" *ngIf="filtre.isMois==false && filtre.isAnnee==true">
+  Etat financier de la periode allant de {{filtre.annee1 }} à {{filtre.annee2}}
+</div>
+
+<div class="mt-2">
+  <div class="row w-100">
+    <div class="col-4">
+      <mat-card class="stat">
+        <mat-card-header>
+          <mat-list-item >
+            <div class="d-flex align-items-center justify-content-lg-start">
+              <p>
+                <mat-icon color="primary">
+              <span class="material-symbols-outlined">
+                info
+              </span>
+                </mat-icon>
+              </p>
+
+              <p>Ventes de produit</p>
+            </div>
+
+          </mat-list-item>
+        </mat-card-header>
+        <mat-card-content class="content">
+          {{etatfinancier.venteProduits}} FCFA
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-card class="stat">
+        <mat-card-header>
+          <mat-list-item >
+            <div class="d-flex align-items-center justify-content-lg-start">
+              <p>
+                <mat-icon color="primary">
+              <span class="material-symbols-outlined">
+                info
+              </span>
+                </mat-icon>
+              </p>
+
+              <p>Ventes de service</p>
+            </div>
+
+          </mat-list-item>
+        </mat-card-header>
+        <mat-card-content class="content">
+          {{etatfinancier.venteService}} FCFA
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-card class="stat">
+        <mat-card-header>
+          <mat-list-item >
+            <div class="d-flex align-items-center justify-content-lg-start">
+              <p>
+                <mat-icon color="primary">
+              <span class="material-symbols-outlined">
+                info
+              </span>
+                </mat-icon>
+              </p>
+
+              <p>Montant des achats</p>
+            </div>
+
+          </mat-list-item>
+        </mat-card-header>
+        <mat-card-content class="content">
+          {{etatfinancier.montantAchat}} FCFA
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row mt-2 w-100">
+
+    <div class="col-4">
+      <mat-card class="stat">
+        <mat-card-header>
+          <mat-list-item >
+            <div class="d-flex align-items-center justify-content-lg-start">
+              <p>
+                <mat-icon color="primary">
+              <span class="material-symbols-outlined">
+                info
+              </span>
+                </mat-icon>
+              </p>
+
+              <p>Commandes fournisseurs</p>
+            </div>
+
+          </mat-list-item>
+        </mat-card-header>
+        <mat-card-content class="content">
+          {{etatfinancier.commandeFournisseur}} FCFA
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-card class="stat">
+        <mat-card-header>
+          <mat-list-item >
+            <div class="d-flex align-items-center justify-content-lg-start">
+              <p>
+                <mat-icon color="primary">
+              <span class="material-symbols-outlined">
+                info
+              </span>
+                </mat-icon>
+              </p>
+
+              <p>CA</p>
+            </div>
+
+          </mat-list-item>
+        </mat-card-header>
+        <mat-card-content class="content">
+          {{etatfinancier.ca}} FCFA
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-card class="stat">
+        <mat-card-header>
+          <mat-list-item >
+            <div class="d-flex align-items-center justify-content-lg-start">
+              <p>
+                <mat-icon color="primary">
+              <span class="material-symbols-outlined">
+                info
+              </span>
+                </mat-icon>
+              </p>
+
+              <p>Benefice</p>
+            </div>
+
+          </mat-list-item>
+        </mat-card-header>
+        <mat-card-content class="content">
+          {{etatfinancier.benefice}} FCFA
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

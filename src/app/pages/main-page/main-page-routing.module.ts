@@ -22,7 +22,7 @@ const routes: Routes = [
           ]
         },
         {
-          path: 'command',
+          path: 'command-client',
           children:[
             {
               path:'',
@@ -90,6 +90,24 @@ const routes: Routes = [
             {
               path: '',
               loadChildren: () => import('./commande-fournisseur/commande-fournisseur.module').then(m => m.CommandeFournisseurModule)
+            },
+          ]
+        },
+        {
+          path: 'achats',
+          children:[
+            {
+              path: '',
+              loadChildren: () => import('./depense-page/depense-page.module').then(m => m.DepensePageModule)
+            },
+          ]
+        },
+        {
+          path: 'compta',
+          children:[
+            {
+              path: '',
+              loadChildren: () => import('./compta-page/compta-page.module').then(m => m.ComptaPageModule)
             },
           ]
         },

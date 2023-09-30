@@ -1,0 +1,17 @@
+.stat{
+  border: 0.2rem outset var(--bs-primary);
+  border-radius: 2rem 0 2rem;
+}
+.content{
+  color: var(--bs-danger);
+  font-weight: bold;
+  font-size: large;
+  text-align: end;
+}
+
+.text-center{
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}

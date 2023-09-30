@@ -1,0 +1,37 @@
+<div class="row mb-3">
+  <div class="col-3">
+    <mat-slide-toggle [(ngModel)]="isChecked">Afficher compta global</mat-slide-toggle>
+  </div>
+</div>
+<div class="containt">
+  <div class="ms-15 side" *ngIf="isChecked==true">
+      <div class=" divider divider-boder">
+        CA : <span class="important">{{bilan.ca}} Fcfa</span>
+      </div>
+      <div class=" divider divider-boder">
+        Depense : <span class="important">{{bilan.depense}} Fcfa</span>
+      </div>
+      <div class=" divider divider-boder">
+        Avance : <span class="important">{{bilan.avance}} Fcfa</span>
+      </div>
+      <div class=" divider divider-boder">
+        Avance sur Depense : <span class="important">{{bilan.avanceDepense}} Fcfa</span>
+      </div>
+      <div class=" divider divider-boder">
+        Rembourssement : <span class="important">{{bilan.rembourssement}} Fcfa</span>
+      </div>
+      <div class=" divider divider-boder">
+        Rembourssement sur depense : <span class="important">{{bilan.rembourssementDepense}} Fcfa</span>
+      </div>
+      <div class=" divider divider-boder">
+        Reste a payer : <span class="important">{{bilan.resteApayer}} Fcfa</span>
+      </div>
+      <div class=" divider divider-boder">
+        Reste a payer sur depense : <span class="important">{{bilan.resteApayerDepense}} Fcfa</span>
+      </div>
+  </div>
+
+  <div [class]="isChecked ? 'content' : 'content2'">
+    <app-list-view type="bilan comptable" [tableData]="detail" [tableColumns]="columns"></app-list-view>
+  </div>
+</div>

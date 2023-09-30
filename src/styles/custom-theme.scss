@@ -24,11 +24,11 @@ $my-custom-dark-theme: mat.define-dark-theme((
     warn: $my-custom-dark-warn
   )
 ));
+@include mat.all-component-themes($my-custom-light-theme);
+@include mat.strong-focus-indicators-theme($my-custom-light-theme);
 
-@include mat.all-component-themes($my-custom-dark-theme);
-@include mat.strong-focus-indicators-theme($my-custom-dark-theme);
 
-.my-light-theme {
-  @include mat.all-component-themes($my-custom-light-theme);
-  @include mat.strong-focus-indicators-theme($my-custom-light-theme);
+.my-dark-theme {
+  @include mat.all-component-themes($my-custom-dark-theme);
+  @include mat.strong-focus-indicators-theme($my-custom-dark-theme);
 }

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {MyErrorStateMatcher} from "../../ErrorMatcher";
 import {Router} from "@angular/router";
+import {AuthentificationRequest} from "../../../tm-api/src-api/models/authentification-request";
+import {AppAuthenticationService} from "../../../services/authentification/app-authentication.service";
 
 @Component({
   selector: 'app-login-page',
@@ -10,21 +12,23 @@ import {Router} from "@angular/router";
 })
 export class LoginPageComponent {
   loginForm = this.formBuilder.nonNullable.group({
-    login:['',[Validators.required]],
+    login:['',[Validators.required, Validators.email]],
     motDePasse:['',[Validators.required, Validators.minLength(1)]]
   });
-  // authRequest: AuthentificationRequest = {};
+  authRequest: AuthentificationRequest = {};
   matcher = new MyErrorStateMatcher();
   hide = true;
   error = false;
 
-  constructor(private formBuilder :FormBuilder, private router:Router) {
-    // if (sessionStorage.getItem("userData")){
-    //   sessionStorage.removeItem("userData")
-    // }
-    // if (sessionStorage.getItem("connectedUser")){
-    //   sessionStorage.removeItem("connectedUser")
-    // }
+
+  constructor(private formBuilder :FormBuilder, private router:Router,
+              private authService: AppAuthenticationService) {
+    if (sessionStorage.getItem("userData")){
+      sessionStorage.removeItem("userData")
+    }
+    if (sessionStorage.getItem("connectedUser")){
+      sessionStorage.removeItem("connectedUser")
+    }
   }
 
   ngOnInit(): void {
@@ -34,24 +38,24 @@ export class LoginPageComponent {
 
     if (this.loginForm.valid){
 
-      this.router.navigate(["/mainPage"]);
-      // this.authRequest.login = this.loginForm.value.login;
-      // this.authRequest.motDePasse = this.loginForm.value.motDePasse;
-      //
-      // this.authService.login(this.authRequest)
-      //   .subscribe(
-      //     data =>{
-      //       this.error=false;
-      //       this.authService.setConnectedUser(data);
-      //       if (this.authService.isUserLogedAndTokenValid()){
-      //         this.authService.loadRegister(this.authRequest);
-      //       }
-      //     },
-      //     error =>{
-      //       this.error = true
-      //       console.log(error);
-      //     }
-      //   );
+      // this.router.navigate(["/mainPage"]);
+      this.authRequest.login = this.loginForm.value.login;
+      this.authRequest.motDePasse = this.loginForm.value.motDePasse;
+
+      this.authService.login(this.authRequest)
+        .subscribe(
+          data =>{
+            this.error=false;
+            this.authService.setConnectedUser(data);
+            if (this.authService.isUserLogedAndTokenValid()){
+              this.authService.loadRegister(this.authRequest);
+            }
+          },
+          error =>{
+            this.error = true
+            console.log(error);
+          }
+        );
     }
   }
 }

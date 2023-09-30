@@ -13,14 +13,22 @@
 }
 
 .active-link{
-  opacity: 80%;
+  //opacity: 80%;
   background-color: mat.get-color-from-palette($primary-palette);
-  color: mat.get-color-from-palette($accent-palette);
+  //color: mat.get-color-from-palette($accent-palette);
+  color: white;
+  font-weight: bold;
 }
 .active-link:hover{
   background-color: mat.get-color-from-palette($primary-palette);
   color: mat.get-color-from-palette($primary-palette);
   opacity: 88%;
+  //font-weight: bold;
+}
+.link:hover{
+  background-color: mat.get-color-from-palette($warn-palette);
+  color: white;
+  //opacity: 88%;
   //font-weight: bold;
 }
 

@@ -1,6 +1,6 @@
 <mat-nav-list >
   <div  *ngFor="let data of navData">
-    <a href="javascript:void(0)" routerLink="{{data.routerLink}}"
+    <a class="link" href="javascript:void(0)" routerLink="{{data.routerLink}}"
        routerLinkActive="active-link"
        mat-list-item  (click)="activeLink = data.routerLink && addNewItem(data.label)">
       <img src='{{data.icon}}' height="30" alt="">

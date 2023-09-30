@@ -10,20 +10,20 @@ import {ServiceDetailDialogComponent} from "../service-detail-dialog/service-det
   styleUrls: ['./view-product.component.scss']
 })
 export class ViewProductComponent {
-  @Input() listOfData: any;
+  @Input() listOfData: Array<any> = [];
   @Input() typeAffichage: string | undefined;
 
   constructor(private dialog: MatDialog,) {
   }
 
-  callDetail(id:number) {
+  callDetail(data:any) {
     if (this.typeAffichage==='produit'){
       this.dialog.open(ProductDetailDialogComponent, {
         height: '90%',
-        width: '90%',
+        width: '30%',
         disableClose:false,
         data: {
-          id: id,
+          data: data,
         },
       });
     }
@@ -33,7 +33,7 @@ export class ViewProductComponent {
         width: '90%',
         disableClose:false,
         data: {
-          id: id,
+          data: data,
         },
       });
     }

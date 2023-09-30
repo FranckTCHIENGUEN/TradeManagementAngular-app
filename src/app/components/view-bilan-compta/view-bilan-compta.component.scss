@@ -1,0 +1,41 @@
+.divider{
+  padding: 0.5rem;
+}
+.divider-boder{
+  border-bottom: 0.5rem solid red;
+}
+
+.accordion{
+  border-bottom: black solid 0.1rem;
+  margin-top: 0.5rem;
+}
+.important{
+  font-weight: bold;
+}
+.important-Desription{
+  font-weight: bold;
+}
+.containt{
+  display: flex;
+
+}
+
+.side{
+  flex: 2;
+  height: 100vh;
+  overflow: scroll;
+  //line-height: 300px;
+}
+
+.content{
+  flex: 10;
+  height: 100vh;
+  overflow: scroll;
+  //line-height: 300px;
+}
+.content2{
+  flex: 12;
+  height: 100vh;
+  //overflow: scroll;
+  //line-height: 300px;
+}

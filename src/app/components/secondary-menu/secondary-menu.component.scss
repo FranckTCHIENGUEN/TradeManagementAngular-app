@@ -19,6 +19,7 @@
 .active-link{
   //background-color: mat.get-color-from-palette($warn-palette);
   background-color: red;
+  color: white;
 }
 .active-link:hover{
   //background-color: mat.get-color-from-palette($warn-palette);
@@ -26,6 +27,11 @@
   opacity: 88%;
   font-weight: bold;
   //text-decoration: underline;
+}
+
+.title{
+  display: flex;
+  flex-direction: row;
 }
 
 .inactive-link:hover{

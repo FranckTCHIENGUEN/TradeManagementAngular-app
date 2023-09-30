@@ -1,0 +1,56 @@
+<form [formGroup]="saveForm">
+  <div class="row">
+    <div class="col-2">
+      <div class="row">
+        <p><mat-checkbox formControlName="isMois">Par mois</mat-checkbox></p>
+      </div>
+      <div class="row">
+        <p><mat-checkbox formControlName="isAnnee">Par année</mat-checkbox></p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row" *ngIf="saveForm.controls.isMois.value==true && typeFiltre=='etat financier'
+      && saveForm.controls.isAnnee.value==true">
+        <mat-form-field>
+          <mat-label>Mois</mat-label>
+          <mat-select formControlName="mois">
+            <mat-option *ngFor="let data of month" [value]="data.numero">
+              {{data.nom}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Année</mat-label>
+          <mat-select formControlName="annee1">
+            <mat-option *ngFor="let data of year " [value]="data">
+              {{data}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="row" *ngIf="saveForm.controls.isMois.value==false && saveForm.controls.isAnnee.value==true">
+        <mat-form-field>
+          <mat-label>Annee 1</mat-label>
+          <mat-select formControlName="annee1">
+            <mat-option *ngFor="let data of year" [value]="data">
+              {{data}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Annee 2</mat-label>
+          <mat-select formControlName="annee2">
+            <mat-option *ngFor="let data of year" [value]="data">
+              {{data}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <button [disabled]="!saveForm.valid" (click)="formSubmit()" (keydown.enter)="formSubmit()"
+            mat-raised-button color="primary">Rechercher</button>
+  </div>
+</form>
+

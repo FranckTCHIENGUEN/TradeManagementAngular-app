@@ -1,6 +1,6 @@
 :host ::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;
   width: 15rem}
-:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-label { margin-top:-15px; }
+//:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-label { margin-top:-15px; }
 :host ::ng-deep label.ng-star-inserted { transform: translateY(-0.59375em) scale(.75) !important; }
 
 #titre{
@@ -8,30 +8,38 @@
   text-transform: uppercase;
 }
 
+.flex-stretch {
+  flex: 1 0 auto;
+}
+
 :host ::ng-deep .mat-toolbar {
   position: fixed;
-  box-shadow: 0 0.05rem 25px black;
+  //box-shadow: 0 0.05rem 25px black;
   z-index: 10000;
 }
 
 :host ::ng-deep .mat-sidenav-container{
   position: relative;
-  top: 4rem;
+  height: 100%;
+  width: 100%;
+  //top: 4rem;
+  padding: 1%;
 }
 
 :host ::ng-deep mat-sidenav.grand{
   width: 230px;
 }
 :host ::ng-deep mat-sidenav-content{
-  width: auto;
+  height: 100%;
 }
 :host ::ng-deep mat-sidenav.court {
   width: 55px;
 }
 
 .content{
-  margin-top: 0.8rem;
-  margin-left: 0.8rem;
+  //margin-top: 1.5rem;
+  margin-left: 2rem;
+  height: 100%;
 }
 
 .mat-toolbar{

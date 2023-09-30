@@ -1,73 +1,167 @@
 <div mat-dialog-title>
   <mat-toolbar color="primary">
-    <span>Details {{numeroDetail}}</span>
+    <span>Details {{type}} numero {{donnees.code}}</span>
     <span class="example-spacer"></span>
-
   </mat-toolbar>
 </div>
 <div mat-dialog-content>
-  <div class="row">
-    <div class="row">
-      Client : <span>franck</span> (douala) - 671452193
-      <div class="row">
-        <div class="col-4">
-          <button mat-raised-button color="primary" (click)="openDialogAddPaiement()">Modifier client</button>
-        </div>
+  <div class="row" *ngIf="type != 'commande fournisseur'">
+    <div class="row mb-5">
+      <div class="col important">
+        Client : <span class="important">{{donnees.client?.nom}} {{donnees.client?.prenom}}</span>
+      </div>
+      <div class="col important">
+        adresse : <span class="important">{{donnees.client.adresse?.ville}}</span>
+      </div>
+      <div class="col ">
+        Tel : <span class="important">{{donnees.client.contactDto?.tel1}}</span>
       </div>
     </div>
     <div class="row">
       <div class="col divider">
-        Montant total : <span>2552 fcfa</span>
+        Montant total : <span class="important">{{donnees.montantTotal}} Fcfa</span>
       </div>
       <div class="col divider divider-boder">
-        Avance : <span>2552 fcfa</span>
+        Avance : <span class="important">{{donnees.avance}} Fcfa</span>
       </div>
       <div class="col divider divider-boder">
-        Reste a payer : <span>2552 fcfa</span>
+        Reste a payer : <span class="important">{{donnees.resteApayer}} Fcfa</span>
       </div>
       <div class="col divider divider-boder">
-        Reste a donner : <span>2552 fcfa</span>
+        Reste a donner : <span class="important">{{donnees.resteAdonner}} Fcfa</span>
       </div>
     </div>
-    <div class="row justify-content-center align-items-center">
-      Etat :
-      <button mat-icon-button class="justify-content-center align-items-center example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        Modifier Etat
-        <mat-icon>pencil</mat-icon>
-      </button>
+    <div class="row">
+      <div *ngIf="type != 'vente'" class="col divider">
+        Date commande : <span class="important">{{donnees.dateCommande}} </span>
+      </div>
+      <div *ngIf="type == 'vente'" class="col divider">
+        Date vente : <span class="important">{{donnees.datevente}} </span>
+      </div>
+      <div *ngIf="type != 'vente'" class="col divider divider-boder">
+        Date retrait : <span class="important">{{donnees.dateRetrait}}</span>
+      </div>
+      <div *ngIf="type != 'vente'" class="col divider divider-boder">
+        Date livraison : <span class="important">{{donnees.dateLivraison}} </span>
+      </div>
+      <div *ngIf="type!='vente'" class="col divider divider-boder">
+        Etat : <span class="important">{{donnees.etatCommande}} </span>
+        <button (click)="openDialogUpdateEtat()" mat-icon-button class="justify-content-center align-items-center example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+          <mat-icon>pencil</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="type != 'vente' && type !='commande client'">
+    <div class="row mb-5">
+      <div class="col important">
+        Fournisseur : <span class="important">{{donnees.fournisseur?.nom}} {{donnees.fournisseur?.prenom}}</span>
+      </div>
+      <div class="col important">
+        adresse : <span class="important">{{donnees.fournisseur.adresse?.ville}}</span>
+      </div>
+      <div class="col ">
+        Tel : <span class="important">{{donnees.fournisseur.contactDto?.tel1}}</span>
+      </div>
+<!--      <div class="row">-->
+<!--        <div class="col-4">-->
+<!--          <button mat-raised-button color="primary" (click)="openDialogChangeClient()">Modifier client</button>-->
+<!--        </div>-->
+<!--      </div>-->
+    </div>
+    <div class="row">
+      <div class="col divider">
+        Montant total : <span class="important">{{donnees.montantTotal}} Fcfa</span>
+      </div>
+      <div class="col divider divider-boder">
+        Avance : <span class="important">{{donnees.avance}} Fcfa</span>
+      </div>
+      <div class="col divider divider-boder">
+        Reste a payer : <span class="important">{{donnees.resteApayer}} Fcfa</span>
+      </div>
+      <div class="col divider divider-boder">
+        Reste a donner : <span class="important">{{donnees.resteAdonner}} Fcfa</span>
+      </div>
+    </div>
+    <div class="row" >
+      <div *ngIf="type != 'vente'" class="col divider">
+        Date commande : <span class="important">{{donnees.dateCommande | date:"EEE dd MMM yyyy" }} </span>
+      </div>
+      <div *ngIf="type == 'vente'" class="col divider">
+        Date vente : <span class="important">{{donnees.datevente}} </span>
+      </div>
+      <div *ngIf="type != 'vente'" class="col divider divider-boder">
+        Date retrait : <span class="important">{{donnees.dateRetrait | date:"EEE dd MMM yyyy"}}</span>
+      </div>
+      <div *ngIf="type != 'vente'" class="col divider divider-boder">
+        Date livraison : <span class="important">{{donnees.dateLivraison | date:"EEE dd MMM yyyy"}} </span>
+      </div>
+      <div *ngIf="type!='vente'" class="col divider divider-boder">
+        Etat : <span class="important">{{donnees.etatCommande}} </span>
+        <button (click)="openDialogUpdateEtat()" mat-icon-button class="justify-content-center align-items-center example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+          <mat-icon>pencil</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
   <div class="row">
+<!--    <div class="col-4">-->
+<!--      <button mat-raised-button color="primary" (click)="openDialogAddLigne()">Ajouter un element-</button>-->
+<!--    </div>-->
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
       <mat-tab label="Element de la commande / vente">
-        <mat-accordion>
+        <mat-accordion class="accordion" *ngFor="let element of elements">
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              <mat-panel-title>
-                This is the expansion title
+              <mat-panel-title class="important" *ngIf="element.type=='PRODUIT'">
+                {{element.type}} : {{element.object.designation}}
+              </mat-panel-title>
+              <mat-panel-title class="important" *ngIf="element.type=='SERVICE'">
+                {{element.type}} : {{element.object.serviceDto?.nom}}
               </mat-panel-title>
               <mat-panel-description>
-                This is a summary of the content
-                <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-                  <mat-icon>pencil</mat-icon>
-                </button>
+                 <span class="important divider ">Quantite : {{element.quantite}} </span> <span class="important divider divider-boder"> Prix unitaire : {{element.prixunitaire}} </span>
+                <span class="important divider divider-boder"> Prix total : {{element.prixTotal}} </span>
+<!--                <button (click)="openDialogAddLigne(element)" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">-->
+<!--                  <mat-icon>pencil</mat-icon>-->
+<!--                </button>-->
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <p>This is the primary content of the panel.</p>
+            <p class="important-Desription">{{element.description}}</p>
           </mat-expansion-panel>
         </mat-accordion>
       </mat-tab>
       <mat-tab label="Paiement">
-        <div class="row">
-          <div class="col-4">
-            <button mat-raised-button color="primary" (click)="openDialogAddPaiement()">Ajouter un paiement-</button>
-          </div>
+        <div *ngIf="donnees.resteApayer > 0" class="col-4">
+          <button mat-raised-button color="primary" (click)="openDialogAddPaiement()">Ajouter un paiement-</button>
         </div>
+        <div class="row">
+          <mat-accordion class="accordion" *ngFor="let paiement of paiementList">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title class="important">
+                 Montant : {{paiement.montant}} Fcfa
+                </mat-panel-title>
+                <mat-panel-description>
+                  <span class="important divider">Date paiement : {{paiement.datepaiement | date:"EEE dd MMM yyyy"}} </span>  <span class="important divider divider-boder">Mode paiement : {{paiement.mode}} </span>
+                  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                    <mat-icon>pencil</mat-icon>
+                  </button>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p class="important-Desription">Compte payeur : {{paiement.comptePayeur}}</p>
+              <p class="important-Desription">Reference paiement: {{paiement.ref}}</p>
+              <p class="important-Desription">Reste a donner : {{paiement.resteAdonner}}</p>
+              <p class="important-Desription">Reste a payer : {{paiement.resteApayer}}</p>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
       </mat-tab>
     </mat-tab-group>
   </div>
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button (click)="closeDialog()" cdkFocusInitial>Fermer</button>
+  <button mat-button (click)="closeDialog()" >Fermer</button>
 </div>

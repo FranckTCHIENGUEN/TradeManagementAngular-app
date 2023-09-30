@@ -1,0 +1,84 @@
+<div>
+  <form [formGroup]="saveForm">
+    <div class="row">
+      <button mat-flat-button color="primary"  (click)="formSubmit()" >Rechercher</button>
+    </div>
+    <div class="row">
+      <mat-form-field *ngIf="typeEnregistrement=='client'" class="example-full-width">
+        <mat-label>Nom Client</mat-label>
+        <input type="text"
+               placeholder="Saisir un nom"
+               aria-label="Nom Client"
+               matInput
+               #input
+               (input)="manageFilterPerson(input.value)"
+               formControlName="nom"
+               [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option.nom}} {{option.prenom}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field *ngIf="typeEnregistrement=='fournisseur'" class="mat-form-field example-full-width" appearance="fill">
+        <mat-label>Nom Fournisseur</mat-label>
+        <input type="text"
+               placeholder="Saisir un nom"
+               aria-label="Nom Client"
+               matInput
+               #input
+               (input)="manageFilterPerson(input.value)"
+               formControlName="nom"
+               [matAutocomplete]="auto2">
+        <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" [displayWith]="displayFnFournisseur">
+          <mat-option *ngFor="let option of filteredOptionsFournisseur | async" [value]="option">
+            {{option.nom}} {{option.prenom}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="fill">
+          <mat-label>CA</mat-label>
+          <input matInput formControlName="ca" type="number">
+          <span matSuffix>FCFA&nbsp;</span>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="fill">
+          <mat-label>Solde</mat-label>
+          <input matInput formControlName="solde" type="number">
+          <span matSuffix>FCFA&nbsp;</span>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre visite</mat-label>
+          <input matInput formControlName="nbreVisite" type="number">
+          <span matSuffix>FCFA&nbsp;</span>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <mat-label>Tel</mat-label>
+          <input matInput formControlName="tel">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <mat-label>Mail</mat-label>
+          <input matInput formControlName="mail">
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <mat-label>Ville</mat-label>
+          <input matInput formControlName="ville">
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>

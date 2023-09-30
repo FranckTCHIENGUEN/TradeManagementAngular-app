@@ -1,1 +1,148 @@
-<p>filter works!</p>
+
+<div>
+  <form [formGroup]="saveForm">
+    <div class="row">
+      <button mat-flat-button color="primary"  (click)="formSubmit()" >Rechercher</button>
+    </div>
+    <div class="row">
+      <mat-form-field *ngIf="typeEnregistrement!='commande fournisseur'" class="example-full-width">
+        <mat-label>Nom Client</mat-label>
+        <input type="text"
+               placeholder="Saisir un nom"
+               aria-label="Nom Client"
+               matInput
+               #input
+               (input)="manageFilterPerson(input.value)"
+               formControlName="idClient"
+               [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option.nom}} {{option.prenom}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field *ngIf="typeEnregistrement=='commande fournisseur'" class="mat-form-field example-full-width" appearance="fill">
+        <mat-label>Nom Fournisseur</mat-label>
+        <input type="text"
+               placeholder="Saisir un nom"
+               aria-label="Nom Client"
+               matInput
+               #input
+               (input)="manageFilterPerson(input.value)"
+               formControlName="idClient"
+               [matAutocomplete]="auto2">
+        <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" [displayWith]="displayFnFournisseur">
+          <mat-option *ngFor="let option of filteredOptionsFournisseur | async" [value]="option">
+            {{option.nom}} {{option.prenom}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div class="row">
+        <div class="col">
+          <mat-form-field appearance="fill">
+            <mat-label>Date de commande 1</mat-label>
+            <input  matInput formControlName="datecommande1" [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="fill">
+            <mat-label>Date de commande 2</mat-label>
+            <input  matInput formControlName="datecommande2" [matDatepicker]="picker2">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="fill">
+          <mat-label>Avance</mat-label>
+          <input matInput formControlName="avance" type="number">
+          <span matSuffix>FCFA&nbsp;</span>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="example-full-width">
+          <mat-label>Code</mat-label>
+          <input matInput formControlName="code">
+        </mat-form-field>
+      </div>
+      <div class="col" *ngIf="typeEnregistrement!='vente'">
+        <mat-form-field appearance="fill">
+          <mat-label>Etat commande</mat-label>
+          <mat-select formControlName="etatCommande"  placeholder="choisir un mode">
+            <mat-option *ngFor="let etat of etatCommande " [value]="etat" >{{etat}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="fill">
+          <mat-label>Montant total</mat-label>
+          <input matInput formControlName="montantTotal" type="number">
+          <span matSuffix>FCFA&nbsp;</span>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="fill">
+          <mat-label>Reste a payer</mat-label>
+          <input matInput formControlName="resteApayer" type="number">
+          <span matSuffix>FCFA&nbsp;</span>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="fill">
+          <mat-label>Rembourssement</mat-label>
+          <input matInput formControlName="resteAdonner" type="number">
+          <span matSuffix>FCFA&nbsp;</span>
+        </mat-form-field>
+      </div>
+    </div>
+<!--    <div class="row">-->
+<!--      <div class="col">-->
+<!--        <mat-form-field appearance="fill">-->
+<!--          <mat-label>Date de retrait 1</mat-label>-->
+<!--          <input  matInput formControlName="dateRetrait1" [matDatepicker]="picker3">-->
+<!--          <mat-hint>MM/DD/YYYY</mat-hint>-->
+<!--          <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>-->
+<!--          <mat-datepicker #picker3></mat-datepicker>-->
+<!--        </mat-form-field>-->
+<!--      </div>-->
+<!--      <div class="col">-->
+<!--        <mat-form-field appearance="fill">-->
+<!--          <mat-label>Date de retrait 2</mat-label>-->
+<!--          <input  matInput formControlName="dateRetrait2" [matDatepicker]="picker4">-->
+<!--          <mat-hint>MM/DD/YYYY</mat-hint>-->
+<!--          <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>-->
+<!--          <mat-datepicker #picker4></mat-datepicker>-->
+<!--        </mat-form-field>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--      <div class="col">-->
+<!--        <mat-form-field appearance="fill">-->
+<!--          <mat-label>Date de livraison 1</mat-label>-->
+<!--          <input  matInput formControlName="dateLivraison1" [matDatepicker]="picker5">-->
+<!--          <mat-hint>MM/DD/YYYY</mat-hint>-->
+<!--          <mat-datepicker-toggle matIconSuffix [for]="picker5"></mat-datepicker-toggle>-->
+<!--          <mat-datepicker #picker5></mat-datepicker>-->
+<!--        </mat-form-field>-->
+<!--      </div>-->
+<!--      <div class="col">-->
+<!--        <mat-form-field appearance="fill">-->
+<!--          <mat-label>Date de livraison 2</mat-label>-->
+<!--          <input  matInput formControlName="dateLivraison2" [matDatepicker]="picker6">-->
+<!--          <mat-hint>MM/DD/YYYY</mat-hint>-->
+<!--          <mat-datepicker-toggle matIconSuffix [for]="picker6"></mat-datepicker-toggle>-->
+<!--          <mat-datepicker #picker6></mat-datepicker>-->
+<!--        </mat-form-field>-->
+<!--      </div>-->
+<!--    </div>-->
+  </form>
+</div>

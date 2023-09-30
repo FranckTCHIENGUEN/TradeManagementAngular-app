@@ -1,0 +1,83 @@
+<div class="row mt-2 justify-content-center text-center">
+  <h2>Enregistrer une {{type}}</h2>
+</div>
+<div class="row h-100 align-items-center justify-content-center">
+  <form class="w-50" #form  [formGroup]="saveForm" >
+    <div class="col">
+      <div class="row mt-2 justify-content-center ">
+        <div class="row mt-2  justify-content-center text-center">
+          <h4>Categorie commande</h4>
+        </div>
+        <div class="row mt-2 ">
+          <div class="col-12 d-flex justify-content-center">
+            <mat-radio-group formControlName="type" value="SERVICE">
+              <mat-radio-button *ngIf="type!='commande fournisseur'" value="SERVICE">
+                SERVICE
+              </mat-radio-button>
+              <mat-radio-button value="PRODUIT">
+                PRODUIT
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+        </div>
+      </div>
+      <div *ngIf="saveForm.controls.type.value=='PRODUIT'" class="col">
+        <mat-form-field class="mat-form-field example-full-width" appearance="fill">
+          <mat-label>{{saveForm.controls.type.value}}</mat-label>
+
+          <input type="text" matInput formControlName="objet" (input)="manageChangeFilter()" [matAutocomplete]="autoElement">
+          <mat-autocomplete  #autoElement="matAutocomplete" [displayWith]="displayFnElement">
+            <mat-option  *ngFor="let option of filteredElement | async" [value]="option">
+              {{option.designation}}
+            </mat-option>
+          </mat-autocomplete>
+          <button matSuffix mat-raised-button color="primary" (click)="nouveau()">Nouveau</button>
+        </mat-form-field>
+      </div>
+      <div *ngIf="saveForm.controls.type.value=='SERVICE²'" class="col">
+        <mat-form-field class="mat-form-field example-full-width" appearance="fill">
+          <mat-label>{{saveForm.controls.type.value}}</mat-label>
+          <input type="text" matInput formControlName="objet" [matAutocomplete]="autoElement2">
+          <mat-autocomplete  #autoElement2="matAutocomplete" [displayWith]="displayFnElementService">
+            <mat-option  *ngFor="let option of filteredElement2 | async" [value]="option.serviceDto">
+              {{option.serviceDto?.nom}}
+            </mat-option>
+          </mat-autocomplete>
+          <button matSuffix mat-raised-button color="primary" (click)="nouveau()">Nouveau</button>
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field appearance="fill" floatLabel="always">
+          <mat-label>Quantité</mat-label>
+          <input matInput (input)="calculmontant()" required="true" formControlName="quantite" type="number" min="1">
+          <!--                            <mat-hint *ngIf="saveForm.controls.type.value=='PRODUIT'">quantité en stock :  </mat-hint>-->
+        </mat-form-field>
+      </div>
+      <div class="row mt-2 justify-content-center">
+        <mat-form-field class="mat-form-field example-full-width" appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" placeholder="entrez une description de l'element de la commande"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="fill">
+          <mat-label>Prix unitaire</mat-label>
+          <input matInput required="true" (input)="calculmontant()" formControlName="prixUnitaire" type="number" min="1">
+          <span matSuffix>FCFA&nbsp;</span>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="fill" floatLabel="always">
+          <mat-label>Montant</mat-label>
+          <input matInput formControlName="prixTotal" readonly="true" type="number" min="1">
+          <span matSuffix>FCFA&nbsp;</span>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <button [disabled]="!saveForm.valid" (click)="formSubmit()" (keydown.enter)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
+    </div>
+  </form>
+</div>

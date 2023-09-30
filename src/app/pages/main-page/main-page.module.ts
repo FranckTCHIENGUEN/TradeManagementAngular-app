@@ -11,24 +11,34 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {PrimaryMenuComponent} from "../../components/primary-menu/primary-menu.component";
 import {MatListModule} from "@angular/material/list";
+import { RegisterPageComponent } from '../register-page/register-page.component';
+import {MatCardModule} from "@angular/material/card";
+import {ReactiveFormsModule} from "@angular/forms";
+import {AppModule} from "../../app.module";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 
 @NgModule({
   declarations: [
     MainPageComponent,
-    PrimaryMenuComponent
+    PrimaryMenuComponent,
   ],
-  imports: [
-    CommonModule,
-    MainPageRoutingModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatListModule,
-  ],
+    imports: [
+        CommonModule,
+        MainPageRoutingModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatListModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        MatMenuModule,
+        MatSlideToggleModule,
+    ],
   exports: [
     PrimaryMenuComponent
   ],

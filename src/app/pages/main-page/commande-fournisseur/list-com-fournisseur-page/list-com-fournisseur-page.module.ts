@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { ListComFournisseurPageRoutingModule } from './list-com-fournisseur-page-routing.module';
 import { ListComFournisseurPageComponent } from './list-com-fournisseur-page.component';
-import {ListCommandeClientModule} from "../../command-page/list-commande-client/list-commande-client.module";
+import {ListeVentePageModule} from "../../vente-page/liste-vente-page/liste-vente-page.module";
+import {MatIconModule} from "@angular/material/icon";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {FormsModule} from "@angular/forms";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -13,7 +17,11 @@ import {ListCommandeClientModule} from "../../command-page/list-commande-client/
   imports: [
     CommonModule,
     ListComFournisseurPageRoutingModule,
-    ListCommandeClientModule
+    ListeVentePageModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    FormsModule,
+    MatButtonModule,
   ]
 })
 export class ListComFournisseurPageModule { }

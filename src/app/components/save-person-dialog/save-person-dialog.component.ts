@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Inject, Input} from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -9,7 +9,14 @@ import {
   ɵElement
 } from "@angular/forms";
 import {MyErrorStateMatcher} from "../../ErrorMatcher";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ClientAppServiceService} from "../../../services/clientAppService/client-app-service.service";
+import {ClientDto} from "../../../tm-api/src-api/models/client-dto";
+import {AdresseDto, ContactDto, UtilisateurDto} from "../../../tm-api/src-api/models";
+import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data-link-transfert.service";
+import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
+import {AppFournisseurService} from "../../../services/fournisseurService/app-fournisseur.service";
+import {AppUserService} from "../../../services/appUserServices/app-user.service";
 
 @Component({
   selector: 'app-save-person-dialog',
@@ -17,25 +24,35 @@ import {MatDialogRef} from "@angular/material/dialog";
   styleUrls: ['./save-person-dialog.component.scss']
 })
 export class SavePersonDialogComponent {
-  private _saveForm = this.formBuilder.group({
-    nom:['',[
+
+  private client:any = {};
+
+  saveForm = this.formBuilder.group({
+    nom:[this.client.nom,[
       Validators.required
     ]],
     contact:this.formBuilder.array([
 
     ]),
-    ville:[''],
-    quartier:[''],
-    mail:['',[
+    ville:[this.client.adresse?.ville],
+    prenom:[this.client.prenom],
+    genre:[this.client.genre, [
+      Validators.required
+    ]],
+    pays:[this.client.adresse?.pays],
+    quartier:[this.client.adresse?.adresse1],
+    mail:[this.client.mail,[
       Validators.email
     ]],
   })
   private _matcher = new MyErrorStateMatcher();
   private _nombreContact=0;
-  @Input() private _typePersonne?:String;
+
+   private _typePersonne?:String;
+  private _personGenre = ['MASCULIN' , 'FEMININ' , 'ENTREPRISE'];
 
   get contact (){
-    return this._saveForm.controls["contact"] as FormArray;
+    return this.saveForm.controls["contact"] as FormArray;
   }
 
   nombretel(): boolean {
@@ -45,18 +62,54 @@ export class SavePersonDialogComponent {
     return false;
   }
 
-  constructor(private formBuilder:FormBuilder, private dialogRef: MatDialogRef<SavePersonDialogComponent>) { }
+  constructor(private formBuilder:FormBuilder,
+              private dataLinkTransfert:DataLinkTransfertService,
+              private clientAppService:ClientAppServiceService,
+              private fournisseurService:AppFournisseurService,
+              private userService:AppUserService,
+              private dialog: MatDialog,
+              private dialogRef: MatDialogRef<SavePersonDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) private data: any) {
 
-
-  closeDialog() {
-    this.dialogRef.close();
+    this._typePersonne = data.typePersonne;
+    if (data.person !=null){
+      this.client = data.person
+      this.saveForm.patchValue(this.client)
+      this.saveForm.controls.ville.setValue( this.client.adresse?.ville)
+      this.saveForm.controls.pays.setValue( this.client.adresse?.pays)
+      this.saveForm.controls.quartier.setValue( this.client.adresse?.adresse1)
+      if (this.client.contactDto !=null){
+        if (this.client.contactDto.tel1!=null){
+          this.addLigne();
+          this.contact.at(0).get('tel')?.patchValue(this.client.contactDto.tel1);
+        }
+        if (this.client.contactDto.tel2!=null){
+          this.addLigne();
+          this.contact.at(1).get('tel')?.patchValue(this.client.contactDto.tel2);
+        }
+        if (this.client.contactDto.tel3!=null){
+          this.addLigne();
+          this.contact.at(2).get('tel')?.patchValue(this.client.contactDto.tel3);
+        }
+        if (this.client.contactDto.tel4!=null){
+          this.addLigne();
+          this.contact.at(3).get('tel')?.patchValue(this.client.contactDto.tel4);
+        }
+      }
+    }
   }
-  get saveForm(): FormGroup<{ [K in keyof { ville: (string | ((control: AbstractControl) => (ValidationErrors | null))[])[]; mail: string[]; contact: FormArray<ɵElement<any, null>>; quartier: string[]; nom: (string | ((control: AbstractControl) => (ValidationErrors | null))[])[] }]: ɵElement<{ ville: (string | ((control: AbstractControl) => (ValidationErrors | null))[])[]; mail: string[]; contact: FormArray<ɵElement<any, null>>; quartier: string[]; nom: (string | ((control: AbstractControl) => (ValidationErrors | null))[])[] }[K], null> }> {
-    return this._saveForm;
+
+
+  closeDialog(p: { etat: string }) {
+    this.dialogRef.close(p);
   }
 
   get matcher(): MyErrorStateMatcher {
     return this._matcher;
+  }
+
+  get personGenre(): string[] {
+    return this._personGenre;
   }
 
   get typePersonne(): String {
@@ -65,8 +118,8 @@ export class SavePersonDialogComponent {
 
   addLigne() {
     const conctactForm = this.formBuilder.group({
-      tel:['',[
-        Validators.required
+      tel:["",[
+        Validators.required,
       ]],
     });
 
@@ -80,16 +133,70 @@ export class SavePersonDialogComponent {
 
   disable(){
     return this._nombreContact <= 4;
-
   }
   formSubmit() {
 
-    if (this._saveForm.valid){
-      if (this._typePersonne==='client'){
+    if (this.saveForm.valid){
+      let userConnected: UtilisateurDto = JSON.parse(sessionStorage.getItem('userData') as string);
+        this.client.idEntreprise = userConnected.entreprise?.id;
+        this.client.mail = this.saveForm.value.mail as string;
+        this.client.nom = this.saveForm.value.nom as string;
+        this.client.prenom = this.saveForm.value.prenom as string;
+        this.client.genre = this.saveForm.value.genre as 'MASCULIN' | 'FEMININ' | 'ENTREPRISE';
 
+        let adresse:AdresseDto = {
+          adresse1:this.saveForm.value.quartier as string,
+          pays:this.saveForm.value.pays as string,
+          ville:this.saveForm.value.ville as string
+        }
+
+        let contact:ContactDto = {
+            tel1:this.contact.at(0)?.get("tel")?.value as string,
+            tel2:this.contact.at(1)?.get("tel")?.value as string,
+            tel3:this.contact.at(2)?.get("tel")?.value as string,
+            tel4:this.contact.at(3)?.get("tel")?.value as string,
+        }
+        this.client.adresse= adresse ;
+        this.client.contactDto = contact;
+
+      if (this._typePersonne==='client'){
+        this.clientAppService.save(this.client)
+          .subscribe(value => {
+
+            this.closeDialog({etat :'ok'});
+            this.dialog.open(ConfirmDialogComponent, {
+              disableClose:false,
+              data: {
+                message: this.typePersonne + " enregisgré avec succé",
+              },
+            });
+          })
       }
       else if (this._typePersonne==='fournisseur'){
+        this.fournisseurService.save(this.client)
+          .subscribe(value => {
 
+            this.closeDialog({etat :'ok'});
+            this.dialog.open(ConfirmDialogComponent, {
+              disableClose:false,
+              data: {
+                message: this.typePersonne + " enregisgré avec succé",
+              },
+            });
+          })
+      }
+      else if (this._typePersonne==='utilisateur'){
+        this.userService.save(this.client)
+          .subscribe(value => {
+
+            this.closeDialog({etat :'ok'});
+            this.dialog.open(ConfirmDialogComponent, {
+              disableClose:false,
+              data: {
+                message: this.typePersonne + " enregisgré avec succé",
+              },
+            });
+          })
       }
     }
 

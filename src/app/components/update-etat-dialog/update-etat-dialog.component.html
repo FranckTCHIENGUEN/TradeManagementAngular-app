@@ -1,0 +1,20 @@
+<div class="row mt-2 justify-content-center text-center">
+  <h2>modifier l'etat de la {{type}}</h2>
+</div>
+<div class="row h-100 align-items-center justify-content-center">
+  <form class="w-50" #form  [formGroup]="saveForm" >
+    <div class="col">
+      <div class="row mt-2 justify-content-center">
+          <mat-form-field appearance="fill">
+            <mat-label>Etat commande</mat-label>
+            <mat-select formControlName="etatCommande"  placeholder="choisir un mode">
+              <mat-option *ngFor="let etat of etatCommande " [value]="etat" >{{etat}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <button [disabled]="!saveForm.valid" (click)="formSubmit()" (keydown.enter)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
+    </div>
+  </form>
+</div>

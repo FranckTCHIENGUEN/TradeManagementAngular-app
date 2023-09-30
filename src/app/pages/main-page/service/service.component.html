@@ -1,1 +1,24 @@
-<p>service works!</p>
+<div id="appbar" >
+  <h1>Services</h1>
+  <div class="row">
+    <div class="col-4">
+      <button mat-raised-button color="primary" (click)="openDialogSave()">Nouveau service</button>
+    </div>
+    <div class="col-4">
+      <button  mat-raised-button color="accent" (click)="findAllProduit()">
+        <mat-icon>
+            <span class="material-symbols-outlined">
+            refresh
+          </span>
+        </mat-icon>
+      </button>
+    </div>
+    <div class="col-4">
+      <button  mat-raised-button color="primary" (click)="opendoalogCategorie()">Voir les categories</button>
+    </div>
+  </div>
+</div>
+
+<div class="content-second">
+  <app-view-product [listOfData]="listService" typeAffichage="service"></app-view-product>
+</div>

@@ -2,16 +2,40 @@
   <h2>Enregistrer un {{typePersonne}}</h2>
 </div>
 <div class="row h-100 align-items-center justify-content-center">
-  <form class="w-50" #form  [formGroup]="saveForm" (ngSubmit)="formSubmit()">
+  <form class="w-50" #form  [formGroup]="saveForm" >
     <div class="col">
       <div class="col">
-        <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="outline">
+        <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
           <mat-label class="">Nom</mat-label>
           <input type="text" matInput formControlName="nom"
                  [errorStateMatcher]="matcher">
-          <mat-error class="errorMessage" *ngIf="saveForm.controls['nom'].hasError('required')">
-            le nom est requit
-          </mat-error>
+<!--          <mat-error class="errorMessage" *ngIf="saveForm.controls['nom'].hasError('required')">-->
+<!--            le nom est requit-->
+<!--          </mat-error>-->
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+          <mat-label class="">Prenom</mat-label>
+          <input type="text" matInput formControlName="prenom"
+                 [errorStateMatcher]="matcher">
+<!--          <mat-error class="errorMessage" *ngIf="saveForm.controls['prenom'].hasError('required')">-->
+<!--            le prenom est requit-->
+<!--          </mat-error>-->
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+          <mat-label class="">Genre</mat-label>
+
+          <mat-select formControlName="genre" [errorStateMatcher]="matcher">
+            <mat-option *ngFor="let genre of personGenre" [value]="genre">
+              {{genre}}
+            </mat-option>
+          </mat-select>
+          <mat-error class="errorMessage" *ngIf="saveForm.controls['genre'].hasError('required')">
+          le genre est requit
+        </mat-error>
         </mat-form-field>
       </div>
       <div class="col">
@@ -39,7 +63,7 @@
               </div>
             </ng-container>
           </ng-container>
-          <div class="row mt-2  ">
+          <div class="row mb-2  ">
             <div class="col-12 d-flex justify-content-center">
               <button mat-button (click)="addLigne()" [disabled]="nombretel()">
                 Ajouter un Contact
@@ -55,6 +79,16 @@
           </div>
         </div>
 
+      </div>
+      <div class="col">
+        <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+          <mat-label class="">pays</mat-label>
+          <input type="text" matInput formControlName="pays"
+                 [errorStateMatcher]="matcher">
+          <mat-error class="errorMessage" *ngIf="saveForm.controls['pays'].hasError('required')">
+            le pays est requit
+          </mat-error>
+        </mat-form-field>
       </div>
       <div class="col">
         <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">

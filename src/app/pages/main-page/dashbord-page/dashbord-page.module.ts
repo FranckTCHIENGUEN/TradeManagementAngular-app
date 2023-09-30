@@ -8,6 +8,8 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
+import {ListCommandeClientModule} from "../command-page/list-commande-client/list-commande-client.module";
+import {ListeVentePageModule} from "../vente-page/liste-vente-page/liste-vente-page.module";
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatDividerModule,
     MatCardModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    ListeVentePageModule,
   ]
 })
 export class DashbordPageModule { }

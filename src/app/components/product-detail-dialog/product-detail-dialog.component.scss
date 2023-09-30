@@ -1,0 +1,34 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+//.icon-size {
+//  font-size: 27px;
+//  height: 27px;
+//  width: 27px;
+//}
+.icon-size {
+  transform: scale(1.5);
+}
+
+.nom{
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.info{
+  display: inline-block;
+}
+
+.detail{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

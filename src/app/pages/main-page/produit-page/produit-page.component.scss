@@ -1,0 +1,25 @@
+//@use '@angular/material' as mat;
+//@import "/src/styles/themeProp";
+:host ::ng-deep .mat-toolbar {
+  //
+  //box-shadow: 0 0.05rem 25px black;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+//#appbar{
+//  position: fixed;
+//  width: 100%;
+//  padding: 1%;
+//  box-shadow: 0 0.05rem 25px black;
+//  background-color: #d6e6ea;
+//  //top: rem;
+//  z-index: 10000;
+//}
+//
+//.content-second{
+//  position: relative;
+//  top: 10rem;
+//}

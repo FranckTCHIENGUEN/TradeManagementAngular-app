@@ -1,9 +1,9 @@
-<div class="h-100 w-100 container text-center">
+<app-app-loader></app-app-loader>
+<div class=" w-100  text-center">
 
-
-  <div  class="row h-50 align-items-center">
-    <div class="col">
-      <img class="img-fluid" style="height: 250px" src="assets/logo.png" alt="">
+  <div  class="row mt-5 mb-5 align-items-center">
+    <div class="col mb-3">
+      <img class="img-fluid" style="height: 200px" src="assets/logo.png" alt="">
     </div>
     <span id="titre">CONNEXION</span>
   </div>
@@ -13,8 +13,8 @@
       login ou mot de passe incorrect
     </div>
   </div>
-  <div class="row h-50 align-items-center justify-content-center">
-    <form class="w-25" #form  [formGroup]="loginForm" (ngSubmit)="formSubmit()">
+  <div class="row align-items-center justify-content-center">
+    <form class="w-25" #form  [formGroup]="loginForm" >
       <div class="col">
         <div class="col">
           <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="outline">
@@ -23,6 +23,9 @@
                    [errorStateMatcher]="matcher">
             <mat-error class="errorMessage" *ngIf="loginForm.controls['login'].hasError('required')">
               le login est requit
+            </mat-error>
+            <mat-error class="errorMessage" *ngIf="loginForm.controls['login'].hasError('email')">
+              le login est incorrect
             </mat-error>
           </mat-form-field>
         </div>

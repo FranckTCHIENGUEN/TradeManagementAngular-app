@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {map, Observable, startWith} from "rxjs";
+import {Component, Input, OnInit} from '@angular/core';
+import {debounceTime, distinctUntilChanged, map, Observable, of, startWith, switchMap} from "rxjs";
 import {FormArray, FormBuilder, Validators} from "@angular/forms";
 import {
   MAT_MOMENT_DATE_FORMATS,
@@ -8,6 +8,35 @@ import {
 } from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import 'moment/locale/fr';
+import {AppFournisseurService} from "../../../services/fournisseurService/app-fournisseur.service";
+import {AppUserService} from "../../../services/appUserServices/app-user.service";
+import {ClientAppServiceService} from "../../../services/clientAppService/client-app-service.service";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {SavePersonDialogComponent} from "../save-person-dialog/save-person-dialog.component";
+import {ServiceDto} from "../../../tm-api/src-api/models/service-dto";
+import {ArticleDto} from "../../../tm-api/src-api/models/article-dto";
+import {SaveProductDialogComponent} from "../save-product-dialog/save-product-dialog.component";
+import {AppProductService} from "../../../services/productService/app-product.service";
+import {ClientDto} from "../../../tm-api/src-api/models/client-dto";
+import {
+  CommandeClientDto,
+  CommandeFournisseurDto,
+  CompteClientDto, FournisseurDto, LigneCommandeClientDto, LigneCommandeFournisseurDto,
+  LigneVenteDto,
+  PaiementDto, StatServiceDto,
+  UtilisateurDto,
+  VenteDto
+} from "../../../tm-api/src-api/models";
+import {AppVenbteServiceService} from "../../../services/venteService/app-venbte-service.service";
+import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
+import {AppServiceService} from "../../../services/serviceService/app-service.service";
+import {SaveServiceDialogComponent} from "../save-service-dialog/save-service-dialog.component";
+import {
+  AppCommandFournisseurService
+} from "../../../services/commandFournisseurService/app-command-fournisseur.service";
+import {AppCommandClientService} from "../../../services/commandClientService/app-command-client.service";
+import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
+import {DatePipe} from "@angular/common";
 
 export interface User {
   name: string;
@@ -32,36 +61,34 @@ export interface User {
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ],
 })
-export class VenteComponent {
-  personnes: any;
+export class VenteComponent implements OnInit{
+  personnes: Array<ClientDto> =[];
+  personnes2: Array<FournisseurDto> =[];
   saveForm = this.formBuilder.group({
     personne:['',[
       Validators.required
     ]],
-    type:['',[
-      Validators.required
-    ]],
+
     etatCommande:['',[
-      Validators.required
+
     ]],
 
-    dateRetrait:[null,[
-      Validators.required
+    dateRetrait:['',[
+
     ]],
-    dateCommande:[null,[
+    dateCommande:['',[
       Validators.required
     ]],
     montantTotal:[0,[
-      Validators.required
+
     ]],
     avance:[0,[
-      Validators.required
+
     ]],
     resteAPayer:[0,[
-      Validators.required
+
     ]],
     resteAdonner:[0,[
-      Validators.required
     ]],
     ligneCom:this.formBuilder.array([
 
@@ -70,17 +97,55 @@ export class VenteComponent {
 
     ]),
   })
-  options: User[] = [{name: 'Mary'}, {name: 'Shelley'}, {name: 'Igor'}];
-  filteredOptions: Observable<User[]> | undefined;
+  filteredOptions: Observable<ClientDto[]> | undefined;
+  filteredOptionsFournisseur: Observable<FournisseurDto[]> | undefined;
+  filteredElement: Observable<ArticleDto[]> | undefined;
+  filteredElement2: Observable<StatServiceDto[]> | undefined;
   type: any;
   private _isSubmited = false;
   private _resteAdonner: number = 0;
   private _montantTotal: number = 0;
   private _Restepayer: number = 0;
   selected: any;
+  etatCommande = ['EN_PREPARATION' , 'RECEPTIONER' , 'VALIDER' , 'LIVRER']
+  modePaiement = ['MOBILE_MONNEY' , 'ORANGE_MONNEY' , 'REMBOURSSEMENT' , 'ESPECE']
   @Input() typeEnregistrement: string | undefined;
+  elements: any ;
+  maxMontant:number = 0;
+  modeVisible = true
+  products: Array<ArticleDto> =[] ;
 
-  constructor(private formBuilder:FormBuilder) { }
+  constructor(private formBuilder:FormBuilder,
+              private produitService:AppProductService,
+              private serviceService:AppServiceService,
+              private dialog: MatDialog,
+              private fournisseurService:AppFournisseurService,
+              private venteService:AppVenbteServiceService,
+              private comFournisseurService:AppCommandFournisseurService,
+              private comClientService:AppCommandClientService,
+              private clientService:ClientAppServiceService) {
+    if (this.typeEnregistrement == "commande fournisseur"){
+      this.modeVisible = false
+    }
+  }
+
+
+  findAll(){
+    if (this.typeEnregistrement =="commande client" || this.typeEnregistrement=="vente"){
+      this.clientService.findAll().subscribe(
+        value => {
+          this.personnes = value
+        }
+      )
+    }
+    if (this.typeEnregistrement =="commande fournisseur"){
+      this.fournisseurService.findAll().subscribe(
+        value => {
+          this.personnes2 = value
+        }
+      )
+    }
+  }
 
   get resteAdonner(): number {
     return this._resteAdonner;
@@ -102,51 +167,128 @@ export class VenteComponent {
   }
 
   ngOnInit() {
-    this.filteredOptions = this.saveForm.controls["personne"].valueChanges.pipe(
-      startWith(''),
-      map(value => {
-        const name = typeof value === 'string' ? value : 'personne';
-        return name ? this._filter(name as string) : this.options.slice();
-      }),
-    );
-
+    this.filteredOptions = this.saveForm.controls.personne.valueChanges
+      .pipe(
+        startWith(''),
+        debounceTime(400),
+        distinctUntilChanged(),
+        switchMap(val => {
+          return this._filter(val || '')
+        })
+      );
     this.addLigne();
     this.addPaiement();
   }
 
-  displayFn(user: User): string {
-    return user && user.name ? user.name : '';
+  displayFn(user: ClientDto): string {
+    let nom = user.nom+" "+ user.prenom
+    return user && nom ? nom : '';
+  }
+  displayFnFournisseur(user: FournisseurDto): string {
+    let nom = user.nom+" "+ user.prenom
+    return user && nom ? nom : '';
+  }
+  displayFnPaiement(user: CompteClientDto): string {
+    let nom = user.numeroCompte
+    return user && nom ? nom : '';
+  }
+  displayFnElement(user: any): string {
+    let nom = user.designation
+    return user && nom ? nom : '';
   }
 
-  private _filter(name: string): User[] {
-    const filterValue = name.toLowerCase();
+  displayFnElementService(user: ServiceDto): string {
+    let nom = user.nom
+    return user && nom ? nom : '';
+  }
 
-    return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
+  private _filter(name: string): Observable<ClientDto[]> {
+    // const filterValue = name.toLowerCase();
+
+    return this.clientService.findAll().pipe(map(response => response.filter(option => {
+      return option.nom?.toLowerCase().indexOf(name.toLowerCase()) === 0
+    })))
+  }
+  private _filterFournisseur(name: string): Observable<FournisseurDto[]> {
+    // const filterValue = name.toLowerCase();
+
+    return this.fournisseurService.findAll().pipe(map(response => response.filter(option => {
+      return option.nom?.toLowerCase().indexOf(name.toLowerCase()) === 0
+    })))
+  }
+  private _filterElement(name: string): Observable<ArticleDto[]> {
+    // const filterValue = name.toLowerCase();
+
+
+      return this.produitService.findAll().pipe(map(response => response.filter(option => {
+        return option.designation?.toLowerCase().indexOf(name.toLowerCase()) === 0
+      })))
+
+
+  }
+
+  private _filterElementService(name: string): Observable<StatServiceDto[]> {
+    // const filterValue = name.toLowerCase();
+
+
+      return this.serviceService.findAll().pipe(map(response => response.filter(option => {
+        return option.serviceDto?.nom?.toLowerCase().indexOf(name.toLowerCase()) === 0
+      })))
+
+
   }
 
   addLigne() {
     const ligneComForm = this.formBuilder.group({
       objet: ['', Validators.required],
-      description: ['', Validators.required],
-      quantite: [0, Validators.required],
+      description: ['',],
+      quantite: [0,],
+      type:['',[
+        Validators.required
+      ]],
       prixUnitaire: [0, Validators.required],
       prixTotal: [0, Validators.required],
     });
+
 
     this.ligneCom.push(ligneComForm);
     this.calculmontantTotal();
     this.calculRestepayer();
   }
 
+  manageChangeFilter(index:number){
+    if (this.ligneCom.at(index).get('type')?.value == "SERVICE"){
+      this.filteredElement2 = this._filterElementService(this.ligneCom.at(index).get('objet')?.value);
+    }
+    if (this.ligneCom.at(index).get('type')?.value == "PRODUIT"){
+      this.filteredElement = this._filterElement(this.ligneCom.at(index).get('objet')?.value);
+    }
+
+
+  }
+  manageFilterPerson(value:string) {
+    if (this.typeEnregistrement =="commande client" || this.typeEnregistrement=="vente"){
+      this.filteredOptions=this._filter(value);
+    }
+    if (this.typeEnregistrement =="commande fournisseur"){
+      this.filteredOptionsFournisseur=this._filterFournisseur(value);
+    }
+
+  }
+  manageChangeFilterPaiement(index:number){
+
+    this.filteredElement = this._filterElement(this.paiement.at(index).get('objet')?.value);
+  }
+
   addPaiement() {
     const paiementForm = this.formBuilder.group({
-      objet: ['', Validators.required],
-      comptePayeur: ['', Validators.required],
+      objet: ['', ],
+      comptePayeur: ['', ],
       resteAPayer:[0,[
-        Validators.required
+
       ]],
       resteAdonner:[0,[
-        Validators.required
+
       ]],
       modePaiement:[null,[
         Validators.required
@@ -159,8 +301,64 @@ export class VenteComponent {
     this.calculRestepayer();
   }
 
+  private calculPaiement(){
+    for (let i = 0; i < this.paiement.length; i++) {
+
+      if (i==0){
+        let mT = this.saveForm.controls["montantTotal"].value;
+        let reste = mT! - this.paiement.at(i).get('montant')?.value;
+
+        if (reste >= 0){
+          this.paiement.at(i).get('resteAPayer')?.patchValue(reste);
+          this.paiement.at(i).get('resteAdonner')?.patchValue(0);
+        }
+        else if(reste < 0){
+          this.paiement.at(i).get('resteAPayer')?.patchValue(0);
+          this.paiement.at(i).get('resteAdonner')?.patchValue(-1*reste);
+        }
+      }
+      else if (i==1){
+        let mT = this.paiement.at(1).get('montant')?.value + this.paiement.at(0).get('montant')?.value
+        let reste = mT! - this.paiement.at(i).get('montant')?.value;
+
+        if (reste >= 0){
+          this.paiement.at(i).get('resteAPayer')?.patchValue(reste);
+          this.paiement.at(i).get('resteAdonner')?.patchValue(0);
+        }
+        else if(reste < 0){
+          this.paiement.at(i).get('resteAPayer')?.patchValue(0);
+          this.paiement.at(i).get('resteAdonner')?.patchValue(-1*reste);
+        }
+      }
+      else{
+        let mT = 0
+        for (let j = 0; j < i+1; j++) {
+          mT = mT + this.paiement.at(j).get('montant')?.value
+        }
+
+        let reste = mT! - this.paiement.at(i).get('montant')?.value;
+
+        if (reste >= 0){
+          this.paiement.at(i).get('resteAPayer')?.patchValue(reste);
+          this.paiement.at(i).get('resteAdonner')?.patchValue(0);
+        }
+        else if(reste < 0){
+          this.paiement.at(i).get('resteAPayer')?.patchValue(0);
+          this.paiement.at(i).get('resteAdonner')?.patchValue(-1*reste);
+        }
+      }
+
+
+    }
+  }
+
   deleteLigneCom(ligneComIndex: number) {
     this.ligneCom.removeAt(ligneComIndex);
+    this.calculmontantTotal();
+    this.calculRestepayer();
+  }
+  deleteLignePai(lignePaiIndex: number) {
+    this.paiement.removeAt(lignePaiIndex);
     this.calculmontantTotal();
     this.calculRestepayer();
   }
@@ -194,9 +392,10 @@ export class VenteComponent {
       number = 0;
     }
     else if (number >= 0){
-      this.calculrestedonner(0)
+      this.calculrestedonner(-0)
     }
     this.saveForm.controls["resteAPayer"].patchValue(number)
+    this.calculPaiement();
     this._Restepayer = number;
   }
 
@@ -207,21 +406,318 @@ export class VenteComponent {
 
   formSubmit() {
     this._isSubmited = true;
-    if (!this.saveForm.valid) {
-      console.log('Please provide all the required values!')
 
-    } else {
-      console.log(this.saveForm.value);
+    if (!this.saveForm.valid) {
+      console.log(this.saveForm.getError("required"))
+
+    }
+    else {
+      let userConnected: UtilisateurDto = JSON.parse(sessionStorage.getItem('userData') as string);
+      this.calculPaiement();
+      let pipe = new DatePipe('fr-FR');
+      if (this.typeEnregistrement=="vente"){
+        let data: VenteDto = {};
+
+
+        data.client = this.saveForm.controls.personne.value  as ClientDto;
+        data.avance = this.saveForm.controls.avance.value as number;
+        data.datevente = this.saveForm.controls.dateCommande.value as string;
+        data.montantTotal = this.saveForm.controls.montantTotal.value as number;
+        data.resteAdonner = this.saveForm.controls.resteAdonner.value as number;
+        data.resteApayer = this.saveForm.controls.resteAPayer.value as number;
+        data.idEntreprise = userConnected.entreprise?.id as number;
+
+        let paieEle:Array<PaiementDto> = [];
+        for (let i = 0; i < this.paiement.length; i++) {
+          let compte:string | undefined;
+          if (this.paiement.at(i).get('modePaiement')?.value =='REMBOURSSEMENT'){
+            let numero: CompteClientDto = this.paiement.at(i).get('comptePayeur')?.value as CompteClientDto;
+
+            compte = numero.numeroCompte;
+          }
+          else {
+            compte = this.paiement.at(i).get('comptePayeur')?.value
+          }
+
+          const pai:PaiementDto = {
+            idEntreprise:userConnected.entreprise?.id,
+            montant : this.paiement.at(i).get('montant')?.value as number,
+            mode : this.paiement.at(i).get('modePaiement')?.value,
+            objet : 'VENTE',
+            datepaiement: new Date().toISOString(),
+            resteApayer:this.paiement.at(i).get('resteAPayer')?.value,
+            resteAdonner: this.paiement.at(i).get('resteAdonner')?.value,
+            comptePayeur : compte
+          };
+
+
+          paieEle.push(pai);
+        }
+
+        let ele :Array<LigneVenteDto> = [];
+
+        for (let i = 0; i < this.ligneCom.length; i++) {
+          const object : any = this.ligneCom.at(i).get('objet')?.value
+
+          const lig:LigneVenteDto = {
+           idEntreprise : userConnected.entreprise?.id,
+            idType :object.id,
+           type : this.ligneCom.at(i).get('type')?.value,
+           prixTotal : this.ligneCom.at(i).get('prixTotal')?.value as number,
+           quantite : this.ligneCom.at(i).get('quantite')?.value as number,
+           prixunitaire : this.ligneCom.at(i).get('prixUnitaire')?.value as number,
+           description : this.ligneCom.at(i).get('description')?.value as string
+          };
+
+          ele.push(lig)
+        }
+
+        data.ligneVentes = ele;
+        data.paiementDtoList = paieEle
+
+        this.venteService.save(data)
+          .subscribe(value => {
+            this.saveForm.reset();
+            this.dialog.open(ConfirmDialogComponent, {
+              disableClose:false,
+              data: {
+                message: this.typeEnregistrement + " enregisgré avec succé",
+              },
+            });
+          })
+      }
+      if (this.typeEnregistrement =="commande fournisseur" ){
+        let data: CommandeFournisseurDto = {};
+
+        data.fournisseur = this.saveForm.controls.personne.value  as FournisseurDto;
+        data.avance = this.saveForm.controls.avance.value as number;
+        data.datecommande = this.saveForm.controls.dateCommande.value as string;
+        data.dateLivraison = this.saveForm.controls.dateRetrait.value as string;
+        data.montantTotal = this.saveForm.controls.montantTotal.value as number;
+        data.resteAdonner = this.saveForm.controls.resteAdonner.value as number;
+        data.resteApayer = this.saveForm.controls.resteAPayer.value as number;
+        data.etatCommande = this.saveForm.controls.etatCommande.value as "EN_PREPARATION" | "RECEPTIONER" | "VALIDER" | "LIVRER";
+        data.idEntreprise = userConnected.entreprise?.id as number;
+
+        let paieEle:Array<PaiementDto> = [];
+        for (let i = 0; i < this.paiement.length; i++) {
+          let compte:string | undefined;
+          if (this.paiement.at(i).get('modePaiement')?.value =='REMBOURSSEMENT'){
+            let numero: CompteClientDto = this.paiement.at(i).get('comptePayeur')?.value as CompteClientDto;
+
+            compte = numero.numeroCompte;
+          }
+          else {
+            compte = this.paiement.at(i).get('comptePayeur')?.value
+          }
+
+          const pai:PaiementDto = {
+            idEntreprise:userConnected.entreprise?.id,
+            montant : this.paiement.at(i).get('montant')?.value as number,
+            mode : this.paiement.at(i).get('modePaiement')?.value,
+            objet : 'CF',
+            datepaiement:new Date().toISOString(),
+            resteApayer:this.paiement.at(i).get('resteAPayer')?.value,
+            resteAdonner: this.paiement.at(i).get('resteAdonner')?.value,
+            comptePayeur : compte
+          };
+
+
+          paieEle.push(pai);
+        }
+
+        let ele :Array<LigneCommandeFournisseurDto> = [];
+
+        for (let i = 0; i < this.ligneCom.length; i++) {
+          const object : any = this.ligneCom.at(i).get('objet')?.value
+
+          const lig:LigneCommandeFournisseurDto = {
+            idEntreprise : userConnected.entreprise?.id,
+            idType :object.id,
+            type : this.ligneCom.at(i).get('type')?.value,
+            prixTotal : this.ligneCom.at(i).get('prixTotal')?.value as number,
+            quantite : this.ligneCom.at(i).get('quantite')?.value as number,
+            prixunitaire : this.ligneCom.at(i).get('prixUnitaire')?.value as number,
+            description : this.ligneCom.at(i).get('description')?.value as string
+          };
+
+          ele.push(lig)
+        }
+
+        data.ligneCommandeFournisseurs = ele;
+        data.paiementDtoList = paieEle
+
+        this.comFournisseurService.save(data)
+          .subscribe(value => {
+            this.saveForm.reset();
+            this.dialog.open(ConfirmDialogComponent, {
+              disableClose:false,
+              data: {
+                message: this.typeEnregistrement + " enregisgré avec succé",
+              },
+            });
+          })
+      }
+      if (this.typeEnregistrement =="commande client"){
+        let data: CommandeClientDto = {};
+
+        data.client = this.saveForm.controls.personne.value  as ClientDto;
+        data.avance = this.saveForm.controls.avance.value as number;
+        data.datecommande = this.saveForm.controls.dateCommande.value as string;
+        data.dateRetrait = this.saveForm.controls.dateRetrait.value as string;
+        data.montantTotal = this.saveForm.controls.montantTotal.value as number;
+        data.resteAdonner = this.saveForm.controls.resteAdonner.value as number;
+        data.resteApayer = this.saveForm.controls.resteAPayer.value as number;
+        data.etatCommande = this.saveForm.controls.etatCommande.value as "EN_PREPARATION" | "RECEPTIONER" | "VALIDER" | "LIVRER";
+        data.idEntreprise = userConnected.entreprise?.id as number;
+
+        let paieEle:Array<PaiementDto> = [];
+        for (let i = 0; i < this.paiement.length; i++) {
+          let compte:string | undefined;
+          if (this.paiement.at(i).get('modePaiement')?.value =='REMBOURSSEMENT'){
+            let numero: CompteClientDto = this.paiement.at(i).get('comptePayeur')?.value as CompteClientDto;
+
+            compte = numero.numeroCompte;
+          }
+          else {
+            compte = this.paiement.at(i).get('comptePayeur')?.value
+          }
+
+          const pai:PaiementDto = {
+            idEntreprise:userConnected.entreprise?.id,
+            montant : this.paiement.at(i).get('montant')?.value as number,
+            mode : this.paiement.at(i).get('modePaiement')?.value,
+            objet : 'CC',
+            datepaiement:new Date().toISOString(),
+            resteApayer:this.paiement.at(i).get('resteAPayer')?.value,
+            resteAdonner: this.paiement.at(i).get('resteAdonner')?.value,
+            comptePayeur : compte
+          };
+
+
+          paieEle.push(pai);
+        }
+
+        let ele :Array<LigneCommandeClientDto> = [];
+
+        for (let i = 0; i < this.ligneCom.length; i++) {
+          const object : any = this.ligneCom.at(i).get('objet')?.value
+
+          const lig:LigneCommandeClientDto = {
+            idEntreprise : userConnected.entreprise?.id,
+            idType :object.id,
+            type : this.ligneCom.at(i).get('type')?.value,
+            prixTotal : this.ligneCom.at(i).get('prixTotal')?.value as number,
+            quantite : this.ligneCom.at(i).get('quantite')?.value as number,
+            prixunitaire : this.ligneCom.at(i).get('prixUnitaire')?.value as number,
+            description : this.ligneCom.at(i).get('description')?.value as string
+          };
+
+          ele.push(lig)
+        }
+
+        data.ligneCommandeClients = ele;
+        data.paiementDtoList = paieEle
+
+        this.comClientService.save(data)
+          .subscribe(value => {
+            this.saveForm.reset();
+            this.dialog.open(ConfirmDialogComponent, {
+              disableClose:false,
+              data: {
+                message: this.typeEnregistrement + " enregisgré avec succé",
+              },
+            });
+          })
+      }
+
     }
   }
 
   nouveauClient() {
 
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '75%';
+    dialogConfig.width = '90%';
+
+    let typePersonne;
+    if (this.typeEnregistrement =="commande client" || this.typeEnregistrement=="vente"){
+      typePersonne = "client"
+    }
+    if (this.typeEnregistrement =="commande fournisseur"){
+      typePersonne = "fournisseur"
+    }
+    dialogConfig.data= {
+      typePersonne:typePersonne
+    };
+
+    this.dialog.open(SavePersonDialogComponent, dialogConfig);
+
+    const dialogRef = this.dialog.open(SavePersonDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data=="ok"){
+
+          // this.findAll();
+        }
+      }
+    );
+    dialogRef.close();
   }
 
-  nouveau() {
+  nouveau(i:number) {
+    if (this.ligneCom.at(i).get('type')?.value == "SERVICE"){
+      this.dialog.open(SaveServiceDialogComponent, {
+        height: '75%',
+        width: '90%',
+        disableClose:false,
+        data: {
 
+        },
+      }).afterClosed().subscribe(
+        data => {
+          if (data=="ok"){
+
+            // this.ngOnInit();
+          }
+        }
+      );
+    }
+    if (this.ligneCom.at(i).get('type')?.value== "PRODUIT"){
+      this.dialog.open(SaveProductDialogComponent, {
+        height: '75%',
+        width: '90%',
+        disableClose:false,
+        data: {
+
+        },
+      }).afterClosed().subscribe(
+        data => {
+          if (data=="ok"){
+
+            // this.ngOnInit();
+          }
+        }
+      );
+    }
   }
+
+  // findAllElement(){
+  //   if (this.ligneCom.at(i).get('type')?.value== "SERVICE"){
+  //
+  //   }
+  //   if (this.ligneCom.at(i).get('type')?.value == "PRODUIT"){
+  //     this.produitService.findAll().subscribe(
+  //       value => {
+  //         this.elements = value
+  //       }
+  //     );
+  //   }
+  // }
 
   isDisable() {
     let disable = true
@@ -236,7 +732,7 @@ export class VenteComponent {
     for (let i = 0; i < this.paiement.length; i++) {
       montant = montant + this.paiement.at(i).get('montant')?.value;
     }
-    console.log(montant)
+
     this.saveForm.controls.avance.patchValue(montant);
     this.calculRestepayer();
     this.paiement.at(index).get("resteAPayer")?.patchValue(
@@ -248,5 +744,32 @@ export class VenteComponent {
       this.paiement.at(index).get("resteAPayer")?.patchValue(0);
 
     }
+  }
+
+
+  detectRequired(index:number) {
+    if (this.paiement.at(index).get('modePaiement')?.value != 'ESPECE'){
+      return true;
+    }
+    return false;
+
+  }
+
+  calculmax(i: number):number{
+   let present = false;
+    for (let j = 0; j < this.paiement.length; j++) {
+      if (this.paiement.at(j).get('modePaiement')?.value =='REMBOURSSEMENT' && j!=i){
+        present = true;
+      }
+    }
+    if (present){
+      this.paiement.at(i).get('modePaiement')?.setValue('ESPECE');
+    }
+    if (this.paiement.at(i).get('modePaiement')?.value =='REMBOURSSEMENT'){
+      let compte = this.paiement.at(i).get('comptePayeur')?.value as CompteClientDto
+      return compte.solde as number
+    }
+
+    return 100000000000;
   }
 }

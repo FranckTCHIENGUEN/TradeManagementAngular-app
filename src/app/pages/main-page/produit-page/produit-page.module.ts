@@ -6,6 +6,8 @@ import { ProduitPageComponent } from './produit-page.component';
 import {ViewProductComponent} from "../../../components/view-product/view-product.component";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 
 @NgModule({
@@ -13,12 +15,14 @@ import {MatCardModule} from "@angular/material/card";
     ProduitPageComponent,
     ViewProductComponent,
   ],
-  imports: [
-    CommonModule,
-    ProduitPageRoutingModule,
-    MatButtonModule,
-    MatCardModule
-  ],
+    imports: [
+        CommonModule,
+        ProduitPageRoutingModule,
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        MatToolbarModule
+    ],
   exports :[
     ViewProductComponent,
   ]

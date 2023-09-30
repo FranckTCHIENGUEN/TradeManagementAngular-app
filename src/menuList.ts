@@ -9,20 +9,20 @@ export const menuList = [
   {
     id:'2',
     label : 'Commandes Clients',
-    routerLink : 'command',
+    routerLink : 'command-client',
     icon : 'newspaper',
     submenu: [
         {
           id: '2.1',
           routerLink: 'save-commande',
           label: 'Nouvelle commande',
-          icon: 'assets/image/icon/iconCODEBARRE_128x128.png',
+          icon: '',
         },
       {
           id: '2.1',
           routerLink: 'list-commande',
           label: 'Liste commande',
-          icon: 'assets/image/icon/iconCODEBARRE_128x128.png',
+          icon: '',
         },
       ]
   },
@@ -35,15 +35,15 @@ export const menuList = [
     submenu: [
         {
           id: '2.1',
-          routerLink: 'save-commande-fournisseur',
+          routerLink: 'enregistrer',
           label: 'Nouvelle commande',
-          icon: 'assets/image/icon/iconCODEBARRE_128x128.png',
+          icon: '',
         },
       {
           id: '2.1',
-          routerLink: 'list-commande-fournisseur',
+          routerLink: 'detail',
           label: 'Liste commande',
-          icon: 'assets/image/icon/iconCODEBARRE_128x128.png',
+          icon: '',
         },
       ]
   },
@@ -57,20 +57,20 @@ export const menuList = [
         id: '2.1',
         routerLink: 'save-vente',
         label: 'Nouvelle Vente',
-        icon: 'assets/image/icon/iconCODEBARRE_128x128.png',
+        icon: '',
       },
       {
         id: '2.1',
         routerLink: 'list-vente',
         label: 'Liste Vente',
-        icon: 'assets/image/icon/iconCODEBARRE_128x128.png',
+        icon: '',
       },
     ]
   },
   {
     id:'2',
-    label : 'Depense',
-    routerLink : 'depense',
+    label : 'Achats',
+    routerLink : 'achats',
     icon : 'receipt'
   },
   {
@@ -102,20 +102,72 @@ export const menuList = [
     id:'2',
     label : 'Statistiques',
     routerLink : 'statistique',
-    icon : 'bar-chart'
+    icon : 'bar-chart',
+    submenu: [
+      {
+        id: '2.1',
+        routerLink: 'etat-financier',
+        label: 'Etat finanacier',
+        icon: '',
+      },
+      {
+        id: '2.1',
+        routerLink: 'stat-ca',
+        label: 'CA',
+        icon: '',
+      },
+      {
+        id: '2.1',
+        routerLink: 'stat-sale',
+        label: 'Vente',
+        icon: '',
+      },
+      {
+        id: '2.1',
+        routerLink: 'stat-achat',
+        label: 'Achat',
+        icon: '',
+      },
+      {
+        id: '2.1',
+        routerLink: 'stat-benefice',
+        label: 'Benefice',
+        icon: '',
+      },
+    ]
+  },
+  {
+    id:'2',
+    label : 'Comptabilité',
+    routerLink : 'compta',
+    icon : 'bar-chart',
+    submenu: [
+      {
+        id: '2.1',
+        routerLink: 'bilan-journalier',
+        label: 'Bilan journalier',
+        icon: '',
+      },
+      {
+        id: '2.1',
+        routerLink: 'bilan-period',
+        label: 'Bilan periodique',
+        icon: '',
+      },
+    ]
   },
 
   // {
   //   id:'2',
   //   routerLink : 'code-barre',
   //   label : 'code barre',
-  //   icon : 'assets/image/icon/iconCODEBARRE_128x128.png',
+  //   icon : '',
   //   submenu: [
   //     {
   //       id: '2.1',
   //       routerLink: 'code-barre-inventaire',
   //       label: 'code barre inventaire',
-  //       icon: 'assets/image/icon/iconCODEBARRE_128x128.png',
+  //       icon: '',
   //     },
   //   ]
   // },

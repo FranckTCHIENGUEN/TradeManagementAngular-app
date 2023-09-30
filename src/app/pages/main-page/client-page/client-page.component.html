@@ -1,2 +1,15 @@
-<h1>Clients</h1>
-<app-person></app-person>
+
+<div class="row mb-3">
+  <div class="col-3">
+    <mat-slide-toggle [(ngModel)]="isChecked">Recherche avancée</mat-slide-toggle>
+  </div>
+</div>
+
+<div class="containt">
+  <div *ngIf="isChecked==true" class="side">
+    <app-filter-person (objetFiltre)="filter($event)" typeEnregistrement="client"></app-filter-person>
+  </div>
+  <div [class]="isChecked ? 'content' : 'content2'">
+    <app-person typePersonne="client"></app-person>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+.filter-input{
+  margin: 1rem;
+  border-radius: 20px;
+  height: 3rem;
+  padding: 5px;
+  border: 1px solid red;
+}
+
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d78787;
+  color: black;
+  height: 2rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+h2{
+  font-size: 20px;
+  font-weight: bold;
+}
+h3{
+  font-size: 17px;
+  font-weight: bold;
+}
+.sub-title{
+  display: flex;
+  height: 1.7rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #ce8468;
+  color: black;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}

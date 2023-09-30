@@ -8,15 +8,22 @@ import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import {FilterPersonComponent} from "../../../components/filter-person/filter-person.component";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
     declarations: [
         FournisseurPageComponent,
-        PersonComponent
+        PersonComponent,
+        FilterPersonComponent
     ],
     exports: [
-        PersonComponent
+        PersonComponent,
+        FilterPersonComponent
     ],
   imports: [
     CommonModule,
@@ -24,7 +31,11 @@ import {MatButtonModule} from "@angular/material/button";
     MatListModule,
     MatCardModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ]
 })
 export class FournisseurPageModule { }

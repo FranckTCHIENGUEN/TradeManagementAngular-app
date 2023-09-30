@@ -6,7 +6,7 @@ import {CommandPageComponent} from "../command-page/command-page.component";
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'save-commande-fournisseur',
+    redirectTo: 'enregistrer',
     pathMatch: 'full'
   },
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
     component: CommandeFournisseurComponent,
     children:[
       {
-        path: 'save-commande-fournisseur',
+        path: 'enregistrer',
         children:[
           {
             path:'',
@@ -23,7 +23,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'list-commande-fournisseur',
+        path: 'detail',
         children:[
           {
             path:'',

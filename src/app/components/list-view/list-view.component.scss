@@ -1,31 +1,32 @@
-.mat-row .mat-cell {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
+.mat-mdc-row .mat-mdc-cell {
+  border: 0.1rem solid black;
+  //border-top: 0.1rem solid black;
   cursor: pointer;
-  padding-bottom: 1.5rem;
-  padding-top: 1.5rem;
 }
-
-.mat-row:hover .mat-cell {
+.mat-mdc-row:hover .mat-mdc-cell {
   border-color: currentColor;
 }
-.mat-row:active{
 
+.mat-row:nth-child(even){
+  background-color: #deb281;
+}
+
+.mat-row:nth-child(odd){
+  background-color: #88d2e0;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
 }
 div.con{
   padding-right: 1.5rem;
   border-radius: 2rem;
 }
 th.mat-header-cell {
-  font-size: large;
-  border-radius: 2rem;
-  text-align: center;
-}
-.mat-row:hover{
-  background-color: black;
-  opacity: 100%;
+  color: #ffffff;
+  background-color: #047c0e;
+  font-weight: bold;
+  border: 0.1rem solid white;
 }
 
-.demo-row-is-clicked {
-  background-color: gray;
-}
+

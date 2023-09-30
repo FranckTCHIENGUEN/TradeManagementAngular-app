@@ -1,8 +1,25 @@
-<h1>Produits</h1>
-<div class="row">
-  <div class="col-4">
-    <button mat-raised-button color="primary" (click)="openDialogSave()">Ajouter</button>
+<div id="appbar" >
+  <h1>Produits</h1>
+  <div class="row">
+    <div class="col-4">
+      <button mat-raised-button color="primary" (click)="openDialogSave()">Ajouter</button>
+    </div>
+    <div class="col-4">
+      <button  mat-raised-button color="accent" (click)="findAllProduit()">
+        <mat-icon>
+            <span class="material-symbols-outlined">
+            refresh
+          </span></mat-icon>
+      </button>
+    </div>
+    <div class="col-4">
+      <button  mat-raised-button color="primary" (click)="opendoalogCategorie()">Voir les categories</button>
+    </div>
   </div>
 </div>
 
-<app-view-product></app-view-product>
+<div class="content-second">
+  <app-view-product [listOfData]="listProduiut" typeAffichage="produit"></app-view-product>
+</div>
+
+

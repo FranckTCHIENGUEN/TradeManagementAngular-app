@@ -42,6 +42,22 @@ h1{
 
 }
 
+#appbar{
+  position: fixed;
+  width: 100%;
+  padding: 1%;
+  box-shadow: 0 0.05rem 25px black;
+  background-color: #038a25;
+  //top: rem;
+  z-index: 10000;
+}
+
+.content-second{
+  position: relative;
+  top: 10rem;
+
+}
+
 .Subactivebutton{
   border-radius: 6px;
   background-color: mat.get-color-from-palette($primary-palette);

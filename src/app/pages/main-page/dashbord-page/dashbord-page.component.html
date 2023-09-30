@@ -3,45 +3,46 @@
     <h2>Etat des commandes</h2>
 
   </div>
-  <div class="col border-2  border-primary rounded-3">
+  <div class="row border-2  border-primary rounded-3">
     <div class="row">
-      <div class="row">
+      <div class="row ligneCom">
         <div class="col text-center">
           Commande en attente de traitement
         </div>
         <div class="col">
-         <button mat-stroked-button class="border-primary rounded-pill">Voir plus</button>
+         <button mat-raised-button class="border-primary rounded-pill">Voir plus</button>
         </div>
       </div>
       <div class="row">
-        tables des commandes
+        <app-list-view *ngIf="display==3" type="commande client" [tableColumns]="columns" [tableData]="listeCommandeEnArttente"></app-list-view>
       </div>
     </div>
   </div>
-  <div class="col border-2  border-primary rounded-3">
+
+</div>
+<div class="row border-2  border-primary rounded-3">
+  <div class="row">
+    <div class="row ligneCom">
+      <div class="col text-center">
+        Commande en attente de livraison
+      </div>
+      <div class="col">
+        <button mat-raised-button class="border-primary rounded-pill">Voir plus</button>
+      </div>
+    </div>
     <div class="row">
-      <div class="row">
-        <div class="col text-center">
-          Commande en attente de traitement
-        </div>
-        <div class="col">
-          <button mat-stroked-button class="border-primary rounded-pill">Voir plus</button>
-        </div>
-      </div>
-      <div class="row">
-        tables des commandes
-      </div>
+      <app-list-view *ngIf="display==3" type="commande client" [tableColumns]="columns" [tableData]="listeCommandeValider"></app-list-view>
     </div>
   </div>
 </div>
 
 <div class="row w-100">
   <mat-divider class="mt-3 mb-3"></mat-divider>
-  <div class="row w-100 text-center text-capitalize">
+  <div class="row ligneCom w-100 text-center text-capitalize">
     <h2>Etat financier du mois en cour</h2>
   </div>
   <div class="row w-100">
-    <div class="col-3">
+    <div class="col-4">
       <mat-card class="stat">
         <mat-card-header>
           <mat-list-item >
@@ -60,11 +61,11 @@
           </mat-list-item>
         </mat-card-header>
         <mat-card-content class="content">
-          200000 FCFA
+          {{etatfinancier.venteProduits}} FCFA
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-3">
+    <div class="col-4">
       <mat-card class="stat">
         <mat-card-header>
           <mat-list-item >
@@ -83,11 +84,11 @@
           </mat-list-item>
         </mat-card-header>
         <mat-card-content class="content">
-          200000 FCFA
+          {{etatfinancier.venteService}} FCFA
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-3">
+    <div class="col-4">
       <mat-card class="stat">
         <mat-card-header>
           <mat-list-item >
@@ -100,17 +101,43 @@
                 </mat-icon>
               </p>
 
-              <p>Commandes livré</p>
+              <p>Montant des achats</p>
             </div>
 
           </mat-list-item>
         </mat-card-header>
         <mat-card-content class="content">
-          200000 FCFA
+          {{etatfinancier.montantAchat}} FCFA
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-3">
+  </div>
+  <div class="row mt-2 w-100">
+
+    <div class="col-4">
+      <mat-card class="stat">
+        <mat-card-header>
+          <mat-list-item >
+            <div class="d-flex align-items-center justify-content-lg-start">
+              <p>
+                <mat-icon color="primary">
+              <span class="material-symbols-outlined">
+                info
+              </span>
+                </mat-icon>
+              </p>
+
+              <p>Commandes fournisseurs</p>
+            </div>
+
+          </mat-list-item>
+        </mat-card-header>
+        <mat-card-content class="content">
+          {{etatfinancier.commandeFournisseur}} FCFA
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-4">
       <mat-card class="stat">
         <mat-card-header>
           <mat-list-item >
@@ -129,7 +156,30 @@
           </mat-list-item>
         </mat-card-header>
         <mat-card-content class="content">
-          200000 FCFA
+          {{etatfinancier.ca}} FCFA
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-card class="stat">
+        <mat-card-header>
+          <mat-list-item >
+            <div class="d-flex align-items-center justify-content-lg-start">
+              <p>
+                <mat-icon color="primary">
+              <span class="material-symbols-outlined">
+                info
+              </span>
+                </mat-icon>
+              </p>
+
+              <p>Benefice</p>
+            </div>
+
+          </mat-list-item>
+        </mat-card-header>
+        <mat-card-content class="content">
+          {{etatfinancier.benefice}} FCFA
         </mat-card-content>
       </mat-card>
     </div>
@@ -138,7 +188,7 @@
 
 <div class="row w-100">
   <mat-divider class="mt-3 mb-3"></mat-divider>
-  <div class="row w-100 text-center text-capitalize">
+  <div class="row ligneCom w-100 text-center text-capitalize">
     <h2>Graphes de vente</h2>
 
   </div>

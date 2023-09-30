@@ -1,0 +1,84 @@
+<div mat-dialog-title>
+  <mat-toolbar color="accent">
+    <span>Details produit</span>
+    <span class="example-spacer"></span>
+<!--    <button mat-icon-button (click)="openDialogEdit(entreprise)" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">-->
+<!--      <mat-icon>edit</mat-icon>-->
+<!--    </button>-->
+  </mat-toolbar>
+</div>
+
+<div matDialogContent>
+  <div class="row justify-content-center align-items-center">
+    <img style="height: 150px; width: 150px" src="assets/icons8-client-100.png">
+  </div>
+
+  <div class="row justify-content-center align-items-center text-center">
+    <span>{{entreprise.nom}} - {{entreprise.codeFiscal}}</span>
+  </div>
+  <div class="row justify-content-center align-items-center text-center">
+    <span>{{entreprise.description}}</span>
+  </div>
+
+  <!--<div class="row">-->
+  <div class="col justify-content-center align-items-center text-center">
+    <mat-icon color="primary" >
+      entreprise_pin_circle
+    </mat-icon>
+    <span>{{entreprise.adresse?.adresse1}} - {{entreprise.adresse?.ville}} ( {{entreprise.adresse?.pays}} )</span>
+  </div>
+  <div class="row justify-content-center align-items-center text-center" *ngIf="entreprise.contact !=null && entreprise.contact !=undefined ">
+
+    <div class="col justify-content-center align-items-center text-center" >
+      <mat-icon color="primary">
+        phone_in_talk
+      </mat-icon>
+      <span>Contact</span>
+    </div>
+    <div class="row justify-content-center align-items-center text-center" >
+      <div class="col">
+        <span *ngIf="entreprise.contact.tel1 !=null && entreprise.contact.tel1 !=undefined ">
+              Tel 1: {{entreprise.contact.tel1}}
+        </span>
+      </div>
+      <div class="col">
+        <span *ngIf="entreprise.contact?.tel2 !=null && entreprise.contact?.tel2 !=undefined ">
+              Tel 2: {{entreprise.contact.tel2}}
+        </span>
+      </div>
+      <div class="col">
+        <span *ngIf="entreprise.contact.tel3 !=null && entreprise.contact.tel3 !=undefined ">
+              Tel 3: {{entreprise.contact.tel3}}
+        </span>
+      </div>
+      <div class="col">
+        <span *ngIf="entreprise.contact.tel4 !=null && entreprise.contact.tel4 !=undefined ">
+              Tel 4: {{entreprise.contact.tel4}}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="col justify-content-center align-items-center text-center" >
+      <mat-icon color="primary">
+        mail
+      </mat-icon>
+      <span>
+      {{entreprise.email}}
+    </span>
+    </div>
+    <div class="col justify-content-center align-items-center text-center" >
+      <mat-icon color="primary">
+        mail
+      </mat-icon>
+      <span>
+      {{entreprise.siteWeb}}
+    </span>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial>Ok</button>
+</div>

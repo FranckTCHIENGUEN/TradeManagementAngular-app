@@ -1,3 +1,4 @@
+
 <mat-toolbar color="primary" class="d-flex tool justify-content-between">
 
   <!--  <mat-toolbar-row>-->
@@ -5,8 +6,8 @@
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon (click)="sidenav.toggle()" >menu</mat-icon>
     </button>
-    <img class="img-fluid" src="assets/logo.png" style="height: 50px" alt="">
-<!--    <span id="titre">SIGIF</span>-->
+    <img class="img-fluid" src="{{userConnected.entreprise?.photo}}" style="height: 50px" alt="">
+    <span id="titre">{{userConnected.entreprise?.nom}}</span>
   </div>
   <div class=" align-items-center justify-content-center">
     <mat-form-field class="input-group" appearance="fill">
@@ -15,16 +16,33 @@
         <mat-icon>search</mat-icon>
       </button>
     </mat-form-field>
-    <!--    <input matInput type="text" class="form-control" placeholder="Recherche" aria-label="Recipient's username" aria-describedby="button-addon2">-->
-    <!--    <button mat-button type="button">-->
-    <!--      <mat-icon>search</mat-icon>-->
-    <!--    </button>-->
   </div>
   <div>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>account_circle</mat-icon>
+    <div class="flex-stretch"></div>
+    <mat-icon class="mr-8">brightness_5</mat-icon>
+    <mat-slide-toggle [formControl]="toggleControl" class="mr-8">
+    </mat-slide-toggle>
+    <mat-icon>bedtime</mat-icon>
+  </div>
+  <div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <img class="img-fluid" src="{{userConnected.photo}}" style="height: 50px" alt="">
     </button>
-<!--    <span>{{userConnected.prenom}}  {{userConnected.nom}}</span>-->
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="callDialogDetailPerson()">
+        <mat-icon>person</mat-icon>
+        <span>Mon profile</span>
+      </button>
+      <button mat-menu-item (click)="callDialogDetailentreprise()">
+        <mat-icon>webhook</mat-icon>
+        <span>Mon entreprise</span>
+      </button>
+      <button mat-menu-item (click)="deconnexion()">
+        <mat-icon>logout</mat-icon>
+        <span>Deconnexion</span>
+      </button>
+    </mat-menu>
+    <span>{{userConnected.prenom}}  {{userConnected.nom}}</span>
   </div>
   <!--  </mat-toolbar-row>-->
 

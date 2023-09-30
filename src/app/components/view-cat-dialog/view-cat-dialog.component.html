@@ -1,0 +1,33 @@
+<div class="row mt-2 justify-content-center text-center">
+  <h2>Liste des categories de {{typeAffichage}}</h2>
+</div>
+<div class="row ms-5">
+  <div class="col-4">
+    <button mat-raised-button color="primary" (click)="nouvelleCategorie()">Nouvelle categorie</button>
+  </div>
+  <div class="col-4">
+    <button  mat-raised-button color="accent" (click)="findAllCatProduit()">
+      <mat-icon>
+            <span class="material-symbols-outlined">
+            refresh
+          </span></mat-icon>
+    </button>
+  </div>
+<!--  <div class="col-4">-->
+<!--    <button  mat-raised-button color="primary" (click)="openDialogDeleteCat(cat.selectedOptions.selected.at(0)?.value)">Supprimer</button>-->
+<!--  </div>-->
+</div>
+
+<mat-list class="ms-5">
+  <div mat-subheader>Categories</div>
+  <mat-list-item *ngFor="let categorie of categories">
+    <mat-icon matListItemIcon> folder </mat-icon>
+    <div matListItemTitle>{{categorie.nom}}</div>
+    <button matSuffix mat-button color="accent" (click)="openDialogEditCat(categorie)">
+    <mat-icon color="primary">
+            <span class="material-symbols-outlined">
+            edit
+          </span></mat-icon>
+  </button>
+  </mat-list-item>
+</mat-list>

@@ -1,0 +1,31 @@
+<form [formGroup]="saveForm">
+  <div class="row">
+    <div class="col">
+      <mat-form-field appearance="fill">
+        <mat-label>Date de recherche 1</mat-label>
+        <input  matInput formControlName="date1" [matDatepicker]="picker" [max]="dateMax">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field appearance="fill">
+        <mat-label>Date de recherche 2</mat-label>
+        <input  matInput formControlName="date2" [matDatepicker]="picker2" [min]="saveForm.controls.date1.value" [max]="dateMax">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <button [disabled]="!saveForm.valid" (click)="formSubmit()" (keydown.enter)="formSubmit()"
+            mat-raised-button color="primary">Rechercher</button>
+  </div>
+</form>
+
+<div class="mt-5">
+  <app-view-bilan-compta *ngIf="display==true" [date1]="date1" [date2]="date2"></app-view-bilan-compta>
+</div>
+
