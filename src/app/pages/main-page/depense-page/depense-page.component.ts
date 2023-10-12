@@ -9,6 +9,7 @@ import {ViewCatDialogComponent} from "../../../components/view-cat-dialog/view-c
 import {MatDialog} from "@angular/material/dialog";
 import {SaveProductDialogComponent} from "../../../components/save-product-dialog/save-product-dialog.component";
 import {SaveDepenseDialogComponent} from "../../../components/save-depense-dialog/save-depense-dialog.component";
+import {UtilisateurDto} from "../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
   selector: 'app-depense-page',
@@ -18,7 +19,7 @@ import {SaveDepenseDialogComponent} from "../../../components/save-depense-dialo
 export class DepensePageComponent implements OnInit{
 
   listeVente:Array<DepensesDto> = [];
-
+  permission: Array<string> = [];
   display=false;
   filterValue:string = '';
   columns:Array<Column> = [
@@ -73,6 +74,15 @@ export class DepensePageComponent implements OnInit{
 
   }
 
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
+  }
+
   openDialogSave() {
 
     this.dialog.open(SaveDepenseDialogComponent, {
@@ -95,6 +105,7 @@ export class DepensePageComponent implements OnInit{
 
   ngOnInit(): void {
 
+    this.getPermissions();
     this.dataLinkTransfer.name.subscribe(value => this.filterValue = value)
     this.findAllDepenses();
 
@@ -102,11 +113,13 @@ export class DepensePageComponent implements OnInit{
 
   findAllDepenses() {
     this.display = false
-    this.depenseService.findAll().subscribe(
-      value => {
-        this.listeVente = value;
-        this.display = true
-      });
+    if (this.permission.includes('DEPENSE: LIRE')){
+      this.depenseService.findAll().subscribe(
+        value => {
+          this.listeVente = value;
+          this.display = true
+        });
+    }
   }
 
   opendoalogCategorie() {

@@ -17,6 +17,7 @@ import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 import {AppFournisseurService} from "../../../services/fournisseurService/app-fournisseur.service";
 import {AppUserService} from "../../../services/appUserServices/app-user.service";
+import {passCorect, userExistsValidator} from "../../../validation";
 
 @Component({
   selector: 'app-save-person-dialog',
@@ -45,6 +46,15 @@ export class SavePersonDialogComponent {
       Validators.email
     ]],
   })
+  usersaveForm = this.formBuilder.group({
+    userMail:[this.client.email,
+      {
+        validators:[Validators.required,],
+        asyncValidators: [userExistsValidator(this.userService)],
+        updateOn: 'blur'
+      }
+    ],
+  })
   private _matcher = new MyErrorStateMatcher();
   private _nombreContact=0;
 
@@ -54,12 +64,12 @@ export class SavePersonDialogComponent {
   get contact (){
     return this.saveForm.controls["contact"] as FormArray;
   }
-
+  get userMail() {
+    return this.usersaveForm.controls['userMail'];
+  }
   nombretel(): boolean {
-    if (this._nombreContact>=4){
-      return true;
-    }
-    return false;
+    return this._nombreContact >= 4;
+
   }
 
   constructor(private formBuilder:FormBuilder,
@@ -136,10 +146,19 @@ export class SavePersonDialogComponent {
   }
   formSubmit() {
 
-    if (this.saveForm.valid){
+    let proceed = true;
+
+    if (this.typePersonne =="utilisateur"){
+      if (!this.usersaveForm.valid){
+        proceed = false
+      }
+    }
+
+    if (this.saveForm.valid && proceed){
       let userConnected: UtilisateurDto = JSON.parse(sessionStorage.getItem('userData') as string);
-        this.client.idEntreprise = userConnected.entreprise?.id;
+
         this.client.mail = this.saveForm.value.mail as string;
+        this.client.photo = "https://res.cloudinary.com/dal83zeal/image/upload/v1695476069/TradeManagement-DefaultPicture/ctm3p9ppvi6gwlgpxnca.png";
         this.client.nom = this.saveForm.value.nom as string;
         this.client.prenom = this.saveForm.value.prenom as string;
         this.client.genre = this.saveForm.value.genre as 'MASCULIN' | 'FEMININ' | 'ENTREPRISE';
@@ -160,6 +179,7 @@ export class SavePersonDialogComponent {
         this.client.contactDto = contact;
 
       if (this._typePersonne==='client'){
+        this.client.idEntreprise = userConnected.entreprise?.id;
         this.clientAppService.save(this.client)
           .subscribe(value => {
 
@@ -173,6 +193,7 @@ export class SavePersonDialogComponent {
           })
       }
       else if (this._typePersonne==='fournisseur'){
+        this.client.idEntreprise = userConnected.entreprise?.id;
         this.fournisseurService.save(this.client)
           .subscribe(value => {
 
@@ -186,7 +207,17 @@ export class SavePersonDialogComponent {
           })
       }
       else if (this._typePersonne==='utilisateur'){
-        this.userService.save(this.client)
+
+        let user = this.client as UtilisateurDto
+        if (user.id==undefined){
+          user.accountNonLocked = true;
+          user.passwordState = "DEFAULT"
+        }
+        user.entreprise = userConnected.entreprise;
+        user.email = this.userMail.value as string;
+
+
+        this.userService.save(user)
           .subscribe(value => {
 
             this.closeDialog({etat :'ok'});
@@ -198,6 +229,15 @@ export class SavePersonDialogComponent {
             });
           })
       }
+    }
+
+    else {
+      this.dialog.open(ConfirmDialogComponent, {
+        disableClose:false,
+        data: {
+          message: "Le formulaire contient des erreurs",
+        },
+      });
     }
 
   }

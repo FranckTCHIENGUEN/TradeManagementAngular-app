@@ -71,13 +71,13 @@ export class RegisterPageComponent {
     if (this.registerForm.valid) {
       this.utilisateurDto.passwordState = "PERSONAL";
       this.utilisateurDto.motdepasse = this.registerForm.value.password!;
-      console.log(this.utilisateurDto)
+
       this.appUserService.changeAcess(this.utilisateurDto)
         .subscribe(user => {
           this.error = false;
           sessionStorage.setItem("userData", JSON.stringify(user));
           this.router.navigate(['']);
-          sessionStorage.removeItem("connectedUser");
+          // sessionStorage.removeItem("connectedUser");
 
         }, error1 => {
           this.error = true;

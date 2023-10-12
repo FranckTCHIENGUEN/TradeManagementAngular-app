@@ -27,12 +27,76 @@ export class UtilisateurService extends BaseService {
   }
 
   /**
+   * Path part for operation removeRoleToUser
+   */
+  static readonly RemoveRoleToUserPath = '/tradeManagement/v1/utilisateurs/removeroleuser/{iduser}?{idrole}';
+
+  /**
+   * retirer un role a un utilisateur.
+   *
+   * cette methode permet de rechercher les organisations dont le nom resemble au nom passé en parametre
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `removeRoleToUser()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  removeRoleToUser$Response(params: {
+    iduser: number;
+    idrole: number;
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<UtilisateurDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, UtilisateurService.RemoveRoleToUserPath, 'put');
+    if (params) {
+      rb.query('iduser', params.iduser, {});
+      rb.query('idrole', params.idrole, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<UtilisateurDto>;
+      })
+    );
+  }
+
+  /**
+   * retirer un role a un utilisateur.
+   *
+   * cette methode permet de rechercher les organisations dont le nom resemble au nom passé en parametre
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `removeRoleToUser$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  removeRoleToUser(params: {
+    iduser: number;
+    idrole: number;
+  },
+  context?: HttpContext
+
+): Observable<UtilisateurDto> {
+
+    return this.removeRoleToUser$Response(params,context).pipe(
+      map((r: StrictHttpResponse<UtilisateurDto>) => r.body as UtilisateurDto)
+    );
+  }
+
+  /**
    * Path part for operation addRoleToUser
    */
   static readonly AddRoleToUserPath = '/tradeManagement/v1/utilisateurs/addroleuser/{iduser}?{idrole}';
 
   /**
-   * rechercher une organisation.
+   * ajouter un role a un utilisateur.
    *
    * cette methode permet de rechercher les organisations dont le nom resemble au nom passé en parametre
    *
@@ -51,8 +115,8 @@ export class UtilisateurService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, UtilisateurService.AddRoleToUserPath, 'put');
     if (params) {
-      rb.path('iduser', params.iduser, {});
-      rb.path('idrole', params.idrole, {});
+      rb.query('iduser', params.iduser, {});
+      rb.query('idrole', params.idrole, {});
     }
 
     return this.http.request(rb.build({
@@ -68,7 +132,7 @@ export class UtilisateurService extends BaseService {
   }
 
   /**
-   * rechercher une organisation.
+   * ajouter un role a un utilisateur.
    *
    * cette methode permet de rechercher les organisations dont le nom resemble au nom passé en parametre
    *
@@ -664,8 +728,8 @@ export class UtilisateurService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, UtilisateurService.FindByPaysAndVillePath, 'get');
     if (params) {
-      rb.path('pays', params.pays, {});
-      rb.path('ville', params.ville, {});
+      rb.query('pays', params.pays, {});
+      rb.query('ville', params.ville, {});
     }
 
     return this.http.request(rb.build({
@@ -956,7 +1020,7 @@ export class UtilisateurService extends BaseService {
   static readonly FindByEmailAndIdNotPath = '/tradeManagement/v1/utilisateurs/find/emailNot/{email}/{id}';
 
   /**
-   * rechercher une organisation.
+   * rechercher un utilisateur par mail avec id different de celui specifié.
    *
    * cette methode permet de rechercher les organisations dont le nom resemble au nom passé en parametre
    *
@@ -992,7 +1056,7 @@ export class UtilisateurService extends BaseService {
   }
 
   /**
-   * rechercher une organisation.
+   * rechercher un utilisateur par mail avec id different de celui specifié.
    *
    * cette methode permet de rechercher les organisations dont le nom resemble au nom passé en parametre
    *

@@ -106,18 +106,18 @@
     }
   ],
   "paths": {
-    "/tradeManagement/v1/utilisateurs/addroleuser/{iduser}?{idrole}": {
+    "/tradeManagement/v1/utilisateurs/removeroleuser/{iduser}?{idrole}": {
       "put": {
         "tags": [
           "Utilisateur"
         ],
-        "summary": "rechercher une organisation",
+        "summary": "retirer un role a un utilisateur",
         "description": "cette methode permet de rechercher les organisations dont le nom resemble au nom passé en parametre",
-        "operationId": "addRoleToUser",
+        "operationId": "removeRoleToUser",
         "parameters": [
           {
             "name": "iduser",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -126,7 +126,7 @@
           },
           {
             "name": "idrole",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -146,7 +146,59 @@
             }
           },
           "200": {
-            "description": "organisation treouvé avec succée",
+            "description": "role retiré  avec succée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UtilisateurDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tradeManagement/v1/utilisateurs/addroleuser/{iduser}?{idrole}": {
+      "put": {
+        "tags": [
+          "Utilisateur"
+        ],
+        "summary": "ajouter un role a un utilisateur",
+        "description": "cette methode permet de rechercher les organisations dont le nom resemble au nom passé en parametre",
+        "operationId": "addRoleToUser",
+        "parameters": [
+          {
+            "name": "iduser",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "idrole",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "aucune organisation n'existe avec le nom fournit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UtilisateurDto"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "role ajouter avec succée",
             "content": {
               "application/json": {
                 "schema": {
@@ -678,6 +730,19 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/tradeManagement/v1/logout": {
+      "post": {
+        "tags": [
+          "authentification"
+        ],
+        "operationId": "disconect",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -1459,7 +1524,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1468,7 +1533,7 @@
           },
           {
             "name": "idLigneCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1477,7 +1542,7 @@
           },
           {
             "name": "quantite",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "number"
@@ -1561,7 +1626,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1570,7 +1635,7 @@
           },
           {
             "name": "idFournisseur",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1613,7 +1678,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1622,7 +1687,7 @@
           },
           {
             "name": "etatCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string",
@@ -1670,7 +1735,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1679,7 +1744,7 @@
           },
           {
             "name": "idLigneCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1688,7 +1753,7 @@
           },
           {
             "name": "typeCom",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string",
@@ -1701,7 +1766,7 @@
           },
           {
             "name": "newIdArticle",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1744,7 +1809,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1753,7 +1818,7 @@
           },
           {
             "name": "idLigneCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1762,7 +1827,7 @@
           },
           {
             "name": "quantite",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "number"
@@ -1846,7 +1911,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1855,7 +1920,7 @@
           },
           {
             "name": "etatCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string",
@@ -1903,7 +1968,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1912,7 +1977,7 @@
           },
           {
             "name": "idClient",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1955,7 +2020,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1964,7 +2029,7 @@
           },
           {
             "name": "idLigneCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1973,7 +2038,7 @@
           },
           {
             "name": "typeCom",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string",
@@ -1986,7 +2051,7 @@
           },
           {
             "name": "newIdArticle",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -2453,7 +2518,7 @@
         "parameters": [
           {
             "name": "pays",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string"
@@ -2461,7 +2526,7 @@
           },
           {
             "name": "ville",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string"
@@ -2694,7 +2759,7 @@
         "tags": [
           "Utilisateur"
         ],
-        "summary": "rechercher une organisation",
+        "summary": "rechercher un utilisateur par mail avec id different de celui specifié",
         "description": "cette methode permet de rechercher les organisations dont le nom resemble au nom passé en parametre",
         "operationId": "findByEmailAndIdNot",
         "parameters": [
@@ -3108,6 +3173,31 @@
         }
       }
     },
+    "/tradeManagement/v1/roles/permissions": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "rechercher les permissions",
+        "description": "cette methode permet de rechercher la liste des roles elle retourne la liste de tous les roles",
+        "operationId": "findAllPermissions",
+        "responses": {
+          "200": {
+            "description": "role trouvé avec succée / liste vide",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Permissions"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/tradeManagement/v1/roles/nom/{nom}": {
       "get": {
         "tags": [
@@ -3231,7 +3321,7 @@
         "parameters": [
           {
             "name": "objet",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string",
@@ -3245,7 +3335,7 @@
           },
           {
             "name": "date1",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string",
@@ -3254,7 +3344,7 @@
           },
           {
             "name": "date2",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string",
@@ -3488,7 +3578,7 @@
         "parameters": [
           {
             "name": "objet",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string",
@@ -3502,7 +3592,7 @@
           },
           {
             "name": "idObjet",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -3511,7 +3601,7 @@
           },
           {
             "name": "date1",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string",
@@ -3520,7 +3610,7 @@
           },
           {
             "name": "date2",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string",
@@ -4073,7 +4163,7 @@
         "parameters": [
           {
             "name": "pays",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string"
@@ -4081,7 +4171,7 @@
           },
           {
             "name": "ville",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string"
@@ -4551,7 +4641,7 @@
         "parameters": [
           {
             "name": "date1",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string",
@@ -4560,7 +4650,7 @@
           },
           {
             "name": "date2",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string",
@@ -4700,7 +4790,7 @@
         "parameters": [
           {
             "name": "idcategorie",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -4709,7 +4799,7 @@
           },
           {
             "name": "date1",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string",
@@ -4718,7 +4808,7 @@
           },
           {
             "name": "date2",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string",
@@ -5451,7 +5541,7 @@
         "parameters": [
           {
             "name": "pays",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string"
@@ -5459,7 +5549,7 @@
           },
           {
             "name": "ville",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string"
@@ -5948,6 +6038,66 @@
         }
       }
     },
+    "/tradeManagement/v1/bilan-comptafind-by-date-between/{date1}/{date2}/{userName}": {
+      "get": {
+        "tags": [
+          "bilanComptable"
+        ],
+        "summary": "rechercher un bilan comptable",
+        "description": "cette methode permet de rechercher un bilan comptable comprise entre deux dates passé en parametre",
+        "operationId": "findByDateBetweenAndUser",
+        "parameters": [
+          {
+            "name": "date1",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "date2",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "une erreur interne s'est produite",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComptaGlobalDto"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "operation realisé avec succée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComptaGlobalDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/tradeManagement/v1/articles/{idArticle}": {
       "get": {
         "tags": [
@@ -6115,7 +6265,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -6124,7 +6274,7 @@
           },
           {
             "name": "idLigneCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -6167,7 +6317,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -6176,7 +6326,7 @@
           },
           {
             "name": "idLigneCommande",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -7309,6 +7459,9 @@
           },
           "argentEnCaisse": {
             "type": "number"
+          },
+          "user": {
+            "type": "string"
           },
           "detailsBilan": {
             "type": "array",

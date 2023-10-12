@@ -33,21 +33,21 @@
     </div>
     <div class="row">
       <div *ngIf="type != 'vente'" class="col divider">
-        Date commande : <span class="important">{{donnees.dateCommande}} </span>
+        Date commande : <span class="important">{{donnees.datecommande | date:"EEEE dd MMMM yyyy"}} </span>
       </div>
       <div *ngIf="type == 'vente'" class="col divider">
-        Date vente : <span class="important">{{donnees.datevente}} </span>
+        Date vente : <span class="important">{{donnees.datevente | date:"EEEE dd MMMM yyyy"}} </span>
       </div>
       <div *ngIf="type != 'vente'" class="col divider divider-boder">
-        Date retrait : <span class="important">{{donnees.dateRetrait}}</span>
+        Date retrait : <span class="important">{{donnees.dateRetrait | date:"EEEE dd MMMM yyyy"}}</span>
       </div>
       <div *ngIf="type != 'vente'" class="col divider divider-boder">
-        Date livraison : <span class="important">{{donnees.dateLivraison}} </span>
+        Date livraison : <span class="important">{{donnees.dateLivraison | date:"EEEE dd MMMM yyyy"}} </span>
       </div>
-      <div *ngIf="type!='vente'" class="col divider divider-boder">
+      <div *ngIf="type!='vente' && (permission.includes('COM_FOURNISSEUR: CRÉER_MODIFIER') || permission.includes('COM_CLIENT: CRÉER_MODIFIER')) " class="col divider divider-boder">
         Etat : <span class="important">{{donnees.etatCommande}} </span>
-        <button (click)="openDialogUpdateEtat()" mat-icon-button class="justify-content-center align-items-center example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-          <mat-icon>pencil</mat-icon>
+        <button *ngIf="donnees.etatCommande!='LIVRER'" (click)="openDialogUpdateEtat()" mat-icon-button class="justify-content-center align-items-center example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+          <mat-icon color="primary">pencil</mat-icon>
         </button>
       </div>
     </div>
@@ -132,10 +132,10 @@
         </mat-accordion>
       </mat-tab>
       <mat-tab label="Paiement">
-        <div *ngIf="donnees.resteApayer > 0" class="col-4">
+        <div *ngIf="donnees.resteApayer > 0 && permission.includes('PAIEMENT: CRÉER_MODIFIER')" class="col-4">
           <button mat-raised-button color="primary" (click)="openDialogAddPaiement()">Ajouter un paiement-</button>
         </div>
-        <div class="row">
+        <div class="row" *ngIf=" permission.includes('PAIEMENT: LIRE')">
           <mat-accordion class="accordion" *ngFor="let paiement of paiementList">
             <mat-expansion-panel>
               <mat-expansion-panel-header>

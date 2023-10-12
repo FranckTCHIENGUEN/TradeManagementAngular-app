@@ -1,1 +1,1 @@
-<app-vente typeEnregistrement="commande client"></app-vente>
+<app-vente *ngIf="permission.includes('COM_CLIENT: CRÉER_MODIFIER')" typeEnregistrement="commande client"></app-vente>

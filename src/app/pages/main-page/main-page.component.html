@@ -25,9 +25,9 @@
     <mat-icon>bedtime</mat-icon>
   </div>
   <div>
-    <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <img class="img-fluid" src="{{userConnected.photo}}" style="height: 50px" alt="">
-    </button>
+<!--    <button mat-icon-button  class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">-->
+      <img [matMenuTriggerFor]="menu" class="img-fluid" src="{{userConnected.photo}}" style="height: 50px" alt="">
+<!--    </button>-->
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="callDialogDetailPerson()">
         <mat-icon>person</mat-icon>
@@ -37,6 +37,13 @@
         <mat-icon>webhook</mat-icon>
         <span>Mon entreprise</span>
       </button>
+<!--      <button *ngIf="permission.includes('UTILISATEUR: CRÉER_MODIFIER') || permission.includes('UTILISATEUR: FILTRER')-->
+<!--                                      || permission.includes('ROLE: LIRE')-->
+<!--                                      || permission.includes('UTILISATEUR: LIRE') || permission.includes('UTILISATEUR: CHANGER_ETAT') || permission.includes('UTILISATEUR: REMOVE_ROLE')-->
+<!--                                      || permission.includes('UTILISATEUR: ADD_ROLE') || permission.includes('UTILISATEUR: RESET_PASS')" mat-menu-item (click)="navigateGestUser()">-->
+<!--        <mat-icon>manage_accounts</mat-icon>-->
+<!--        <span>Mes utilisateurs</span>-->
+<!--      </button>-->
       <button mat-menu-item (click)="deconnexion()">
         <mat-icon>logout</mat-icon>
         <span>Deconnexion</span>
@@ -68,3 +75,4 @@
 
   </mat-sidenav-content>
 </mat-sidenav-container>
+<!--<router-outlet></router-outlet>-->

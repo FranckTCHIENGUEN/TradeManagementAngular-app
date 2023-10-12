@@ -115,9 +115,9 @@ export class CommandeClientService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, CommandeClientService.UpdateQteCommande1Path, 'patch');
     if (params) {
-      rb.path('idCommande', params.idCommande, {});
-      rb.path('idLigneCommande', params.idLigneCommande, {});
-      rb.path('quantite', params.quantite, {});
+      rb.query('idCommande', params.idCommande, {});
+      rb.query('idLigneCommande', params.idLigneCommande, {});
+      rb.query('quantite', params.quantite, {});
     }
 
     return this.http.request(rb.build({
@@ -242,8 +242,8 @@ export class CommandeClientService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, CommandeClientService.UpdateEtatCommande1Path, 'patch');
     if (params) {
-      rb.path('idCommande', params.idCommande, {});
-      rb.path('etatCommande', params.etatCommande, {});
+      rb.query('idCommande', params.idCommande, {});
+      rb.query('etatCommande', params.etatCommande, {});
     }
 
     return this.http.request(rb.build({
@@ -306,8 +306,8 @@ export class CommandeClientService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, CommandeClientService.UpdateClientCommandePath, 'patch');
     if (params) {
-      rb.path('idCommande', params.idCommande, {});
-      rb.path('idClient', params.idClient, {});
+      rb.query('idCommande', params.idCommande, {});
+      rb.query('idClient', params.idClient, {});
     }
 
     return this.http.request(rb.build({
@@ -372,10 +372,10 @@ export class CommandeClientService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, CommandeClientService.UpdateArticleCommande1Path, 'patch');
     if (params) {
-      rb.path('idCommande', params.idCommande, {});
-      rb.path('idLigneCommande', params.idLigneCommande, {});
-      rb.path('typeCom', params.typeCom, {});
-      rb.path('newIdArticle', params.newIdArticle, {});
+      rb.query('idCommande', params.idCommande, {});
+      rb.query('idLigneCommande', params.idLigneCommande, {});
+      rb.query('typeCom', params.typeCom, {});
+      rb.query('newIdArticle', params.newIdArticle, {});
     }
 
     return this.http.request(rb.build({
@@ -803,8 +803,8 @@ export class CommandeClientService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, CommandeClientService.DeleteLigneCommande1Path, 'delete');
     if (params) {
-      rb.path('idCommande', params.idCommande, {});
-      rb.path('idLigneCommande', params.idLigneCommande, {});
+      rb.query('idCommande', params.idCommande, {});
+      rb.query('idLigneCommande', params.idLigneCommande, {});
     }
 
     return this.http.request(rb.build({

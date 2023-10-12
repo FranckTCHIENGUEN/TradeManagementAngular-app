@@ -63,6 +63,12 @@ import { ViewenterpriseDialogComponent } from './components/viewenterprise-dialo
 import { ChangePasswordDialogComponent } from './components/change-password-dialog/change-password-dialog.component';
 import { FactureDialogComponent } from './components/facture-dialog/facture-dialog.component';
 import {NgxPrintModule} from "ngx-print";
+import { UtilisateurComponent } from './components/utilisateur/utilisateur.component';
+import { RolesComponent } from './components/roles/roles.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { SaveRoleDialogComponent } from './components/save-role-dialog/save-role-dialog.component';
+import {MatMenuModule} from "@angular/material/menu";
+import { AddRoleToUserComponent } from './components/add-role-to-user/add-role-to-user.component';
 
 @NgModule({
     declarations: [
@@ -89,6 +95,8 @@ import {NgxPrintModule} from "ngx-print";
         ViewenterpriseDialogComponent,
         ChangePasswordDialogComponent,
         FactureDialogComponent,
+        SaveRoleDialogComponent,
+        AddRoleToUserComponent,
 
     ],
     imports: [
@@ -118,7 +126,9 @@ import {NgxPrintModule} from "ngx-print";
         MatProgressSpinnerModule,
         MatCheckboxModule,
         ListeVentePageModule,
-        NgxPrintModule
+        NgxPrintModule,
+        MatSlideToggleModule,
+        MatMenuModule
     ],
     providers: [
       {

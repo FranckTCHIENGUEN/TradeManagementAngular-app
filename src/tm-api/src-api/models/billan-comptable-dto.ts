@@ -13,4 +13,5 @@ export interface BillanComptableDto {
   rembourssementDepense?: number;
   resteApayer?: number;
   resteApayerDepense?: number;
+  user?: string;
 }

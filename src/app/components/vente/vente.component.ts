@@ -37,6 +37,7 @@ import {
 import {AppCommandClientService} from "../../../services/commandClientService/app-command-client.service";
 import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
 import {DatePipe} from "@angular/common";
+import * as moment from "moment/moment";
 
 export interface User {
   name: string;
@@ -69,14 +70,14 @@ export class VenteComponent implements OnInit{
       Validators.required
     ]],
 
-    etatCommande:['',[
+    etatCommande:['RECEPTIONNER',[
 
     ]],
 
-    dateRetrait:['',[
+    dateRetrait:[moment(),[
 
     ]],
-    dateCommande:['',[
+    dateCommande:[moment(),[
       Validators.required
     ]],
     montantTotal:[0,[
@@ -114,6 +115,7 @@ export class VenteComponent implements OnInit{
   maxMontant:number = 0;
   modeVisible = true
   products: Array<ArticleDto> =[] ;
+  permission: Array<string> = [];
 
   constructor(private formBuilder:FormBuilder,
               private produitService:AppProductService,
@@ -127,24 +129,38 @@ export class VenteComponent implements OnInit{
     if (this.typeEnregistrement == "commande fournisseur"){
       this.modeVisible = false
     }
+    this.getPermissions();
   }
 
-
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
+  }
   findAll(){
-    if (this.typeEnregistrement =="commande client" || this.typeEnregistrement=="vente"){
-      this.clientService.findAll().subscribe(
-        value => {
-          this.personnes = value
-        }
-      )
+    if (this.permission.includes('CLIENT: LIRE')){
+      if ((this.typeEnregistrement =="commande client" || this.typeEnregistrement=="vente")){
+        this.clientService.findAll().subscribe(
+          value => {
+            this.personnes = value
+          }
+        )
+      }
     }
-    if (this.typeEnregistrement =="commande fournisseur"){
-      this.fournisseurService.findAll().subscribe(
-        value => {
-          this.personnes2 = value
-        }
-      )
+    if (this.permission.includes('FOURNISSEUR: LIRE')){
+      if (this.typeEnregistrement =="commande fournisseur"){
+        this.fournisseurService.findAll().subscribe(
+          value => {
+            this.personnes2 = value
+          }
+        )
+      }
     }
+
+
   }
 
   get resteAdonner(): number {
@@ -421,7 +437,7 @@ export class VenteComponent implements OnInit{
 
         data.client = this.saveForm.controls.personne.value  as ClientDto;
         data.avance = this.saveForm.controls.avance.value as number;
-        data.datevente = this.saveForm.controls.dateCommande.value as string;
+        data.datevente = this.saveForm.controls.dateCommande.value?.toISOString() as string;
         data.montantTotal = this.saveForm.controls.montantTotal.value as number;
         data.resteAdonner = this.saveForm.controls.resteAdonner.value as number;
         data.resteApayer = this.saveForm.controls.resteAPayer.value as number;
@@ -491,8 +507,8 @@ export class VenteComponent implements OnInit{
 
         data.fournisseur = this.saveForm.controls.personne.value  as FournisseurDto;
         data.avance = this.saveForm.controls.avance.value as number;
-        data.datecommande = this.saveForm.controls.dateCommande.value as string;
-        data.dateLivraison = this.saveForm.controls.dateRetrait.value as string;
+        data.datecommande = this.saveForm.controls.dateCommande.value?.toISOString() as string;
+        data.dateLivraison = this.saveForm.controls.dateRetrait.value?.toISOString() as string;
         data.montantTotal = this.saveForm.controls.montantTotal.value as number;
         data.resteAdonner = this.saveForm.controls.resteAdonner.value as number;
         data.resteApayer = this.saveForm.controls.resteAPayer.value as number;
@@ -563,8 +579,8 @@ export class VenteComponent implements OnInit{
 
         data.client = this.saveForm.controls.personne.value  as ClientDto;
         data.avance = this.saveForm.controls.avance.value as number;
-        data.datecommande = this.saveForm.controls.dateCommande.value as string;
-        data.dateRetrait = this.saveForm.controls.dateRetrait.value as string;
+        data.datecommande = this.saveForm.controls.dateCommande.value?.toISOString() as string;
+        data.dateRetrait = this.saveForm.controls.dateRetrait.value?.toISOString() as string;
         data.montantTotal = this.saveForm.controls.montantTotal.value as number;
         data.resteAdonner = this.saveForm.controls.resteAdonner.value as number;
         data.resteApayer = this.saveForm.controls.resteAPayer.value as number;
@@ -670,7 +686,7 @@ export class VenteComponent implements OnInit{
   }
 
   nouveau(i:number) {
-    if (this.ligneCom.at(i).get('type')?.value == "SERVICE"){
+    if (this.ligneCom.at(i).get('type')?.value == "SERVICE" && this.permission.includes('SERVICE: CRÉER_MODIFIER')){
       this.dialog.open(SaveServiceDialogComponent, {
         height: '75%',
         width: '90%',
@@ -687,7 +703,7 @@ export class VenteComponent implements OnInit{
         }
       );
     }
-    if (this.ligneCom.at(i).get('type')?.value== "PRODUIT"){
+    if (this.ligneCom.at(i).get('type')?.value== "PRODUIT" && this.permission.includes('PRODUIT: CRÉER_MODIFIER')){
       this.dialog.open(SaveProductDialogComponent, {
         height: '75%',
         width: '90%',

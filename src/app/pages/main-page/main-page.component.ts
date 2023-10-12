@@ -11,6 +11,7 @@ import {PersonViewDetailComponent} from "../../components/person-view-detail/per
 import {ViewenterpriseDialogComponent} from "../../components/viewenterprise-dialog/viewenterprise-dialog.component";
 import {FormControl} from "@angular/forms";
 import {OverlayContainer} from "@angular/cdk/overlay";
+import {AppAuthenticationService} from "../../../services/authentification/app-authentication.service";
 
 @Component({
   selector: 'app-main-page',
@@ -24,7 +25,7 @@ export class MainPageComponent {
   menuClass:String = 'grand';
   @ViewChild('sidenav', {static: true})
   sidenav!: MatSidenav;
-
+  permission: Array<string> = [];
   @HostBinding('class') className = '';
 
   toggleControl = new FormControl(false);
@@ -37,8 +38,20 @@ export class MainPageComponent {
 
   constructor(private dataTransfert:DataLinkTransfertService,
               private router: Router,
+              private authenservice: AppAuthenticationService,
               private overlay: OverlayContainer,
-              private dialog: MatDialog,) { }
+              private dialog: MatDialog,) {
+    this.getPermissions();
+  }
+
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
+  }
 
   ngOnInit(): void {
 
@@ -134,9 +147,14 @@ export class MainPageComponent {
       }
     }).afterClosed().subscribe(value => {
       if (value=='oui'){
+        this.authenservice.disconect();
         this.router.navigate(['']);
       }
     });
 
+  }
+
+  navigateGestUser() {
+    this.router.navigate(['mainPage/gest-entreprise']);
   }
 }

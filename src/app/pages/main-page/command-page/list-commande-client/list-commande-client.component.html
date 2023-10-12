@@ -1,5 +1,5 @@
 <div class="row mb-3">
-  <div class="col-3">
+  <div class="col-3" *ngIf="permission.includes('COM_CLIENT: FILTRER')">
     <mat-slide-toggle [(ngModel)]="isChecked">Recherche avancée</mat-slide-toggle>
   </div>
   <div class="col-3">
@@ -16,7 +16,8 @@
   <div *ngIf="isChecked==true" class="side">
       <app-filter (objetFiltre)="filter($event)" typeEnregistrement="commande client"></app-filter>
   </div>
-  <div [class]="isChecked ? 'content' : 'content2'">
+  <div *ngIf="permission.includes('COM_CLIENT: LIRE') || permission.includes('COM_CLIENT: SUPPRIMER')
+  || permission.includes('COM_CLIENT: FILTRER')" [class]="isChecked ? 'content' : 'content2'">
     <app-list-view *ngIf="display==true" type="commande client"
                    [tableColumns]="columns" [tableData]="listeCommande"></app-list-view>
 

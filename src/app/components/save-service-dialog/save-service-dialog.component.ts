@@ -74,7 +74,7 @@ export class SaveServiceDialogComponent implements OnInit{
     if(this.saveForm.valid){
       let userConnected: UtilisateurDto = JSON.parse(sessionStorage.getItem('userData') as string);
       this.service.idEntreprise = userConnected.entreprise?.id;
-      this.service.photo= this.saveForm.controls.photo.value as string;
+      this.service.photo=  "https://res.cloudinary.com/dal83zeal/image/upload/v1695476070/TradeManagement-DefaultPicture/vrej29fadxug1azatfg9.png";
       this.service.category = this.saveForm.controls.categorie.value as CategoriServiceDto;
       this.service.nom = this.saveForm.controls.nom.value as string;
 
@@ -89,6 +89,14 @@ export class SaveServiceDialogComponent implements OnInit{
           });
         }
       )
+    }
+    else {
+      this.dialog.open(ConfirmDialogComponent, {
+        disableClose:false,
+        data: {
+          message: "Le formulaire contient des erreurs",
+        },
+      });
     }
 
   }

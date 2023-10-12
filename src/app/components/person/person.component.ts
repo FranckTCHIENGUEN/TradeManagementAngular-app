@@ -11,6 +11,7 @@ import {AppFournisseurService} from "../../../services/fournisseurService/app-fo
 import {AppUserService} from "../../../services/appUserServices/app-user.service";
 import {PersonSearchDto} from "../../../tm-api/src-api/models/person-search-dto";
 import {AppPersonSearchService} from "../../../services/personSearch/app-person-search.service";
+import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
   selector: 'app-person',
@@ -22,6 +23,7 @@ export class PersonComponent implements OnInit{
   @Input() typePersonne:String = "";
   @Input() filterObject:PersonSearchDto = {};
   person: any;
+  @Input() permission: Array<string> = [];
   listClient:Array<any> = [];
   selectedPerson:any;
   constructor(private dialog: MatDialog,
@@ -31,26 +33,36 @@ export class PersonComponent implements OnInit{
               private clientService:ClientAppServiceService) {
   }
 
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
+  }
+
   ngOnInit(): void {
+    // this.getPermissions();
       this.findAll()
   }
 
   findAll(){
-    if (this.typePersonne =="client"){
+    if (this.typePersonne =="client" && this.permission.includes('CLIENT: LIRE')){
       this.clientService.findAll().subscribe(
         value => {
           this.person = value
         }
       )
     }
-    if (this.typePersonne =="fournisseur"){
+    else if (this.typePersonne =="fournisseur" && this.permission.includes('FOURNISSEUR: LIRE')){
       this.fournisseurService.findAll().subscribe(
         value => {
           this.person = value
         }
       )
     }
-    if (this.typePersonne =="utilisateur"){
+   else if (this.typePersonne =="utilisateur" && this.permission.includes('UTILISATEUR: LIRE')){
       this.userService.findAll().subscribe(
         value => {
           this.person = value
@@ -138,7 +150,7 @@ export class PersonComponent implements OnInit{
   }
 
   delete() {
-    if (this.typePersonne =="client"){
+    if (this.typePersonne =="client" && this.permission.includes('CLIENT: SUPPRIMER')){
       this.dialog.open(ConfirmDeleteDialogComponent, {
         disableClose:false,
       }).afterClosed().subscribe(value => {

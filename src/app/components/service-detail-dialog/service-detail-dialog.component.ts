@@ -6,6 +6,7 @@ import {AppProductService} from "../../../services/productService/app-product.se
 import {SaveProductDialogComponent} from "../save-product-dialog/save-product-dialog.component";
 import {AppServiceService} from "../../../services/serviceService/app-service.service";
 import {SaveServiceDialogComponent} from "../save-service-dialog/save-service-dialog.component";
+import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
   selector: 'app-service-detail-dialog',
@@ -14,13 +15,23 @@ import {SaveServiceDialogComponent} from "../save-service-dialog/save-service-di
 })
 export class ServiceDetailDialogComponent {
   service:StatServiceDto = {}
+  permission: Array<string> = [];
 
   constructor(private servicService:AppServiceService,
               private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) private data: any,
               private dialogRef: MatDialogRef<ServiceDetailDialogComponent>) {
-
+    this.getPermissions();
     this.service = this.data.data;
+  }
+
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
   }
 
   closeDialog() {

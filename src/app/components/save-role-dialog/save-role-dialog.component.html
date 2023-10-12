@@ -1,0 +1,49 @@
+<div mat-dialog-title>
+  <mat-toolbar color="accent">
+    <span>Enregistrer un role</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+</div>
+
+<div mat-dialog-content class="content">
+  <div class="col">
+    <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+      <mat-label class="">Nom</mat-label>
+      <input type="text" matInput formControlName="nom"
+             [errorStateMatcher]="matcher">
+      <mat-error class="errorMessage" *ngIf="saveForm.controls['nom'].hasError('required')">
+        le nom est requit
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="containt">
+
+    <div class="side">
+      <mat-selection-list (selectionchange)="updateSelectedPermissions(shoes.selectedOptions.selected)" #shoes>
+        <div mat-subheader>Liste des Permissions</div>
+        <mat-action-list>
+          <button mat-list-item (click)="shoes.selectAll()">Tout selectionner</button>
+        </mat-action-list>
+        <mat-list-option *ngFor="let permissions of listPermission">
+          {{permissions.permisssion}}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+    <div class="content" *ngIf="listPermission?.length!=0">
+      <mat-list>
+        <div mat-subheader>Permission du role</div>
+        <mat-list-item *ngFor="let permission of listSelectedPermission">
+          <span matListItemTitle>{{permission.permisssion}}</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <button (click)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="accent"  cdkFocusInitial>Fermer</button>
+</div>

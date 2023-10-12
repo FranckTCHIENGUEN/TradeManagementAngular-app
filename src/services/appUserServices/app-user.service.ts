@@ -28,6 +28,10 @@ export class AppUserService {
     return this.userService.addRoleToUser({idrole:idRole,iduser:idUser});
   }
 
+  removeRoleToUser(idUser:number, idRole:number):Observable<UtilisateurDto>{
+    return this.userService.removeRoleToUser({idrole:idRole,iduser:idUser});
+  }
+
   delete(id:number){
     return this.userService.delete1({id:id});
   }
@@ -38,5 +42,9 @@ export class AppUserService {
 
   changeAcess(user:UtilisateurDto):Observable<UtilisateurDto>{
     return this.userService.changeAccess({body:user});
+  }
+
+  renewPass(user:UtilisateurDto):Observable<UtilisateurDto>{
+    return this.userService.reinitializePass({body:user});
   }
 }

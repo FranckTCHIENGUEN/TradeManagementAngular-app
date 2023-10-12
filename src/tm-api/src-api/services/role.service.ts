@@ -9,6 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { Permissions } from '../models/permissions';
 import { RoleDto } from '../models/role-dto';
 
 
@@ -264,6 +265,64 @@ export class RoleService extends BaseService {
 
     return this.delete3$Response(params,context).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
+    );
+  }
+
+  /**
+   * Path part for operation findAllPermissions
+   */
+  static readonly FindAllPermissionsPath = '/tradeManagement/v1/roles/permissions';
+
+  /**
+   * rechercher les permissions.
+   *
+   * cette methode permet de rechercher la liste des roles elle retourne la liste de tous les roles
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findAllPermissions()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findAllPermissions$Response(params?: {
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Array<Permissions>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, RoleService.FindAllPermissionsPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<Permissions>>;
+      })
+    );
+  }
+
+  /**
+   * rechercher les permissions.
+   *
+   * cette methode permet de rechercher la liste des roles elle retourne la liste de tous les roles
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `findAllPermissions$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findAllPermissions(params?: {
+  },
+  context?: HttpContext
+
+): Observable<Array<Permissions>> {
+
+    return this.findAllPermissions$Response(params,context).pipe(
+      map((r: StrictHttpResponse<Array<Permissions>>) => r.body as Array<Permissions>)
     );
   }
 

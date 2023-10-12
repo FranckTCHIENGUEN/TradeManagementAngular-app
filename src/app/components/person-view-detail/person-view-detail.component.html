@@ -5,8 +5,18 @@
   <mat-toolbar color="accent">
     <span>Details {{typePersonne}}</span>
     <span class="example-spacer"></span>
-    <button mat-raised-button *ngIf="samePerson()" color="primary" (click)="openDialogPass()" class="ms-5 example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <button mat-raised-button *ngIf="typePersonne=='utilisateur' && samePerson() && permission.includes('UTILISATEUR: UTILISATEUR: CHANGER_PASS')" color="primary" (click)="openDialogPass()" class="ms-5 example-icon favorite-icon" aria-label="Example icon-button with heart icon">
         changer mon mot de passe
+    </button>
+    <span class="example-spacer"></span>
+    <button mat-raised-button *ngIf="typePersonne=='utilisateur' && permission.includes('UTILISATEUR: RESET_PASS')" color="primary" (click)="openDialogRenewPass()" class="ms-5 example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        reinitialiser le mot de passe
+    </button>
+    <span class="example-spacer"></span>
+    <mat-slide-toggle *ngIf="typePersonne=='utilisateur' && permission.includes('UTILISATEUR: CHANGER_ETAT')" [formControl]="toggleControl" class="mr-8">Bloqué</mat-slide-toggle>
+    <span class="example-spacer"></span>
+    <button *ngIf="typePersonne=='utilisateur' && permission.includes('UTILISATEUR: CRÉER_MODIFIER')" mat-icon-button (click)="openDialogEdit(person)" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>edit</mat-icon>
     </button>
   </mat-toolbar>
 </div>
@@ -64,8 +74,11 @@
     <mat-icon color="primary">
       mail
     </mat-icon>
-    <span>
+    <span *ngIf="typePersonne=='utilisateur'">
       {{person.email}}
+    </span>
+    <span *ngIf="typePersonne!='utilisateur'">
+      {{person.mail}}
     </span>
 
   </div>
@@ -92,7 +105,44 @@
     </h5>
 
   </div>
+  <div class="containt" *ngIf="typePersonne=='utilisateur'">
+
+    <div class="side">
+      <mat-list>
+        <div mat-subheader>Roles</div>
+        <div class="col-4">
+          <button mat-raised-button color="primary" (click)="openDialogAdd()">Ajouter un role à l'utilisateur</button>
+        </div>
+        <mat-list-item (click)="updatePermission(role)" *ngFor="let role of listRoles">
+          <mat-icon matListItemIcon>folder</mat-icon>
+          <div matListItemTitle (contextmenu)="onRightClick($event, {content: '' + role.roleName})">
+            {{role.roleName}}
+            <div style="visibility: hidden; position: fixed;"
+                 [style.left]="menuTopLeftPosition.x"
+                 [style.top]="menuTopLeftPosition.y"
+                 [matMenuTriggerFor]="rightMenu"></div>
+
+            <mat-menu #rightMenu="matMenu">
+              <ng-template matMenuContent>
+                <button (click)="openDialogRemoveRole(role, person.id)" mat-menu-item>Retirer le role à l'utilisateur</button>
+              </ng-template>
+            </mat-menu>
+          </div>
+          <!--      <div matListItemLine>{{role.updated | date}}</div>-->
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="content" *ngIf="listPermission?.length!=0">
+      <mat-list>
+        <div mat-subheader>Permission</div>
+        <mat-list-item *ngFor="let permission of listPermission">
+          <span matListItemTitle>{{permission.permisssion}}</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
 </div>
+
 
 <div mat-dialog-actions>
   <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial>Ok</button>

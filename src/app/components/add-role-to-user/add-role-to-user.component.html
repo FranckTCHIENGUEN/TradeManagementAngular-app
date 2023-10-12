@@ -1,0 +1,31 @@
+<div mat-dialog-title>
+  <mat-toolbar color="accent">
+    <span>Ajouter un role</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+</div>
+
+<div mat-dialog-content class="content">
+
+  <div class="containt">
+
+    <div class="side">
+      <mat-selection-list (selectionchange)="updateSelectedPermissions(shoes.selectedOptions.selected)" #shoes>
+        <div mat-subheader>Liste des Permissions</div>
+        <mat-action-list>
+          <button mat-list-item (click)="shoes.selectAll()">Tout selectionner</button>
+        </mat-action-list>
+        <mat-list-option *ngFor="let role of listRole" [value]="role">
+          {{role.roleName}}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <button [disabled]="shoes.selectedOptions.isEmpty()" (click)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="accent"  cdkFocusInitial>Fermer</button>
+</div>

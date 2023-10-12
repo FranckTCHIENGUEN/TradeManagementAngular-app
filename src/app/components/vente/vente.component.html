@@ -6,7 +6,7 @@
   <div class="row mt-2 justify-content-center">
       <form [formGroup]="saveForm">
         <div class="row mt-2 justify-content-center">
-            <mat-form-field *ngIf="typeEnregistrement!='commande fournisseur'" class="mat-form-field example-full-width" appearance="fill">
+            <mat-form-field *ngIf="typeEnregistrement!='commande fournisseur' && permission.includes('CLIENT: LIRE')" class="mat-form-field example-full-width" appearance="fill">
               <mat-label>Nom du client</mat-label>
               <mat-select formControlName="personne" [(value)]="selected" placeholder="choisir le client">
                 <input type="text" placeholder="entrez un nom" class="filter-input" matInput #autocompletenameSelect  (input)="manageFilterPerson(autocompletenameSelect.value)">
@@ -18,9 +18,9 @@
                 <mat-option *ngFor="let person of filteredOptions | async" [value]="person" >{{person.nom}} {{person.prenom}}</mat-option>
               </mat-select>
 
-              <button matSuffix color="primary" mat-raised-button (click)="nouveauClient()">Nouveau client</button>
+              <button *ngIf=" permission.includes('CLIENT: CRÉER_MODIFIER')" matSuffix color="primary" mat-raised-button (click)="nouveauClient()">Nouveau client</button>
             </mat-form-field>
-            <mat-form-field *ngIf="typeEnregistrement=='commande fournisseur'" class="mat-form-field example-full-width" appearance="fill">
+            <mat-form-field *ngIf="typeEnregistrement=='commande fournisseur'  && permission.includes('FOURNISSEUR: LIRE')" class="mat-form-field example-full-width" appearance="fill">
                 <mat-label>Nom Fournisseur</mat-label>
                 <input type="text"
                        placeholder="Saisir un nom"
@@ -36,7 +36,7 @@
                   </mat-option>
                 </mat-autocomplete>
 
-              <button matSuffix color="primary" mat-raised-button (click)="nouveauClient()">Nouveau fournisseur</button>
+              <button *ngIf=" permission.includes('FOURNISSEUR: CRÉER_MODIFIER')" matSuffix color="primary" mat-raised-button (click)="nouveauClient()">Nouveau fournisseur</button>
             </mat-form-field>
         </div>
 
@@ -80,7 +80,7 @@
                   <div class="row mt-2 justify-content-center">
                     <div class="col-8">
                       <div  class="row mt-2 justify-content-center">
-                        <div *ngIf="ligneCom.at(i).get('type')?.value=='PRODUIT'" class="col">
+                        <div *ngIf="ligneCom.at(i).get('type')?.value=='PRODUIT' && permission.includes('PRODUIT: LIRE')" class="col">
                           <mat-form-field class="mat-form-field example-full-width" appearance="fill">
                             <mat-label>{{ligneCom.at(i).get('type')?.value}}</mat-label>
 
@@ -90,10 +90,10 @@
                                 {{option.designation}}
                               </mat-option>
                             </mat-autocomplete>
-                            <button matSuffix mat-raised-button color="primary" (click)="nouveau(i)">Nouveau</button>
+                            <button *ngIf=" permission.includes('PRODUIT: CRÉER_MODIFIER')" matSuffix mat-raised-button color="primary" (click)="nouveau(i)">Nouveau</button>
                           </mat-form-field>
                         </div>
-                        <div *ngIf="ligneCom.at(i).get('type')?.value=='SERVICE'" class="col">
+                        <div *ngIf="ligneCom.at(i).get('type')?.value=='SERVICE' && permission.includes('SERVICE: LIRE')" class="col">
                           <mat-form-field class="mat-form-field example-full-width" appearance="fill">
                             <mat-label>{{ligneCom.at(i).get('type')?.value}}</mat-label>
                             <input type="text" matInput  (input)="manageChangeFilter(i)" formControlName="objet" [matAutocomplete]="autoElement2">
@@ -102,7 +102,7 @@
                                 {{option.serviceDto?.nom}}
                               </mat-option>
                             </mat-autocomplete>
-                            <button matSuffix mat-raised-button color="primary" (click)="nouveau(i)">Nouveau</button>
+                            <button *ngIf=" permission.includes('SERVICE: CRÉER_MODIFIER')" matSuffix mat-raised-button color="primary" (click)="nouveau(i)">Nouveau</button>
                           </mat-form-field>
                         </div>
 
@@ -272,7 +272,7 @@
             <div class="col-3" *ngIf="typeEnregistrement !='vente'">
               <mat-form-field appearance="fill">
                 <mat-label>Etat commande</mat-label>
-                <mat-select formControlName="etatCommande"  placeholder="choisir un mode">
+                <mat-select formControlName="etatCommande"  placeholder="choisir un mode" [value]="etatCommande.at(0)">
                   <mat-option *ngFor="let etat of etatCommande " [value]="etat" >{{etat}}</mat-option>
                 </mat-select>
               </mat-form-field>

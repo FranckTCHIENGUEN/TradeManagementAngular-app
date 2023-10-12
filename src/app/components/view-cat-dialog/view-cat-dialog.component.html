@@ -2,8 +2,9 @@
   <h2>Liste des categories de {{typeAffichage}}</h2>
 </div>
 <div class="row ms-5">
-  <div class="col-4">
-    <button mat-raised-button color="primary" (click)="nouvelleCategorie()">Nouvelle categorie</button>
+  <div class="col-4" *ngIf=" (typeAffichage=='produit' && permission.includes('CAT_PRODUIT: CRÉER_MODIFIER'))  || (typeAffichage=='service' && permission.includes('CAT_SERVICE: CRÉER_MODIFIER')) ||
+   (typeAffichage=='depense' && permission.includes('CAT_DEPENSE: CRÉER_MODIFIER'))">
+    <button mat-raised-button color="primary"  (click)="nouvelleCategorie()">Nouvelle categorie</button>
   </div>
   <div class="col-4">
     <button  mat-raised-button color="accent" (click)="findAllCatProduit()">

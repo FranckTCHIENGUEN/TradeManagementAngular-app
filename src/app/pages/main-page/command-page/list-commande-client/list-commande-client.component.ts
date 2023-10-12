@@ -6,6 +6,7 @@ import {AppCommandClientService} from "../../../../../services/commandClientServ
 import {DatePipe} from "@angular/common";
 import {AppSearchCommandService} from "../../../../../services/searchCommand/app-search-command.service";
 import {CommandSearch} from "../../../../../tm-api/src-api/models/command-search";
+import {UtilisateurDto} from "../../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
   selector: 'app-list-commande-client',
@@ -15,7 +16,7 @@ import {CommandSearch} from "../../../../../tm-api/src-api/models/command-search
 export class ListCommandeClientComponent implements OnInit{
 
   listeCommande:Array<CommandeClientDto> = [];
-
+  permission: Array<string> = [];
   display=false;
   filterValue:string = '';
   columns:Array<Column> = [
@@ -92,8 +93,18 @@ export class ListCommandeClientComponent implements OnInit{
 
   }
 
-  ngOnInit(): void {
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
+  }
 
+  ngOnInit(): void {
+    this.getPermissions();
+    console.log(this.permission)
     this.dataLinkTransfer.name.subscribe(value => this.filterValue = value)
     this.findAll();
 
@@ -101,21 +112,25 @@ export class ListCommandeClientComponent implements OnInit{
 
   findAll(){
     this.display=false;
-    this.commandeClientService.findAll().subscribe(
-      value => {
-        this.listeCommande = value;
-        this.display = true
-      });
+    if (this.permission.includes('COM_CLIENT: LIRE')){
+      this.commandeClientService.findAll().subscribe(
+        value => {
+          this.listeCommande = value;
+          this.display = true
+        });
+    }
+
   }
 
   filter($event: CommandSearch) {
     this.display = false;
-    console.log($event as CommandSearch)
-    this.commandeSearcServjce.filterCommand($event, 'client').subscribe(
-      value => {
-        this.listeCommande = value;
-        this.display = true;
-      }
-    )
+    if (this.permission.includes('COM_CLIENT: FILTRER')){
+      this.commandeSearcServjce.filterCommand($event, 'client').subscribe(
+        value => {
+          this.listeCommande = value;
+          this.display = true;
+        })
+    }
+
   }
 }

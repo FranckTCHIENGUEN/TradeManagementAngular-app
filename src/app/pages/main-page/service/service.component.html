@@ -1,10 +1,10 @@
 <div id="appbar" >
   <h1>Services</h1>
   <div class="row">
-    <div class="col-4">
+    <div class="col-4" *ngIf="permission.includes('SERVICE: CRÉER_MODIFIER')">
       <button mat-raised-button color="primary" (click)="openDialogSave()">Nouveau service</button>
     </div>
-    <div class="col-4">
+    <div class="col-4" *ngIf="permission.includes('SERVICE: LIRE')">
       <button  mat-raised-button color="accent" (click)="findAllProduit()">
         <mat-icon>
             <span class="material-symbols-outlined">
@@ -13,12 +13,12 @@
         </mat-icon>
       </button>
     </div>
-    <div class="col-4">
+    <div class="col-4" *ngIf="permission.includes('CAT_SERVICE: LIRE')">
       <button  mat-raised-button color="primary" (click)="opendoalogCategorie()">Voir les categories</button>
     </div>
   </div>
 </div>
 
-<div class="content-second">
+<div class="content-second" *ngIf="permission.includes('SERVICE: LIRE')">
   <app-view-product [listOfData]="listService" typeAffichage="service"></app-view-product>
 </div>

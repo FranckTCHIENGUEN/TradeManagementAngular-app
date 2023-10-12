@@ -235,9 +235,9 @@ export class PaiementService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, PaiementService.FindByObjetAndDatepaiementBetweenPath, 'get');
     if (params) {
-      rb.path('objet', params.objet, {});
-      rb.path('date1', params.date1, {});
-      rb.path('date2', params.date2, {});
+      rb.query('objet', params.objet, {});
+      rb.query('date1', params.date1, {});
+      rb.query('date2', params.date2, {});
     }
 
     return this.http.request(rb.build({
@@ -492,10 +492,10 @@ export class PaiementService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, PaiementService.FindByObjetAndIdObjetAndDatepaiementBetweenPath, 'get');
     if (params) {
-      rb.path('objet', params.objet, {});
-      rb.path('idObjet', params.idObjet, {});
-      rb.path('date1', params.date1, {});
-      rb.path('date2', params.date2, {});
+      rb.query('objet', params.objet, {});
+      rb.query('idObjet', params.idObjet, {});
+      rb.query('date1', params.date1, {});
+      rb.query('date2', params.date2, {});
     }
 
     return this.http.request(rb.build({

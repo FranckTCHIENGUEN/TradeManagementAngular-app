@@ -5,7 +5,7 @@ import {DatePipe} from "@angular/common";
 import {DataLinkTransfertService} from "../../../../services/dataLinkTransfert/Data-link-transfert.service";
 import {AppCommandClientService} from "../../../../services/commandClientService/app-command-client.service";
 import {AppSearchCommandService} from "../../../../services/searchCommand/app-search-command.service";
-import {CommandSearch, EtatFinancier} from "../../../../tm-api/src-api/models";
+import {CommandSearch, EtatFinancier, UtilisateurDto} from "../../../../tm-api/src-api/models";
 import {AppStatService} from "../../../../services/statSservice/app-stat.service";
 
 @Component({
@@ -19,6 +19,7 @@ export class DashbordPageComponent implements OnInit{
   listeCommandeEnArttente:Array<CommandeClientDto> = [];
   etatfinancier:EtatFinancier={};
   display=0;
+  permission: Array<string> = [];
   filterValue:string = '';
   columns:Array<Column> = [
     {
@@ -72,8 +73,18 @@ export class DashbordPageComponent implements OnInit{
 
   }
 
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
+  }
+
   ngOnInit(): void {
 
+    this.getPermissions();
     this.dataLinkTransfer.name.subscribe(value => this.filterValue = value);
     let commandSearchDto:CommandSearch = {
       etatCommande:"VALIDER"
@@ -84,28 +95,32 @@ export class DashbordPageComponent implements OnInit{
     let commandSearchDto3:CommandSearch = {
       etatCommande:"RECEPTIONER"
     }
-    this.commandeSearchService.filterCommand(commandSearchDto, "client").subscribe(
+    if(this.permission.includes('COM_CLIENT: FILTRER')){
+      this.commandeSearchService.filterCommand(commandSearchDto, "client").subscribe(
         (value: CommandeClientDto[]) => {
-        this.listeCommandeValider = value;
-        this.display++
-      });
-    this.commandeSearchService.filterCommand(commandSearchDto2, "client").subscribe(
+          this.listeCommandeValider = value;
+          this.display++
+        });
+      this.commandeSearchService.filterCommand(commandSearchDto2, "client").subscribe(
         (value: CommandeClientDto[]) => {
-        this.listeCommandeEnArttente = value;
-        this.display++
-      });
-    this.commandeSearchService.filterCommand(commandSearchDto3, "client").subscribe(
+          this.listeCommandeEnArttente = value;
+          this.display++
+        });
+      this.commandeSearchService.filterCommand(commandSearchDto3, "client").subscribe(
         (value: CommandeClientDto[]) => {
           for (let commandeClientDto of value) {
             this.listeCommandeEnArttente.push(commandeClientDto) ;
           }
-        this.display++
-      });
-    this.statService.getEtatFinancierMonthYear(new Date().getMonth()+1, new Date().getFullYear()).subscribe(
-      value => {
-        this.etatfinancier=value;
-      }
-    );
+          this.display++
+        });
+    }
 
+    if(this.permission.includes('STAT: LIRE_ETAT_FINANCIER')){
+      this.statService.getEtatFinancierMonthYear(new Date().getMonth()+1, new Date().getFullYear()).subscribe(
+        value => {
+          this.etatfinancier=value;
+        }
+      );
+    }
   }
 }

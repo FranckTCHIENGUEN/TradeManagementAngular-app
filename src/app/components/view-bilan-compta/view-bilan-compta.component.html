@@ -2,7 +2,29 @@
   <div class="col-3">
     <mat-slide-toggle [(ngModel)]="isChecked">Afficher compta global</mat-slide-toggle>
   </div>
+  <div class="col-2" *ngIf="permission.includes('COMPTA: LIRE_UTILISATEUR_BILAN_JOURNALIER') ">
+    <mat-slide-toggle [disabled]="forUser" [(ngModel)]="voirTout">Voir tout</mat-slide-toggle>
+  </div>
+  <div class="col-3" *ngIf="permission.includes('COMPTA: LIRE_TOUT_LES_BILAN_JOURNALIER') ">
+    <mat-slide-toggle [disabled]="voirTout" [(ngModel)]="forUser">Par utilisateur</mat-slide-toggle>
+  </div>
+  <div class="col-3" *ngIf="permission.includes('COMPTA: LIRE_UTILISATEUR_BILAN_JOURNALIER') && forUser">
+    <mat-form-field appearance="fill">
+      <mat-label>Etat commande</mat-label>
+      <mat-select [(ngModel)]="userName"  placeholder="choisir un mode" [value]="lisUser.at(0)">
+        <mat-option *ngFor="let etat of lisUser " [value]="etat" >{{etat}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button  (click)="find()">
+      <mat-icon class="ms-2"  color="primary">
+                <span class="material-symbols-outlined">
+                  search
+                </span>
+      </mat-icon>
+    </button>
+  </div>
 </div>
+<!--</div>-->
 <div class="containt">
   <div class="ms-15 side" *ngIf="isChecked==true">
       <div class=" divider divider-boder">

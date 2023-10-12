@@ -1,4 +1,4 @@
-<div class="row w-100">
+<div class="row w-100"  *ngIf="permission.includes('COM_CLIENT: FILTRER')">
   <div class="row w-100 text-center text-capitalize">
     <h2>Etat des commandes</h2>
 
@@ -20,7 +20,7 @@
   </div>
 
 </div>
-<div class="row border-2  border-primary rounded-3">
+<div class="row border-2  border-primary rounded-3" *ngIf="permission.includes('COM_CLIENT: FILTRER')">
   <div class="row">
     <div class="row ligneCom">
       <div class="col text-center">
@@ -36,7 +36,7 @@
   </div>
 </div>
 
-<div class="row w-100">
+<div class="row w-100" *ngIf="permission.includes('STAT: LIRE_ETAT_FINANCIER')">
   <mat-divider class="mt-3 mb-3"></mat-divider>
   <div class="row ligneCom w-100 text-center text-capitalize">
     <h2>Etat financier du mois en cour</h2>
@@ -186,12 +186,12 @@
   </div>
 </div>
 
-<div class="row w-100">
-  <mat-divider class="mt-3 mb-3"></mat-divider>
-  <div class="row ligneCom w-100 text-center text-capitalize">
-    <h2>Graphes de vente</h2>
+<!--<div class="row w-100">-->
+<!--  <mat-divider class="mt-3 mb-3"></mat-divider>-->
+<!--  <div class="row ligneCom w-100 text-center text-capitalize">-->
+<!--    <h2>Graphes de vente</h2>-->
 
-  </div>
-</div>
+<!--  </div>-->
+<!--</div>-->
 
 

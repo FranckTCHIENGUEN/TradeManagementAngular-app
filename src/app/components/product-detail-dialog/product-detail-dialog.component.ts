@@ -4,6 +4,7 @@ import {SavePersonDialogComponent} from "../save-person-dialog/save-person-dialo
 import {ArticleDto} from "../../../tm-api/src-api/models/article-dto";
 import {SaveProductDialogComponent} from "../save-product-dialog/save-product-dialog.component";
 import {AppProductService} from "../../../services/productService/app-product.service";
+import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
   selector: 'app-product-detail-dialog',
@@ -13,15 +14,24 @@ import {AppProductService} from "../../../services/productService/app-product.se
 export class ProductDetailDialogComponent implements OnInit{
 
   produit:ArticleDto = {}
+  permission: Array<string> = [];
 
   constructor(private produitService:AppProductService,
               private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) private data: any,
-              private dialogRef: MatDialogRef<ProductDetailDialogComponent>) {
-
+                     private dialogRef: MatDialogRef<ProductDetailDialogComponent>) {
+    this.getPermissions();
     this.produit = this.data.data;
   }
 
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
+  }
   closeDialog() {
     this.dialogRef.close();
   }

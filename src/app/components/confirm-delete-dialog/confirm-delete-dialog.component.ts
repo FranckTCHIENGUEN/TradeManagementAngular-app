@@ -8,11 +8,13 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 })
 export class ConfirmDeleteDialogComponent {
   message: any;
+  titre: any;
 
   constructor(private dialogRef: MatDialogRef<ConfirmDeleteDialogComponent>,
               @Inject(MAT_DIALOG_DATA) private data: any) {
 
     this.message = data.message;
+    this.titre = data.titre;
 
   }
 

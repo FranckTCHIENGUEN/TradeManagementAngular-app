@@ -108,7 +108,7 @@
         </mat-form-field>
       </div>
     </div>
-    <div class="col">
+    <div class="col" *ngIf="typePersonne!='utilisateur'">
       <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
         <mat-label class="">Email</mat-label>
         <input type="text" matInput formControlName="mail"
@@ -118,9 +118,27 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <div class="row mt-5">
-        <button (click)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
 
+
+  </form>
+  <form class="w-50" *ngIf="typePersonne=='utilisateur'" [formGroup]="usersaveForm" >
+    <div class="col">
+      <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+        <mat-label class="">Email</mat-label>
+        <input type="text" matInput formControlName="userMail"
+               [errorStateMatcher]="matcher">
+        <mat-error class="errorMessage" *ngIf="saveForm.controls['mail'].hasError('email')">
+          le mail n'est pas correct
+        </mat-error>
+        <mat-error class="field-message" *ngIf="userMail.errors?.['userExistsValidator']">
+          l'email est déjà utilisé
+        </mat-error>
+      </mat-form-field>
     </div>
   </form>
+
+  <div class="row mt-5">
+  <button (click)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
+
+</div>
 </div>

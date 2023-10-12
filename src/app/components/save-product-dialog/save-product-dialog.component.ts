@@ -82,7 +82,7 @@ export class SaveProductDialogComponent implements OnInit{
      if(this.saveForm.valid){
        let userConnected: UtilisateurDto = JSON.parse(sessionStorage.getItem('userData') as string);
        this.produit.idEntreprise = userConnected.entreprise?.id;
-       this.produit.photo= this.saveForm.controls.photo.value as string;
+       this.produit.photo = "https://res.cloudinary.com/dal83zeal/image/upload/v1695476069/TradeManagement-DefaultPicture/zv2wkltueozzhwjtpiph.png";
        this.produit.quantite = this.saveForm.controls.quantite.value as number;
        this.produit.category = this.saveForm.controls.categorie.value as CategoryDto;
        this.produit.prixunitairettc = this.saveForm.controls.prix.value as number;

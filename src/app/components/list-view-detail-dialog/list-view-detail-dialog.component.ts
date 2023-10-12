@@ -11,6 +11,7 @@ import {AddLigneCommandeComponent} from "../add-ligne-commande/add-ligne-command
 import {UpdateEtatDialogComponent} from "../update-etat-dialog/update-etat-dialog.component";
 import {PaiementDto} from "../../../tm-api/src-api/models/paiement-dto";
 import {AppPaiementServiceService} from "../../../services/paiementService/app-paiement-service.service";
+import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
   selector: 'app-list-view-detail-dialog',
@@ -22,6 +23,7 @@ export class ListViewDetailDialogComponent {
   type?: string;
   elements: any;
   paiementList?: Array<PaiementDto>;
+  permission: Array<string> = [];
 
   constructor(private dialogRef: MatDialogRef<ListViewDetailDialogComponent>,
               private venteService:AppVenbteServiceService,
@@ -30,6 +32,8 @@ export class ListViewDetailDialogComponent {
               private comClientService:AppCommandClientService,
               private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) private data: any) {
+
+    this.getPermissions();
     if (this.data!=null){
       this.donnees = this.data.donnees;
       this.type = this.data.type;
@@ -40,11 +44,14 @@ export class ListViewDetailDialogComponent {
             this.elements = value;
           }
         )
-        this.paiementService.findByObjetAndIdObjet("VENTE",this.donnees.id).subscribe(
-          value => {
-            this.paiementList = value;
-          }
-        );
+        if (this.permission.includes('PAIEMENT: LIRE')){
+          this.paiementService.findByObjetAndIdObjet("VENTE",this.donnees.id).subscribe(
+            value => {
+              this.paiementList = value;
+            }
+          );
+        }
+
       }
       if (this.type=='commande client'){
         this.comClientService.findLigneCommande(this.donnees.id).subscribe(
@@ -52,11 +59,14 @@ export class ListViewDetailDialogComponent {
             this.elements = value;
           }
         )
-        this.paiementService.findByObjetAndIdObjet('CC',this.donnees.id).subscribe(
-          value => {
-            this.paiementList = value;
-          }
-        );
+        if (this.permission.includes('PAIEMENT: LIRE')){
+          this.paiementService.findByObjetAndIdObjet('CC',this.donnees.id).subscribe(
+            value => {
+              this.paiementList = value;
+            }
+          );
+        }
+
       }
       if (this.type=='commande fournisseur'){
         this.comFournisseurService.findLigneCommande(this.donnees.id).subscribe(
@@ -64,14 +74,28 @@ export class ListViewDetailDialogComponent {
             this.elements = value;
           }
         );
-        this.paiementService.findByObjetAndIdObjet('VENTE',this.donnees.id).subscribe(
-          value => {
-            this.paiementList = value;
-          }
-        );
+        if (this.permission.includes('PAIEMENT: LIRE')){
+          this.paiementService.findByObjetAndIdObjet('VENTE',this.donnees.id).subscribe(
+            value => {
+              this.paiementList = value;
+            }
+          );
+        }
+
       }
 
     }
+
+  }
+
+
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
   }
   closeDialog() {
     this.dialogRef.close();

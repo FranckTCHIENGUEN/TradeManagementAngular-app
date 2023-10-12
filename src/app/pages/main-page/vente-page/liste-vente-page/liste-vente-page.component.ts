@@ -7,6 +7,7 @@ import {DatePipe} from "@angular/common";
 import {CommandSearch} from "../../../../../tm-api/src-api/models/command-search";
 import {AppSearchCommandService} from "../../../../../services/searchCommand/app-search-command.service";
 import {CommandeClientDto} from "../../../../../tm-api/src-api/models/commande-client-dto";
+import {UtilisateurDto} from "../../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
   selector: 'app-liste-vente-page',
@@ -16,7 +17,7 @@ import {CommandeClientDto} from "../../../../../tm-api/src-api/models/commande-c
 export class ListeVentePageComponent implements OnInit{
 
   listeVente:Array<VenteDto> = [];
-
+  permission: Array<string> = [];
   display=false;
   filterValue:string = '';
   columns:Array<Column> = [
@@ -62,6 +63,15 @@ export class ListeVentePageComponent implements OnInit{
 
   }
 
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
+  }
+
   ngOnInit(): void {
 
     this.dataLinkTransfer.name.subscribe(value => this.filterValue = value)
@@ -71,21 +81,24 @@ export class ListeVentePageComponent implements OnInit{
 
   findAll(){
     this.display = false
-    this.venteService.findAll().subscribe(
-      value => {
-        this.listeVente = value;
-        this.display = true
-      });
+    if (this.permission.includes('VENTE: LIRE')){
+      this.venteService.findAll().subscribe(
+        value => {
+          this.listeVente = value;
+          this.display = true
+        });
+    }
   }
 
   filter($event: CommandSearch) {
     this.display = false;
-    console.log($event as CommandSearch)
-    this.commandeSearcServjce.filterCommand($event, 'vente').subscribe(
-      value => {
-        this.listeVente = value;
-        this.display = true;
-      }
-    )
+    if (this.permission.includes('VENTE: FILTRER')){
+      this.commandeSearcServjce.filterCommand($event, 'vente').subscribe(
+        value => {
+          this.listeVente = value;
+          this.display = true;
+        })
+    }
+
   }
 }

@@ -4,6 +4,8 @@ import {ComptaGlobalDto} from "../../../tm-api/src-api/models/compta-global-dto"
 import {Column} from "../list-view/list-view.component";
 import {DatePipe} from "@angular/common";
 import {BillanComptableDto} from "../../../tm-api/src-api/models/billan-comptable-dto";
+import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
+import {AppUserService} from "../../../services/appUserServices/app-user.service";
 
 @Component({
   selector: 'app-view-bilan-compta',
@@ -17,7 +19,7 @@ export class ViewBilanComptaComponent implements OnInit, OnChanges{
   @Input() date1:string='';
   @Input() date2:string='';
   display=false;
-
+  permission: Array<string> = [];
   columns:Array<Column> = [
     {
       columnDef: 'date',
@@ -48,37 +50,26 @@ export class ViewBilanComptaComponent implements OnInit, OnChanges{
       cell: (element: BillanComptableDto) => `${element.avance}`,
     },
     {
-      columnDef: 'Avance sur Depense',
-      header: 'Avance sur Dep',
-      cell: (element: BillanComptableDto) => `${element.avanceDepense}`,
-    },
-    {
       columnDef: 'Rembourssement',
-      header: 'Remb',
+      header: 'Rembourssement',
       cell: (element: BillanComptableDto) => `${element.rembourssement}`,
     },
     {
-      columnDef: 'Rembourssement sur depense',
-      header: 'Remb sur dep',
-      cell: (element: BillanComptableDto) => `${element.rembourssementDepense}`,
-    },
-    {
-      columnDef: 'Reste a payer',
-      header: 'Reste a payer',
-      cell: (element: BillanComptableDto) => `${element.resteApayer}`,
-    },
-    {
-      columnDef: ' Reste a payer sur depense',
-      header: ' Reste a payer sur dep',
-      cell: (element: BillanComptableDto) => `${element.resteApayerDepense}`,
+      columnDef: 'user',
+      header: 'Utilisateur',
+      cell: (element: BillanComptableDto) => `${element.user}`,
     },
   ];
-  isChecked = true;
+  isChecked = false;
+  voirTout = false;
+  forUser = false;
+  userName = '';
+  lisUser:Array<UtilisateurDto> = []
 
-  constructor(private bilanComptaService:AppComptaServiceService) {
+  constructor(private bilanComptaService:AppComptaServiceService, appuserService:AppUserService) {
   }
   ngOnInit(): void {
-
+    this.getPermissions();
     this.find();
   }
 
@@ -86,14 +77,49 @@ export class ViewBilanComptaComponent implements OnInit, OnChanges{
     this.find();
   }
 
-  private find(){
-    this.bilanComptaService.findByDayBetween(this.date1, this.date2).subscribe(
-      value => {
-        this.bilan=value;
-        this.detail=this.bilan.billanComptableDtos;
-        this.display=true;
-      }
-    )
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
   }
+
+   find(){
+
+
+    if (this.forUser){
+      this.bilanComptaService.findByDayBetweenAndUser(this.date1, this.date2, this.userName).subscribe(
+        value => {
+          this.bilan=value;
+          this.detail=this.bilan.billanComptableDtos;
+          this.display=true;
+        }
+      )
+    }
+    else if (this.voirTout){
+      this.bilanComptaService.findByDayBetween(this.date1, this.date2).subscribe(
+        value => {
+          this.bilan=value;
+          this.detail=this.bilan.billanComptableDtos;
+          this.display=true;
+        }
+      )
+    }
+    else{
+      let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+      this.bilanComptaService.findByDayBetweenAndUser(this.date1, this.date2, utilisateurDto.nom+ " "+utilisateurDto.prenom).subscribe(
+        value => {
+          this.bilan=value;
+          this.detail=this.bilan.billanComptableDtos;
+          this.display=true;
+        }
+      )
+    }
+
+  }
+
+
 
 }

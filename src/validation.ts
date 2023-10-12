@@ -2,7 +2,7 @@ import {AppUserService} from "./services/appUserServices/app-user.service";
 import {AbstractControl, AsyncValidatorFn, ValidationErrors, ValidatorFn} from "@angular/forms";
 import {map} from "rxjs";
 
-export function userExistsValidator(userService: AppUserService, type:string):AsyncValidatorFn  {
+export function userExistsValidator(userService: AppUserService):AsyncValidatorFn  {
 
     return (control: AbstractControl) => {
         return userService.findByEmail(control.value)

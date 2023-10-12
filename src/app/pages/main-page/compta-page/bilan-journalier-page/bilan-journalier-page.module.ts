@@ -8,6 +8,9 @@ import {ViewBilanComptaComponent} from "../../../../components/view-bilan-compta
 import {ListeVentePageModule} from "../../vente-page/liste-vente-page/liste-vente-page.module";
 import {FormsModule} from "@angular/forms";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatSelectModule} from "@angular/material/select";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -24,6 +27,9 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     ListeVentePageModule,
     FormsModule,
     MatSlideToggleModule,
+    MatSelectModule,
+    MatIconModule,
+    MatButtonModule,
   ]
 })
 export class BilanJournalierPageModule { }

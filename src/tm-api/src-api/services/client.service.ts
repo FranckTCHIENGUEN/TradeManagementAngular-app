@@ -478,8 +478,8 @@ export class ClientService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, ClientService.FindByPaysAndVille3Path, 'get');
     if (params) {
-      rb.path('pays', params.pays, {});
-      rb.path('ville', params.ville, {});
+      rb.query('pays', params.pays, {});
+      rb.query('ville', params.ville, {});
     }
 
     return this.http.request(rb.build({

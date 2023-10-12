@@ -12,10 +12,10 @@
   </div>
   <div class=" title">
     <div class="me-5" *ngFor="let menu of asyncTabs | async">
-      <button mat-raised-button [ngClass]="{'active-link': menu.routerLink == activeLink,'inactive-link': menu.routerLink != activeLink}"
+      <button *ngIf="getView(menu.role!)" mat-raised-button [ngClass]="{'active-link': menu.routerLink == activeLink,'inactive-link': menu.routerLink != activeLink}"
               (click)="activeLink = menu.routerLink"
               routerLink="{{menu.routerLink}}" class="raise-bouton">
-<!--        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>-->
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="{{menu.icon}}"></mat-icon>
         {{menu.label}}
       </button>
     </div>

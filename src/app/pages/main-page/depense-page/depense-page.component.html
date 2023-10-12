@@ -1,11 +1,11 @@
 <div id="appbar" >
   <h1>Depenses</h1>
   <div class="row">
-    <div class="col-4">
-      <button mat-raised-button color="primary" (click)="openDialogSave()">Nouvelle depense</button>
+    <div class="col-4" *ngIf="permission.includes('DEPENSE: CRÉER_MODIFIER')">
+      <button mat-raised-button color="primary"  (click)="openDialogSave()">Nouvelle depense</button>
     </div>
-    <div class="col-4">
-      <button  mat-raised-button color="accent" (click)="findAllDepenses()">
+    <div class="col-4" *ngIf="permission.includes('DEPENSE: LIRE')">
+      <button  mat-raised-button color="accent"  (click)="findAllDepenses()">
         <mat-icon>
             <span class="material-symbols-outlined">
             refresh
@@ -13,13 +13,13 @@
         </mat-icon>
       </button>
     </div>
-    <div class="col-4">
-      <button  mat-raised-button color="primary" (click)="opendoalogCategorie()">Voir les categories</button>
+    <div class="col-4" *ngIf="permission.includes('CAT_DEPENSE: LIRE')">
+      <button  mat-raised-button color="primary"  (click)="opendoalogCategorie()">Voir les categories</button>
     </div>
   </div>
 </div>
 
-<div class="content-second mt-5">
+<div class="content-second mt-5" *ngIf="permission.includes('DEPENSE: LIRE')">
   <app-list-view *ngIf="display==true" [tableColumns]="columns" [tableData]="listeVente"></app-list-view>
 </div>
 

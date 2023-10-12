@@ -9,6 +9,7 @@ import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-del
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 import {AppCatergorieServiceService} from "../../../services/categoriService/app-catergorie-service.service";
 import {AppCategorieDepenseService} from "../../../services/categorieDepenseService/app-categorie-depense.service";
+import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
   selector: 'app-view-cat-dialog',
@@ -19,6 +20,7 @@ export class ViewCatDialogComponent implements OnInit{
 
   categories: Array<any> =[];
   typeAffichage?: string;
+  permission: Array<string> = [];
 
   constructor(private catProduitService:AppCategorieProduitService,
               private catServiceService:AppCatergorieServiceService,
@@ -29,6 +31,16 @@ export class ViewCatDialogComponent implements OnInit{
     if (this.data!=null){
       this.typeAffichage=this.data.type
     }
+    this.getPermissions();
+  }
+
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
   }
 
   ngOnInit(): void {
@@ -144,7 +156,7 @@ export class ViewCatDialogComponent implements OnInit{
   }
 
   openDialogDeleteCat(cat: any) {
-    console.log(cat)
+
     this.dialog.open(ConfirmDeleteDialogComponent, {
       disableClose:false,
     }).afterClosed().subscribe(value => {

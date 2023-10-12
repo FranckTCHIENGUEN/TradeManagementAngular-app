@@ -39,6 +39,9 @@ export class AppAuthenticationService {
   refreshToken(){
     this.authencationService.refreshToken();
   }
+  disconect(){
+    this.authencationService.disconect();
+  }
 
   setConnectedUser(authenticationResponse:AuthentificationResponse){
     sessionStorage.setItem("connectedUser", JSON.stringify(authenticationResponse));

@@ -1,1 +1,1 @@
-<app-vente typeEnregistrement="commande fournisseur"></app-vente>
+<app-vente *ngIf="permission.includes('COM_FOURNISSEUR: CRÉER_MODIFIER')" typeEnregistrement="commande fournisseur"></app-vente>

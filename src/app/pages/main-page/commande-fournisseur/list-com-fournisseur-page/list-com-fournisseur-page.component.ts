@@ -11,6 +11,7 @@ import {
 import {AppSearchCommandService} from "../../../../../services/searchCommand/app-search-command.service";
 import {CommandSearch} from "../../../../../tm-api/src-api/models/command-search";
 import {CommandeClientDto} from "../../../../../tm-api/src-api/models/commande-client-dto";
+import {UtilisateurDto} from "../../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
   selector: 'app-list-com-fournisseur-page',
@@ -20,7 +21,7 @@ import {CommandeClientDto} from "../../../../../tm-api/src-api/models/commande-c
 export class ListComFournisseurPageComponent implements OnInit{
 
   listeVente:Array<CommandeFournisseurDto> = [];
-
+  permission: Array<string> = [];
   display=false;
   filterValue:string = '';
   isChecked = false;
@@ -91,6 +92,15 @@ export class ListComFournisseurPageComponent implements OnInit{
 
   }
 
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
+  }
+
   ngOnInit(): void {
 
     this.dataLinkTransfer.name.subscribe(value => this.filterValue = value)
@@ -100,21 +110,25 @@ export class ListComFournisseurPageComponent implements OnInit{
 
   findAll(){
     this.display=false;
-    this.comFourService.findAll().subscribe(
-      value => {
-        this.listeVente = value;
-        this.display = true
-      });
+    if (this.permission.includes('COM_FOURNISSEUR: LIRE')){
+      this.comFourService.findAll().subscribe(
+        value => {
+          this.listeVente = value;
+          this.display = true
+        });
+    }
+
   }
 
   filter($event: CommandSearch) {
     this.display = false;
-    console.log($event as CommandSearch)
-    this.commandeSearcServjce.filterCommand($event, 'fournisseur').subscribe(
-      value => {
-        this.listeVente = value;
-        this.display = true;
-      }
-    )
+    if (this.permission.includes('COM_FOURNISSEUR: FILTRER')){
+      this.commandeSearcServjce.filterCommand($event, 'fournisseur').subscribe(
+        value => {
+          this.listeVente = value;
+          this.display = true;
+        })
+    }
+
   }
 }

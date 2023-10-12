@@ -28,6 +28,56 @@ export class AuthentificationService extends BaseService {
   }
 
   /**
+   * Path part for operation disconect
+   */
+  static readonly DisconectPath = '/tradeManagement/v1/logout';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `disconect()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  disconect$Response(params?: {
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, AuthentificationService.DisconectPath, 'post');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `disconect$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  disconect(params?: {
+  },
+  context?: HttpContext
+
+): Observable<void> {
+
+    return this.disconect$Response(params,context).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
+    );
+  }
+
+  /**
    * Path part for operation refreshToken
    */
   static readonly RefreshTokenPath = '/tradeManagement/v1/login/refresh-token';

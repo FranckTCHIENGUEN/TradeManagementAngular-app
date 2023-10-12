@@ -111,6 +111,14 @@ const routes: Routes = [
             },
           ]
         },
+        {
+          path: 'gest-entreprise',
+          children:[
+            {
+              path: '',
+              loadChildren: () => import('./gest-entreprise-page/gest-entreprise-page.module').then(m => m.GestEntreprisePageModule)            },
+          ]
+        },
     ]
     },
   ];

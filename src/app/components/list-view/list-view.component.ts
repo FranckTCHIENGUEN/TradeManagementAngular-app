@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ListViewDetailDialogComponent} from "../list-view-detail-dialog/list-view-detail-dialog.component";
 import {ViewDetailBilanDialogComponent} from "../view-detail-bilan-dialog/view-detail-bilan-dialog.component";
+import {PersonViewDetailComponent} from "../person-view-detail/person-view-detail.component";
 
 export interface Column {
   columnDef: string;
@@ -90,7 +91,7 @@ export class ListViewComponent implements OnInit, AfterViewInit, OnChanges{
         },
       });
     }
-    if (this.type =="bilan comptable" ){
+    else if (this.type =="bilan comptable" ){
       this.dialog.open(ViewDetailBilanDialogComponent, {
         height: '90%',
         width: '90%',
@@ -98,6 +99,17 @@ export class ListViewComponent implements OnInit, AfterViewInit, OnChanges{
         data: {
           donnees: row.detailsBilan,
           date: row.date,
+        },
+      });
+    }
+    else if (this.type =="utilisateur" ){
+      this.dialog.open(PersonViewDetailComponent, {
+        height: '90%',
+        width: '90%',
+        disableClose:false,
+        data: {
+          typePersonne: this.type,
+          person: row,
         },
       });
     }

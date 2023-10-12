@@ -2,14 +2,14 @@
   <mat-toolbar color="accent">
     <span>Details produit</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button (click)="openDialogEdit(produit)" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <button *ngIf="permission.includes('PRODUIT: CRÉER_MODIFIER')" mat-icon-button (click)="openDialogEdit(produit)" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>edit</mat-icon>
     </button>
   </mat-toolbar>
 </div>
 <div mat-dialog-content class="content">
   <div class="row justify-content-center align-items-center">
-    <img style="height: 150px; width: 150px" src="assets/icons8-client-100.png">
+    <img style="height: 150px; width: 150px" src="{{produit.photo}}">
   </div>
 
   <div class="row nom justify-content-center align-items-center text-center">

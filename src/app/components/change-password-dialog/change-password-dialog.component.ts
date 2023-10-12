@@ -19,11 +19,13 @@ export class ChangePasswordDialogComponent {
   utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
 
   registerForm = this.formBuilder.nonNullable.group({
-    oldPass:['',{validators:[Validators.required,],
-      asyncValidators: [passCorect(this.appUserService, this.utilisateurDto.id as number)],
-      updateOn: 'blur'
-    }
-      ],
+    oldPass:['',
+      {
+        validators:[Validators.required,],
+        asyncValidators: [passCorect(this.appUserService, this.utilisateurDto.id as number)],
+        updateOn: 'blur'
+      }
+    ],
     password: ['', Validators.compose([Validators.required, Validators.minLength(8), createPasswordStrengthValidator()])],
     confirmPassword: ['', Validators.compose([Validators.required,])],
 
