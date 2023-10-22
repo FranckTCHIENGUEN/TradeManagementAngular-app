@@ -235,9 +235,9 @@ export class PaiementService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, PaiementService.FindByObjetAndDatepaiementBetweenPath, 'get');
     if (params) {
-      rb.query('objet', params.objet, {});
-      rb.query('date1', params.date1, {});
-      rb.query('date2', params.date2, {});
+      rb.path('objet', params.objet, {});
+      rb.path('date1', params.date1, {});
+      rb.path('date2', params.date2, {});
     }
 
     return this.http.request(rb.build({
@@ -352,9 +352,7 @@ export class PaiementService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findByModeAndObjet$Response(params: {
-    mode: 'MOBILE_MONNEY' | 'ORANGE_MONNEY' | 'REMBOURSSEMENT' | 'ESPECE';
-    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
+  findByModeAndObjet$Response(params?: {
   },
   context?: HttpContext
 
@@ -362,8 +360,6 @@ export class PaiementService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, PaiementService.FindByModeAndObjetPath, 'get');
     if (params) {
-      rb.query('mode', params.mode, {});
-      rb.query('objet', params.objet, {});
     }
 
     return this.http.request(rb.build({
@@ -388,9 +384,7 @@ export class PaiementService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findByModeAndObjet(params: {
-    mode: 'MOBILE_MONNEY' | 'ORANGE_MONNEY' | 'REMBOURSSEMENT' | 'ESPECE';
-    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
+  findByModeAndObjet(params?: {
   },
   context?: HttpContext
 
@@ -416,9 +410,7 @@ export class PaiementService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findByObjetAndIdObjet$Response(params: {
-    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
-    idObjet: number;
+  findByObjetAndIdObjet$Response(params?: {
   },
   context?: HttpContext
 
@@ -426,8 +418,6 @@ export class PaiementService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, PaiementService.FindByObjetAndIdObjetPath, 'get');
     if (params) {
-      rb.query('objet', params.objet, {});
-      rb.query('idObjet', params.idObjet, {});
     }
 
     return this.http.request(rb.build({
@@ -452,9 +442,7 @@ export class PaiementService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findByObjetAndIdObjet(params: {
-    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
-    idObjet: number;
+  findByObjetAndIdObjet(params?: {
   },
   context?: HttpContext
 
@@ -492,10 +480,10 @@ export class PaiementService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, PaiementService.FindByObjetAndIdObjetAndDatepaiementBetweenPath, 'get');
     if (params) {
-      rb.query('objet', params.objet, {});
-      rb.query('idObjet', params.idObjet, {});
-      rb.query('date1', params.date1, {});
-      rb.query('date2', params.date2, {});
+      rb.path('objet', params.objet, {});
+      rb.path('idObjet', params.idObjet, {});
+      rb.path('date1', params.date1, {});
+      rb.path('date2', params.date2, {});
     }
 
     return this.http.request(rb.build({

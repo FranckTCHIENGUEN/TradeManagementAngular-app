@@ -8,7 +8,7 @@ import {SaveRoleDialogComponent} from "../save-role-dialog/save-role-dialog.comp
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-roles',
+  selector: 'app-compo-roles',
   templateUrl: './roles.component.html',
   styleUrls: ['./roles.component.scss']
 })
@@ -67,11 +67,11 @@ export class RolesComponent {
 
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '75%';
+    dialogConfig.height = '90%';
     dialogConfig.width = '90%';
 
     dialogConfig.data= {
-      data: role,
+      role: role,
     };
 
     this.dialog.open(SaveRoleDialogComponent, dialogConfig);

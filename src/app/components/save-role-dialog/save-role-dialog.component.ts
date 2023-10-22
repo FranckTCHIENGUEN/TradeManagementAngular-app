@@ -13,9 +13,10 @@ import {MyErrorStateMatcher} from "../../ErrorMatcher";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 import {CategoriServiceDto} from "../../../tm-api/src-api/models/categori-service-dto";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
-import {MatLegacyListOption} from "@angular/material/legacy-list";
+import {MatLegacyListOption, MatLegacySelectionList} from "@angular/material/legacy-list";
 import {PaiementDto} from "../../../tm-api/src-api/models/paiement-dto";
-import {MatListOption} from "@angular/material/list";
+import {MatListOption, MatSelectionList} from "@angular/material/list";
+import {SelectionModel} from "@angular/cdk/collections";
 
 @Component({
   selector: 'app-save-role-dialog',
@@ -27,28 +28,43 @@ export class SaveRoleDialogComponent implements OnInit{
   role:RoleDto = {};
 
   saveForm = this.formBuilder.group({
-    nom:[this.role.roleName,[
+    nom:['',[
       Validators.required
     ]],
   })
 
-  listPermission: Array<Permissions> | undefined = [];
-  listSelectedPermission: Set<Permissions> | undefined;
+  listPermission: Set<Permissions> =  new  Set<Permissions>();
+  listSelectedPermission: Set<Permissions> = new Set<Permissions>();
   private _matcher = new MyErrorStateMatcher();
 
   constructor(private formBuilder:FormBuilder,
               private roleService:AppRoleService,
               private dialog: MatDialog,
               private dialogRef: MatDialogRef<SaveRoleDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) private data: ArticleDto) {
+              @Inject(MAT_DIALOG_DATA) private data: any) {
+
 
     if (this.data != null){
-      this.role = this.data;
-      this.saveForm.controls.nom.setValue(this.role.roleName);
-      this.role.permissions?.forEach(value => {
-        this.listSelectedPermission?.add(value);
-      })
+      this.role = this.data.role;
+      this.saveForm.controls.nom.setValue(this.role.roleName as string);
+      this.roleService.findAllPermissions().subscribe(value => {
+        value.forEach(value1 => {
+         let present = false
+          this.role.permissions?.forEach(value => {
+            this.listSelectedPermission?.add(value);
+              if (value1.id == value.id){
+                present = true;
 
+            }
+          })
+          if (!present){
+            this.listPermission.add(value1)
+          }
+
+        })
+      })
+    }else {
+      this.findAllPermission()
     }
   }
 
@@ -56,11 +72,20 @@ export class SaveRoleDialogComponent implements OnInit{
     return this._matcher;
   }
 
+  findAllPermission(){
+    this.roleService.findAllPermissions().subscribe(value => {
+      value.forEach(value1 => {
+        this.listPermission.add(value1)
+      })
+    })
+  }
+
   closeDialog(p: { etat: string }) {
     this.dialogRef.close();
   }
 
   ngOnInit(): void {
+
 
   }
 
@@ -70,16 +95,18 @@ export class SaveRoleDialogComponent implements OnInit{
       let userConnected: UtilisateurDto = JSON.parse(sessionStorage.getItem('userData') as string);
       this.role.idEntreprise = userConnected.entreprise?.id;
       this.role.roleName = this.saveForm.controls.nom.value as string;
+      this.role.permissions = new Array<Permissions>();
       this.listSelectedPermission?.forEach(value => {
         this.role.permissions?.push(value)
       })
+
       this.roleService.save(this.role).subscribe(
         value => {
           this.closeDialog({etat :'ok'});
           this.dialog.open(ConfirmDialogComponent, {
             disableClose:false,
             data: {
-              message: "Role"+ this.role.roleName + " enregisgré avec succé",
+              message: "Role "+ this.role.roleName + " enregisgré avec succé",
             },
           });
         }
@@ -96,9 +123,17 @@ export class SaveRoleDialogComponent implements OnInit{
 
   }
 
-  updateSelectedPermissions(selected: MatListOption[]) {
-    selected.forEach(value => {
-      this.listSelectedPermission?.add(value as Permissions)
+  updateSelectedPermissions(selected: MatSelectionList) {
+
+    selected.selectedOptions.selected.forEach(value => {
+      let permission = value.value as Permissions;
+      this.listSelectedPermission?.add(permission)
+      this.listPermission?.delete(permission);
     });
+  }
+  remveSelectedPermissions(selected: Permissions) {
+      this.listSelectedPermission?.delete(selected)
+      this.listPermission?.add(selected);
+
   }
 }

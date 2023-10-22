@@ -6,7 +6,7 @@
 </div>
 
 <div mat-dialog-content class="content">
-  <div class="col">
+  <div class="col" [formGroup]="saveForm">
     <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
       <mat-label class="">Nom</mat-label>
       <input type="text" matInput formControlName="nom"
@@ -20,21 +20,24 @@
   <div class="containt">
 
     <div class="side">
-      <mat-selection-list (selectionchange)="updateSelectedPermissions(shoes.selectedOptions.selected)" #shoes>
+      <mat-selection-list  #shoes (selectionChange)="updateSelectedPermissions(shoes)">
         <div mat-subheader>Liste des Permissions</div>
         <mat-action-list>
-          <button mat-list-item (click)="shoes.selectAll()">Tout selectionner</button>
+<!--          <button mat-list-item (click)="shoes.selectAll().length==0 ? shoes.selectAll() : shoes.deselectAll()">Tout selectionner</button>-->
+          <button  mat-list-item *ngIf="shoes.selectedOptions.selected.length==0" (click)="shoes.selectAll(); updateSelectedPermissions(shoes);">Tout selectionner</button>
+          <button mat-list-item *ngIf="shoes.selectedOptions.selected.length!=0" (click)="shoes.deselectAll(); updateSelectedPermissions(shoes);">Tout déselectionner</button>
         </mat-action-list>
-        <mat-list-option *ngFor="let permissions of listPermission">
+        <mat-list-option *ngFor="let permissions of listPermission" [value]="permissions">
           {{permissions.permisssion}}
         </mat-list-option>
       </mat-selection-list>
     </div>
-    <div class="content" *ngIf="listPermission?.length!=0">
+    <div class="content" *ngIf="listSelectedPermission?.size!=0">
       <mat-list>
         <div mat-subheader>Permission du role</div>
-        <mat-list-item *ngFor="let permission of listSelectedPermission">
+        <mat-list-item  *ngFor="let permission of listSelectedPermission;">
           <span matListItemTitle>{{permission.permisssion}}</span>
+          <mat-icon  (click)="remveSelectedPermissions(permission)">close</mat-icon>
         </mat-list-item>
       </mat-list>
     </div>
@@ -44,6 +47,6 @@
   </div>
 </div>
 
-<div mat-dialog-actions>
-  <button mat-raised-button color="accent"  cdkFocusInitial>Fermer</button>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button color="accent" >Fermer</button>
 </div>

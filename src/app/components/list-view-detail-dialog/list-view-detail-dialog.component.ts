@@ -22,6 +22,7 @@ export class ListViewDetailDialogComponent {
   donnees: any;
   type?: string;
   elements: any;
+
   paiementList?: Array<PaiementDto>;
   permission: Array<string> = [];
 

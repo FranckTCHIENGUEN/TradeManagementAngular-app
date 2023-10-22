@@ -10,9 +10,9 @@
   </div>
   <div class="col-3" *ngIf="permission.includes('COMPTA: LIRE_UTILISATEUR_BILAN_JOURNALIER') && forUser">
     <mat-form-field appearance="fill">
-      <mat-label>Etat commande</mat-label>
+      <mat-label>Utilisateur</mat-label>
       <mat-select [(ngModel)]="userName"  placeholder="choisir un mode" [value]="lisUser.at(0)">
-        <mat-option *ngFor="let etat of lisUser " [value]="etat" >{{etat}}</mat-option>
+        <mat-option *ngFor="let etat of lisUser " [value]="etat.nom + ' '+etat.prenom" >{{etat.nom}} {{etat.prenom}}</mat-option>
       </mat-select>
     </mat-form-field>
     <button mat-raised-button  (click)="find()">
@@ -24,7 +24,7 @@
     </button>
   </div>
 </div>
-<!--</div>-->
+
 <div class="containt">
   <div class="ms-15 side" *ngIf="isChecked==true">
       <div class=" divider divider-boder">

@@ -263,7 +263,7 @@
               <mat-form-field appearance="fill">
                 <mat-label *ngIf="typeEnregistrement=='commande client'">Date de retrait</mat-label>
                 <mat-label *ngIf="typeEnregistrement=='commande fournissuer'">Date de livraison</mat-label>
-                <input  matInput formControlName="dateRetrait" [matDatepicker]="picker2">
+                <input [min]="today"  matInput formControlName="dateRetrait" [matDatepicker]="picker2">
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>

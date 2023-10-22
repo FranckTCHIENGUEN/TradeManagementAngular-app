@@ -10,11 +10,11 @@
   <div class="containt">
 
     <div class="side">
-      <mat-selection-list (selectionchange)="updateSelectedPermissions(shoes.selectedOptions.selected)" #shoes>
-        <div mat-subheader>Liste des Permissions</div>
+      <mat-selection-list #shoes (selectionChange)="updateSelectedRole(shoes)" >
+        <div mat-subheader>Liste des Roles</div>
         <mat-action-list>
-          <button mat-list-item (click)="shoes.selectAll()">Tout selectionner</button>
-        </mat-action-list>
+          <button  mat-list-item *ngIf="shoes.selectedOptions.selected.length==0" (click)="shoes.selectAll(); updateSelectedRole(shoes);">Tout selectionner</button>
+          <button mat-list-item *ngIf="shoes.selectedOptions.selected.length!=0" (click)="shoes.deselectAll(); updateSelectedRole(shoes);">Tout déselectionner</button>        </mat-action-list>
         <mat-list-option *ngFor="let role of listRole" [value]="role">
           {{role.roleName}}
         </mat-list-option>
@@ -27,5 +27,5 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-raised-button color="accent"  cdkFocusInitial>Fermer</button>
+  <button mat-raised-button color="accent"  >Fermer</button>
 </div>

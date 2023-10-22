@@ -29,7 +29,7 @@ export class UtilisateurService extends BaseService {
   /**
    * Path part for operation removeRoleToUser
    */
-  static readonly RemoveRoleToUserPath = '/tradeManagement/v1/utilisateurs/removeroleuser/{iduser}?{idrole}';
+  static readonly RemoveRoleToUserPath = '/tradeManagement/v1/utilisateurs/removeroleuser/{iduser}/{idrole}';
 
   /**
    * retirer un role a un utilisateur.
@@ -51,8 +51,8 @@ export class UtilisateurService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, UtilisateurService.RemoveRoleToUserPath, 'put');
     if (params) {
-      rb.query('iduser', params.iduser, {});
-      rb.query('idrole', params.idrole, {});
+      rb.path('iduser', params.iduser, {});
+      rb.path('idrole', params.idrole, {});
     }
 
     return this.http.request(rb.build({
@@ -93,7 +93,7 @@ export class UtilisateurService extends BaseService {
   /**
    * Path part for operation addRoleToUser
    */
-  static readonly AddRoleToUserPath = '/tradeManagement/v1/utilisateurs/addroleuser/{iduser}?{idrole}';
+  static readonly AddRoleToUserPath = '/tradeManagement/v1/utilisateurs/addroleuser/{iduser}/{idrole}';
 
   /**
    * ajouter un role a un utilisateur.
@@ -115,8 +115,8 @@ export class UtilisateurService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, UtilisateurService.AddRoleToUserPath, 'put');
     if (params) {
-      rb.query('iduser', params.iduser, {});
-      rb.query('idrole', params.idrole, {});
+      rb.path('iduser', params.iduser, {});
+      rb.path('idrole', params.idrole, {});
     }
 
     return this.http.request(rb.build({
@@ -728,8 +728,8 @@ export class UtilisateurService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, UtilisateurService.FindByPaysAndVillePath, 'get');
     if (params) {
-      rb.query('pays', params.pays, {});
-      rb.query('ville', params.ville, {});
+      rb.path('pays', params.pays, {});
+      rb.path('ville', params.ville, {});
     }
 
     return this.http.request(rb.build({

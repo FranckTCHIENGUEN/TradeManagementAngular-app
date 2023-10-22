@@ -103,6 +103,7 @@ export class VenteComponent implements OnInit{
   filteredElement: Observable<ArticleDto[]> | undefined;
   filteredElement2: Observable<StatServiceDto[]> | undefined;
   type: any;
+  today = new Date().getDate();
   private _isSubmited = false;
   private _resteAdonner: number = 0;
   private _montantTotal: number = 0;

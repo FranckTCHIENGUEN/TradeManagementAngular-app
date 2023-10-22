@@ -23,6 +23,7 @@ import {
   MAT_MOMENT_DATE_FORMATS,
   MomentDateAdapter
 } from "@angular/material-moment-adapter";
+import * as moment from "moment/moment";
 
 @Component({
   selector: 'app-save-depense-dialog',
@@ -105,7 +106,7 @@ export class SaveDepenseDialogComponent implements OnInit{
       quantite:[this.depense.quantite,[
         Validators.required
       ]],
-      date:[this.depense.dateDepense,[
+      date:[moment(),[
         Validators.required
       ]],
       montantTotal:[this.depense.montantTotal,[
@@ -142,7 +143,7 @@ export class SaveDepenseDialogComponent implements OnInit{
 
         const lig:DepensesDto = {
           idEntreprise : userConnected.entreprise?.id,
-          dateDepense :this.ligneDepense.at(i).get('date')?.value as string,
+          dateDepense :this.ligneDepense.at(i).get('date')?.value.toISOString() as string,
           categorieDepense : this.ligneDepense.at(i).get('categorie')?.value as CategorieDepenseDto,
           prixunitaire : this.ligneDepense.at(i).get('prix')?.value as number,
           quantite : this.ligneDepense.at(i).get('quantite')?.value as number,

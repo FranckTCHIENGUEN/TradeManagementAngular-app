@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { RolesRoutingModule } from './roles-routing.module';
 import { RolesComponent } from './roles.component';
+import {GestEntreprisePageModule} from "../gest-entreprise-page.module";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { RolesComponent } from './roles.component';
   ],
   imports: [
     CommonModule,
-    RolesRoutingModule
+    RolesRoutingModule,
+    GestEntreprisePageModule
   ]
 })
 export class RolesModule { }

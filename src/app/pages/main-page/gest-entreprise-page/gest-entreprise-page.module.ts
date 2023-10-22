@@ -20,9 +20,10 @@ import {CommandPageModule} from "../command-page/command-page.module";
     UtilisateurComponent,
     RolesComponent
   ],
-  exports: [
-    UtilisateurComponent
-  ],
+    exports: [
+        UtilisateurComponent,
+        RolesComponent
+    ],
   imports: [
     CommonModule,
     GestEntreprisePageRoutingModule,

@@ -120,7 +120,7 @@ export class UtilisateurComponent implements OnInit{
     dialogRef.close();
   }
 
-  private findAll(){
+   findAll(){
     this.userService.findAll().subscribe(
       value => {
         this.listeUtilisateur = value;

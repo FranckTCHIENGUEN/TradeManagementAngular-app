@@ -234,8 +234,8 @@ export class DepenseService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, DepenseService.FindByDateDepenseBetweenPath, 'get');
     if (params) {
-      rb.query('date1', params.date1, {});
-      rb.query('date2', params.date2, {});
+      rb.path('date1', params.date1, {});
+      rb.path('date2', params.date2, {});
     }
 
     return this.http.request(rb.build({
@@ -421,9 +421,9 @@ export class DepenseService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, DepenseService.FindByCategoryIdAndDateDepenseBetweenPath, 'get');
     if (params) {
-      rb.query('idcategorie', params.idcategorie, {});
-      rb.query('date1', params.date1, {});
-      rb.query('date2', params.date2, {});
+      rb.path('idcategorie', params.idcategorie, {});
+      rb.path('date1', params.date1, {});
+      rb.path('date2', params.date2, {});
     }
 
     return this.http.request(rb.build({

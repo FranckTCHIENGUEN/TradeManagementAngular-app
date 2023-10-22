@@ -50,9 +50,9 @@ export class ViewBilanComptaComponent implements OnInit, OnChanges{
       cell: (element: BillanComptableDto) => `${element.avance}`,
     },
     {
-      columnDef: 'Rembourssement',
-      header: 'Rembourssement',
-      cell: (element: BillanComptableDto) => `${element.rembourssement}`,
+      columnDef: 'argent encaisse',
+      header: 'Argent en caisse',
+      cell: (element: BillanComptableDto) => `${element.argentEnCaisse}`,
     },
     {
       columnDef: 'user',
@@ -66,14 +66,21 @@ export class ViewBilanComptaComponent implements OnInit, OnChanges{
   userName = '';
   lisUser:Array<UtilisateurDto> = []
 
-  constructor(private bilanComptaService:AppComptaServiceService, appuserService:AppUserService) {
+  constructor(private bilanComptaService:AppComptaServiceService, private appuserService:AppUserService) {
   }
   ngOnInit(): void {
     this.getPermissions();
+    if (this.permission.includes('UTILISATEUR: LIRE')){
+      this.appuserService.findAll().subscribe(value => {
+        this.lisUser = value;
+      })
+    }
+
     this.find();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.getPermissions();
     this.find();
   }
 

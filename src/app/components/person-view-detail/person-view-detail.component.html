@@ -108,33 +108,35 @@
   <div class="containt" *ngIf="typePersonne=='utilisateur'">
 
     <div class="side">
+      <div>Roles</div>
+      <div class="col-4" *ngIf="typePersonne=='utilisateur' && permission.includes('UTILISATEUR: ADD_ROLE')">
+        <button mat-raised-button color="primary" (click)="openDialogAdd()">Ajouter un role</button>
+      </div>
       <mat-list>
-        <div mat-subheader>Roles</div>
-        <div class="col-4">
-          <button mat-raised-button color="primary" (click)="openDialogAdd()">Ajouter un role à l'utilisateur</button>
-        </div>
-        <mat-list-item (click)="updatePermission(role)" *ngFor="let role of listRoles">
-          <mat-icon matListItemIcon>folder</mat-icon>
-          <div matListItemTitle (contextmenu)="onRightClick($event, {content: '' + role.roleName})">
-            {{role.roleName}}
-            <div style="visibility: hidden; position: fixed;"
-                 [style.left]="menuTopLeftPosition.x"
-                 [style.top]="menuTopLeftPosition.y"
-                 [matMenuTriggerFor]="rightMenu"></div>
 
-            <mat-menu #rightMenu="matMenu">
-              <ng-template matMenuContent>
-                <button (click)="openDialogRemoveRole(role, person.id)" mat-menu-item>Retirer le role à l'utilisateur</button>
-              </ng-template>
-            </mat-menu>
-          </div>
+        <mat-list-item (click)="updatePermission(role)" *ngFor="let role of listRoles"
+                       (contextmenu)="open($event, role); $event. preventDefault();" class="listRole">
+          <mat-icon matListItemIcon>folder</mat-icon>
+          <section matListItemTitle class="collection">
+            <div class="collection-item">
+              {{role.roleName}}
+            </div>
+          </section>
+
+          <ng-template #userMenu let-role>
+            <section class="user-menu">
+              <div *ngIf="typePersonne=='utilisateur' && permission.includes('UTILISATEUR: REMOVE_ROLE')"
+                   (click)="openDialogRemoveRole(role, person.id)">Retirer le role</div>
+            </section>
+          </ng-template>
           <!--      <div matListItemLine>{{role.updated | date}}</div>-->
         </mat-list-item>
       </mat-list>
     </div>
     <div class="content" *ngIf="listPermission?.length!=0">
+      <div>Permission</div>
       <mat-list>
-        <div mat-subheader>Permission</div>
+
         <mat-list-item *ngFor="let permission of listPermission">
           <span matListItemTitle>{{permission.permisssion}}</span>
         </mat-list-item>
@@ -145,5 +147,5 @@
 
 
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial>Ok</button>
+  <button mat-raised-button color="primary" mat-dialog-close >Ok</button>
 </div>

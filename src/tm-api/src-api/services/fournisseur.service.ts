@@ -536,8 +536,8 @@ export class FournisseurService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, FournisseurService.FindByPaysAndVille1Path, 'get');
     if (params) {
-      rb.query('pays', params.pays, {});
-      rb.query('ville', params.ville, {});
+      rb.path('pays', params.pays, {});
+      rb.path('ville', params.ville, {});
     }
 
     return this.http.request(rb.build({

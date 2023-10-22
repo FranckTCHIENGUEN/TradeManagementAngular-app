@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 import {ChangePasswordDialogComponent} from "../change-password-dialog/change-password-dialog.component";
@@ -10,6 +10,11 @@ import {SavePersonDialogComponent} from "../save-person-dialog/save-person-dialo
 import {RoleDto} from "../../../tm-api/src-api/models/role-dto";
 import {Permissions} from "../../../tm-api/src-api/models/permissions";
 import {MatMenuTrigger} from "@angular/material/menu";
+import {AddRoleToUserComponent} from "../add-role-to-user/add-role-to-user.component";
+import {fromEvent, Subscription, take} from "rxjs";
+import {Overlay, OverlayRef} from "@angular/cdk/overlay";
+import {TemplatePortal} from "@angular/cdk/portal";
+import {filter} from "rxjs/operators";
 
 @Component({
   selector: 'app-person-view-detail',
@@ -23,10 +28,18 @@ export class PersonViewDetailComponent implements OnInit{
   listRoles?: Array<RoleDto> =[] ;
   listPermission: Array<Permissions> | undefined = [];
   permission: Array<string> = [];
+  sub!: Subscription;
+
+  @ViewChild('userMenu')
+  userMenu!: TemplateRef<any>;
+
+  overlayRef?: OverlayRef | null;
 
   constructor( @Inject(MAT_DIALOG_DATA) private data: any,
                private dialog: MatDialog,
-               private userService:AppUserService) {
+               private userService:AppUserService,
+               public overlay: Overlay,
+               public viewContainerRef: ViewContainerRef) {
 
     this.typePersonne = data.typePersonne;
     this.person = data.person;
@@ -36,6 +49,46 @@ export class PersonViewDetailComponent implements OnInit{
      this.listRoles=user.roles
     }
     this.getPermissions();
+  }
+
+  open({ x, y }: MouseEvent, user: any) {
+    this.close();
+    const positionStrategy = this.overlay.position()
+      .flexibleConnectedTo({ x, y })
+      .withPositions([
+        {
+          originX: 'end',
+          originY: 'bottom',
+          overlayX: 'end',
+          overlayY: 'top',
+        }
+      ]);
+
+    this.overlayRef = this.overlay.create({
+      positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.close()
+    });
+
+    this.overlayRef.attach(new TemplatePortal(this.userMenu, this.viewContainerRef, {
+      $implicit: user
+    }));
+
+    this.sub = fromEvent<MouseEvent>(document, 'click')
+      .pipe(
+        filter(event => {
+          const clickTarget = event.target as HTMLElement;
+          return !!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget);
+        }),
+        take(1)
+      ).subscribe(() => this.close())
+
+  }
+  close() {
+    this.sub && this.sub.unsubscribe();
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+      this.overlayRef = null;
+    }
   }
 
   private getPermissions(){
@@ -154,42 +207,20 @@ export class PersonViewDetailComponent implements OnInit{
     });
   }
 
-  menuTopLeftPosition =  {x: '0', y: '0'}
-
-  // reference to the MatMenuTrigger in the DOM
-  @ViewChild(MatMenuTrigger, {static: true}) matMenuTrigger: MatMenuTrigger | undefined;
-
-  /**
-   * Method called when the user click with the right button
-   * @param event MouseEvent, it contains the coordinates
-   * @param item Our data contained in the row of the table
-   */
-  onRightClick(event: MouseEvent, item: any) {
-    // preventDefault avoids to show the visualization of the right-click menu of the browser
-    event.preventDefault();
-
-    // we record the mouse position in our object
-    this.menuTopLeftPosition.x = event.clientX + 'px';
-    this.menuTopLeftPosition.y = event.clientY + 'px';
-
-    // we open the menu
-    // we pass to the menu the information about our object
-    this.matMenuTrigger!.menuData = {item: item}
-
-    // we open the menu
-    this.matMenuTrigger?.openMenu();
-
-  }
-
   openDialogAdd() {
-
+    this.dialog.open(AddRoleToUserComponent, {
+      disableClose:false,
+      data: {
+        person:this.person ,
+      },
+    })
   }
 
   openDialogRemoveRole(role: RoleDto, id:number) {
     this.dialog.open(ConfirmDeleteDialogComponent, {
       disableClose:false,
       data: {
-        message: "Retirer le role" +role.roleName+ "à l'utilisateur ?",
+        message: "Retirer le role " +role.roleName+ " à l'utilisateur ?",
         titre: "Gestion de role",
       },
     }).afterClosed().subscribe(value => {

@@ -106,7 +106,7 @@
     }
   ],
   "paths": {
-    "/tradeManagement/v1/utilisateurs/removeroleuser/{iduser}?{idrole}": {
+    "/tradeManagement/v1/utilisateurs/removeroleuser/{iduser}/{idrole}": {
       "put": {
         "tags": [
           "Utilisateur"
@@ -117,7 +117,7 @@
         "parameters": [
           {
             "name": "iduser",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -126,7 +126,7 @@
           },
           {
             "name": "idrole",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -158,7 +158,7 @@
         }
       }
     },
-    "/tradeManagement/v1/utilisateurs/addroleuser/{iduser}?{idrole}": {
+    "/tradeManagement/v1/utilisateurs/addroleuser/{iduser}/{idrole}": {
       "put": {
         "tags": [
           "Utilisateur"
@@ -169,7 +169,7 @@
         "parameters": [
           {
             "name": "iduser",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -178,7 +178,7 @@
           },
           {
             "name": "idrole",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1524,7 +1524,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1533,7 +1533,7 @@
           },
           {
             "name": "idLigneCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1542,7 +1542,7 @@
           },
           {
             "name": "quantite",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "number"
@@ -1626,7 +1626,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1635,7 +1635,7 @@
           },
           {
             "name": "idFournisseur",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1678,7 +1678,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1687,7 +1687,7 @@
           },
           {
             "name": "etatCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
@@ -1735,7 +1735,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1744,7 +1744,7 @@
           },
           {
             "name": "idLigneCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1753,7 +1753,7 @@
           },
           {
             "name": "typeCom",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
@@ -1766,7 +1766,7 @@
           },
           {
             "name": "newIdArticle",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1809,7 +1809,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1818,7 +1818,7 @@
           },
           {
             "name": "idLigneCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1827,7 +1827,7 @@
           },
           {
             "name": "quantite",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "number"
@@ -1911,7 +1911,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1920,7 +1920,7 @@
           },
           {
             "name": "etatCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
@@ -1968,7 +1968,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1977,7 +1977,7 @@
           },
           {
             "name": "idClient",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -2020,7 +2020,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -2029,7 +2029,7 @@
           },
           {
             "name": "idLigneCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -2038,7 +2038,7 @@
           },
           {
             "name": "typeCom",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
@@ -2051,7 +2051,7 @@
           },
           {
             "name": "newIdArticle",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -2518,7 +2518,7 @@
         "parameters": [
           {
             "name": "pays",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -2526,7 +2526,7 @@
           },
           {
             "name": "ville",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -3321,7 +3321,7 @@
         "parameters": [
           {
             "name": "objet",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
@@ -3335,7 +3335,7 @@
           },
           {
             "name": "date1",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
@@ -3344,7 +3344,7 @@
           },
           {
             "name": "date2",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
@@ -3444,36 +3444,7 @@
         "summary": "rechercher un role",
         "description": "cette methode permet de rechercher un role par son ID",
         "operationId": "findByModeAndObjet",
-        "parameters": [
-          {
-            "name": "mode",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "MOBILE_MONNEY",
-                "ORANGE_MONNEY",
-                "REMBOURSSEMENT",
-                "ESPECE"
-              ]
-            }
-          },
-          {
-            "name": "objet",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "CC",
-                "CF",
-                "VENTE",
-                "DEPENSE"
-              ]
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "role r=trouvé avec succée",
@@ -3512,31 +3483,7 @@
         "summary": "rechercher un role",
         "description": "cette methode permet de rechercher un role par son ID",
         "operationId": "findByObjetAndIdObjet",
-        "parameters": [
-          {
-            "name": "objet",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "CC",
-                "CF",
-                "VENTE",
-                "DEPENSE"
-              ]
-            }
-          },
-          {
-            "name": "idObjet",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "role r=trouvé avec succée",
@@ -3578,7 +3525,7 @@
         "parameters": [
           {
             "name": "objet",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
@@ -3592,7 +3539,7 @@
           },
           {
             "name": "idObjet",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -3601,7 +3548,7 @@
           },
           {
             "name": "date1",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
@@ -3610,7 +3557,7 @@
           },
           {
             "name": "date2",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
@@ -4163,7 +4110,7 @@
         "parameters": [
           {
             "name": "pays",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -4171,7 +4118,7 @@
           },
           {
             "name": "ville",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -4641,7 +4588,7 @@
         "parameters": [
           {
             "name": "date1",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
@@ -4650,7 +4597,7 @@
           },
           {
             "name": "date2",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
@@ -4790,7 +4737,7 @@
         "parameters": [
           {
             "name": "idcategorie",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -4799,7 +4746,7 @@
           },
           {
             "name": "date1",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
@@ -4808,7 +4755,7 @@
           },
           {
             "name": "date2",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
@@ -5541,7 +5488,7 @@
         "parameters": [
           {
             "name": "pays",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -5549,7 +5496,7 @@
           },
           {
             "name": "ville",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -6265,7 +6212,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -6274,7 +6221,7 @@
           },
           {
             "name": "idLigneCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -6317,7 +6264,7 @@
         "parameters": [
           {
             "name": "idCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
@@ -6326,7 +6273,7 @@
           },
           {
             "name": "idLigneCommande",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "integer",
