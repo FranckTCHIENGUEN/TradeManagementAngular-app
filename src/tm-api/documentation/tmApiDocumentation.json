@@ -1693,7 +1693,7 @@
               "type": "string",
               "enum": [
                 "EN_PREPARATION",
-                "RECEPTIONER",
+                "RECEPTIONNER",
                 "VALIDER",
                 "LIVRER"
               ]
@@ -1926,7 +1926,7 @@
               "type": "string",
               "enum": [
                 "EN_PREPARATION",
-                "RECEPTIONER",
+                "RECEPTIONNER",
                 "VALIDER",
                 "LIVRER"
               ]
@@ -3310,7 +3310,7 @@
         }
       }
     },
-    "/tradeManagement/v1/paiement/objet-date/{objet}?{date1}?{date2}": {
+    "/tradeManagement/v1/paiement/objet-date/{objet}/{date1}/{date2}": {
       "get": {
         "tags": [
           "paiement"
@@ -3444,7 +3444,36 @@
         "summary": "rechercher un role",
         "description": "cette methode permet de rechercher un role par son ID",
         "operationId": "findByModeAndObjet",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "mode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MOBILE_MONNEY",
+                "ORANGE_MONNEY",
+                "REMBOURSSEMENT",
+                "ESPECE"
+              ]
+            }
+          },
+          {
+            "name": "objet",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "CC",
+                "CF",
+                "VENTE",
+                "DEPENSE"
+              ]
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "role r=trouvé avec succée",
@@ -3483,7 +3512,31 @@
         "summary": "rechercher un role",
         "description": "cette methode permet de rechercher un role par son ID",
         "operationId": "findByObjetAndIdObjet",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "objet",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "CC",
+                "CF",
+                "VENTE",
+                "DEPENSE"
+              ]
+            }
+          },
+          {
+            "name": "idObjet",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "role r=trouvé avec succée",
@@ -3514,7 +3567,7 @@
         }
       }
     },
-    "/tradeManagement/v1/paiement/findobjet-idObjet-date/{objet}?{idObjet}?{date1}?{date2}": {
+    "/tradeManagement/v1/paiement/findobjet-idObjet-date/{objet}/{idObjet}/{date1}/{date2}": {
       "get": {
         "tags": [
           "paiement"
@@ -7044,7 +7097,7 @@
             "type": "string",
             "enum": [
               "EN_PREPARATION",
-              "RECEPTIONER",
+              "RECEPTIONNER",
               "VALIDER",
               "LIVRER"
             ]
@@ -7143,7 +7196,7 @@
             "type": "string",
             "enum": [
               "EN_PREPARATION",
-              "RECEPTIONER",
+              "RECEPTIONNER",
               "VALIDER",
               "LIVRER"
             ]
@@ -7250,7 +7303,7 @@
             "type": "string",
             "enum": [
               "EN_PREPARATION",
-              "RECEPTIONER",
+              "RECEPTIONNER",
               "VALIDER",
               "LIVRER"
             ]

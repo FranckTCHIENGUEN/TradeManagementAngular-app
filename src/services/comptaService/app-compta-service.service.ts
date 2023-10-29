@@ -14,6 +14,6 @@ export class AppComptaServiceService {
     return this.comptaService.findByDateBetween({date1:date1,date2:date2});
   }
   findByDayBetweenAndUser(date1:string, date2:string, user:string):Observable<ComptaGlobalDto>{
-    return this.comptaService.findByDateBetween({date1:date1,date2:date2});
+    return this.comptaService.findByDateBetweenAndUser({date1:date1,date2:date2, userName:user});
   }
 }

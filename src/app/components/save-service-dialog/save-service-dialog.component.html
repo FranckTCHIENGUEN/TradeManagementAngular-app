@@ -31,7 +31,7 @@
             refresh
           </span></mat-icon>
           </button>
-          <button matSuffix mat-raised-button color="primary" (click)="nouvelleCategorie()">Nouvelle Categorie</button>
+          <button *ngIf=" permission.includes('CAT_SERVICE: CRÉER_MODIFIER')" matSuffix mat-raised-button color="primary" (click)="nouvelleCategorie()">Nouvelle Categorie</button>
         </mat-form-field>
       </div>
     </div>

@@ -11,7 +11,7 @@ export interface CommandeClientDto {
   dateLivraison?: string;
   dateRetrait?: string;
   datecommande?: string;
-  etatCommande?: 'EN_PREPARATION' | 'RECEPTIONER' | 'VALIDER' | 'LIVRER';
+  etatCommande?: 'EN_PREPARATION' | 'RECEPTIONNER' | 'VALIDER' | 'LIVRER';
   id?: number;
   idEntreprise?: number;
   ligneCommandeClients?: Array<LigneCommandeClientDto>;

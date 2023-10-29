@@ -16,7 +16,9 @@ import {AppAuthenticationService} from "../../../services/authentification/app-a
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
+  styleUrls: ['./main-page.component.scss'],
+  // providers:
+  //   [CookieService],
 })
 export class MainPageComponent {
   // userConnected:UtilisateursDto =  {};

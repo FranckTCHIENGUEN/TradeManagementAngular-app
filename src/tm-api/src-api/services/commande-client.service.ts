@@ -234,7 +234,7 @@ export class CommandeClientService extends BaseService {
    */
   updateEtatCommande1$Response(params: {
     idCommande: number;
-    etatCommande: 'EN_PREPARATION' | 'RECEPTIONER' | 'VALIDER' | 'LIVRER';
+    etatCommande: 'EN_PREPARATION' | 'RECEPTIONNER' | 'VALIDER' | 'LIVRER';
   },
   context?: HttpContext
 
@@ -270,7 +270,7 @@ export class CommandeClientService extends BaseService {
    */
   updateEtatCommande1(params: {
     idCommande: number;
-    etatCommande: 'EN_PREPARATION' | 'RECEPTIONER' | 'VALIDER' | 'LIVRER';
+    etatCommande: 'EN_PREPARATION' | 'RECEPTIONNER' | 'VALIDER' | 'LIVRER';
   },
   context?: HttpContext
 

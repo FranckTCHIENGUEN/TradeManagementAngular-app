@@ -9,7 +9,7 @@ export interface CommandSearch {
   dateRetrait2?: string;
   datecommande1?: string;
   datecommande2?: string;
-  etatCommande?: 'EN_PREPARATION' | 'RECEPTIONER' | 'VALIDER' | 'LIVRER';
+  etatCommande?: 'EN_PREPARATION' | 'RECEPTIONNER' | 'VALIDER' | 'LIVRER';
   idClient?: number;
   montantTotal?: number;
   resteAdonner?: number;

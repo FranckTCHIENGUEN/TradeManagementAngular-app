@@ -74,6 +74,7 @@ export class ListeVentePageComponent implements OnInit{
 
   ngOnInit(): void {
 
+    this.getPermissions();
     this.dataLinkTransfer.name.subscribe(value => this.filterValue = value)
     this.findAll();
 

@@ -27,7 +27,7 @@ export class SaveServiceDialogComponent implements OnInit{
   service:ServiceDto = {};
   private _matcher = new MyErrorStateMatcher();
   categories: Array<CategoriServiceDto> =[];
-
+  permission: Array<string> = [];
   saveForm = this.formBuilder.group({
     nom:[this.service.nom,[
       Validators.required
@@ -46,7 +46,7 @@ export class SaveServiceDialogComponent implements OnInit{
               private dialog: MatDialog,
               private dialogRef: MatDialogRef<SaveServiceDialogComponent>,
               @Inject(MAT_DIALOG_DATA) private data: ArticleDto) {
-
+    this.getPermissions();
     if (this.data != null){
       this.service = this.data;
       this.saveForm.patchValue(this.service)
@@ -56,7 +56,14 @@ export class SaveServiceDialogComponent implements OnInit{
     }
   }
 
-
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
+  }
   get matcher(): MyErrorStateMatcher {
     return this._matcher;
   }

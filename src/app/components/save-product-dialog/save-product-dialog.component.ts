@@ -42,7 +42,7 @@ export class SaveProductDialogComponent implements OnInit{
       ]],
       photo:[this.produit.photo,],
   })
-
+  permission: Array<string> = [];
 
   constructor(private formBuilder:FormBuilder,
               private produitService:AppProductService,
@@ -51,7 +51,7 @@ export class SaveProductDialogComponent implements OnInit{
               private dialog: MatDialog,
               private dialogRef: MatDialogRef<SaveProductDialogComponent>,
               @Inject(MAT_DIALOG_DATA) private data: ArticleDto) {
-
+    this.getPermissions();
      if (this.data != null){
        this.produit = this.data;
        this.saveForm.patchValue(this.produit)
@@ -63,7 +63,14 @@ export class SaveProductDialogComponent implements OnInit{
        this.saveForm.controls.categorie.setValue(this.produit.category);
      }
   }
-
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
+  }
 
   get matcher(): MyErrorStateMatcher {
     return this._matcher;

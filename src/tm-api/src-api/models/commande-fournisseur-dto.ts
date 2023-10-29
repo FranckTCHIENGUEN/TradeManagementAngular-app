@@ -10,7 +10,7 @@ export interface CommandeFournisseurDto {
   dateLivraison?: string;
   dateRetrait?: string;
   datecommande?: string;
-  etatCommande?: 'EN_PREPARATION' | 'RECEPTIONER' | 'VALIDER' | 'LIVRER';
+  etatCommande?: 'EN_PREPARATION' | 'RECEPTIONNER' | 'VALIDER' | 'LIVRER';
   fournisseur?: FournisseurDto;
   id?: number;
   idEntreprise?: number;

@@ -90,7 +90,6 @@ export class ListCommandeClientComponent implements OnInit{
               private commandeSearcServjce:AppSearchCommandService,
               @Inject(LOCALE_ID) private locale: string,) {
 
-
   }
 
   private getPermissions(){
@@ -104,7 +103,6 @@ export class ListCommandeClientComponent implements OnInit{
 
   ngOnInit(): void {
     this.getPermissions();
-    console.log(this.permission)
     this.dataLinkTransfer.name.subscribe(value => this.filterValue = value)
     this.findAll();
 

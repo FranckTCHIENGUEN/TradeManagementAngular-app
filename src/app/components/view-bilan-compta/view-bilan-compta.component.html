@@ -15,14 +15,15 @@
         <mat-option *ngFor="let etat of lisUser " [value]="etat.nom + ' '+etat.prenom" >{{etat.nom}} {{etat.prenom}}</mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button  (click)="find()">
-      <mat-icon class="ms-2"  color="primary">
-                <span class="material-symbols-outlined">
-                  search
-                </span>
-      </mat-icon>
-    </button>
+
   </div>
+  <button class="mt-5" mat-raised-button  (click)="find()">
+    <mat-icon class="ms-2"  color="primary">
+                  <span class="material-symbols-outlined">
+                    search
+                  </span>
+    </mat-icon> Recherche
+  </button>
 </div>
 
 <div class="containt">

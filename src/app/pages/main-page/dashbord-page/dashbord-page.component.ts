@@ -93,7 +93,7 @@ export class DashbordPageComponent implements OnInit{
       etatCommande:"EN_PREPARATION"
     }
     let commandSearchDto3:CommandSearch = {
-      etatCommande:"RECEPTIONER"
+      etatCommande:"RECEPTIONNER"
     }
     if(this.permission.includes('COM_CLIENT: FILTRER')){
       this.commandeSearchService.filterCommand(commandSearchDto, "client").subscribe(

@@ -118,7 +118,7 @@ export class FilterComponent {
       datecommande1:this.saveForm.controls.datecommande1.value as string | undefined,
       datecommande2:this.saveForm.controls.datecommande2.value as string | undefined,
       code:this.saveForm.controls.code.value as string | undefined,
-      etatCommande:this.saveForm.controls.etatCommande.value as "EN_PREPARATION" | "RECEPTIONER" | "VALIDER" | "LIVRER" | undefined,
+      etatCommande:this.saveForm.controls.etatCommande.value as "EN_PREPARATION" | "RECEPTIONNER" | "VALIDER" | "LIVRER" | undefined,
       avance:this.saveForm.controls.avance.value as number | undefined,
       idClient:person?.id as number | undefined,
       montantTotal:this.saveForm.controls.montantTotal.value as number | undefined,

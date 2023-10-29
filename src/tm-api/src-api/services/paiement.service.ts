@@ -212,7 +212,7 @@ export class PaiementService extends BaseService {
   /**
    * Path part for operation findByObjetAndDatepaiementBetween
    */
-  static readonly FindByObjetAndDatepaiementBetweenPath = '/tradeManagement/v1/paiement/objet-date/{objet}?{date1}?{date2}';
+  static readonly FindByObjetAndDatepaiementBetweenPath = '/tradeManagement/v1/paiement/objet-date/{objet}/{date1}/{date2}';
 
   /**
    * rechercher un role.
@@ -352,7 +352,9 @@ export class PaiementService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findByModeAndObjet$Response(params?: {
+  findByModeAndObjet$Response(params: {
+    mode: 'MOBILE_MONNEY' | 'ORANGE_MONNEY' | 'REMBOURSSEMENT' | 'ESPECE';
+    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
   },
   context?: HttpContext
 
@@ -360,6 +362,8 @@ export class PaiementService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, PaiementService.FindByModeAndObjetPath, 'get');
     if (params) {
+      rb.query('mode', params.mode, {});
+      rb.query('objet', params.objet, {});
     }
 
     return this.http.request(rb.build({
@@ -384,7 +388,9 @@ export class PaiementService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findByModeAndObjet(params?: {
+  findByModeAndObjet(params: {
+    mode: 'MOBILE_MONNEY' | 'ORANGE_MONNEY' | 'REMBOURSSEMENT' | 'ESPECE';
+    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
   },
   context?: HttpContext
 
@@ -410,7 +416,9 @@ export class PaiementService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findByObjetAndIdObjet$Response(params?: {
+  findByObjetAndIdObjet$Response(params: {
+    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
+    idObjet: number;
   },
   context?: HttpContext
 
@@ -418,6 +426,8 @@ export class PaiementService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, PaiementService.FindByObjetAndIdObjetPath, 'get');
     if (params) {
+      rb.query('objet', params.objet, {});
+      rb.query('idObjet', params.idObjet, {});
     }
 
     return this.http.request(rb.build({
@@ -442,7 +452,9 @@ export class PaiementService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findByObjetAndIdObjet(params?: {
+  findByObjetAndIdObjet(params: {
+    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
+    idObjet: number;
   },
   context?: HttpContext
 
@@ -456,7 +468,7 @@ export class PaiementService extends BaseService {
   /**
    * Path part for operation findByObjetAndIdObjetAndDatepaiementBetween
    */
-  static readonly FindByObjetAndIdObjetAndDatepaiementBetweenPath = '/tradeManagement/v1/paiement/findobjet-idObjet-date/{objet}?{idObjet}?{date1}?{date2}';
+  static readonly FindByObjetAndIdObjetAndDatepaiementBetweenPath = '/tradeManagement/v1/paiement/findobjet-idObjet-date/{objet}/{idObjet}/{date1}/{date2}';
 
   /**
    * rechercher un role.

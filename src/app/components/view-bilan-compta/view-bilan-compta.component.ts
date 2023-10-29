@@ -95,7 +95,6 @@ export class ViewBilanComptaComponent implements OnInit, OnChanges{
 
    find(){
 
-
     if (this.forUser){
       this.bilanComptaService.findByDayBetweenAndUser(this.date1, this.date2, this.userName).subscribe(
         value => {

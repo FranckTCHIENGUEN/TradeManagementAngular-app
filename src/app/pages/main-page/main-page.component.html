@@ -17,13 +17,7 @@
       </button>
     </mat-form-field>
   </div>
-  <div>
-    <div class="flex-stretch"></div>
-    <mat-icon class="mr-8">brightness_5</mat-icon>
-    <mat-slide-toggle [formControl]="toggleControl" class="mr-8">
-    </mat-slide-toggle>
-    <mat-icon>bedtime</mat-icon>
-  </div>
+
   <div>
 <!--    <button mat-icon-button  class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">-->
       <img [matMenuTriggerFor]="menu" class="img-fluid" src="{{userConnected.photo}}" style="height: 50px" alt="">
@@ -37,6 +31,13 @@
         <mat-icon>webhook</mat-icon>
         <span>Mon entreprise</span>
       </button>
+      <div>
+        <div class="flex-stretch"></div>
+<!--        <mat-icon class="mr-8">brightness_5</mat-icon>-->
+        <mat-slide-toggle [formControl]="toggleControl" class="mr-8"> Mode sombre
+        </mat-slide-toggle>
+<!--        <mat-icon>bedtime</mat-icon>-->
+      </div>
 <!--      <button *ngIf="permission.includes('UTILISATEUR: CRÉER_MODIFIER') || permission.includes('UTILISATEUR: FILTRER')-->
 <!--                                      || permission.includes('ROLE: LIRE')-->
 <!--                                      || permission.includes('UTILISATEUR: LIRE') || permission.includes('UTILISATEUR: CHANGER_ETAT') || permission.includes('UTILISATEUR: REMOVE_ROLE')-->

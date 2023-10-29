@@ -69,7 +69,7 @@ export const menuList = [
   },
   {
     role:['DEPENSE: CRÉER_MODIFIER', 'DEPENSE: SUPPRIMER','DEPENSE: LIRE', 'DEPENSE: FILTRER'],
-    label : 'Achats',
+    label : 'Depenses',
     routerLink : 'achats',
     icon : 'receipt'
   },

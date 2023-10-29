@@ -56,7 +56,7 @@ export class SaveDepenseDialogComponent implements OnInit{
     ]),
   })
 
-
+  permission: Array<string> = [];
   constructor(private formBuilder:FormBuilder,
               private depenseService:AppDepenseService,
               private catDepenseService:AppCategorieDepenseService,
@@ -64,7 +64,7 @@ export class SaveDepenseDialogComponent implements OnInit{
               private dialog: MatDialog,
               private dialogRef: MatDialogRef<SaveDepenseDialogComponent>,
               @Inject(MAT_DIALOG_DATA) private data: ArticleDto) {
-
+    this.getPermissions();
     // if (this.data != null){
     //   this.depense = this.data;
     //   this.saveForm.patchValue(this.depense)
@@ -77,7 +77,14 @@ export class SaveDepenseDialogComponent implements OnInit{
     // }
   }
 
-
+  private getPermissions(){
+    let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
+    utilisateurDto.roles?.forEach(role => {
+      role.permissions?.forEach(perm => {
+        this.permission?.push(perm.permisssion!);
+      })
+    })
+  }
   get matcher(): MyErrorStateMatcher {
     return this._matcher;
   }

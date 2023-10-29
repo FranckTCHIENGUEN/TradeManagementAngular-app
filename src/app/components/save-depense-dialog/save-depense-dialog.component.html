@@ -42,7 +42,7 @@
                       </span>
                     </mat-icon>
                   </button>
-                  <button matSuffix mat-raised-button color="primary" (click)="nouvelleCategorie()">Nouvelle Categorie</button>
+                  <button *ngIf=" permission.includes('CAT_DEPENSE: CRÉER_MODIFIER')" matSuffix mat-raised-button color="primary" (click)="nouvelleCategorie()">Nouvelle Categorie</button>
                 </mat-form-field>
               </div>
               <div class="row mt-2 justify-content-center">

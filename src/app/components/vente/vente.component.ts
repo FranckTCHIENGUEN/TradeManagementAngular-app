@@ -382,7 +382,6 @@ export class VenteComponent implements OnInit{
 
   getType(event: any) {
     this.type = event.value;
-    console.log(this.type)
   }
 
   calculmontant(i: number) {
@@ -513,7 +512,7 @@ export class VenteComponent implements OnInit{
         data.montantTotal = this.saveForm.controls.montantTotal.value as number;
         data.resteAdonner = this.saveForm.controls.resteAdonner.value as number;
         data.resteApayer = this.saveForm.controls.resteAPayer.value as number;
-        data.etatCommande = this.saveForm.controls.etatCommande.value as "EN_PREPARATION" | "RECEPTIONER" | "VALIDER" | "LIVRER";
+        data.etatCommande = this.saveForm.controls.etatCommande.value as "EN_PREPARATION" | "RECEPTIONNER" | "VALIDER" | "LIVRER";
         data.idEntreprise = userConnected.entreprise?.id as number;
 
         let paieEle:Array<PaiementDto> = [];
@@ -538,8 +537,6 @@ export class VenteComponent implements OnInit{
             resteAdonner: this.paiement.at(i).get('resteAdonner')?.value,
             comptePayeur : compte
           };
-
-
           paieEle.push(pai);
         }
 
@@ -585,7 +582,7 @@ export class VenteComponent implements OnInit{
         data.montantTotal = this.saveForm.controls.montantTotal.value as number;
         data.resteAdonner = this.saveForm.controls.resteAdonner.value as number;
         data.resteApayer = this.saveForm.controls.resteAPayer.value as number;
-        data.etatCommande = this.saveForm.controls.etatCommande.value as "EN_PREPARATION" | "RECEPTIONER" | "VALIDER" | "LIVRER";
+        data.etatCommande = this.saveForm.controls.etatCommande.value as "EN_PREPARATION" | "RECEPTIONNER" | "VALIDER" | "LIVRER";
         data.idEntreprise = userConnected.entreprise?.id as number;
 
         let paieEle:Array<PaiementDto> = [];
@@ -780,7 +777,8 @@ export class VenteComponent implements OnInit{
       }
     }
     if (present){
-      this.paiement.at(i).get('modePaiement')?.setValue('ESPECE');
+      let compte = this.paiement.at(i).get('comptePayeur')?.value as CompteClientDto;
+      return (compte.solde as number - this.paiement.at(i).get('montant')?.value) as number
     }
     if (this.paiement.at(i).get('modePaiement')?.value =='REMBOURSSEMENT'){
       let compte = this.paiement.at(i).get('comptePayeur')?.value as CompteClientDto
