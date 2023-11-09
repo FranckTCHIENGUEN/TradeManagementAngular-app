@@ -1,14 +1,18 @@
-import { Component } from '@angular/core';
+import {Component, HostBinding} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {MyErrorStateMatcher} from "../../ErrorMatcher";
 import {Router} from "@angular/router";
 import {AuthentificationRequest} from "../../../tm-api/src-api/models/authentification-request";
 import {AppAuthenticationService} from "../../../services/authentification/app-authentication.service";
+import {CookieService} from "ngx-cookie-service";
+import {OverlayContainer} from "@angular/cdk/overlay";
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
+  providers:
+    [CookieService],
 })
 export class LoginPageComponent {
   loginForm = this.formBuilder.nonNullable.group({
@@ -19,9 +23,12 @@ export class LoginPageComponent {
   matcher = new MyErrorStateMatcher();
   hide = true;
   error = false;
+  @HostBinding('class') className = '';
 
-
-  constructor(private formBuilder :FormBuilder, private router:Router,
+  constructor(private formBuilder :FormBuilder,
+              private router:Router,
+              private cookie: CookieService,
+              private overlay: OverlayContainer,
               private authService: AppAuthenticationService) {
     if (sessionStorage.getItem("userData")){
       sessionStorage.removeItem("userData")
@@ -32,6 +39,11 @@ export class LoginPageComponent {
   }
 
   ngOnInit(): void {
+
+    if (this.cookie.check("viewMode")){
+      this.className = this.cookie.get("viewMode");
+      this.overlay.getContainerElement().classList.add(this.cookie.get("viewMode"));
+    }
   }
 
   formSubmit() {

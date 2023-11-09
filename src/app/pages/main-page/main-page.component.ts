@@ -12,13 +12,14 @@ import {ViewenterpriseDialogComponent} from "../../components/viewenterprise-dia
 import {FormControl} from "@angular/forms";
 import {OverlayContainer} from "@angular/cdk/overlay";
 import {AppAuthenticationService} from "../../../services/authentification/app-authentication.service";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
-  // providers:
-  //   [CookieService],
+  providers:
+    [CookieService],
 })
 export class MainPageComponent {
   // userConnected:UtilisateursDto =  {};
@@ -40,6 +41,7 @@ export class MainPageComponent {
 
   constructor(private dataTransfert:DataLinkTransfertService,
               private router: Router,
+              private cookie: CookieService,
               private authenservice: AppAuthenticationService,
               private overlay: OverlayContainer,
               private dialog: MatDialog,) {
@@ -56,15 +58,25 @@ export class MainPageComponent {
   }
 
   ngOnInit(): void {
-
-    this.toggleControl.valueChanges.subscribe((darkMode) => {
-      const darkClassName = 'my-dark-theme';
-      this.className = darkMode ? darkClassName : '';
-      if (darkMode) {
-        this.overlay.getContainerElement().classList.add(darkClassName);
-      } else {
-        this.overlay.getContainerElement().classList.remove(darkClassName);
+    if (this.cookie.check("viewMode")){
+      this.className = this.cookie.get("viewMode");
+      this.overlay.getContainerElement().classList.add(this.cookie.get("viewMode"));
+      if (this.cookie.get("viewMode")=="my-dark-theme"){
+        this.toggleControl.patchValue(true)
       }
+    }
+    this.toggleControl.valueChanges.subscribe((darkMode) => {
+
+        const darkClassName = 'my-dark-theme';
+        this.className = darkMode ? darkClassName : '';
+        this.cookie.set("viewMode",darkMode ? darkClassName : '', 30)
+        if (darkMode) {
+          this.overlay.getContainerElement().classList.add(darkClassName);
+        }
+        else {
+          this.overlay.getContainerElement().classList.remove(darkClassName);
+        }
+
     });
 
     if (window.innerWidth < 768) {
