@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddCategorieDialogComponent } from './add-categorie-dialog.component';
+import {AddCategorieDialogComponent} from './add-categorie-dialog.component';
 
 describe('AddCategorieDialogComponent', () => {
   let component: AddCategorieDialogComponent;
