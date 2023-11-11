@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@import "src/styles/themeProp";
+//@import "src/styles/themeProp";
 
 .menuLabel{
   margin-left: 0.5rem;
@@ -14,26 +14,26 @@
 
 .active-link{
   //opacity: 80%;
-  background-color: mat.get-color-from-palette($primary-palette);
-  //color: mat.get-color-from-palette($accent-palette);
+  background-color: mat.get-color-from-palette( var(--primary-palette) );
+  //color: mat.get-color-from-palette( var(--accent-palette) );
   color: white;
   font-weight: bold;
 }
 .active-link:hover{
-  background-color: mat.get-color-from-palette($primary-palette);
-  color: mat.get-color-from-palette($primary-palette);
+  background-color: mat.get-color-from-palette( var(--primary-palette) );
+  color: mat.get-color-from-palette( var(--primary-palette) );
   opacity: 88%;
   //font-weight: bold;
 }
 .link:hover{
-  background-color: mat.get-color-from-palette($warn-palette);
+  background-color: mat.get-color-from-palette( var(--warn-palette) );
   color: white;
   //opacity: 88%;
   //font-weight: bold;
 }
 
 .inactive-link:hover{
-  background-color: mat.get-color-from-palette($accent-palette);
+  background-color: mat.get-color-from-palette( var(--accent-palette) );
   //font-weight: bold;
   //text-decoration: underline;
 }

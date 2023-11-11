@@ -2,8 +2,8 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 /* You can add global styles to this file, and also import other style files */
-@import "styles/themeProp";
-@import "styles/custom-theme";
+//@import "styles/themeProp";
+//@import "styles/custom-theme";
 /* Importing Bootstrap SCSS file. */
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "../node_modules/bootstrap/scss/functions";
@@ -60,10 +60,10 @@ h1{
 
 .Subactivebutton{
   border-radius: 6px;
-  background-color: mat.get-color-from-palette($primary-palette);
+  background-color: mat.get-color-from-palette( var(--primary-palette) );
 }
 .errorForm{
-  color: mat.get-color-from-palette($warn-palette);
+  color: mat.get-color-from-palette( var(--warn-palette) );
 }
 
 .secondLink:active{
@@ -93,13 +93,13 @@ h1{
   margin-top: 1rem;
   justify-content: space-evenly;
   border-bottom: solid;
-  border-bottom-color: mat.get-color-from-palette($primary-palette);
+  border-bottom-color: mat.get-color-from-palette( var(--primary-palette) );
 }
 
 .display-subtitle{
   width: 35%;
   border-right: solid;
-  border-bottom-color: mat.get-color-from-palette($accent-palette);
+  border-bottom-color: mat.get-color-from-palette( var(--accent-palette) );
 }
 
 .display-subtitle2{
