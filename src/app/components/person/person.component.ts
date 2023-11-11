@@ -1,9 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ListViewDetailDialogComponent} from "../list-view-detail-dialog/list-view-detail-dialog.component";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {SavePersonDialogComponent} from "../save-person-dialog/save-person-dialog.component";
 import {ClientAppServiceService} from "../../../services/clientAppService/client-app-service.service";
-import {ClientDto} from "../../../tm-api/src-api/models/client-dto";
 import {PersonViewDetailComponent} from "../person-view-detail/person-view-detail.component";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";

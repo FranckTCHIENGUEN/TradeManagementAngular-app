@@ -12,7 +12,6 @@ import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-del
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data-link-transfert.service";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-save-product-dialog',

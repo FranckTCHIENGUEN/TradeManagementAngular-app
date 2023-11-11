@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { GestEntreprisePageComponent } from './gest-entreprise-page.component';
-import {CommandeFournisseurComponent} from "../commande-fournisseur/commande-fournisseur.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {GestEntreprisePageComponent} from './gest-entreprise-page.component';
 
 const routes: Routes = [
   {

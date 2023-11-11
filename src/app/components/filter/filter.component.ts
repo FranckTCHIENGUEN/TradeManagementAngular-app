@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
-import {objetFiltreStat} from "../filtre-stat/filtre-stat.component";
 import {CommandSearch} from "../../../tm-api/src-api/models/command-search";
 import {map, Observable} from "rxjs";
 import {ClientDto} from "../../../tm-api/src-api/models/client-dto";

@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
-import { Permissions } from './permissions';
+import {Permissions} from './permissions';
+
 export interface RoleDto {
   id?: number;
   idEntreprise?: number;

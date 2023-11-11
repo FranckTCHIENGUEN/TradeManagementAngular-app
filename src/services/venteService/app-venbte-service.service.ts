@@ -1,9 +1,7 @@
-import { Injectable } from '@angular/core';
-import {DepenseService} from "../../tm-api/src-api/services/depense.service";
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {VenteService} from "../../tm-api/src-api/services/vente.service";
 import {VenteDto} from "../../tm-api/src-api/models/vente-dto";
-import {LigneCommandeClientDto} from "../../tm-api/src-api/models/ligne-commande-client-dto";
 import {LigneVenteDto} from "../../tm-api/src-api/models/ligne-vente-dto";
 
 @Injectable({

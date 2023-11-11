@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { DashbordPageComponent } from './dashbord-page.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {DashbordPageComponent} from './dashbord-page.component';
 
 const routes: Routes = [{ path: '', component: DashbordPageComponent }];
 

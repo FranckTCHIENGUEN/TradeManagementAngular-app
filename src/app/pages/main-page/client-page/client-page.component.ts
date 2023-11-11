@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {PersonSearchDto} from "../../../../tm-api/src-api/models/person-search-dto";
 import {UtilisateurDto} from "../../../../tm-api/src-api/models/utilisateur-dto";
-import {Permissions} from "../../../../tm-api/src-api/models/permissions";
 
 @Component({
   selector: 'app-client-page',

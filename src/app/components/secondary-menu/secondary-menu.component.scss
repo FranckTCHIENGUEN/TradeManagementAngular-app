@@ -1,12 +1,12 @@
-@use '@angular/material' as mat;
-//@import "src/styles/themeProp";
+@use '@angular/material' as mat ;
+/* @import "src/styles/themeProp"; */
 
 .example-button-row {
   display: table-cell;
   width: 100%;
 }
 .mat-divider {
-  border-top-color: mat.get-color-from-palette( var(--primary-palette) );
+  border-top-color:  var(--primary-palette) ;
 }
 .example-button-row .mat-button-base {
   margin: 8px 8px 8px 0;
@@ -17,16 +17,16 @@
 }
 
 .active-link{
-  //background-color: mat.get-color-from-palette( var(--warn-palette) );
+  /* background-color: mat.get-color-from-palette( var(--warn-palette) ); */
   background-color: red;
   color: white;
 }
 .active-link:hover{
-  //background-color: mat.get-color-from-palette( var(--warn-palette) );
+  // background-color: mat.get-color-from-palette( var(--warn-palette) );
   background-color: red;
   opacity: 88%;
   font-weight: bold;
-  //text-decoration: underline;
+  // text-decoration: underline;
 }
 
 .title{
@@ -35,7 +35,7 @@
 }
 
 .inactive-link:hover{
-  color: mat.get-color-from-palette( var(--accent-palette) );
-  //font-weight: bold;
-  //text-decoration: underline;
+  color: var(--accent-palette) ;
+  // font-weight: bold;
+  // text-decoration: underline;
 }

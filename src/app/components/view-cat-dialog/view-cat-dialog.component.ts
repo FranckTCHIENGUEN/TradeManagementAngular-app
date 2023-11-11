@@ -1,10 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {AppCategorieProduitService} from "../../../services/categorieProduit/app-categorie-produit.service";
-import {CategoryDto} from "../../../tm-api/src-api/models/category-dto";
 import {SaveProductDialogComponent} from "../save-product-dialog/save-product-dialog.component";
 import {AddCategorieDialogComponent} from "../add-categorie-dialog/add-categorie-dialog.component";
-import {SavePersonDialogComponent} from "../save-person-dialog/save-person-dialog.component";
 import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 import {AppCatergorieServiceService} from "../../../services/categoriService/app-catergorie-service.service";

@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {ListViewDetailDialogComponent} from "../list-view-detail-dialog/list-view-detail-dialog.component";
 import {ProductDetailDialogComponent} from "../product-detail-dialog/product-detail-dialog.component";
 import {ServiceDetailDialogComponent} from "../service-detail-dialog/service-detail-dialog.component";
 

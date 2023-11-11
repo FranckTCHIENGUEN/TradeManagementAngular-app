@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {UtilisateurDto} from "../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({

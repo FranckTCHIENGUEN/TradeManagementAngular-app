@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Observable, Observer} from "rxjs";
-import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data-link-transfert.service";
 import {menuList} from "../../../menuList";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";

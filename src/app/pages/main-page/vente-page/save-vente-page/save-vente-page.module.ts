@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { SaveVentePageRoutingModule } from './save-vente-page-routing.module';
-import { SaveVentePageComponent } from './save-vente-page.component';
+import {SaveVentePageRoutingModule} from './save-vente-page-routing.module';
+import {SaveVentePageComponent} from './save-vente-page.component';
 import {SaveCommandeClientModule} from "../../command-page/save-commande-client/save-commande-client.module";
 
 

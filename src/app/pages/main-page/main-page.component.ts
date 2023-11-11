@@ -2,9 +2,7 @@ import {Component, EventEmitter, HostBinding, HostListener, ViewChild} from '@an
 import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data-link-transfert.service";
 import {MatSidenav} from "@angular/material/sidenav";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
-import {AppCommandClientService} from "../../../services/commandClientService/app-command-client.service";
 import {Router} from "@angular/router";
-import {ConfirmDialogComponent} from "../../components/confirm-dialog/confirm-dialog.component";
 import {ConfirmDeleteDialogComponent} from "../../components/confirm-delete-dialog/confirm-delete-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {PersonViewDetailComponent} from "../../components/person-view-detail/person-view-detail.component";

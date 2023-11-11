@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
 import {UtilisateurService} from "../../tm-api/src-api/services/utilisateur.service";
 import {UtilisateurDto} from "../../tm-api/src-api/models/utilisateur-dto";
 

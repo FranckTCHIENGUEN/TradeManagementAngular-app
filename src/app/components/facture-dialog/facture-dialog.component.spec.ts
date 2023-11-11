@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FactureDialogComponent } from './facture-dialog.component';
+import {FactureDialogComponent} from './facture-dialog.component';
 
 describe('FactureDialogComponent', () => {
   let component: FactureDialogComponent;

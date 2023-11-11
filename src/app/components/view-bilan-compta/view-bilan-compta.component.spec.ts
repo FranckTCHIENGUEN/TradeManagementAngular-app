@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ViewBilanComptaComponent } from './view-bilan-compta.component';
+import {ViewBilanComptaComponent} from './view-bilan-compta.component';
 
 describe('ViewBilanComptaComponent', () => {
   let component: ViewBilanComptaComponent;

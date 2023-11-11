@@ -1,9 +1,8 @@
 import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {MatPaginator} from "@angular/material/paginator";
-import {MatTableDataSource, MatTableModule} from "@angular/material/table";
-import {MatSort, MatSortModule, Sort} from "@angular/material/sort";
-import {PeriodicElement} from "./periodicElecment";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatSort, Sort} from "@angular/material/sort";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ListViewDetailDialogComponent} from "../list-view-detail-dialog/list-view-detail-dialog.component";

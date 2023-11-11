@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ViewCatDialogComponent } from './view-cat-dialog.component';
+import {ViewCatDialogComponent} from './view-cat-dialog.component';
 
 describe('ViewCatDialogComponent', () => {
   let component: ViewCatDialogComponent;

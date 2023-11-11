@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { SaveCommandeClientComponent } from './save-commande-client.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {SaveCommandeClientComponent} from './save-commande-client.component';
 
 const routes: Routes = [{ path: '', component: SaveCommandeClientComponent }];
 

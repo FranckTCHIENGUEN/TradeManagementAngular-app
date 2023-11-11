@@ -1,17 +1,17 @@
 /* tslint:disable */
 /* eslint-disable */
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
-import { BaseService } from '../base-service';
-import { ApiConfiguration } from '../api-configuration';
-import { StrictHttpResponse } from '../strict-http-response';
-import { RequestBuilder } from '../request-builder';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpContext, HttpResponse} from '@angular/common/http';
+import {BaseService} from '../base-service';
+import {ApiConfiguration} from '../api-configuration';
+import {StrictHttpResponse} from '../strict-http-response';
+import {RequestBuilder} from '../request-builder';
+import {Observable} from 'rxjs';
+import {filter, map} from 'rxjs/operators';
 
-import { CommandeFournisseurDto } from '../models/commande-fournisseur-dto';
-import { HistoriqueArticleDto } from '../models/historique-article-dto';
-import { LigneCommandeFournisseurDto } from '../models/ligne-commande-fournisseur-dto';
+import {CommandeFournisseurDto} from '../models/commande-fournisseur-dto';
+import {HistoriqueArticleDto} from '../models/historique-article-dto';
+import {LigneCommandeFournisseurDto} from '../models/ligne-commande-fournisseur-dto';
 
 
 /**

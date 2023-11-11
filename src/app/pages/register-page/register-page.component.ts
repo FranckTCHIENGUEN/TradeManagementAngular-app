@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 import {MyErrorStateMatcher} from "../../ErrorMatcher";
 import {AppUserService} from "../../../services/appUserServices/app-user.service";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {confirmPassValidator, createPasswordStrengthValidator} from "../../../validation";
 

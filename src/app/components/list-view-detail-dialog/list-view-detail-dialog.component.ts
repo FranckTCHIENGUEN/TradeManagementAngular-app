@@ -1,11 +1,10 @@
-import {Component, Inject, Input} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {AppVenbteServiceService} from "../../../services/venteService/app-venbte-service.service";
 import {
   AppCommandFournisseurService
 } from "../../../services/commandFournisseurService/app-command-fournisseur.service";
 import {AppCommandClientService} from "../../../services/commandClientService/app-command-client.service";
-import {SavePersonDialogComponent} from "../save-person-dialog/save-person-dialog.component";
 import {AddPaiementDialogComponent} from "../add-paiement-dialog/add-paiement-dialog.component";
 import {AddLigneCommandeComponent} from "../add-ligne-commande/add-ligne-commande.component";
 import {UpdateEtatDialogComponent} from "../update-etat-dialog/update-etat-dialog.component";

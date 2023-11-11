@@ -13,8 +13,6 @@ import {AppServiceService} from "../../../services/serviceService/app-service.se
 import {AppProductService} from "../../../services/productService/app-product.service";
 import {SaveServiceDialogComponent} from "../save-service-dialog/save-service-dialog.component";
 import {SaveProductDialogComponent} from "../save-product-dialog/save-product-dialog.component";
-import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
-import {LigneVenteDto} from "../../../tm-api/src-api/models/ligne-vente-dto";
 
 @Component({
   selector: 'app-add-ligne-commande',

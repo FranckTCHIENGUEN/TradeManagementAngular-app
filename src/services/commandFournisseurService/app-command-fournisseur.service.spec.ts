@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { AppCommandFournisseurService } from './app-command-fournisseur.service';
+import {AppCommandFournisseurService} from './app-command-fournisseur.service';
 
 describe('AppCommandFournisseurService', () => {
   let service: AppCommandFournisseurService;

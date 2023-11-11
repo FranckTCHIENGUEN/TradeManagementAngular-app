@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { AchatPageRoutingModule } from './achat-page-routing.module';
-import { AchatPageComponent } from './achat-page.component';
-import {AppModule} from "../../../../app.module";
+import {AchatPageRoutingModule} from './achat-page-routing.module';
+import {AchatPageComponent} from './achat-page.component';
 import {FiltreStatComponent} from "../../../../components/filtre-stat/filtre-stat.component";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatFormFieldModule} from "@angular/material/form-field";

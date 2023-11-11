@@ -1,14 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { DashbordPageRoutingModule } from './dashbord-page-routing.module';
-import { DashbordPageComponent } from './dashbord-page.component';
+import {DashbordPageRoutingModule} from './dashbord-page-routing.module';
+import {DashbordPageComponent} from './dashbord-page.component';
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
-import {ListCommandeClientModule} from "../command-page/list-commande-client/list-commande-client.module";
 import {ListeVentePageModule} from "../vente-page/liste-vente-page/liste-vente-page.module";
 
 

@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { CommandPageComponent } from './command-page.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {CommandPageComponent} from './command-page.component';
 
 const routes: Routes = [
   {

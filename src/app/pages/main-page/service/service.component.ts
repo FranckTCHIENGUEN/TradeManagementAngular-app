@@ -1,10 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ArticleDto} from "../../../../tm-api/src-api/models/article-dto";
 import {MatDialog} from "@angular/material/dialog";
-import {AppProductService} from "../../../../services/productService/app-product.service";
-import {SaveProductDialogComponent} from "../../../components/save-product-dialog/save-product-dialog.component";
 import {ViewCatDialogComponent} from "../../../components/view-cat-dialog/view-cat-dialog.component";
-import {ServiceDto} from "../../../../tm-api/src-api/models/service-dto";
 import {AppServiceService} from "../../../../services/serviceService/app-service.service";
 import {StatServiceDto} from "../../../../tm-api/src-api/models/stat-service-dto";
 import {SaveServiceDialogComponent} from "../../../components/save-service-dialog/save-service-dialog.component";

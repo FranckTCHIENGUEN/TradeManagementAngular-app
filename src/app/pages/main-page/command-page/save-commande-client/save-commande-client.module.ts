@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { SaveCommandeClientRoutingModule } from './save-commande-client-routing.module';
-import { SaveCommandeClientComponent } from './save-commande-client.component';
+import {SaveCommandeClientRoutingModule} from './save-commande-client-routing.module';
+import {SaveCommandeClientComponent} from './save-commande-client.component';
 import {VenteComponent} from "../../../../components/vente/vente.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";

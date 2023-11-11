@@ -1,7 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
-import { AdresseDto } from './adresse-dto';
-import { CompteClientDto } from './compte-client-dto';
+import {AdresseDto} from './adresse-dto';
+import {CompteClientDto} from './compte-client-dto';
+
 export interface PersonSearchDto {
   adresse?: AdresseDto;
   compteClientDto?: CompteClientDto;

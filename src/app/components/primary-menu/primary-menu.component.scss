@@ -1,5 +1,5 @@
-@use '@angular/material' as mat;
-//@import "src/styles/themeProp";
+@use '@angular/material' as mat ;
+/* @import "src/styles/themeProp"; */
 
 .menuLabel{
   margin-left: 0.5rem;
@@ -13,27 +13,27 @@
 }
 
 .active-link{
-  //opacity: 80%;
-  background-color: mat.get-color-from-palette( var(--primary-palette) );
-  //color: mat.get-color-from-palette( var(--accent-palette) );
+  /* opacity: 80%; */
+  background-color:  var(--primary-palette);
+  /* color: mat.get-color-from-palette( var(--accent-palette) ); */
   color: white;
   font-weight: bold;
 }
 .active-link:hover{
-  background-color: mat.get-color-from-palette( var(--primary-palette) );
-  color: mat.get-color-from-palette( var(--primary-palette) );
+  background-color: var(--primary-palette) ;
+  color: var(--primary-palette) ;
   opacity: 88%;
   //font-weight: bold;
 }
 .link:hover{
-  background-color: mat.get-color-from-palette( var(--warn-palette) );
+  background-color: var(--warn-palette) ;
   color: white;
   //opacity: 88%;
   //font-weight: bold;
 }
 
 .inactive-link:hover{
-  background-color: mat.get-color-from-palette( var(--accent-palette) );
+  background-color: var(--accent-palette) ;
   //font-weight: bold;
   //text-decoration: underline;
 }

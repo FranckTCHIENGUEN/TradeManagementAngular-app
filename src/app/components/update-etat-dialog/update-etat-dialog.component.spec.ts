@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UpdateEtatDialogComponent } from './update-etat-dialog.component';
+import {UpdateEtatDialogComponent} from './update-etat-dialog.component';
 
 describe('UpdateEtatDialogComponent', () => {
   let component: UpdateEtatDialogComponent;

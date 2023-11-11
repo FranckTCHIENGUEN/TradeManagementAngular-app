@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { AppComptaServiceService } from './app-compta-service.service';
+import {AppComptaServiceService} from './app-compta-service.service';
 
 describe('AppComptaServiceService', () => {
   let service: AppComptaServiceService;

@@ -3,9 +3,6 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angula
 import {FormBuilder, Validators} from "@angular/forms";
 import {ArticleDto} from "../../../tm-api/src-api/models/article-dto";
 import {MyErrorStateMatcher} from "../../ErrorMatcher";
-import {CategoryDto} from "../../../tm-api/src-api/models/category-dto";
-import {AppProductService} from "../../../services/productService/app-product.service";
-import {AppCategorieProduitService} from "../../../services/categorieProduit/app-categorie-produit.service";
 import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data-link-transfert.service";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";

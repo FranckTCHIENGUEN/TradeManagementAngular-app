@@ -1,9 +1,6 @@
 import {Component, Inject} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder} from "@angular/forms";
 import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data-link-transfert.service";
-import {ClientAppServiceService} from "../../../services/clientAppService/client-app-service.service";
-import {AppFournisseurService} from "../../../services/fournisseurService/app-fournisseur.service";
-import {AppUserService} from "../../../services/appUserServices/app-user.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {
   AppCommandFournisseurService

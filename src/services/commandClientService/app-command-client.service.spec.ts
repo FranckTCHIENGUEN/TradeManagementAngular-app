@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { AppCommandClientService } from './app-command-client.service';
+import {AppCommandClientService} from './app-command-client.service';
 
 describe('AppCommandClientService', () => {
   let service: AppCommandClientService;

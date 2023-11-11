@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ComptaPageComponent } from './compta-page.component';
+import {ComptaPageComponent} from './compta-page.component';
 
 describe('ComptaPageComponent', () => {
   let component: ComptaPageComponent;

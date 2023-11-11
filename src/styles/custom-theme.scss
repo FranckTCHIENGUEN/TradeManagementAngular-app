@@ -29,6 +29,6 @@ $my-custom-dark-theme: mat.define-dark-theme((
 
 
 .my-dark-theme {
-  @include mat.all-component-themes($my-custom-dark-theme);
-  @include mat.strong-focus-indicators-theme($my-custom-dark-theme);
+  @include mat.all-component-colors($my-custom-dark-theme);
+  @include mat.strong-focus-indicators-color($my-custom-dark-theme);
 }

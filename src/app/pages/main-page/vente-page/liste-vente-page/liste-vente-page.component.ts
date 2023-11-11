@@ -6,7 +6,6 @@ import {Column} from "../../../../components/list-view/list-view.component";
 import {DatePipe} from "@angular/common";
 import {CommandSearch} from "../../../../../tm-api/src-api/models/command-search";
 import {AppSearchCommandService} from "../../../../../services/searchCommand/app-search-command.service";
-import {CommandeClientDto} from "../../../../../tm-api/src-api/models/commande-client-dto";
 import {UtilisateurDto} from "../../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({

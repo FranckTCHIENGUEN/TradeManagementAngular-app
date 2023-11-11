@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { EtatFinancierPageRoutingModule } from './etat-financier-page-routing.module';
-import { EtatFinancierPageComponent } from './etat-financier-page.component';
+import {EtatFinancierPageRoutingModule} from './etat-financier-page-routing.module';
+import {EtatFinancierPageComponent} from './etat-financier-page.component';
 import {AchatPageModule} from "../achat-page/achat-page.module";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";

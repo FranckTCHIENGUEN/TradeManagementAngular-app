@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AppRoleService} from "../../../services/roleService/app-role.service";
 import {RoleDto} from "../../../tm-api/src-api/models/role-dto";
 import {Permissions} from "../../../tm-api/src-api/models/permissions";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {SavePersonDialogComponent} from "../save-person-dialog/save-person-dialog.component";
 import {SaveRoleDialogComponent} from "../save-role-dialog/save-role-dialog.component";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 

@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
-import { BillanComptableDto } from './billan-comptable-dto';
+import {BillanComptableDto} from './billan-comptable-dto';
+
 export interface ComptaGlobalDto {
   argentEnCaisse?: number;
   avance?: number;

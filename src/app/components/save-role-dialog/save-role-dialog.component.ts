@@ -1,22 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-import {AppServiceService} from "../../../services/serviceService/app-service.service";
-import {AppCatergorieServiceService} from "../../../services/categoriService/app-catergorie-service.service";
-import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data-link-transfert.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {ArticleDto} from "../../../tm-api/src-api/models/article-dto";
 import {AppRoleService} from "../../../services/roleService/app-role.service";
-import {ServiceDto} from "../../../tm-api/src-api/models/service-dto";
 import {RoleDto} from "../../../tm-api/src-api/models/role-dto";
 import {Permissions} from "../../../tm-api/src-api/models/permissions";
 import {MyErrorStateMatcher} from "../../ErrorMatcher";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
-import {CategoriServiceDto} from "../../../tm-api/src-api/models/categori-service-dto";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
-import {MatLegacyListOption, MatLegacySelectionList} from "@angular/material/legacy-list";
-import {PaiementDto} from "../../../tm-api/src-api/models/paiement-dto";
-import {MatListOption, MatSelectionList} from "@angular/material/list";
-import {SelectionModel} from "@angular/cdk/collections";
+import {MatSelectionList} from "@angular/material/list";
 
 @Component({
   selector: 'app-save-role-dialog',

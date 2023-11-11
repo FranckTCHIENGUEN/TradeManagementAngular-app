@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ListCommandeClientComponent } from './list-commande-client.component';
+import {ListCommandeClientComponent} from './list-commande-client.component';
 
 describe('ListCommandeClientComponent', () => {
   let component: ListCommandeClientComponent;

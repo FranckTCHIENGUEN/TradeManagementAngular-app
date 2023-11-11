@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
-import { CategoryDto } from './category-dto';
+import {CategoryDto} from './category-dto';
+
 export interface ArticleDto {
   category?: CategoryDto;
   codeArticle?: string;

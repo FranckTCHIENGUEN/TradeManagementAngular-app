@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { GestEntreprisePageRoutingModule } from './gest-entreprise-page-routing.module';
-import { GestEntreprisePageComponent } from './gest-entreprise-page.component';
+import {GestEntreprisePageRoutingModule} from './gest-entreprise-page-routing.module';
+import {GestEntreprisePageComponent} from './gest-entreprise-page.component';
 import {MatButtonModule} from "@angular/material/button";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatExpansionModule} from "@angular/material/expansion";

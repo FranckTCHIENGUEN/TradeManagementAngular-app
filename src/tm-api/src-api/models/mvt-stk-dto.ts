@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import { ArticleDto } from './article-dto';
+import {ArticleDto} from './article-dto';
 
 /**
  * le type de mouvement accepté est ENTREE/SORTIE/CORRECTION_NEG/CORRECTION_POS

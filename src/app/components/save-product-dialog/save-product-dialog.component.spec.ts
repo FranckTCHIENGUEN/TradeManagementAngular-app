@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SaveProductDialogComponent } from './save-product-dialog.component';
+import {SaveProductDialogComponent} from './save-product-dialog.component';
 
 describe('SaveProductDialogComponent', () => {
   let component: SaveProductDialogComponent;

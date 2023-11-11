@@ -1,23 +1,14 @@
-import {Component, Inject, Input} from '@angular/core';
-import {
-  AbstractControl,
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  ValidationErrors,
-  Validators,
-  ɵElement
-} from "@angular/forms";
+import {Component, Inject} from '@angular/core';
+import {FormArray, FormBuilder, Validators} from "@angular/forms";
 import {MyErrorStateMatcher} from "../../ErrorMatcher";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ClientAppServiceService} from "../../../services/clientAppService/client-app-service.service";
-import {ClientDto} from "../../../tm-api/src-api/models/client-dto";
 import {AdresseDto, ContactDto, UtilisateurDto} from "../../../tm-api/src-api/models";
 import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data-link-transfert.service";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 import {AppFournisseurService} from "../../../services/fournisseurService/app-fournisseur.service";
 import {AppUserService} from "../../../services/appUserServices/app-user.service";
-import {passCorect, userExistsValidator} from "../../../validation";
+import {userExistsValidator} from "../../../validation";
 
 @Component({
   selector: 'app-save-person-dialog',

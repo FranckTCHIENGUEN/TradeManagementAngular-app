@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SaveDepenseDialogComponent } from './save-depense-dialog.component';
+import {SaveDepenseDialogComponent} from './save-depense-dialog.component';
 
 describe('SaveDepenseDialogComponent', () => {
   let component: SaveDepenseDialogComponent;

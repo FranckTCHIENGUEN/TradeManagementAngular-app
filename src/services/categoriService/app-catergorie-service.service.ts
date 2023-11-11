@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {CategorieServiceService} from "../../tm-api/src-api/services/categorie-service.service";
 import {CategoriServiceDto} from "../../tm-api/src-api/models/categori-service-dto";
 import {Observable} from "rxjs";

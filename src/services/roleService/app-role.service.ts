@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {RoleService} from "../../tm-api/src-api/services/role.service";
 import {Observable} from "rxjs";
-import {UtilisateurDto} from "../../tm-api/src-api/models/utilisateur-dto";
 import {RoleDto} from "../../tm-api/src-api/models/role-dto";
 import {Permissions} from "../../tm-api/src-api/models/permissions";
 

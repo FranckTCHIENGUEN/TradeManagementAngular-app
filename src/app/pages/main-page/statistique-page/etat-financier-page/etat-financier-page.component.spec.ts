@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EtatFinancierPageComponent } from './etat-financier-page.component';
+import {EtatFinancierPageComponent} from './etat-financier-page.component';
 
 describe('EtatFinancierPageComponent', () => {
   let component: EtatFinancierPageComponent;

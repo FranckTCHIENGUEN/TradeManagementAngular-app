@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { BilanJournalierPageRoutingModule } from './bilan-journalier-page-routing.module';
-import { BilanJournalierPageComponent } from './bilan-journalier-page.component';
-import {AppModule} from "../../../../app.module";
+import {BilanJournalierPageRoutingModule} from './bilan-journalier-page-routing.module';
+import {BilanJournalierPageComponent} from './bilan-journalier-page.component';
 import {ViewBilanComptaComponent} from "../../../../components/view-bilan-compta/view-bilan-compta.component";
 import {ListeVentePageModule} from "../../vente-page/liste-vente-page/liste-vente-page.module";
 import {FormsModule} from "@angular/forms";

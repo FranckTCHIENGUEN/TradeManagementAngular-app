@@ -1,5 +1,4 @@
 import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
-import {VenteDto} from "../../../../tm-api/src-api/models/vente-dto";
 import {Column} from "../../../components/list-view/list-view.component";
 import {DatePipe} from "@angular/common";
 import {DataLinkTransfertService} from "../../../../services/dataLinkTransfert/Data-link-transfert.service";
@@ -7,7 +6,6 @@ import {AppDepenseService} from "../../../../services/depenseService/app-depense
 import {DepensesDto} from "../../../../tm-api/src-api/models/depenses-dto";
 import {ViewCatDialogComponent} from "../../../components/view-cat-dialog/view-cat-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {SaveProductDialogComponent} from "../../../components/save-product-dialog/save-product-dialog.component";
 import {SaveDepenseDialogComponent} from "../../../components/save-depense-dialog/save-depense-dialog.component";
 import {UtilisateurDto} from "../../../../tm-api/src-api/models/utilisateur-dto";
 

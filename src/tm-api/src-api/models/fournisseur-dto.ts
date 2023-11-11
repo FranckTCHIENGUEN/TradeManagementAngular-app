@@ -1,7 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
-import { AdresseDto } from './adresse-dto';
-import { ContactDto } from './contact-dto';
+import {AdresseDto} from './adresse-dto';
+import {ContactDto} from './contact-dto';
+
 export interface FournisseurDto {
   adresse?: AdresseDto;
   contactDto?: ContactDto;

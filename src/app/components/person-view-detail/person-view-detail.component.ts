@@ -9,7 +9,6 @@ import {FormControl} from "@angular/forms";
 import {SavePersonDialogComponent} from "../save-person-dialog/save-person-dialog.component";
 import {RoleDto} from "../../../tm-api/src-api/models/role-dto";
 import {Permissions} from "../../../tm-api/src-api/models/permissions";
-import {MatMenuTrigger} from "@angular/material/menu";
 import {AddRoleToUserComponent} from "../add-role-to-user/add-role-to-user.component";
 import {fromEvent, Subscription, take} from "rxjs";
 import {Overlay, OverlayRef} from "@angular/cdk/overlay";

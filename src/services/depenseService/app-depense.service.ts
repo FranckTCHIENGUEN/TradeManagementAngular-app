@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {DepenseService} from "../../tm-api/src-api/services/depense.service";
 import {Observable} from "rxjs";
 import {DepensesDto} from "../../tm-api/src-api/models/depenses-dto";

@@ -1,16 +1,13 @@
 import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
-import {VenteDto} from "../../../../../tm-api/src-api/models/vente-dto";
 import {Column} from "../../../../components/list-view/list-view.component";
 import {DatePipe} from "@angular/common";
 import {DataLinkTransfertService} from "../../../../../services/dataLinkTransfert/Data-link-transfert.service";
-import {AppVenbteServiceService} from "../../../../../services/venteService/app-venbte-service.service";
 import {CommandeFournisseurDto} from "../../../../../tm-api/src-api/models/commande-fournisseur-dto";
 import {
   AppCommandFournisseurService
 } from "../../../../../services/commandFournisseurService/app-command-fournisseur.service";
 import {AppSearchCommandService} from "../../../../../services/searchCommand/app-search-command.service";
 import {CommandSearch} from "../../../../../tm-api/src-api/models/command-search";
-import {CommandeClientDto} from "../../../../../tm-api/src-api/models/commande-client-dto";
 import {UtilisateurDto} from "../../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ListViewDetailDialogComponent } from './list-view-detail-dialog.component';
+import {ListViewDetailDialogComponent} from './list-view-detail-dialog.component';
 
 describe('ListViewDetailDialogComponent', () => {
   let component: ListViewDetailDialogComponent;

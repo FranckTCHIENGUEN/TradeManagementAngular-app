@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ClientService} from "../../tm-api/src-api/services/client.service";
 import {ClientDto} from "../../tm-api/src-api/models/client-dto";
 import {Observable} from "rxjs";

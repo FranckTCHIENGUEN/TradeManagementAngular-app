@@ -2,16 +2,13 @@ import {Component, Inject} from '@angular/core';
 import {ClientDto} from "../../../tm-api/src-api/models/client-dto";
 import {CompteClientDto} from "../../../tm-api/src-api/models/compte-client-dto";
 import {map, Observable} from "rxjs";
-import {FournisseurDto} from "../../../tm-api/src-api/models/fournisseur-dto";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ArticleDto} from "../../../tm-api/src-api/models/article-dto";
-import {StatServiceDto} from "../../../tm-api/src-api/models/stat-service-dto";
 import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data-link-transfert.service";
 import {
   AppCommandFournisseurService
 } from "../../../services/commandFournisseurService/app-command-fournisseur.service";
 import {AppCommandClientService} from "../../../services/commandClientService/app-command-client.service";
-import {AppServiceService} from "../../../services/serviceService/app-service.service";
 import {AppProductService} from "../../../services/productService/app-product.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ClientAppServiceService} from "../../../services/clientAppService/client-app-service.service";

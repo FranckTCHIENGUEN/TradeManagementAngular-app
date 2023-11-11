@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {StatisqueService} from "../../tm-api/src-api/services/statisque.service";
 import {Observable} from "rxjs";
 import {EtatFinancier} from "../../tm-api/src-api/models/etat-financier";

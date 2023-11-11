@@ -1,8 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {EntrepriseDto} from "../../../tm-api/src-api/models/entreprise-dto";
 import {AppProductService} from "../../../services/productService/app-product.service";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
-import {SaveProductDialogComponent} from "../save-product-dialog/save-product-dialog.component";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-viewenterprise-dialog',

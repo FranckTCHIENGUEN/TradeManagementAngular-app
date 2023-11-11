@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { ListeVentePageRoutingModule } from './liste-vente-page-routing.module';
-import { ListeVentePageComponent } from './liste-vente-page.component';
-import {ListCommandeClientModule} from "../../command-page/list-commande-client/list-commande-client.module";
+import {ListeVentePageRoutingModule} from './liste-vente-page-routing.module';
+import {ListeVentePageComponent} from './liste-vente-page.component';
 import {ListViewComponent} from "../../../../components/list-view/list-view.component";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";

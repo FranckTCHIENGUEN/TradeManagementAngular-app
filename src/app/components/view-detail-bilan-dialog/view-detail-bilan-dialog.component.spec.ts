@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ViewDetailBilanDialogComponent } from './view-detail-bilan-dialog.component';
+import {ViewDetailBilanDialogComponent} from './view-detail-bilan-dialog.component';
 
 describe('ViewDetailBilanDialogComponent', () => {
   let component: ViewDetailBilanDialogComponent;

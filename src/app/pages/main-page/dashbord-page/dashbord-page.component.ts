@@ -3,7 +3,6 @@ import {CommandeClientDto} from "../../../../tm-api/src-api/models/commande-clie
 import {Column} from "../../../components/list-view/list-view.component";
 import {DatePipe} from "@angular/common";
 import {DataLinkTransfertService} from "../../../../services/dataLinkTransfert/Data-link-transfert.service";
-import {AppCommandClientService} from "../../../../services/commandClientService/app-command-client.service";
 import {AppSearchCommandService} from "../../../../services/searchCommand/app-search-command.service";
 import {CommandSearch, EtatFinancier, UtilisateurDto} from "../../../../tm-api/src-api/models";
 import {AppStatService} from "../../../../services/statSservice/app-stat.service";

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AppStatService} from "../../../../../services/statSservice/app-stat.service";
 import {objetFiltreStat} from "../../../../components/filtre-stat/filtre-stat.component";
 import {EtatFinancier} from "../../../../../tm-api/src-api/models/etat-financier";

@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { DepensePageRoutingModule } from './depense-page-routing.module';
-import { DepensePageComponent } from './depense-page.component';
+import {DepensePageRoutingModule} from './depense-page-routing.module';
+import {DepensePageComponent} from './depense-page.component';
 import {MatButtonModule} from "@angular/material/button";
-import {ListCommandeClientModule} from "../command-page/list-commande-client/list-commande-client.module";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {ListeVentePageModule} from "../vente-page/liste-vente-page/liste-vente-page.module";

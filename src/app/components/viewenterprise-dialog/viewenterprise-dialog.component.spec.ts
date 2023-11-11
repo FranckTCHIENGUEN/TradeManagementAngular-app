@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ViewenterpriseDialogComponent } from './viewenterprise-dialog.component';
+import {ViewenterpriseDialogComponent} from './viewenterprise-dialog.component';
 
 describe('ViewenterpriseDialogComponent', () => {
   let component: ViewenterpriseDialogComponent;

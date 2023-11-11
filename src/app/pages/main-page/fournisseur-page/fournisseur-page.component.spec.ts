@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FournisseurPageComponent } from './fournisseur-page.component';
+import {FournisseurPageComponent} from './fournisseur-page.component';
 
 describe('FournisseurPageComponent', () => {
   let component: FournisseurPageComponent;

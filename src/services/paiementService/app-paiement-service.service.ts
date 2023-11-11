@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {PaiementService} from "../../tm-api/src-api/services/paiement.service";
 import {PaiementDto} from "../../tm-api/src-api/models/paiement-dto";
 import {Observable} from "rxjs";

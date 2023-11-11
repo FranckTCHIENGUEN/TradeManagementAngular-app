@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { VentePageComponent } from './vente-page.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {VentePageComponent} from './vente-page.component';
 
 const routes: Routes = [{ path: '', component: VentePageComponent }];
 

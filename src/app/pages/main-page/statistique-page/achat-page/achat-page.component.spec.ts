@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AchatPageComponent } from './achat-page.component';
+import {AchatPageComponent} from './achat-page.component';
 
 describe('AchatPageComponent', () => {
   let component: AchatPageComponent;

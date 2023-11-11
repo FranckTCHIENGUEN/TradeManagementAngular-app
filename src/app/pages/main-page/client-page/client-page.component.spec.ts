@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ClientPageComponent } from './client-page.component';
+import {ClientPageComponent} from './client-page.component';
 
 describe('ClientPageComponent', () => {
   let component: ClientPageComponent;

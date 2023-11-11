@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SaveCommandeClientComponent } from './save-commande-client.component';
+import {SaveCommandeClientComponent} from './save-commande-client.component';
 
 describe('SaveCommandeClientComponent', () => {
   let component: SaveCommandeClientComponent;

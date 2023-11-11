@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BilanComptableService} from "../../tm-api/src-api/services/bilan-comptable.service";
 import {Observable} from "rxjs";
 import {ComptaGlobalDto} from "../../tm-api/src-api/models/compta-global-dto";

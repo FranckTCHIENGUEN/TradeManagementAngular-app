@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { BilanPeriodiquePageRoutingModule } from './bilan-periodique-page-routing.module';
-import { BilanPeriodiquePageComponent } from './bilan-periodique-page.component';
+import {BilanPeriodiquePageRoutingModule} from './bilan-periodique-page-routing.module';
+import {BilanPeriodiquePageComponent} from './bilan-periodique-page.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";

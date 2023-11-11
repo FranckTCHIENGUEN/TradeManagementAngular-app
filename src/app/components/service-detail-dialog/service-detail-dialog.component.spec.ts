@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ServiceDetailDialogComponent } from './service-detail-dialog.component';
+import {ServiceDetailDialogComponent} from './service-detail-dialog.component';
 
 describe('ServiceDetailDialogComponent', () => {
   let component: ServiceDetailDialogComponent;

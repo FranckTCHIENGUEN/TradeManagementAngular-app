@@ -4,9 +4,7 @@ import {AppUserService} from "../../../services/appUserServices/app-user.service
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 import {AppRoleService} from "../../../services/roleService/app-role.service";
 import {RoleDto} from "../../../tm-api/src-api/models/role-dto";
-import {MatListOption, MatSelectionList} from "@angular/material/list";
-import {Permissions} from "../../../tm-api/src-api/models/permissions";
-import {MatLegacyListOption, MatLegacySelectionList} from "@angular/material/legacy-list";
+import {MatSelectionList} from "@angular/material/list";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 
 @Component({

@@ -1,15 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {debounceTime, distinctUntilChanged, map, Observable, of, startWith, switchMap} from "rxjs";
+import {debounceTime, distinctUntilChanged, map, Observable, startWith, switchMap} from "rxjs";
 import {FormArray, FormBuilder, Validators} from "@angular/forms";
 import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
   MAT_MOMENT_DATE_FORMATS,
   MomentDateAdapter,
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import 'moment/locale/fr';
 import {AppFournisseurService} from "../../../services/fournisseurService/app-fournisseur.service";
-import {AppUserService} from "../../../services/appUserServices/app-user.service";
 import {ClientAppServiceService} from "../../../services/clientAppService/client-app-service.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {SavePersonDialogComponent} from "../save-person-dialog/save-person-dialog.component";
@@ -21,9 +20,13 @@ import {ClientDto} from "../../../tm-api/src-api/models/client-dto";
 import {
   CommandeClientDto,
   CommandeFournisseurDto,
-  CompteClientDto, FournisseurDto, LigneCommandeClientDto, LigneCommandeFournisseurDto,
+  CompteClientDto,
+  FournisseurDto,
+  LigneCommandeClientDto,
+  LigneCommandeFournisseurDto,
   LigneVenteDto,
-  PaiementDto, StatServiceDto,
+  PaiementDto,
+  StatServiceDto,
   UtilisateurDto,
   VenteDto
 } from "../../../tm-api/src-api/models";
@@ -35,8 +38,6 @@ import {
   AppCommandFournisseurService
 } from "../../../services/commandFournisseurService/app-command-fournisseur.service";
 import {AppCommandClientService} from "../../../services/commandClientService/app-command-client.service";
-import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
-import {DatePipe} from "@angular/common";
 import * as moment from "moment/moment";
 
 export interface User {
@@ -113,7 +114,6 @@ export class VenteComponent implements OnInit{
   modePaiement = ['MOBILE_MONNEY' , 'ORANGE_MONNEY' , 'REMBOURSSEMENT' , 'ESPECE']
   @Input() typeEnregistrement: string | undefined;
   elements: any ;
-  maxMontant:number = 0;
   modeVisible = true
   products: Array<ArticleDto> =[] ;
   permission: Array<string> = [];
@@ -172,9 +172,6 @@ export class VenteComponent implements OnInit{
     return this._montantTotal;
   }
 
-  get Restepayer(): number {
-    return this._Restepayer;
-  }
 
   get ligneCom (){
     return this.saveForm.controls["ligneCom"] as FormArray;
@@ -380,9 +377,6 @@ export class VenteComponent implements OnInit{
     this.calculRestepayer();
   }
 
-  getType(event: any) {
-    this.type = event.value;
-  }
 
   calculmontant(i: number) {
     this.ligneCom.at(i).get("prixTotal")?.patchValue(
@@ -430,7 +424,7 @@ export class VenteComponent implements OnInit{
     else {
       let userConnected: UtilisateurDto = JSON.parse(sessionStorage.getItem('userData') as string);
       this.calculPaiement();
-      let pipe = new DatePipe('fr-FR');
+
       if (this.typeEnregistrement=="vente"){
         let data: VenteDto = {};
 
@@ -733,13 +727,13 @@ export class VenteComponent implements OnInit{
   //   }
   // }
 
-  isDisable() {
-    let disable = true
-    if (this.ligneCom.length >0){
-      disable=false;
-    }
-    return disable;
-  }
+  // isDisable() {
+  //   let disable = true
+  //   if (this.ligneCom.length >0){
+  //     disable=false;
+  //   }
+  //   return disable;
+  // }
 
   calculAvance(index:number) {
     let montant:number = 0;
@@ -761,13 +755,11 @@ export class VenteComponent implements OnInit{
   }
 
 
-  detectRequired(index:number) {
-    if (this.paiement.at(index).get('modePaiement')?.value != 'ESPECE'){
-      return true;
-    }
-    return false;
-
-  }
+  // detectRequired(index:number) {
+  //   return this.paiement.at(index).get('modePaiement')?.value != 'ESPECE';
+  //
+  //
+  // }
 
   calculmax(i: number):number{
    let present = false;

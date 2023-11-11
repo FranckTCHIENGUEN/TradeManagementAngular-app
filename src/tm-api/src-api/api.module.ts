@@ -1,31 +1,31 @@
 /* tslint:disable */
 /* eslint-disable */
-import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
+import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {ApiConfiguration, ApiConfigurationParams} from './api-configuration';
 
-import { UtilisateurService } from './services/utilisateur.service';
-import { VenteService } from './services/vente.service';
-import { ServiceService } from './services/service.service';
-import { RoleService } from './services/role.service';
-import { PhotoService } from './services/photo.service';
-import { PaiementService } from './services/paiement.service';
-import { MouvementDeStockService } from './services/mouvement-de-stock.service';
-import { AuthentificationService } from './services/authentification.service';
-import { FournisseurService } from './services/fournisseur.service';
-import { FiltreDesPersonnesService } from './services/filtre-des-personnes.service';
-import { FiltreCommandeService } from './services/filtre-commande.service';
-import { EntrepriseService } from './services/entreprise.service';
-import { DepenseService } from './services/depense.service';
-import { CommandeFournisseurService } from './services/commande-fournisseur.service';
-import { CommandeClientService } from './services/commande-client.service';
-import { ClientService } from './services/client.service';
-import { CategoryService } from './services/category.service';
-import { CategorieServiceService } from './services/categorie-service.service';
-import { CategorieDepenseService } from './services/categorie-depense.service';
-import { ArticleService } from './services/article.service';
-import { StatisqueService } from './services/statisque.service';
-import { BilanComptableService } from './services/bilan-comptable.service';
+import {UtilisateurService} from './services/utilisateur.service';
+import {VenteService} from './services/vente.service';
+import {ServiceService} from './services/service.service';
+import {RoleService} from './services/role.service';
+import {PhotoService} from './services/photo.service';
+import {PaiementService} from './services/paiement.service';
+import {MouvementDeStockService} from './services/mouvement-de-stock.service';
+import {AuthentificationService} from './services/authentification.service';
+import {FournisseurService} from './services/fournisseur.service';
+import {FiltreDesPersonnesService} from './services/filtre-des-personnes.service';
+import {FiltreCommandeService} from './services/filtre-commande.service';
+import {EntrepriseService} from './services/entreprise.service';
+import {DepenseService} from './services/depense.service';
+import {CommandeFournisseurService} from './services/commande-fournisseur.service';
+import {CommandeClientService} from './services/commande-client.service';
+import {ClientService} from './services/client.service';
+import {CategoryService} from './services/category.service';
+import {CategorieServiceService} from './services/categorie-service.service';
+import {CategorieDepenseService} from './services/categorie-depense.service';
+import {ArticleService} from './services/article.service';
+import {StatisqueService} from './services/statisque.service';
+import {BilanComptableService} from './services/bilan-comptable.service';
 
 /**
  * Module that provides all services and configuration.
@@ -73,7 +73,7 @@ export class ApiModule {
     }
   }
 
-  constructor( 
+  constructor(
     @Optional() @SkipSelf() parentModule: ApiModule,
     @Optional() http: HttpClient
   ) {

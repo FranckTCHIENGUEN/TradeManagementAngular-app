@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { GestEntreprisePageComponent } from './gest-entreprise-page.component';
+import {GestEntreprisePageComponent} from './gest-entreprise-page.component';
 
 describe('GestEntreprisePageComponent', () => {
   let component: GestEntreprisePageComponent;

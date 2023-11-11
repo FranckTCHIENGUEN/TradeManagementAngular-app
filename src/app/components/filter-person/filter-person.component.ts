@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CommandSearch} from "../../../tm-api/src-api/models/command-search";
 import {map, Observable} from "rxjs";
 import {ClientDto} from "../../../tm-api/src-api/models/client-dto";
 import {FournisseurDto} from "../../../tm-api/src-api/models/fournisseur-dto";

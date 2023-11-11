@@ -1,12 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppUserService} from "../../../services/appUserServices/app-user.service";
 import {Column} from "../list-view/list-view.component";
-import {DatePipe} from "@angular/common";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {SavePersonDialogComponent} from "../save-person-dialog/save-person-dialog.component";
-import {MatMenuTrigger} from "@angular/material/menu";
-import {RoleDto} from "../../../tm-api/src-api/models/role-dto";
 
 @Component({
   selector: 'app-utilisateur',

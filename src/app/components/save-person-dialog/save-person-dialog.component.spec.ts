@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SavePersonDialogComponent } from './save-person-dialog.component';
+import {SavePersonDialogComponent} from './save-person-dialog.component';
 
 describe('SavePersonDialogComponent', () => {
   let component: SavePersonDialogComponent;

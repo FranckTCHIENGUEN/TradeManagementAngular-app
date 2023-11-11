@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CommandeFournisseurComponent } from './commande-fournisseur.component';
+import {CommandeFournisseurComponent} from './commande-fournisseur.component';
 
 describe('CommandeFournisseurComponent', () => {
   let component: CommandeFournisseurComponent;

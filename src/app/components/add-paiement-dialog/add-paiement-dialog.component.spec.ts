@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddPaiementDialogComponent } from './add-paiement-dialog.component';
+import {AddPaiementDialogComponent} from './add-paiement-dialog.component';
 
 describe('AddPaiementDialogComponent', () => {
   let component: AddPaiementDialogComponent;

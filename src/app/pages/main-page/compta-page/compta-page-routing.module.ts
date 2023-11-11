@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { ComptaPageComponent } from './compta-page.component';
-import {MainPageComponent} from "../main-page.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {ComptaPageComponent} from './compta-page.component';
 
 const routes: Routes =
   [

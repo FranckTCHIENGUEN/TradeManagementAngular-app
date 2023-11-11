@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { FournisseurPageRoutingModule } from './fournisseur-page-routing.module';
-import { FournisseurPageComponent } from './fournisseur-page.component';
+import {FournisseurPageRoutingModule} from './fournisseur-page-routing.module';
+import {FournisseurPageComponent} from './fournisseur-page.component';
 import {PersonComponent} from "../../../components/person/person.component";
 import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";

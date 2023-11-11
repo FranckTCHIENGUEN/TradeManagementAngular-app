@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {SavePersonDialogComponent} from "../../../components/save-person-dialog/save-person-dialog.component";
 import {SaveProductDialogComponent} from "../../../components/save-product-dialog/save-product-dialog.component";
 import {ArticleDto} from "../../../../tm-api/src-api/models/article-dto";
 import {AppProductService} from "../../../../services/productService/app-product.service";

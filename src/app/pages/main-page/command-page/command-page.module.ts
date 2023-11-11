@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { CommandPageRoutingModule } from './command-page-routing.module';
-import { CommandPageComponent } from './command-page.component';
+import {CommandPageRoutingModule} from './command-page-routing.module';
+import {CommandPageComponent} from './command-page.component';
 import {SecondaryMenuComponent} from "../../../components/secondary-menu/secondary-menu.component";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";

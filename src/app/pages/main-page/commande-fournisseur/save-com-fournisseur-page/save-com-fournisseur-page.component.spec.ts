@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SaveComFournisseurPageComponent } from './save-com-fournisseur-page.component';
+import {SaveComFournisseurPageComponent} from './save-com-fournisseur-page.component';
 
 describe('SaveComFournisseurPageComponent', () => {
   let component: SaveComFournisseurPageComponent;

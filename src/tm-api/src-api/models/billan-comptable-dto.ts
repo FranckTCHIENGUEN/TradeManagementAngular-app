@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
-import { DetailsBilan } from './details-bilan';
+import {DetailsBilan} from './details-bilan';
+
 export interface BillanComptableDto {
   argentEnCaisse?: number;
   avance?: number;

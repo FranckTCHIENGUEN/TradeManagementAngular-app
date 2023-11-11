@@ -1,11 +1,7 @@
-import { Injectable } from '@angular/core';
-import {CommandeClientService} from "../../tm-api/src-api/services/commande-client.service";
-import {CommandeClientDto} from "../../tm-api/src-api/models/commande-client-dto";
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {ServiceDto} from "../../tm-api/src-api/models/service-dto";
 import {CommandeFournisseurService} from "../../tm-api/src-api/services/commande-fournisseur.service";
 import {CommandeFournisseurDto} from "../../tm-api/src-api/models/commande-fournisseur-dto";
-import {LigneCommandeClientDto} from "../../tm-api/src-api/models/ligne-commande-client-dto";
 import {LigneCommandeFournisseurDto} from "../../tm-api/src-api/models/ligne-commande-fournisseur-dto";
 
 @Injectable({

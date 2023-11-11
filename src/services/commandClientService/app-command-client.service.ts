@@ -1,6 +1,4 @@
-import { Injectable } from '@angular/core';
-import {ServiceService} from "../../tm-api/src-api/services/service.service";
-import {ServiceDto} from "../../tm-api/src-api/models/service-dto";
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {CommandeClientService} from "../../tm-api/src-api/services/commande-client.service";
 import {CommandeClientDto} from "../../tm-api/src-api/models/commande-client-dto";
@@ -13,7 +11,7 @@ export class AppCommandClientService {
 
   constructor(private commandeService:CommandeClientService) { }
 
-  save (cat:CommandeClientDto):Observable<CommandeClientDto>{
+  save (cat:CommandeClientDto){
     return this.commandeService.save8({body:cat});
   }
 

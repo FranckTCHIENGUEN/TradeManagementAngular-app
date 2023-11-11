@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { VentePageComponent } from './vente-page.component';
+import {VentePageComponent} from './vente-page.component';
 
 describe('VentePageComponent', () => {
   let component: VentePageComponent;

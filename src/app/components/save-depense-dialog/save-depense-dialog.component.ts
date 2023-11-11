@@ -1,10 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ArticleDto} from "../../../tm-api/src-api/models/article-dto";
 import {MyErrorStateMatcher} from "../../ErrorMatcher";
-import {CategoryDto} from "../../../tm-api/src-api/models/category-dto";
 import {FormArray, FormBuilder, Validators} from "@angular/forms";
-import {AppProductService} from "../../../services/productService/app-product.service";
-import {AppCategorieProduitService} from "../../../services/categorieProduit/app-categorie-produit.service";
 import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data-link-transfert.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
@@ -16,7 +13,6 @@ import {DepensesDto} from "../../../tm-api/src-api/models/depenses-dto";
 import {CategorieDepenseDto} from "../../../tm-api/src-api/models/categorie-depense-dto";
 import {AppDepenseService} from "../../../services/depenseService/app-depense.service";
 import {AppCategorieDepenseService} from "../../../services/categorieDepenseService/app-categorie-depense.service";
-import {LigneVenteDto} from "../../../tm-api/src-api/models/ligne-vente-dto";
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material/core";
 import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,

@@ -1,11 +1,7 @@
 import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
-import {FormBuilder, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
+import {FormBuilder, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material/core";
-import {
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-  MAT_MOMENT_DATE_FORMATS,
-  MomentDateAdapter
-} from "@angular/material-moment-adapter";
+import {MomentDateAdapter} from "@angular/material-moment-adapter";
 
 // const moment = _rollupMoment || _moment;
 

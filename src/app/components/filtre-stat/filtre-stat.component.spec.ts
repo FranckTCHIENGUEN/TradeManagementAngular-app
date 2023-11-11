@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FiltreStatComponent } from './filtre-stat.component';
+import {FiltreStatComponent} from './filtre-stat.component';
 
 describe('FiltreStatComponent', () => {
   let component: FiltreStatComponent;

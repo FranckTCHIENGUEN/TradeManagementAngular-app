@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { AppSearchCommandService } from './app-search-command.service';
+import {AppSearchCommandService} from './app-search-command.service';
 
 describe('AppSearchCommandService', () => {
   let service: AppSearchCommandService;

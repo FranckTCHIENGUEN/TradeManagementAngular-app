@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BilanJournalierPageComponent } from './bilan-journalier-page.component';
+import {BilanJournalierPageComponent} from './bilan-journalier-page.component';
 
 describe('BilanJournalierPageComponent', () => {
   let component: BilanJournalierPageComponent;

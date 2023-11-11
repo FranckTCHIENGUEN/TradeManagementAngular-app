@@ -1,14 +1,6 @@
 import {Component, Inject} from '@angular/core';
-import {PaiementDto} from "../../../tm-api/src-api/models/paiement-dto";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {AppVenbteServiceService} from "../../../services/venteService/app-venbte-service.service";
-import {
-  AppCommandFournisseurService
-} from "../../../services/commandFournisseurService/app-command-fournisseur.service";
-import {AppPaiementServiceService} from "../../../services/paiementService/app-paiement-service.service";
-import {AppCommandClientService} from "../../../services/commandClientService/app-command-client.service";
 import {Column} from "../list-view/list-view.component";
-import {DatePipe} from "@angular/common";
 import {DetailsBilan} from "../../../tm-api/src-api/models/details-bilan";
 
 @Component({

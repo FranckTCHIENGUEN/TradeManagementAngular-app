@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { StatistiquePageRoutingModule } from './statistique-page-routing.module';
-import { StatistiquePageComponent } from './statistique-page.component';
+import {StatistiquePageRoutingModule} from './statistique-page-routing.module';
+import {StatistiquePageComponent} from './statistique-page.component';
 import {CommandPageModule} from "../command-page/command-page.module";
 
 

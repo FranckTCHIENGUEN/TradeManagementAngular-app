@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {LoaderService} from "../loader/loader.service";
 import {HttpEvent, HttpHandler, HttpRequest} from "@angular/common/http";
 import {finalize, Observable} from 'rxjs';

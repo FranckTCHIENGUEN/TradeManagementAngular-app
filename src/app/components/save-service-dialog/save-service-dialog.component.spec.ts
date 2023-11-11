@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SaveServiceDialogComponent } from './save-service-dialog.component';
+import {SaveServiceDialogComponent} from './save-service-dialog.component';
 
 describe('SaveServiceDialogComponent', () => {
   let component: SaveServiceDialogComponent;

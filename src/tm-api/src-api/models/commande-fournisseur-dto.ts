@@ -1,8 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
-import { FournisseurDto } from './fournisseur-dto';
-import { LigneCommandeFournisseurDto } from './ligne-commande-fournisseur-dto';
-import { PaiementDto } from './paiement-dto';
+import {FournisseurDto} from './fournisseur-dto';
+import {LigneCommandeFournisseurDto} from './ligne-commande-fournisseur-dto';
+import {PaiementDto} from './paiement-dto';
+
 export interface CommandeFournisseurDto {
   avance?: number;
   code?: string;
