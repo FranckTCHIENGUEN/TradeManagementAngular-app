@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:9090",
+      "url": "https://trademanagementapi.azurewebsites.net",
       "description": "Generated server url"
     }
   ],

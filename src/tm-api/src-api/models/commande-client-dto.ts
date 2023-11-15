@@ -1,9 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
-import {ClientDto} from './client-dto';
-import {LigneCommandeClientDto} from './ligne-commande-client-dto';
-import {PaiementDto} from './paiement-dto';
-
+import { ClientDto } from './client-dto';
+import { LigneCommandeClientDto } from './ligne-commande-client-dto';
+import { PaiementDto } from './paiement-dto';
 export interface CommandeClientDto {
   avance?: number;
   client?: ClientDto;

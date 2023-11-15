@@ -1,10 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
-import {AdresseDto} from './adresse-dto';
-import {ContactDto} from './contact-dto';
-import {EntrepriseDto} from './entreprise-dto';
-import {RoleDto} from './role-dto';
-
+import { AdresseDto } from './adresse-dto';
+import { ContactDto } from './contact-dto';
+import { EntrepriseDto } from './entreprise-dto';
+import { RoleDto } from './role-dto';
 export interface UtilisateurDto {
   accountNonLocked?: boolean;
   adresse?: AdresseDto;

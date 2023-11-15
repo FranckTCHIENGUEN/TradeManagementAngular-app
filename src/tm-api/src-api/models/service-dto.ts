@@ -1,7 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import {CategoriServiceDto} from './categori-service-dto';
-
+import { CategoriServiceDto } from './categori-service-dto';
 export interface ServiceDto {
   category?: CategoriServiceDto;
   id?: number;

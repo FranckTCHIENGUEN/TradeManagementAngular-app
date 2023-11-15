@@ -1,7 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import {CategorieDepenseDto} from './categorie-depense-dto';
-
+import { CategorieDepenseDto } from './categorie-depense-dto';
 export interface DepensesDto {
   categorieDepense?: CategorieDepenseDto;
   code?: string;

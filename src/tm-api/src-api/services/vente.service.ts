@@ -1,17 +1,17 @@
 /* tslint:disable */
 /* eslint-disable */
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpContext, HttpResponse} from '@angular/common/http';
-import {BaseService} from '../base-service';
-import {ApiConfiguration} from '../api-configuration';
-import {StrictHttpResponse} from '../strict-http-response';
-import {RequestBuilder} from '../request-builder';
-import {Observable} from 'rxjs';
-import {filter, map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
+import { BaseService } from '../base-service';
+import { ApiConfiguration } from '../api-configuration';
+import { StrictHttpResponse } from '../strict-http-response';
+import { RequestBuilder } from '../request-builder';
+import { Observable } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
 
-import {HistoriqueArticleDto} from '../models/historique-article-dto';
-import {LigneVenteDto} from '../models/ligne-vente-dto';
-import {VenteDto} from '../models/vente-dto';
+import { HistoriqueArticleDto } from '../models/historique-article-dto';
+import { LigneVenteDto } from '../models/ligne-vente-dto';
+import { VenteDto } from '../models/vente-dto';
 
 
 /**
