@@ -29,9 +29,9 @@ export class CommandeFournisseurService extends BaseService {
   }
 
   /**
-   * Path part for operation findAll9
+   * Path part for operation findAll10
    */
-  static readonly FindAll9Path = '/tradeManagement/v1/commandesfournisseurs/';
+  static readonly FindAll10Path = '/tradeManagement/v1/commandesfournisseurs/';
 
   /**
    * obtenir la liste de toutes les commandes fournisseurs.
@@ -39,17 +39,17 @@ export class CommandeFournisseurService extends BaseService {
    * cette methode permet de rechercher tous les commande fournisseurs
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findAll9()` instead.
+   * To access only the response body, use `findAll10()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll9$Response(params?: {
+  findAll10$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<Array<CommandeFournisseurDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CommandeFournisseurService.FindAll9Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CommandeFournisseurService.FindAll10Path, 'get');
     if (params) {
     }
 
@@ -71,25 +71,25 @@ export class CommandeFournisseurService extends BaseService {
    * cette methode permet de rechercher tous les commande fournisseurs
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findAll9$Response()` instead.
+   * To access the full response (for headers, for example), `findAll10$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll9(params?: {
+  findAll10(params?: {
   },
   context?: HttpContext
 
 ): Observable<Array<CommandeFournisseurDto>> {
 
-    return this.findAll9$Response(params,context).pipe(
+    return this.findAll10$Response(params,context).pipe(
       map((r: StrictHttpResponse<Array<CommandeFournisseurDto>>) => r.body as Array<CommandeFournisseurDto>)
     );
   }
 
   /**
-   * Path part for operation save7
+   * Path part for operation save8
    */
-  static readonly Save7Path = '/tradeManagement/v1/commandesfournisseurs/';
+  static readonly Save8Path = '/tradeManagement/v1/commandesfournisseurs/';
 
   /**
    * enregistrer une commande fournisseur.
@@ -97,18 +97,18 @@ export class CommandeFournisseurService extends BaseService {
    * cette methode permet d'enregistrer ou de modifier une commande fournisseur
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `save7()` instead.
+   * To access only the response body, use `save8()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save7$Response(params: {
+  save8$Response(params: {
     body: CommandeFournisseurDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<CommandeFournisseurDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CommandeFournisseurService.Save7Path, 'post');
+    const rb = new RequestBuilder(this.rootUrl, CommandeFournisseurService.Save8Path, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -131,18 +131,18 @@ export class CommandeFournisseurService extends BaseService {
    * cette methode permet d'enregistrer ou de modifier une commande fournisseur
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `save7$Response()` instead.
+   * To access the full response (for headers, for example), `save8$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save7(params: {
+  save8(params: {
     body: CommandeFournisseurDto
   },
   context?: HttpContext
 
 ): Observable<CommandeFournisseurDto> {
 
-    return this.save7$Response(params,context).pipe(
+    return this.save8$Response(params,context).pipe(
       map((r: StrictHttpResponse<CommandeFournisseurDto>) => r.body as CommandeFournisseurDto)
     );
   }
@@ -342,7 +342,7 @@ export class CommandeFournisseurService extends BaseService {
   /**
    * Path part for operation updateEtatCommande
    */
-  static readonly UpdateEtatCommandePath = '/tradeManagement/v1/commandesfournisseurs/update-etat/{idCommande}?{etatCommande}';
+  static readonly UpdateEtatCommandePath = '/tradeManagement/v1/commandesfournisseurs/update-etat/{idCommande}/{etatCommande}';
 
   /**
    * modifier l'etat d'une commande fournisseur.
@@ -535,9 +535,9 @@ export class CommandeFournisseurService extends BaseService {
   }
 
   /**
-   * Path part for operation findById9
+   * Path part for operation findById10
    */
-  static readonly FindById9Path = '/tradeManagement/v1/commandesfournisseurs/{id}';
+  static readonly FindById10Path = '/tradeManagement/v1/commandesfournisseurs/{id}';
 
   /**
    * rechercher une commande fournisseur.
@@ -545,18 +545,18 @@ export class CommandeFournisseurService extends BaseService {
    * cette methode permet de rechercher une commande fournisseur par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById9()` instead.
+   * To access only the response body, use `findById10()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById9$Response(params: {
+  findById10$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<CommandeFournisseurDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CommandeFournisseurService.FindById9Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CommandeFournisseurService.FindById10Path, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -579,26 +579,26 @@ export class CommandeFournisseurService extends BaseService {
    * cette methode permet de rechercher une commande fournisseur par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById9$Response()` instead.
+   * To access the full response (for headers, for example), `findById10$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById9(params: {
+  findById10(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<CommandeFournisseurDto> {
 
-    return this.findById9$Response(params,context).pipe(
+    return this.findById10$Response(params,context).pipe(
       map((r: StrictHttpResponse<CommandeFournisseurDto>) => r.body as CommandeFournisseurDto)
     );
   }
 
   /**
-   * Path part for operation delete9
+   * Path part for operation delete10
    */
-  static readonly Delete9Path = '/tradeManagement/v1/commandesfournisseurs/{id}';
+  static readonly Delete10Path = '/tradeManagement/v1/commandesfournisseurs/{id}';
 
   /**
    * supprimer une commande fournisseur.
@@ -606,18 +606,18 @@ export class CommandeFournisseurService extends BaseService {
    * cette methode permet de supprimer un commande fournisseur par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `delete9()` instead.
+   * To access only the response body, use `delete10()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete9$Response(params: {
+  delete10$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CommandeFournisseurService.Delete9Path, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, CommandeFournisseurService.Delete10Path, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -640,18 +640,18 @@ export class CommandeFournisseurService extends BaseService {
    * cette methode permet de supprimer un commande fournisseur par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `delete9$Response()` instead.
+   * To access the full response (for headers, for example), `delete10$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete9(params: {
+  delete10(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<void> {
 
-    return this.delete9$Response(params,context).pipe(
+    return this.delete10$Response(params,context).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

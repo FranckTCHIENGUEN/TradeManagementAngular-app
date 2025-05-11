@@ -1,0 +1,33 @@
+:host ::ng-deep .mat-toolbar {
+  //
+  //box-shadow: 0 0.05rem 25px black;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.containt{
+  display: flex;
+
+}
+
+.side{
+  flex: 6;
+  height: 100vh;
+  overflow: scroll;
+  //line-height: 300px;
+}
+
+.content{
+  flex: 6;
+  height: 100vh;
+  overflow: scroll;
+  //line-height: 300px;
+}
+
+.active-role:hover{
+  // background-color: mat.get-color-from-palette( var(--warn-palette) );
+  color: dodgerblue;
+  // text-decoration: underline;
+}

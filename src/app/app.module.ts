@@ -58,6 +58,14 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {SaveRoleDialogComponent} from './components/save-role-dialog/save-role-dialog.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {AddRoleToUserComponent} from './components/add-role-to-user/add-role-to-user.component';
+import {
+  AddClientToGroupDialogComponent
+} from './components/add-client-to-group-dialog/add-client-to-group-dialog.component';
+import {
+  CreerGroupeClientDialogComponent
+} from './components/creer-groupe-client-dialog/creer-groupe-client-dialog.component';
+import {AddgroupetoclientComponent} from './components/addgroupetoclient/addgroupetoclient.component';
+import {RemoveClientToGroupeComponent} from './components/remove-client-to-groupe/remove-client-to-groupe.component';
 
 @NgModule({
     declarations: [
@@ -86,7 +94,10 @@ import {AddRoleToUserComponent} from './components/add-role-to-user/add-role-to-
         FactureDialogComponent,
         SaveRoleDialogComponent,
         AddRoleToUserComponent,
-
+        AddClientToGroupDialogComponent,
+        CreerGroupeClientDialogComponent,
+        AddgroupetoclientComponent,
+        RemoveClientToGroupeComponent,
     ],
     imports: [
         BrowserModule,

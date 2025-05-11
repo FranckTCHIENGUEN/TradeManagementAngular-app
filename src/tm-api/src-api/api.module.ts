@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { UtilisateurService } from './services/utilisateur.service';
+import { GroupeClientService } from './services/groupe-client.service';
 import { VenteService } from './services/vente.service';
 import { ServiceService } from './services/service.service';
 import { RoleService } from './services/role.service';
@@ -25,6 +26,7 @@ import { CategorieServiceService } from './services/categorie-service.service';
 import { CategorieDepenseService } from './services/categorie-depense.service';
 import { ArticleService } from './services/article.service';
 import { StatisqueService } from './services/statisque.service';
+import { BillService } from './services/bill.service';
 import { BilanComptableService } from './services/bilan-comptable.service';
 
 /**
@@ -36,6 +38,7 @@ import { BilanComptableService } from './services/bilan-comptable.service';
   declarations: [],
   providers: [
     UtilisateurService,
+    GroupeClientService,
     VenteService,
     ServiceService,
     RoleService,
@@ -56,6 +59,7 @@ import { BilanComptableService } from './services/bilan-comptable.service';
     CategorieDepenseService,
     ArticleService,
     StatisqueService,
+    BillService,
     BilanComptableService,
     ApiConfiguration
   ],

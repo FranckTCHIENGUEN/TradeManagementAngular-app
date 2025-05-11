@@ -12,13 +12,7 @@
                matInput
                #input
                (input)="manageFilterPerson(input.value)"
-               formControlName="nom"
-               [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option.nom}} {{option.prenom}}
-          </mat-option>
-        </mat-autocomplete>
+               formControlName="nom">
       </mat-form-field>
       <mat-form-field *ngIf="typeEnregistrement=='fournisseur'" class="mat-form-field example-full-width" appearance="fill">
         <mat-label>Nom Fournisseur</mat-label>
@@ -28,24 +22,29 @@
                matInput
                #input
                (input)="manageFilterPerson(input.value)"
-               formControlName="nom"
-               [matAutocomplete]="auto2">
-        <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" [displayWith]="displayFnFournisseur">
-          <mat-option *ngFor="let option of filteredOptionsFournisseur | async" [value]="option">
-            {{option.nom}} {{option.prenom}}
-          </mat-option>
-        </mat-autocomplete>
+               formControlName="nom">
+      </mat-form-field>
+      <mat-form-field *ngIf="typeEnregistrement=='utilisateur'" class="mat-form-field example-full-width" appearance="fill">
+        <mat-label>Nom Utilisateur</mat-label>
+        <input type="text"
+               placeholder="Saisir un nom"
+               aria-label="Nom Client"
+               matInput
+               #input
+               (input)="manageFilterPerson(input.value)"
+               formControlName="nom">
+
       </mat-form-field>
     </div>
     <div class="row">
-      <div class="col">
+      <div class="col" *ngIf="typeEnregistrement =='client'">
         <mat-form-field appearance="fill">
           <mat-label>CA</mat-label>
           <input matInput formControlName="ca" type="number">
           <span matSuffix>FCFA&nbsp;</span>
         </mat-form-field>
       </div>
-      <div class="col">
+      <div class="col" *ngIf="typeEnregistrement =='client'">
         <mat-form-field appearance="fill">
           <mat-label>Solde</mat-label>
           <input matInput formControlName="solde" type="number">

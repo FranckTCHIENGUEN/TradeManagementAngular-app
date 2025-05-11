@@ -81,11 +81,11 @@ export class ListeVentePageComponent implements OnInit{
 
   findAll(){
     this.display = false
-    if (this.permission.includes('VENTE: LIRE')){
-      this.venteService.findAll().subscribe(
+    if (this.permission.includes('VENTE: LIRE') || this.permission.includes('VENTE: FILTRER')){
+      this.commandeSearcServjce.filterCommand({datecommande1:new Date(new Date().setHours(0, 0, 0, 0)).toISOString(), datecommande2:new Date(new Date().setHours(23, 59, 59, 999)).toISOString()}, 'vente').subscribe(
         value => {
           this.listeVente = value;
-          this.display = true
+          this.display = true;
         });
     }
   }

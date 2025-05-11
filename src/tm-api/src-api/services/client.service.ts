@@ -27,9 +27,9 @@ export class ClientService extends BaseService {
   }
 
   /**
-   * Path part for operation save9
+   * Path part for operation save10
    */
-  static readonly Save9Path = '/tradeManagement/v1/clients/create';
+  static readonly Save10Path = '/tradeManagement/v1/clients/create';
 
   /**
    * enregistrer un client.
@@ -37,18 +37,18 @@ export class ClientService extends BaseService {
    * cette methode permet de enregistrer un client
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `save9()` instead.
+   * To access only the response body, use `save10()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save9$Response(params: {
+  save10$Response(params: {
     body: ClientDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<ClientDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ClientService.Save9Path, 'post');
+    const rb = new RequestBuilder(this.rootUrl, ClientService.Save10Path, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -71,18 +71,18 @@ export class ClientService extends BaseService {
    * cette methode permet de enregistrer un client
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `save9$Response()` instead.
+   * To access the full response (for headers, for example), `save10$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save9(params: {
+  save10(params: {
     body: ClientDto
   },
   context?: HttpContext
 
 ): Observable<ClientDto> {
 
-    return this.save9$Response(params,context).pipe(
+    return this.save10$Response(params,context).pipe(
       map((r: StrictHttpResponse<ClientDto>) => r.body as ClientDto)
     );
   }
@@ -149,9 +149,9 @@ export class ClientService extends BaseService {
   }
 
   /**
-   * Path part for operation findById11
+   * Path part for operation findById12
    */
-  static readonly FindById11Path = '/tradeManagement/v1/clients/{id}';
+  static readonly FindById12Path = '/tradeManagement/v1/clients/{id}';
 
   /**
    * rechercher un client.
@@ -159,18 +159,18 @@ export class ClientService extends BaseService {
    * cette methode permet de rechercher un client par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById11()` instead.
+   * To access only the response body, use `findById12()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById11$Response(params: {
+  findById12$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<ClientDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ClientService.FindById11Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, ClientService.FindById12Path, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -193,26 +193,26 @@ export class ClientService extends BaseService {
    * cette methode permet de rechercher un client par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById11$Response()` instead.
+   * To access the full response (for headers, for example), `findById12$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById11(params: {
+  findById12(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<ClientDto> {
 
-    return this.findById11$Response(params,context).pipe(
+    return this.findById12$Response(params,context).pipe(
       map((r: StrictHttpResponse<ClientDto>) => r.body as ClientDto)
     );
   }
 
   /**
-   * Path part for operation delete11
+   * Path part for operation delete12
    */
-  static readonly Delete11Path = '/tradeManagement/v1/clients/{id}';
+  static readonly Delete12Path = '/tradeManagement/v1/clients/{id}';
 
   /**
    * supprimer un client.
@@ -220,18 +220,18 @@ export class ClientService extends BaseService {
    * cette methode permet de supprimer un client par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `delete11()` instead.
+   * To access only the response body, use `delete12()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete11$Response(params: {
+  delete12$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ClientService.Delete11Path, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, ClientService.Delete12Path, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -254,18 +254,18 @@ export class ClientService extends BaseService {
    * cette methode permet de supprimer un client par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `delete11$Response()` instead.
+   * To access the full response (for headers, for example), `delete12$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete11(params: {
+  delete12(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<void> {
 
-    return this.delete11$Response(params,context).pipe(
+    return this.delete12$Response(params,context).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
@@ -579,9 +579,9 @@ export class ClientService extends BaseService {
   }
 
   /**
-   * Path part for operation findAll11
+   * Path part for operation findAll12
    */
-  static readonly FindAll11Path = '/tradeManagement/v1/clients/';
+  static readonly FindAll12Path = '/tradeManagement/v1/clients/';
 
   /**
    * rechercher un client.
@@ -589,17 +589,17 @@ export class ClientService extends BaseService {
    * cette methode permet de rechercher la liste des clients elle retourne la liste de tous les clients
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findAll11()` instead.
+   * To access only the response body, use `findAll12()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll11$Response(params?: {
+  findAll12$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<Array<ClientDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ClientService.FindAll11Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, ClientService.FindAll12Path, 'get');
     if (params) {
     }
 
@@ -621,17 +621,17 @@ export class ClientService extends BaseService {
    * cette methode permet de rechercher la liste des clients elle retourne la liste de tous les clients
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findAll11$Response()` instead.
+   * To access the full response (for headers, for example), `findAll12$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll11(params?: {
+  findAll12(params?: {
   },
   context?: HttpContext
 
 ): Observable<Array<ClientDto>> {
 
-    return this.findAll11$Response(params,context).pipe(
+    return this.findAll12$Response(params,context).pipe(
       map((r: StrictHttpResponse<Array<ClientDto>>) => r.body as Array<ClientDto>)
     );
   }

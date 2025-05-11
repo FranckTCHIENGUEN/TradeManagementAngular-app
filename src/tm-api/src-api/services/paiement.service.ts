@@ -225,7 +225,7 @@ export class PaiementService extends BaseService {
    * This method doesn't expect any request body.
    */
   findByObjetAndDatepaiementBetween$Response(params: {
-    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
+    objet: 'CC' | 'CC_OLD' | 'CF_OLD' | 'CF' | 'VENTE' | 'DEPENSE';
     date1: string;
     date2: string;
   },
@@ -263,7 +263,7 @@ export class PaiementService extends BaseService {
    * This method doesn't expect any request body.
    */
   findByObjetAndDatepaiementBetween(params: {
-    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
+    objet: 'CC' | 'CC_OLD' | 'CF_OLD' | 'CF' | 'VENTE' | 'DEPENSE';
     date1: string;
     date2: string;
   },
@@ -354,7 +354,7 @@ export class PaiementService extends BaseService {
    */
   findByModeAndObjet$Response(params: {
     mode: 'MOBILE_MONNEY' | 'ORANGE_MONNEY' | 'REMBOURSSEMENT' | 'ESPECE';
-    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
+    objet: 'CC' | 'CC_OLD' | 'CF_OLD' | 'CF' | 'VENTE' | 'DEPENSE';
   },
   context?: HttpContext
 
@@ -390,7 +390,7 @@ export class PaiementService extends BaseService {
    */
   findByModeAndObjet(params: {
     mode: 'MOBILE_MONNEY' | 'ORANGE_MONNEY' | 'REMBOURSSEMENT' | 'ESPECE';
-    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
+    objet: 'CC' | 'CC_OLD' | 'CF_OLD' | 'CF' | 'VENTE' | 'DEPENSE';
   },
   context?: HttpContext
 
@@ -417,7 +417,7 @@ export class PaiementService extends BaseService {
    * This method doesn't expect any request body.
    */
   findByObjetAndIdObjet$Response(params: {
-    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
+    objet: 'CC' | 'CC_OLD' | 'CF_OLD' | 'CF' | 'VENTE' | 'DEPENSE';
     idObjet: number;
   },
   context?: HttpContext
@@ -453,7 +453,7 @@ export class PaiementService extends BaseService {
    * This method doesn't expect any request body.
    */
   findByObjetAndIdObjet(params: {
-    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
+    objet: 'CC' | 'CC_OLD' | 'CF_OLD' | 'CF' | 'VENTE' | 'DEPENSE';
     idObjet: number;
   },
   context?: HttpContext
@@ -481,7 +481,7 @@ export class PaiementService extends BaseService {
    * This method doesn't expect any request body.
    */
   findByObjetAndIdObjetAndDatepaiementBetween$Response(params: {
-    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
+    objet: 'CC' | 'CC_OLD' | 'CF_OLD' | 'CF' | 'VENTE' | 'DEPENSE';
     idObjet: number;
     date1: string;
     date2: string;
@@ -521,7 +521,7 @@ export class PaiementService extends BaseService {
    * This method doesn't expect any request body.
    */
   findByObjetAndIdObjetAndDatepaiementBetween(params: {
-    objet: 'CC' | 'CF' | 'VENTE' | 'DEPENSE';
+    objet: 'CC' | 'CC_OLD' | 'CF_OLD' | 'CF' | 'VENTE' | 'DEPENSE';
     idObjet: number;
     date1: string;
     date2: string;

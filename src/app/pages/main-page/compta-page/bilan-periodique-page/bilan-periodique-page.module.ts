@@ -25,7 +25,7 @@ import {MatNativeDateModule} from "@angular/material/core";
     MatButtonModule,
     MatNativeDateModule,
     BilanJournalierPageModule,
-    MatDatepickerModule
+    MatDatepickerModule,
   ]
 })
 export class BilanPeriodiquePageModule { }

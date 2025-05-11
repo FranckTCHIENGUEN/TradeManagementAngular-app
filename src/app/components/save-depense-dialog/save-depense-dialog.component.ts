@@ -20,6 +20,7 @@ import {
   MomentDateAdapter
 } from "@angular/material-moment-adapter";
 import * as moment from "moment/moment";
+import {Observable, Observer} from "rxjs";
 
 @Component({
   selector: 'app-save-depense-dialog',
@@ -44,7 +45,7 @@ import * as moment from "moment/moment";
 export class SaveDepenseDialogComponent implements OnInit{
   depense:DepensesDto = {};
   private _matcher = new MyErrorStateMatcher();
-  categories: Array<CategorieDepenseDto> =[];
+  categories: Observable<CategorieDepenseDto[]> | undefined;
 
   saveForm = this.formBuilder.group({
     ligneDepense:this.formBuilder.array([
@@ -61,6 +62,7 @@ export class SaveDepenseDialogComponent implements OnInit{
               private dialogRef: MatDialogRef<SaveDepenseDialogComponent>,
               @Inject(MAT_DIALOG_DATA) private data: ArticleDto) {
     this.getPermissions();
+    this.findAllCatProduit()
     // if (this.data != null){
     //   this.depense = this.data;
     //   this.saveForm.patchValue(this.depense)
@@ -89,7 +91,7 @@ export class SaveDepenseDialogComponent implements OnInit{
   }
 
   closeDialog(p: { etat: string }) {
-    this.dialogRef.close();
+    this.dialogRef.close(p);
   }
 
   addLigne() {
@@ -129,9 +131,14 @@ export class SaveDepenseDialogComponent implements OnInit{
       this.ligneDepense.at(i).get("quantite")?.value * this.ligneDepense.at(i).get("prix")?.value as number
     )
   }
+  calculPrixUnitaire(i: number) {
+    this.ligneDepense.at(i).get("prix")?.patchValue(
+      this.ligneDepense.at(i).get("montantTotal")?.value / this.ligneDepense.at(i).get("quantite")?.value as number
+    )
+  }
 
   ngOnInit(): void {
-    this.findAllCatProduit();
+
     this.addLigne();
   }
 
@@ -190,9 +197,13 @@ export class SaveDepenseDialogComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(
       data => {
-        if (data=="ok"){
-
-          this.categories.push(data.data)
+        if (data.etat=="ok"){
+          this.categories = new Observable( ( observer : Observer<CategorieDepenseDto[]> ) => {
+            setTimeout ( () => {
+              observer.next(data.data);
+            }, 1000);
+          });
+          // this.categories.push(data.data)
           console.log(this.categories)
         }
       }
@@ -231,7 +242,12 @@ export class SaveDepenseDialogComponent implements OnInit{
   findAllCatProduit(){
     this.catDepenseService.findAll().subscribe(
       value => {
-        this.categories = value;
+        // this.categories = value;
+        this.categories = new Observable( ( observer : Observer<CategorieDepenseDto[]> ) => {
+          setTimeout ( () => {
+            observer.next(value);
+          }, 1000);
+        });
       }
     )
   }

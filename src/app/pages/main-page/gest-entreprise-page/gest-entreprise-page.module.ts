@@ -12,6 +12,9 @@ import {ListeVentePageModule} from "../vente-page/liste-vente-page/liste-vente-p
 import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {CommandPageModule} from "../command-page/command-page.module";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {FormsModule} from "@angular/forms";
+import {FournisseurPageModule} from "../fournisseur-page/fournisseur-page.module";
 
 
 @NgModule({
@@ -33,7 +36,10 @@ import {CommandPageModule} from "../command-page/command-page.module";
     ListeVentePageModule,
     MatListModule,
     MatIconModule,
-    CommandPageModule
+    CommandPageModule,
+    MatSlideToggleModule,
+    FormsModule,
+    FournisseurPageModule
   ]
 })
 export class GestEntreprisePageModule { }

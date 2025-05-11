@@ -46,8 +46,13 @@
       </div>
       <div *ngIf="type!='vente' && (permission.includes('COM_FOURNISSEUR: CRÉER_MODIFIER') || permission.includes('COM_CLIENT: CRÉER_MODIFIER')) " class="col divider divider-boder">
         Etat : <span class="important">{{donnees.etatCommande}} </span>
-        <button *ngIf="donnees.etatCommande!='LIVRER'" (click)="openDialogUpdateEtat()" mat-icon-button class="justify-content-center align-items-center example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-          <mat-icon color="primary">pencil</mat-icon>
+        <button mat-raised-button color="primary" (click)="openDialogUpdateEtat()" class="justify-content-center align-items-center example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+         Modifier etat
+        </button>
+      </div>
+      <div  class="col divider divider-boder">
+        <button  mat-raised-button aria-label="expand row" (click)="loadFacture(donnees.id);">
+          Telecharger la facture
         </button>
       </div>
     </div>
@@ -98,8 +103,8 @@
       </div>
       <div *ngIf="type!='vente'" class="col divider divider-boder">
         Etat : <span class="important">{{donnees.etatCommande}} </span>
-        <button (click)="openDialogUpdateEtat()" mat-icon-button class="justify-content-center align-items-center example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-          <mat-icon>pencil</mat-icon>
+        <button mat-raised-button color="primary" (click)="openDialogUpdateEtat()" >
+          Modifier
         </button>
       </div>
     </div>

@@ -26,11 +26,11 @@
   <div class="side">
     <mat-list>
       <div mat-subheader>Roles</div>
-      <mat-list-item (click)="updatePermission(role)" *ngFor="let role of listRoles">
-        <mat-icon matListItemIcon>folder</mat-icon>
+      <mat-list-item  *ngFor="let role of listRoles">
+        <mat-icon class="active-role" (click)="updatePermission(role)" matListItemIcon>folder</mat-icon>
         <div matListItemTitle>
           {{role.roleName}}
-          <mat-icon (click)="openDialogEdit(role)" >edit</mat-icon>
+          <mat-icon *ngIf="role.roleName!='USER' && role.roleName!='ADMIN'" style="cursor: pointer" (click)="openDialogEdit(role)" >edit</mat-icon>
         </div>
         <!--      <div matListItemLine>{{role.updated | date}}</div>-->
       </mat-list-item>

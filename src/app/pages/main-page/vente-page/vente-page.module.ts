@@ -13,7 +13,7 @@ import {CommandPageModule} from "../command-page/command-page.module";
     imports: [
         CommonModule,
         VentePageRoutingModule,
-        CommandPageModule
+      CommandPageModule
     ]
 })
 export class VentePageModule { }

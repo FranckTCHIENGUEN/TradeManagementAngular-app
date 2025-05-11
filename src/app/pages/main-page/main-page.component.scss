@@ -1,4 +1,4 @@
-:host ::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;
+:host ::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0 !important;
   width: 15rem}
 //:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-label { margin-top:-15px; }
 :host ::ng-deep label.ng-star-inserted { transform: translateY(-0.59375em) scale(.75) !important; }
@@ -40,6 +40,13 @@
   //margin-top: 1.5rem;
   margin-left: 2rem;
   height: 100%;
+}
+
+.name{
+  cursor: pointer;
+}
+.name:hover{
+  color: #fc5802;
 }
 
 .mat-toolbar{

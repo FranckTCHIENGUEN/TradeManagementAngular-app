@@ -29,7 +29,7 @@ export class ListComFournisseurPageComponent implements OnInit{
       cell: (element: CommandeFournisseurDto) =>{
         let pipe = new DatePipe('fr-FR');
 
-        const time = pipe.transform(element.datecommande, 'mediumTime', 'UTC+1');
+        // const time = pipe.transform(element.datecommande, 'mediumTime', 'UTC+1');
 
         return pipe.transform(element.datecommande, 'EEE dd MMM yyyy') ;
       }
@@ -107,11 +107,11 @@ export class ListComFournisseurPageComponent implements OnInit{
 
   findAll(){
     this.display=false;
-    if (this.permission.includes('COM_FOURNISSEUR: LIRE')){
-      this.comFourService.findAll().subscribe(
+    if (this.permission.includes('COM_FOURNISSEUR: LIRE') || this.permission.includes('COM_FOURNISSEUR: FILTRER')){
+      this.commandeSearcServjce.filterCommand({datecommande1:new Date(new Date().setHours(0, 0, 0, 0)).toISOString(), datecommande2:new Date(new Date().setHours(23, 59, 59, 999)).toISOString()}, 'fournisseur').subscribe(
         value => {
           this.listeVente = value;
-          this.display = true
+          this.display = true;
         });
     }
 

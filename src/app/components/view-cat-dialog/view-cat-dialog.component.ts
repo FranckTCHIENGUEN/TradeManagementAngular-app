@@ -79,7 +79,6 @@ export class ViewCatDialogComponent implements OnInit{
         if (data=="ok"){
 
           this.categories.push(data.data)
-          console.log(this.categories)
         }
       }
     );

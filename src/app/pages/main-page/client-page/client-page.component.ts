@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {PersonSearchDto} from "../../../../tm-api/src-api/models/person-search-dto";
 import {UtilisateurDto} from "../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
@@ -8,7 +7,7 @@ import {UtilisateurDto} from "../../../../tm-api/src-api/models/utilisateur-dto"
   styleUrls: ['./client-page.component.scss']
 })
 export class ClientPageComponent {
-  isChecked: boolean=false;
+
 
   permission: Array<string> = [];
   constructor() {
@@ -23,7 +22,5 @@ export class ClientPageComponent {
       })
     })
   }
-  filter($event: PersonSearchDto) {
 
-  }
 }

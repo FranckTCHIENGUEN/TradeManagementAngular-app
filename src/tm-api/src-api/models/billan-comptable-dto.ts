@@ -1,17 +1,17 @@
 /* tslint:disable */
 /* eslint-disable */
 import { DetailsBilan } from './details-bilan';
+import { DetailsPaiement } from './details-paiement';
 export interface BillanComptableDto {
-  argentEnCaisse?: number;
-  avance?: number;
-  avanceDepense?: number;
+  ancienneCommande?: DetailsPaiement;
+  ancienneDepense?: DetailsPaiement;
   ca?: number;
   date?: string;
   depense?: number;
   detailsBilan?: Array<DetailsBilan>;
+  nouvelleCommande?: DetailsPaiement;
+  nouvelleDepense?: DetailsPaiement;
   rembourssement?: number;
   rembourssementDepense?: number;
-  resteApayer?: number;
-  resteApayerDepense?: number;
   user?: string;
 }

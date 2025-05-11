@@ -47,7 +47,7 @@ export const menuList = [
         },
       ]
   },
-  {
+ /* {
     role:['VENTE: CRÉER_MODIFIER', 'VENTE: SUPPRIMER','VENTE: LIRE', 'VENTE: FILTRER'],
     label : 'Ventes',
     routerLink : 'vente',
@@ -66,7 +66,7 @@ export const menuList = [
         icon: 'shopping_cart',
       },
     ]
-  },
+  },*/
   {
     role:['DEPENSE: CRÉER_MODIFIER', 'DEPENSE: SUPPRIMER','DEPENSE: LIRE', 'DEPENSE: FILTRER'],
     label : 'Depenses',
@@ -83,7 +83,21 @@ export const menuList = [
     role:['CLIENT: CRÉER_MODIFIER', 'CLIENT: SUPPRIMER','CLIENT: LIRE', 'CLIENT: FILTRER'],
     label : 'Clients',
     routerLink : 'client',
-    icon : 'person'
+    icon : 'person',
+    submenu: [
+      {
+        role:['CLIENT: CRÉER_MODIFIER', 'CLIENT: SUPPRIMER','CLIENT: LIRE', 'CLIENT: FILTRER'],
+        routerLink: 'liste-client',
+        label: 'Liste Clients',
+        icon: 'newspaper',
+      },
+      {
+        role:['GROUPE_CLIENT: CRÉER_MODIFIER','GROUPE_CLIENT: LIRE',],
+        routerLink: 'groupe-client',
+        label: 'Groupe Client',
+        icon: 'newspaper',
+      },
+    ]
   },
   {
     role:['FOURNISSEUR: CRÉER_MODIFIER', 'FOURNISSEUR: SUPPRIMER','FOURNISSEUR: LIRE', 'FOURNISSEUR: FILTRER'],

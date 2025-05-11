@@ -1,7 +1,7 @@
 <!--<div class="title row mt-5 justify-content-center align-items-center text-center">-->
 <!--  <h2 mat-dialog-title>Details </h2>-->
 <!--</div>-->
-<div mat-dialog-title>
+<div class="ms-3 me-3 mt-3">
   <mat-toolbar color="accent">
     <span>Details {{typePersonne}}</span>
     <span class="example-spacer"></span>
@@ -21,13 +21,19 @@
   </mat-toolbar>
 </div>
 
-<div matDialogContent>
+<div class="ms-3 me-3">
   <div class="row justify-content-center align-items-center">
     <img style="height: 150px; width: 150px" src="{{person.photo}}">
   </div>
 
   <div class="row justify-content-center align-items-center text-center">
     <span>{{person.nom}}  {{person.prenom}} - {{person.genre}}</span>
+  </div>
+
+  <div *ngIf="typePersonne=='client'" class="row justify-content-center align-items-center text-center">
+    <span *ngIf="person.groupeClientDtos !=null && true ">
+             Groupe : <span *ngFor=" let groupe of person.groupeClientDtos" >{{groupe.nom}}, </span>
+            </span>
   </div>
 
   <!--<div class="row">-->
@@ -108,7 +114,7 @@
   <div class="containt" *ngIf="typePersonne=='utilisateur'">
 
     <div class="side">
-      <div>Roles</div>
+      <span>Roles</span>
       <div class="col-4" *ngIf="typePersonne=='utilisateur' && permission.includes('UTILISATEUR: ADD_ROLE')">
         <button mat-raised-button color="primary" (click)="openDialogAdd()">Ajouter un role</button>
       </div>
@@ -146,6 +152,6 @@
 </div>
 
 
-<div mat-dialog-actions>
+<div class="row">
   <button mat-raised-button color="primary" mat-dialog-close >Ok</button>
 </div>

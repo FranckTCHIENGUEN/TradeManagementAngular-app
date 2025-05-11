@@ -6,6 +6,9 @@ import {ServiceComponent} from './service.component';
 import {MatButtonModule} from "@angular/material/button";
 import {ProduitPageModule} from "../produit-page/produit-page.module";
 import {MatIconModule} from "@angular/material/icon";
+import {ListeVentePageModule} from "../vente-page/liste-vente-page/liste-vente-page.module";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import {MatIconModule} from "@angular/material/icon";
     ServiceRoutingModule,
     MatButtonModule,
     MatIconModule,
-    ProduitPageModule
+    ProduitPageModule,
+    ListeVentePageModule,
+    MatSlideToggleModule,
+    FormsModule
   ]
 })
 export class ServiceModule { }

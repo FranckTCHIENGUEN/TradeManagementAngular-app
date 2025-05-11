@@ -1,5 +1,12 @@
 
 <div class="row mt-2 justify-content-center text-center">
+<!--  <mat-form-field appearance="fill">-->
+<!--    <mat-select #selected (change)="typeEnregistrement = selected.value" [(value)]="typeEnregistrement"  placeholder="choisir le type d'enregistrement">-->
+<!--        <mat-option *ngFor="let option of listeTypeEnregistrement " [value]="option">-->
+<!--          {{option}}-->
+<!--        </mat-option>-->
+<!--    </mat-select>-->
+<!--  </mat-form-field>-->
   <h2>Enregistrer une {{typeEnregistrement}}</h2>
 </div>
 
@@ -8,17 +15,32 @@
         <div class="row mt-2 justify-content-center">
             <mat-form-field *ngIf="typeEnregistrement!='commande fournisseur' && permission.includes('CLIENT: LIRE')" class="mat-form-field example-full-width" appearance="fill">
               <mat-label>Nom du client</mat-label>
-              <mat-select formControlName="personne" [(value)]="selected" placeholder="choisir le client">
-                <input type="text" placeholder="entrez un nom" class="filter-input" matInput #autocompletenameSelect  (input)="manageFilterPerson(autocompletenameSelect.value)">
-<!--                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">-->
-<!--                  <mat-option *ngFor="let option of filteredOptions |async" [value]="option">-->
-<!--                    {{option.nom}} {{option.prenom}}-->
-<!--                  </mat-option>-->
-<!--                </mat-autocomplete>-->
-                <mat-option *ngFor="let person of filteredOptions | async" [value]="person" >{{person.nom}} {{person.prenom}}</mat-option>
-              </mat-select>
+              <input type="text"
+                     placeholder="Saisir un nom"
+                     aria-label="Nom Client"
+                     matInput
+                     #autocompletenameSelect
+                     (input)="manageFilterPerson(autocompletenameSelect.value)"
+                     formControlName="personne"
+                     [matAutocomplete]="auto">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option.nom}} {{option.prenom}} | <span [style]="option.compteClientDto?.solde!<0 ? 'color:red;' : 'color:black;'" >Solde : {{option.compteClientDto?.solde || 0}}</span>
+                  | Groupe : <span *ngFor=" let groupe of option.groupeClientDtos" >{{groupe.nom}}, </span>
+                </mat-option>
+              </mat-autocomplete>
+<!--              <mat-select formControlName="personne" [(value)]="selected" placeholder="choisir le client">-->
+<!--                <input type="text" placeholder="entrez un nom" class="filter-input" matInput #autocompletenameSelect  (input)="manageFilterPerson(autocompletenameSelect.value)">-->
+<!--&lt;!&ndash;                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <mat-option *ngFor="let option of filteredOptions |async" [value]="option">&ndash;&gt;-->
+<!--&lt;!&ndash;                    {{option.nom}} {{option.prenom}}&ndash;&gt;-->
+<!--&lt;!&ndash;                  </mat-option>&ndash;&gt;-->
+<!--&lt;!&ndash;                </mat-autocomplete>&ndash;&gt;-->
+<!--                <mat-option *ngFor="let person of filteredOptions | async" [value]="person" >{{person.nom}} {{person.prenom}}</mat-option>-->
+<!--              </mat-select>-->
 
               <button *ngIf=" permission.includes('CLIENT: CRÉER_MODIFIER')" matSuffix color="primary" mat-raised-button (click)="nouveauClient()">Nouveau client</button>
+              <button *ngIf=" permission.includes('GROUPE_CLIENT: CRÉER_MODIFIER')" matSuffix color="accent" mat-raised-button (click)="openDialogSave()">Ajouter a un groupe</button>
             </mat-form-field>
             <mat-form-field *ngIf="typeEnregistrement=='commande fournisseur'  && permission.includes('FOURNISSEUR: LIRE')" class="mat-form-field example-full-width" appearance="fill">
                 <mat-label>Nom Fournisseur</mat-label>
@@ -130,8 +152,8 @@
                         </div>
                         <div class="col">
                           <mat-form-field appearance="fill" floatLabel="always">
-                            <mat-label>Montant</mat-label>
-                            <input matInput formControlName="prixTotal" readonly="true" type="number" min="1">
+                            <mat-label>Prix total</mat-label>
+                            <input matInput formControlName="prixTotal" (input)="calculPrixUnitaire(i)"  type="number" min="1">
                             <span matSuffix>FCFA&nbsp;</span>
                           </mat-form-field>
                         </div>
@@ -190,12 +212,12 @@
                         <mat-select formControlName="modePaiement"  placeholder="choisir un mode" (change)="calculmax(i)">
                           <mat-option value="ORANGE_MONNEY" >ORANGE_MONNEY</mat-option>
                           <mat-option value="MOBILE_MONNEY" >MOBILE_MONNEY</mat-option>
-                          <mat-option *ngIf="modeVisible == true" value="REMBOURSSEMENT" >REMBOURSSEMENT</mat-option>
+                          <mat-option *ngIf="modeVisible" value="REMBOURSSEMENT" >REMBOURSSEMENT</mat-option>
                           <mat-option value="ESPECE" >ESPECE</mat-option>
                         </mat-select>
                       </mat-form-field>
                     </div>
-                    <div class="col-3" *ngIf="paiement.at(i).get('modePaiement')?.value != 'ESPECE' ">
+                    <div class="col-3" *ngIf="paiement.at(i).get('modePaiement')?.value != 'ESPECE' && paiement.at(i).get('modePaiement')?.value != 'REMBOURSSEMENT' ">
                       <mat-form-field class="mat-form-field example-full-width" appearance="fill">
                         <mat-label>Compte payeur</mat-label>
                         <input type="text"  (input)="manageChangeFilterPaiement(i)" matInput formControlName="comptePayeur" [matAutocomplete]="autoPaiement">

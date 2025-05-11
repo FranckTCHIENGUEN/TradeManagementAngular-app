@@ -18,12 +18,14 @@ import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 })
 export class PersonComponent implements OnInit{
   typesOfShoes: any;
-  @Input() typePersonne:String = "";
+  @Input() typePersonne:string = "";
   @Input() filterObject:PersonSearchDto = {};
   person: any;
   @Input() permission: Array<string> = [];
   listClient:Array<any> = [];
   selectedPerson:any;
+  isChecked: boolean=false;
+
   constructor(private dialog: MatDialog,
               private fournisseurService:AppFournisseurService,
               private userService:AppUserService,

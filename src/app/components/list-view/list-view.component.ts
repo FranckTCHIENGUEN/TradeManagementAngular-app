@@ -8,6 +8,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ListViewDetailDialogComponent} from "../list-view-detail-dialog/list-view-detail-dialog.component";
 import {ViewDetailBilanDialogComponent} from "../view-detail-bilan-dialog/view-detail-bilan-dialog.component";
 import {PersonViewDetailComponent} from "../person-view-detail/person-view-detail.component";
+import {FactureDialogComponent} from "../facture-dialog/facture-dialog.component";
 
 export interface Column {
   columnDef: string;
@@ -118,7 +119,7 @@ export class ListViewComponent implements OnInit, AfterViewInit, OnChanges{
   viewFacture(id: any) {
     if (this.type =="commande client" ||
       this.type == "commande fournisseur" || this.type=="vente"){
-      this.dialog.open(ListViewDetailDialogComponent, {
+      this.dialog.open(FactureDialogComponent, {
         height: '1122px',
         width: '793px',
         disableClose:false,

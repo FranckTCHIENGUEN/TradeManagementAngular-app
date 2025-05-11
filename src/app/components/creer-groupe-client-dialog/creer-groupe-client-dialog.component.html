@@ -1,0 +1,78 @@
+<div mat-dialog-title>
+  <mat-toolbar color="accent">
+    <span>Enregistrer un groupe client</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+</div>
+
+<div mat-dialog-content class="content">
+  <div class="col" [formGroup]="saveForm">
+    <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+      <mat-label class="">Nom</mat-label>
+      <input type="text" matInput formControlName="nom"
+             [errorStateMatcher]="matcher">
+      <mat-error class="errorMessage" *ngIf="saveForm.controls['nom'].hasError('required')">
+        le nom est requit
+      </mat-error>
+    </mat-form-field>
+      <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" placeholder="entrez une description du groupe"></textarea>
+      </mat-form-field>
+    <mat-form-field *ngIf=" permission.includes('CLIENT: LIRE')" class="mat-form-field d-flex justify-content-center" appearance="fill">
+      <mat-label>Nom du client</mat-label>
+      <input type="text"
+             placeholder="Saisir un nom"
+             aria-label="Nom Client"
+             matInput
+             #autocompletenameSelect
+             (input)="manageFilterPerson(autocompletenameSelect.value)"
+             formControlName="personne"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="updateSelectedClient(option)">
+          {{option.nom}} {{option.prenom}} | <span [style]="option.compteClientDto?.solde!<0 ? 'color:red;' : 'color:black;'" >Solde : {{option.compteClientDto?.solde || 0}}</span>
+          | Groupe : <span *ngFor=" let groupe of option.groupeClientDtos" >{{groupe.nom}}, </span>
+        </mat-option>
+      </mat-autocomplete>
+
+      <button *ngIf=" permission.includes('CLIENT: CRÉER_MODIFIER')" matSuffix color="primary" mat-raised-button (click)="nouveauClient()">Nouveau client</button>
+
+    </mat-form-field>
+  </div>
+
+  <div class="containt">
+
+<!--    <div class="side">-->
+<!--      -->
+<!--      &lt;!&ndash;<mat-selection-list  #shoes (selectionChange)="updateSelectedPermissions(shoes)">-->
+<!--        <div mat-subheader>Liste des Permissions</div>-->
+<!--        <mat-action-list>-->
+<!--          &lt;!&ndash;          <button mat-list-item (click)="shoes.selectAll().length==0 ? shoes.selectAll() : shoes.deselectAll()">Tout selectionner</button>&ndash;&gt;-->
+<!--          <button  mat-list-item *ngIf="shoes.selectedOptions.selected.length==0" (click)="shoes.selectAll(); updateSelectedPermissions(shoes);">Tout selectionner</button>-->
+<!--          <button mat-list-item *ngIf="shoes.selectedOptions.selected.length!=0" (click)="shoes.deselectAll(); updateSelectedPermissions(shoes);">Tout déselectionner</button>-->
+<!--        </mat-action-list>-->
+<!--        <mat-list-option *ngFor="let permissions of listPermission" [value]="permissions">-->
+<!--          {{permissions.permisssion}}-->
+<!--        </mat-list-option>-->
+<!--      </mat-selection-list>&ndash;&gt;-->
+<!--    </div>-->
+    <div class="content" *ngIf="listSelectedClient?.size!=0">
+      <mat-list>
+        <div mat-subheader >Client du groupe</div>
+        <mat-list-item  *ngFor="let option of listSelectedClient;">
+          {{option.nom}} {{option.prenom}} | <span [style]="option.compteClientDto?.solde!<0 ? 'color:red;' : 'color:black;'" >Solde : {{option.compteClientDto?.solde || 0}}</span>
+          | Groupe : <span *ngFor=" let groupe of option.groupeClientDtos" >{{groupe.nom}}, </span>
+          <mat-icon  (click)="remveSelectedClient(option)">close</mat-icon>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <button (click)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
+  </div>
+</div>
+
+<!--<div mat-dialog-actions align="end">-->
+<!--  <button mat-raised-button (click)="closeDialog({etat :'non'})" color="accent" >Fermer</button>-->
+<!--</div>-->

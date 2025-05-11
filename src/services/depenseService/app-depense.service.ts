@@ -15,14 +15,22 @@ export class AppDepenseService {
   }
 
   findAll ():Observable<Array<DepensesDto>>{
-    return this.depenseService.findAll8();
+    return this.depenseService.findAll9();
   }
 
   findById (id:number):Observable<DepensesDto>{
-    return this.depenseService.findById8({id:id});
+    return this.depenseService.findById9({id:id});
+  }
+
+  findByDateBetweenAndUser (date1:string, date2:string, user:string):Observable<Array<DepensesDto>>{
+    return this.depenseService.findByDateDepenseBetweenAndUser({date1:date1, date2:date2, user:user});
+  }
+
+  findByDateBetween (date1:string, date2:string):Observable<Array<DepensesDto>>{
+    return this.depenseService.findByDateDepenseBetween({date1:date1, date2:date2});
   }
 
   delete (id:number){
-    return this.depenseService.delete8({id:id});
+    return this.depenseService.delete9({id:id});
   }
 }

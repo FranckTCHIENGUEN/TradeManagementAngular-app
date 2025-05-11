@@ -27,9 +27,9 @@ export class CategorieDepenseService extends BaseService {
   }
 
   /**
-   * Path part for operation save12
+   * Path part for operation save13
    */
-  static readonly Save12Path = '/tradeManagement/v1/categories-depense/create';
+  static readonly Save13Path = '/tradeManagement/v1/categories-depense/create';
 
   /**
    * enregistrer une categorie.
@@ -37,18 +37,18 @@ export class CategorieDepenseService extends BaseService {
    * cette methode permet d'enregistrer ou de modifier une categorie
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `save12()` instead.
+   * To access only the response body, use `save13()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save12$Response(params: {
+  save13$Response(params: {
     body: CategorieDepenseDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<CategorieDepenseDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategorieDepenseService.Save12Path, 'post');
+    const rb = new RequestBuilder(this.rootUrl, CategorieDepenseService.Save13Path, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -71,18 +71,18 @@ export class CategorieDepenseService extends BaseService {
    * cette methode permet d'enregistrer ou de modifier une categorie
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `save12$Response()` instead.
+   * To access the full response (for headers, for example), `save13$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save12(params: {
+  save13(params: {
     body: CategorieDepenseDto
   },
   context?: HttpContext
 
 ): Observable<CategorieDepenseDto> {
 
-    return this.save12$Response(params,context).pipe(
+    return this.save13$Response(params,context).pipe(
       map((r: StrictHttpResponse<CategorieDepenseDto>) => r.body as CategorieDepenseDto)
     );
   }
@@ -149,9 +149,9 @@ export class CategorieDepenseService extends BaseService {
   }
 
   /**
-   * Path part for operation findById14
+   * Path part for operation findById15
    */
-  static readonly FindById14Path = '/tradeManagement/v1/categories-depense/find/id/{id}';
+  static readonly FindById15Path = '/tradeManagement/v1/categories-depense/find/id/{id}';
 
   /**
    * rechercher une categorie.
@@ -159,18 +159,18 @@ export class CategorieDepenseService extends BaseService {
    * cette methode permet de rechercher une categorie par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById14()` instead.
+   * To access only the response body, use `findById15()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById14$Response(params: {
+  findById15$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<CategorieDepenseDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategorieDepenseService.FindById14Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CategorieDepenseService.FindById15Path, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -193,26 +193,26 @@ export class CategorieDepenseService extends BaseService {
    * cette methode permet de rechercher une categorie par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById14$Response()` instead.
+   * To access the full response (for headers, for example), `findById15$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById14(params: {
+  findById15(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<CategorieDepenseDto> {
 
-    return this.findById14$Response(params,context).pipe(
+    return this.findById15$Response(params,context).pipe(
       map((r: StrictHttpResponse<CategorieDepenseDto>) => r.body as CategorieDepenseDto)
     );
   }
 
   /**
-   * Path part for operation findAll14
+   * Path part for operation findAll15
    */
-  static readonly FindAll14Path = '/tradeManagement/v1/categories-depense/find/all';
+  static readonly FindAll15Path = '/tradeManagement/v1/categories-depense/find/all';
 
   /**
    * obtenir la liste de tous les categories.
@@ -220,17 +220,17 @@ export class CategorieDepenseService extends BaseService {
    * cette methode permet de rechercher tous les categories
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findAll14()` instead.
+   * To access only the response body, use `findAll15()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll14$Response(params?: {
+  findAll15$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<Array<CategorieDepenseDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategorieDepenseService.FindAll14Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CategorieDepenseService.FindAll15Path, 'get');
     if (params) {
     }
 
@@ -252,25 +252,25 @@ export class CategorieDepenseService extends BaseService {
    * cette methode permet de rechercher tous les categories
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findAll14$Response()` instead.
+   * To access the full response (for headers, for example), `findAll15$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll14(params?: {
+  findAll15(params?: {
   },
   context?: HttpContext
 
 ): Observable<Array<CategorieDepenseDto>> {
 
-    return this.findAll14$Response(params,context).pipe(
+    return this.findAll15$Response(params,context).pipe(
       map((r: StrictHttpResponse<Array<CategorieDepenseDto>>) => r.body as Array<CategorieDepenseDto>)
     );
   }
 
   /**
-   * Path part for operation delete14
+   * Path part for operation delete15
    */
-  static readonly Delete14Path = '/tradeManagement/v1/categories-depense/delete/{id}';
+  static readonly Delete15Path = '/tradeManagement/v1/categories-depense/delete/{id}';
 
   /**
    * supprimer un categorie.
@@ -278,18 +278,18 @@ export class CategorieDepenseService extends BaseService {
    * cette methode permet de supprimer un categorie par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `delete14()` instead.
+   * To access only the response body, use `delete15()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete14$Response(params: {
+  delete15$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategorieDepenseService.Delete14Path, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, CategorieDepenseService.Delete15Path, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -312,18 +312,18 @@ export class CategorieDepenseService extends BaseService {
    * cette methode permet de supprimer un categorie par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `delete14$Response()` instead.
+   * To access the full response (for headers, for example), `delete15$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete14(params: {
+  delete15(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<void> {
 
-    return this.delete14$Response(params,context).pipe(
+    return this.delete15$Response(params,context).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

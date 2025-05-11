@@ -51,7 +51,7 @@ export class AddCategorieDialogComponent {
     return this._typeCat;
   }
 
-  closeDialog(p: String) {
+  closeDialog(p: { etat:String, data:any }) {
     this.dialogRef.close(p);
   }
 
@@ -65,7 +65,7 @@ export class AddCategorieDialogComponent {
         this.catDepenseService.save(this.categorie)
           .subscribe(value => {
 
-            this.closeDialog("ok");
+            this.closeDialog({etat:"ok", data:value});
             this.dialog.open(ConfirmDialogComponent, {
               disableClose:false,
               data: {
@@ -79,7 +79,7 @@ export class AddCategorieDialogComponent {
         this.catServiceService.save(this.categorie)
           .subscribe(value => {
 
-            this.closeDialog("ok");
+            this.closeDialog({etat:"ok", data:value});
             this.dialog.open(ConfirmDialogComponent, {
               disableClose:false,
               data: {
@@ -93,7 +93,7 @@ export class AddCategorieDialogComponent {
         this.catProduitService.save(this.categorie)
           .subscribe(value => {
 
-            this.closeDialog("ok");
+            this.closeDialog({etat:"ok", data:value});
             this.dialog.open(ConfirmDialogComponent, {
               disableClose:false,
               data: {

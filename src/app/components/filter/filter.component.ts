@@ -110,12 +110,12 @@ export class FilterComponent {
 
     let person:any = this.saveForm.controls.idClient.value;
     let objet:CommandSearch={
-      dateLivraison1:this.saveForm.controls.dateLivraison1.value as string | undefined,
-      dateLivraison2:this.saveForm.controls.dateLivraison2.value as string | undefined,
-      dateRetrait1:this.saveForm.controls.dateRetrait1.value as string | undefined,
-      dateRetrait2:this.saveForm.controls.dateRetrait2.value as string | undefined,
-      datecommande1:this.saveForm.controls.datecommande1.value as string | undefined,
-      datecommande2:this.saveForm.controls.datecommande2.value as string | undefined,
+      dateLivraison1: this.saveForm.controls.dateLivraison1.value ? new Date(new Date(this.saveForm.controls.dateLivraison1.value as string).setHours(0, 0, 0, 0)).toISOString() : undefined ,
+      dateLivraison2: this.saveForm.controls.dateLivraison2.value ? new Date(new Date(this.saveForm.controls.dateLivraison2.value as string).setHours(23, 59, 59, 999)).toISOString() : undefined ,
+      dateRetrait1: this.saveForm.controls.dateRetrait1.value ? new Date(new Date(this.saveForm.controls.dateRetrait1.value as string).setHours(0, 0, 0, 0)).toISOString() : undefined ,
+      dateRetrait2: this.saveForm.controls.dateRetrait2.value ? new Date(new Date(this.saveForm.controls.dateRetrait2.value as string).setHours(23, 59, 59, 999)).toISOString() : undefined ,
+      datecommande1: this.saveForm.controls.datecommande1.value ? new Date(new Date(this.saveForm.controls.datecommande1.value as string).setHours(0, 0, 0, 0)).toISOString() : undefined ,
+      datecommande2: this.saveForm.controls.datecommande2.value ? new Date(new Date(this.saveForm.controls.datecommande2.value as string).setHours(23, 59, 59, 999)).toISOString() : undefined ,
       code:this.saveForm.controls.code.value as string | undefined,
       etatCommande:this.saveForm.controls.etatCommande.value as "EN_PREPARATION" | "RECEPTIONNER" | "VALIDER" | "LIVRER" | undefined,
       avance:this.saveForm.controls.avance.value as number | undefined,

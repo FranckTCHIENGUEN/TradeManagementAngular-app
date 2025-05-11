@@ -1,0 +1,53 @@
+/* app.component.css */
+.table-container {
+  overflow-x: auto;
+}
+//
+mat-header-cell {
+  //color: #ffffff;
+  background-color: #047c0e;
+  font-weight: bold;
+  border: 0.1rem solid white;
+  //display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+//
+//mat-cell, mat-header-cell {
+//  //min-width: 100px;
+//  padding: 8px;
+//  border-right: 1px solid #ddd;
+//}
+
+.mat-mdc-row .mat-mdc-cell {
+  border: 0.1rem solid black;
+  //border-top: 0.1rem solid black;
+  cursor: pointer;
+}
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
+
+.mat-row:nth-child(even){
+  background-color: #deb281;
+}
+
+.mat-row:nth-child(odd){
+  background-color: #88d2e0;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+div.con{
+  padding-right: 1.5rem;
+  border-radius: 2rem;
+}
+
+mat-header-row {
+  color: #ffffff;
+  background-color: #047c0e;
+  font-weight: bold;
+  border: 0.1rem solid white;
+}

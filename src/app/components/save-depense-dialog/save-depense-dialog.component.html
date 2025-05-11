@@ -28,7 +28,7 @@
                 <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
                   <mat-label class="">Categorie</mat-label>
                   <mat-select formControlName="categorie" [errorStateMatcher]="matcher">
-                    <mat-option *ngFor="let cat of categories" [value]="cat">
+                    <mat-option *ngFor="let cat of categories | async" [value]="cat">
                       {{cat.nom}}
                     </mat-option>
                   </mat-select>
@@ -82,7 +82,7 @@
                     <div class="col">
                       <mat-form-field appearance="fill" floatLabel="always">
                         <mat-label>Montant</mat-label>
-                        <input matInput formControlName="montantTotal" readonly="true" type="number" min="1">
+                        <input matInput formControlName="montantTotal" (input)="calculPrixUnitaire(i)" type="number" min="1">
                         <span matSuffix>FCFA&nbsp;</span>
                       </mat-form-field>
                     </div>

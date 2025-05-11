@@ -39,6 +39,9 @@ import {
 } from "../../../services/commandFournisseurService/app-command-fournisseur.service";
 import {AppCommandClientService} from "../../../services/commandClientService/app-command-client.service";
 import * as moment from "moment/moment";
+import {AppPersonSearchService} from "../../../services/personSearch/app-person-search.service";
+import {placeObjectAtFirstPosition} from "../../utils/sort";
+import {CreerGroupeClientDialogComponent} from "../creer-groupe-client-dialog/creer-groupe-client-dialog.component";
 
 export interface User {
   name: string;
@@ -103,6 +106,7 @@ export class VenteComponent implements OnInit{
   filteredOptionsFournisseur: Observable<FournisseurDto[]> | undefined;
   filteredElement: Observable<ArticleDto[]> | undefined;
   filteredElement2: Observable<StatServiceDto[]> | undefined;
+  listeTypeEnregistrement = ['vente', 'commande fournisseur', 'commande client']
   type: any;
   today = new Date().getDate();
   private _isSubmited = false;
@@ -110,7 +114,7 @@ export class VenteComponent implements OnInit{
   private _montantTotal: number = 0;
   private _Restepayer: number = 0;
   selected: any;
-  etatCommande = ['EN_PREPARATION' , 'RECEPTIONER' , 'VALIDER' , 'LIVRER']
+  etatCommande = ['EN_PREPARATION' , 'RECEPTIONNER' , 'VALIDER' , 'LIVRER']
   modePaiement = ['MOBILE_MONNEY' , 'ORANGE_MONNEY' , 'REMBOURSSEMENT' , 'ESPECE']
   @Input() typeEnregistrement: string | undefined;
   elements: any ;
@@ -124,6 +128,7 @@ export class VenteComponent implements OnInit{
               private dialog: MatDialog,
               private fournisseurService:AppFournisseurService,
               private venteService:AppVenbteServiceService,
+              private filterPersonService:AppPersonSearchService,
               private comFournisseurService:AppCommandFournisseurService,
               private comClientService:AppCommandClientService,
               private clientService:ClientAppServiceService) {
@@ -195,11 +200,11 @@ export class VenteComponent implements OnInit{
   }
 
   displayFn(user: ClientDto): string {
-    let nom = user.nom+" "+ user.prenom
+    let nom = user.nom + (user?.prenom ? " "+ user?.prenom: "")
     return user && nom ? nom : '';
   }
   displayFnFournisseur(user: FournisseurDto): string {
-    let nom = user.nom+" "+ user.prenom
+    let nom = user.nom + (user?.prenom ? " "+ user?.prenom: "")
     return user && nom ? nom : '';
   }
   displayFnPaiement(user: CompteClientDto): string {
@@ -219,16 +224,18 @@ export class VenteComponent implements OnInit{
   private _filter(name: string): Observable<ClientDto[]> {
     // const filterValue = name.toLowerCase();
 
-    return this.clientService.findAll().pipe(map(response => response.filter(option => {
-      return option.nom?.toLowerCase().indexOf(name.toLowerCase()) === 0
-    })))
+      return this.filterPersonService.fiterPerson({nom:name}, "client").pipe(map(response => response.filter((option:any )=> {
+        return option.nom?.toLowerCase().indexOf(name.toLowerCase()) === 0
+      })))
+
   }
   private _filterFournisseur(name: string): Observable<FournisseurDto[]> {
     // const filterValue = name.toLowerCase();
 
-    return this.fournisseurService.findAll().pipe(map(response => response.filter(option => {
+    return this.filterPersonService.fiterPerson({nom:name}, "fournisseur").pipe(map(response => response.filter((option:any ) => {
       return option.nom?.toLowerCase().indexOf(name.toLowerCase()) === 0
     })))
+
   }
   private _filterElement(name: string): Observable<ArticleDto[]> {
     // const filterValue = name.toLowerCase();
@@ -381,6 +388,13 @@ export class VenteComponent implements OnInit{
   calculmontant(i: number) {
     this.ligneCom.at(i).get("prixTotal")?.patchValue(
       this.ligneCom.at(i).get("quantite")?.value * this.ligneCom.at(i).get("prixUnitaire")?.value as number
+    )
+    this.calculmontantTotal();
+    this.calculRestepayer();
+  }
+  calculPrixUnitaire(i: number) {
+    this.ligneCom.at(i).get("prixUnitaire")?.patchValue(
+      this.ligneCom.at(i).get("prixTotal")?.value / this.ligneCom.at(i).get("quantite")?.value as number
     )
     this.calculmontantTotal();
     this.calculRestepayer();
@@ -642,6 +656,30 @@ export class VenteComponent implements OnInit{
     }
   }
 
+  openDialogSave() {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '75%';
+    dialogConfig.width = '90%';
+
+    this.dialog.open(CreerGroupeClientDialogComponent, dialogConfig);
+
+    const dialogRef = this.dialog.open(CreerGroupeClientDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data=="ok"){
+
+          this.findAll();
+        }
+      }
+    );
+    dialogRef.close();
+  }
+
   nouveauClient() {
 
     const dialogConfig = new MatDialogConfig();
@@ -655,7 +693,7 @@ export class VenteComponent implements OnInit{
     if (this.typeEnregistrement =="commande client" || this.typeEnregistrement=="vente"){
       typePersonne = "client"
     }
-    if (this.typeEnregistrement =="commande fournisseur"){
+    else if (this.typeEnregistrement =="commande fournisseur"){
       typePersonne = "fournisseur"
     }
     dialogConfig.data= {
@@ -668,7 +706,13 @@ export class VenteComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(
       data => {
-        if (data=="ok"){
+        if (data.etat=="ok"){
+          if (this.typeEnregistrement =="commande client" || this.typeEnregistrement=="vente"){
+            this.filteredOptions = placeObjectAtFirstPosition(this.filteredOptions, data.data)
+          }
+          else if (this.typeEnregistrement =="commande fournisseur"){
+            this.filteredOptionsFournisseur = placeObjectAtFirstPosition(this.filteredOptionsFournisseur, data.data)
+          }
 
           // this.findAll();
         }
@@ -688,8 +732,9 @@ export class VenteComponent implements OnInit{
         },
       }).afterClosed().subscribe(
         data => {
-          if (data=="ok"){
-
+          if (data.etat=="ok"){
+            this.filteredElement2 = placeObjectAtFirstPosition(this.filteredElement2, data.data)
+            // this.ligneCom.at(i).get("objet")?.patchValue(data.data)
             // this.ngOnInit();
           }
         }
@@ -705,8 +750,9 @@ export class VenteComponent implements OnInit{
         },
       }).afterClosed().subscribe(
         data => {
-          if (data=="ok"){
-
+          if (data.etat=="ok"){
+            this.filteredElement = placeObjectAtFirstPosition(this.filteredElement, data.data)
+            // this.ligneCom.at(i).get("objet")?.patchValue(data.data)
             // this.ngOnInit();
           }
         }
@@ -760,8 +806,17 @@ export class VenteComponent implements OnInit{
   //
   //
   // }
-
   calculmax(i: number):number{
+    if (this.paiement.at(i).get('modePaiement')?.value =='REMBOURSSEMENT'){
+      if (this.typeEnregistrement=='commande fournisseur'){
+        // let client = this.saveForm.controls.personne.value as FournisseurDto
+        // this.paiement.at(i).get('comptePayeur')?.patchValue(client.)
+      }else {
+        let client = this.saveForm.controls.personne.value as ClientDto
+        this.paiement.at(i).get('comptePayeur')?.patchValue(client.compteClientDto)
+      }
+
+    }
    let present = false;
     for (let j = 0; j < this.paiement.length; j++) {
       if (this.paiement.at(j).get('modePaiement')?.value =='REMBOURSSEMENT' && j!=i){

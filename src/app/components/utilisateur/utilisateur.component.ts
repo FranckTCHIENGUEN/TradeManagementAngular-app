@@ -4,6 +4,8 @@ import {Column} from "../list-view/list-view.component";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {SavePersonDialogComponent} from "../save-person-dialog/save-person-dialog.component";
+import {PersonSearchDto} from "../../../tm-api/src-api/models/person-search-dto";
+import {AppPersonSearchService} from "../../../services/personSearch/app-person-search.service";
 
 @Component({
   selector: 'app-utilisateur',
@@ -69,9 +71,11 @@ export class UtilisateurComponent implements OnInit{
       cell: (element: UtilisateurDto) => `${element.genre}`,
     },
   ];
+  isChecked: boolean=false;
 
   constructor(private userService:AppUserService,
-              private dialog: MatDialog,) {
+              private dialog: MatDialog,
+              private filterPersonService:AppPersonSearchService,) {
     this.getPermissions();
   }
 
@@ -124,7 +128,14 @@ export class UtilisateurComponent implements OnInit{
       }
     )
   }
+  filter(context:string, personSearch:PersonSearchDto){
 
+    this.filterPersonService.fiterPerson(personSearch,context).subscribe(
+      value => {
+        this.listeUtilisateur = value
+      }
+    )
+  }
 
 
 }

@@ -1,4 +1,5 @@
 export { UtilisateurService } from './services/utilisateur.service';
+export { GroupeClientService } from './services/groupe-client.service';
 export { VenteService } from './services/vente.service';
 export { ServiceService } from './services/service.service';
 export { RoleService } from './services/role.service';
@@ -19,4 +20,5 @@ export { CategorieServiceService } from './services/categorie-service.service';
 export { CategorieDepenseService } from './services/categorie-depense.service';
 export { ArticleService } from './services/article.service';
 export { StatisqueService } from './services/statisque.service';
+export { BillService } from './services/bill.service';
 export { BilanComptableService } from './services/bilan-comptable.service';

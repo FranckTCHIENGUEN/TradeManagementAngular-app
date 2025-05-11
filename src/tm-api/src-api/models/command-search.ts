@@ -3,6 +3,7 @@
 export interface CommandSearch {
   avance?: number;
   code?: string;
+  createdBy?: string;
   dateLivraison1?: string;
   dateLivraison2?: string;
   dateRetrait1?: string;

@@ -3,7 +3,7 @@
     <p> Aucune données trouvées</p>
   </div>
   <div class="row me-3" >
-    <div class="col-lg-3 col-xl-4 col-md-6 col-sm-6 mb-3" *ngFor="let data of listOfData">
+    <div class="col-lg-3 col-xl-4 col-md-6 col-sm-6 mb-3" *ngFor="let data of listOfData; let i = index">
       <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title-group *ngIf="typeAffichage=='produit'">
@@ -59,7 +59,8 @@
             </p>
           </div>
 
-          <button color="primary" (click)="callDetail(data)" mat-button>Detail</button>
+          <button *ngIf="typeAffichage=='service'" color="primary" (click)="openDialogEditService(data, i)" mat-button>Modifier</button>
+          <button *ngIf="typeAffichage=='produit'" color="primary" (click)="callDetail(data)" mat-button>Detail</button>
         </mat-card-actions>
       </mat-card>
     </div>

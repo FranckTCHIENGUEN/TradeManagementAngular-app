@@ -3,12 +3,13 @@ import {FormArray, FormBuilder, Validators} from "@angular/forms";
 import {MyErrorStateMatcher} from "../../ErrorMatcher";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ClientAppServiceService} from "../../../services/clientAppService/client-app-service.service";
-import {AdresseDto, ContactDto, UtilisateurDto} from "../../../tm-api/src-api/models";
-import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data-link-transfert.service";
+import {AdresseDto, ContactDto, RoleDto, UtilisateurDto} from "../../../tm-api/src-api/models";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 import {AppFournisseurService} from "../../../services/fournisseurService/app-fournisseur.service";
 import {AppUserService} from "../../../services/appUserServices/app-user.service";
 import {userExistsValidator} from "../../../validation";
+import {MatSelectionList} from "@angular/material/list";
+import {AppRoleService} from "../../../services/roleService/app-role.service";
 
 @Component({
   selector: 'app-save-person-dialog',
@@ -49,6 +50,10 @@ export class SavePersonDialogComponent {
   private _matcher = new MyErrorStateMatcher();
   private _nombreContact=0;
 
+  listRole: Set<RoleDto> =  new  Set<RoleDto>();
+  listSelectedRole: Set<RoleDto> = new Set<RoleDto>();
+  role:RoleDto[] = [];
+
    private _typePersonne?:String;
   private _personGenre = ['MASCULIN' , 'FEMININ' , 'ENTREPRISE'];
 
@@ -64,7 +69,7 @@ export class SavePersonDialogComponent {
   }
 
   constructor(private formBuilder:FormBuilder,
-              private dataLinkTransfert:DataLinkTransfertService,
+              private roleService:AppRoleService,
               private clientAppService:ClientAppServiceService,
               private fournisseurService:AppFournisseurService,
               private userService:AppUserService,
@@ -96,12 +101,62 @@ export class SavePersonDialogComponent {
           this.addLigne();
           this.contact.at(3).get('tel')?.patchValue(this.client.contactDto.tel4);
         }
+        if (this._typePersonne == "utilisateur"){
+          if (this.data.person.roles !=null){
+            this.role = this.data.person.roles;
+          }
+
+          this.roleService.findAll().subscribe(value => {
+            value.forEach(value1 => {
+              let present = false
+              this.role.forEach(value => {
+
+                this.listSelectedRole?.add(value);
+                if (value1.id == value.id){
+                  present = true;
+                }
+              })
+              if (!present){
+                if (value1.roleName!="USER"){
+                  this.listRole.add(value1)
+                }
+              }
+
+            })
+          })
+        }
       }
+    }else {
+      this.findAllRole()
     }
   }
 
+  updateSelectedRole(selected: MatSelectionList) {
 
-  closeDialog(p: { etat: string }) {
+    selected.selectedOptions.selected.forEach(value => {
+      let permission = value.value as RoleDto;
+      this.listSelectedRole?.add(permission)
+      this.listRole?.delete(permission);
+    });
+  }
+
+  remveSelectedRole(selected: RoleDto) {
+    this.listSelectedRole?.delete(selected)
+    this.listRole?.add(selected);
+
+  }
+
+  findAllRole(){
+    this.roleService.findAll().subscribe(value => {
+      value.forEach(value1 => {
+        if (value1.roleName!="USER"){
+          this.listRole.add(value1)
+        }
+
+      })
+    })
+  }
+  closeDialog(p: { etat: string, data:any|null }) {
     this.dialogRef.close(p);
   }
 
@@ -174,7 +229,7 @@ export class SavePersonDialogComponent {
         this.clientAppService.save(this.client)
           .subscribe(value => {
 
-            this.closeDialog({etat :'ok'});
+            this.closeDialog({etat :'ok', data:value});
             this.dialog.open(ConfirmDialogComponent, {
               disableClose:false,
               data: {
@@ -188,7 +243,7 @@ export class SavePersonDialogComponent {
         this.fournisseurService.save(this.client)
           .subscribe(value => {
 
-            this.closeDialog({etat :'ok'});
+            this.closeDialog({etat :'ok', data:value});
             this.dialog.open(ConfirmDialogComponent, {
               disableClose:false,
               data: {
@@ -211,7 +266,7 @@ export class SavePersonDialogComponent {
         this.userService.save(user)
           .subscribe(value => {
 
-            this.closeDialog({etat :'ok'});
+            this.closeDialog({etat :'ok', data:value});
             this.dialog.open(ConfirmDialogComponent, {
               disableClose:false,
               data: {

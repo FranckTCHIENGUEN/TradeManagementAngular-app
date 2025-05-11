@@ -82,8 +82,8 @@ export class FilterPersonComponent {
 
     let person:any = this.saveForm.controls.nom.value;
     let objet:PersonSearchDto={
-      nom:person.nom as string | undefined,
-      prenom:person.prenom as string | undefined,
+      nom:person as string | undefined,
+      prenom:person as string | undefined,
       mail:this.saveForm.controls.mail.value as string | undefined,
       tel:this.saveForm.controls.tel.value as string | undefined,
     }
@@ -104,6 +104,7 @@ export class FilterPersonComponent {
     objet.adresse = adresse;
     objet.compteClientDto = compte;
 
+    console.log(objet)
     this.objetFiltre.emit(objet);
   }
 }

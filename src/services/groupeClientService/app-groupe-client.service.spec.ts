@@ -1,0 +1,16 @@
+import { TestBed } from '@angular/core/testing';
+
+import { AppGroupeClientService } from './app-groupe-client.service';
+
+describe('AppGroupeClientService', () => {
+  let service: AppGroupeClientService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(AppGroupeClientService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});

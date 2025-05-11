@@ -9,19 +9,27 @@
     <img class="img-fluid" src="{{userConnected.entreprise?.photo}}" style="height: 50px" alt="">
     <span id="titre">{{userConnected.entreprise?.nom}}</span>
   </div>
-  <div class=" align-items-center justify-content-center">
-    <mat-form-field class="input-group" appearance="fill">
-      <input matInput placeholder="Recherche" (keyup)="addNewItem(input.value)" #input>
-      <button mat-button type="button" matSuffix (click)="addNewItem(input.value)">
-        <mat-icon>search</mat-icon>
-      </button>
-    </mat-form-field>
-  </div>
+<!--  <div class=" align-items-center justify-content-center">-->
+<!--    <mat-form-field class="input-group" appearance="fill">-->
+<!--      <input matInput placeholder="Recherche" (keyup)="addNewItem(input.value)" #input>-->
+<!--      <button mat-button type="button" matSuffix (click)="addNewItem(input.value)">-->
+<!--        <mat-icon>search</mat-icon>-->
+<!--      </button>-->
+<!--    </mat-form-field>-->
+<!--  </div>-->
 
   <div>
 <!--    <button mat-icon-button  class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">-->
-      <img [matMenuTriggerFor]="menu" class="img-fluid" src="{{userConnected.photo}}" style="height: 50px" alt="">
+<!--      <img [matMenuTriggerFor]="menu" class="img-fluid" ngSrc="{{userConnected.photo}}" style="height: 50px" alt=""-->
+<!--           fill>-->
+
 <!--    </button>-->
+
+    <span [matMenuTriggerFor]="menu" class="name">
+      {{userConnected.prenom}}  {{userConnected.nom}}
+      <mat-icon >expand_circle_down</mat-icon>
+    </span>
+
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="callDialogDetailPerson()">
         <mat-icon>person</mat-icon>
@@ -50,7 +58,7 @@
         <span>Deconnexion</span>
       </button>
     </mat-menu>
-    <span>{{userConnected.prenom}}  {{userConnected.nom}}</span>
+
   </div>
   <!--  </mat-toolbar-row>-->
 

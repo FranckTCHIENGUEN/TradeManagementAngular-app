@@ -48,8 +48,12 @@ export class BilanPeriodiquePageComponent {
     this.display=false;
     if (this.saveForm.valid){
 
-      this.date1 = this.saveForm.controls.date1.value?.toISOString() as string;
-      this.date2 = this.saveForm.controls.date2.value?.toISOString() as string;
+
+      let date1 = new Date( this.saveForm.controls.date1.value?.toISOString() as string).setHours(0, 0, 0, 0);
+      let date2 = new Date(this.saveForm.controls.date2.value?.toISOString() as string).setHours(23, 59, 59, 999);
+
+      this.date1 = new Date(date1).toISOString();
+      this.date2 = new Date(date2).toISOString();
 
       this.display = true;
     }

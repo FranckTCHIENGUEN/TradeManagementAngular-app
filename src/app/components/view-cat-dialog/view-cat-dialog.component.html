@@ -23,12 +23,12 @@
   <div mat-subheader>Categories</div>
   <mat-list-item *ngFor="let categorie of categories">
     <mat-icon matListItemIcon> folder </mat-icon>
-    <div matListItemTitle>{{categorie.nom}}</div>
-    <button matSuffix mat-button color="accent" (click)="openDialogEditCat(categorie)">
-    <mat-icon color="primary">
-            <span class="material-symbols-outlined">
-            edit
-          </span></mat-icon>
-  </button>
+    <div matListItemTitle>{{categorie.nom}}
+      <button matSuffix mat-button color="accent" (click)="openDialogEditCat(categorie)">
+        <mat-icon color="primary">
+          <span class="material-symbols-outlined">edit</span>
+        </mat-icon>
+      </button>
+    </div>
   </mat-list-item>
 </mat-list>

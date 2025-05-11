@@ -88,9 +88,9 @@ export class DepenseService extends BaseService {
   }
 
   /**
-   * Path part for operation findById8
+   * Path part for operation findById9
    */
-  static readonly FindById8Path = '/tradeManagement/v1/depenses/{id}';
+  static readonly FindById9Path = '/tradeManagement/v1/depenses/{id}';
 
   /**
    * rechercher un role.
@@ -98,18 +98,18 @@ export class DepenseService extends BaseService {
    * cette methode permet de rechercher un role par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById8()` instead.
+   * To access only the response body, use `findById9()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById8$Response(params: {
+  findById9$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<DepensesDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, DepenseService.FindById8Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, DepenseService.FindById9Path, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -132,26 +132,26 @@ export class DepenseService extends BaseService {
    * cette methode permet de rechercher un role par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById8$Response()` instead.
+   * To access the full response (for headers, for example), `findById9$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById8(params: {
+  findById9(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<DepensesDto> {
 
-    return this.findById8$Response(params,context).pipe(
+    return this.findById9$Response(params,context).pipe(
       map((r: StrictHttpResponse<DepensesDto>) => r.body as DepensesDto)
     );
   }
 
   /**
-   * Path part for operation delete8
+   * Path part for operation delete9
    */
-  static readonly Delete8Path = '/tradeManagement/v1/depenses/{id}';
+  static readonly Delete9Path = '/tradeManagement/v1/depenses/{id}';
 
   /**
    * supprimer un role.
@@ -159,18 +159,18 @@ export class DepenseService extends BaseService {
    * cette methode permet de supprimer un role par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `delete8()` instead.
+   * To access only the response body, use `delete9()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete8$Response(params: {
+  delete9$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, DepenseService.Delete8Path, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, DepenseService.Delete9Path, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -193,18 +193,18 @@ export class DepenseService extends BaseService {
    * cette methode permet de supprimer un role par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `delete8$Response()` instead.
+   * To access the full response (for headers, for example), `delete9$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete8(params: {
+  delete9(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<void> {
 
-    return this.delete8$Response(params,context).pipe(
+    return this.delete9$Response(params,context).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
@@ -212,7 +212,7 @@ export class DepenseService extends BaseService {
   /**
    * Path part for operation findByDateDepenseBetween
    */
-  static readonly FindByDateDepenseBetweenPath = '/tradeManagement/v1/depenses/date/{date1}?{date2}';
+  static readonly FindByDateDepenseBetweenPath = '/tradeManagement/v1/depenses/date/{date1}/{date2}';
 
   /**
    * rechercher un role.
@@ -269,6 +269,73 @@ export class DepenseService extends BaseService {
 ): Observable<Array<DepensesDto>> {
 
     return this.findByDateDepenseBetween$Response(params,context).pipe(
+      map((r: StrictHttpResponse<Array<DepensesDto>>) => r.body as Array<DepensesDto>)
+    );
+  }
+
+  /**
+   * Path part for operation findByDateDepenseBetweenAndUser
+   */
+  static readonly FindByDateDepenseBetweenAndUserPath = '/tradeManagement/v1/depenses/date/{date1}/{date2}/{user}';
+
+  /**
+   * rechercher un role.
+   *
+   * cette methode permet de rechercher un role par son ID
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findByDateDepenseBetweenAndUser()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findByDateDepenseBetweenAndUser$Response(params: {
+    date1: string;
+    date2: string;
+    user: string;
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<Array<DepensesDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, DepenseService.FindByDateDepenseBetweenAndUserPath, 'get');
+    if (params) {
+      rb.path('date1', params.date1, {});
+      rb.path('date2', params.date2, {});
+      rb.query('user', params.user, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<DepensesDto>>;
+      })
+    );
+  }
+
+  /**
+   * rechercher un role.
+   *
+   * cette methode permet de rechercher un role par son ID
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `findByDateDepenseBetweenAndUser$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findByDateDepenseBetweenAndUser(params: {
+    date1: string;
+    date2: string;
+    user: string;
+  },
+  context?: HttpContext
+
+): Observable<Array<DepensesDto>> {
+
+    return this.findByDateDepenseBetweenAndUser$Response(params,context).pipe(
       map((r: StrictHttpResponse<Array<DepensesDto>>) => r.body as Array<DepensesDto>)
     );
   }
@@ -398,7 +465,7 @@ export class DepenseService extends BaseService {
   /**
    * Path part for operation findByCategoryIdAndDateDepenseBetween
    */
-  static readonly FindByCategoryIdAndDateDepenseBetweenPath = '/tradeManagement/v1/depenses/categorie-date/{idcategorie}?{date1}?{date2}';
+  static readonly FindByCategoryIdAndDateDepenseBetweenPath = '/tradeManagement/v1/depenses/categorie-date/{idcategorie}/{date1}/{date2}';
 
   /**
    * rechercher un role.
@@ -463,9 +530,9 @@ export class DepenseService extends BaseService {
   }
 
   /**
-   * Path part for operation findAll8
+   * Path part for operation findAll9
    */
-  static readonly FindAll8Path = '/tradeManagement/v1/depenses/';
+  static readonly FindAll9Path = '/tradeManagement/v1/depenses/';
 
   /**
    * rechercher un role.
@@ -473,17 +540,17 @@ export class DepenseService extends BaseService {
    * cette methode permet de rechercher la liste des roles elle retourne la liste de tous les roles
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findAll8()` instead.
+   * To access only the response body, use `findAll9()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll8$Response(params?: {
+  findAll9$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<Array<DepensesDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, DepenseService.FindAll8Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, DepenseService.FindAll9Path, 'get');
     if (params) {
     }
 
@@ -505,17 +572,17 @@ export class DepenseService extends BaseService {
    * cette methode permet de rechercher la liste des roles elle retourne la liste de tous les roles
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findAll8$Response()` instead.
+   * To access the full response (for headers, for example), `findAll9$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll8(params?: {
+  findAll9(params?: {
   },
   context?: HttpContext
 
 ): Observable<Array<DepensesDto>> {
 
-    return this.findAll8$Response(params,context).pipe(
+    return this.findAll9$Response(params,context).pipe(
       map((r: StrictHttpResponse<Array<DepensesDto>>) => r.body as Array<DepensesDto>)
     );
   }

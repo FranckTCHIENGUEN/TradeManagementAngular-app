@@ -20,7 +20,7 @@ export class UpdateEtatDialogComponent {
     ]],
   })
 
-  etatCommande = ['EN_PREPARATION' , 'RECEPTIONER' , 'VALIDER' , 'LIVRER']
+  etatCommande = ['EN_PREPARATION' , 'RECEPTIONNER' , 'VALIDER' , 'LIVRER']
   type?: string;
   donnees:any;
 
@@ -34,7 +34,7 @@ export class UpdateEtatDialogComponent {
 
     if (this.data !=null){
       this.type = this.data.type;
-      this.donnees = this.data.commande;
+      this.donnees = this.data.Commande;
     }
 
   }

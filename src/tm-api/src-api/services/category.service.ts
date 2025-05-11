@@ -27,9 +27,9 @@ export class CategoryService extends BaseService {
   }
 
   /**
-   * Path part for operation save10
+   * Path part for operation save11
    */
-  static readonly Save10Path = '/tradeManagement/v1/categories/create';
+  static readonly Save11Path = '/tradeManagement/v1/categories/create';
 
   /**
    * enregistrer une categorie.
@@ -37,18 +37,18 @@ export class CategoryService extends BaseService {
    * cette methode permet d'enregistrer ou de modifier une categorie
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `save10()` instead.
+   * To access only the response body, use `save11()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save10$Response(params: {
+  save11$Response(params: {
     body: CategoryDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<CategoryDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryService.Save10Path, 'post');
+    const rb = new RequestBuilder(this.rootUrl, CategoryService.Save11Path, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -71,26 +71,26 @@ export class CategoryService extends BaseService {
    * cette methode permet d'enregistrer ou de modifier une categorie
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `save10$Response()` instead.
+   * To access the full response (for headers, for example), `save11$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save10(params: {
+  save11(params: {
     body: CategoryDto
   },
   context?: HttpContext
 
 ): Observable<CategoryDto> {
 
-    return this.save10$Response(params,context).pipe(
+    return this.save11$Response(params,context).pipe(
       map((r: StrictHttpResponse<CategoryDto>) => r.body as CategoryDto)
     );
   }
 
   /**
-   * Path part for operation findById12
+   * Path part for operation findById13
    */
-  static readonly FindById12Path = '/tradeManagement/v1/categories/find/id/{id}';
+  static readonly FindById13Path = '/tradeManagement/v1/categories/find/id/{id}';
 
   /**
    * rechercher une categorie.
@@ -98,18 +98,18 @@ export class CategoryService extends BaseService {
    * cette methode permet de rechercher une categorie par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById12()` instead.
+   * To access only the response body, use `findById13()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById12$Response(params: {
+  findById13$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<CategoryDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryService.FindById12Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CategoryService.FindById13Path, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -132,18 +132,18 @@ export class CategoryService extends BaseService {
    * cette methode permet de rechercher une categorie par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById12$Response()` instead.
+   * To access the full response (for headers, for example), `findById13$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById12(params: {
+  findById13(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<CategoryDto> {
 
-    return this.findById12$Response(params,context).pipe(
+    return this.findById13$Response(params,context).pipe(
       map((r: StrictHttpResponse<CategoryDto>) => r.body as CategoryDto)
     );
   }
@@ -207,9 +207,9 @@ export class CategoryService extends BaseService {
   }
 
   /**
-   * Path part for operation findAll12
+   * Path part for operation findAll13
    */
-  static readonly FindAll12Path = '/tradeManagement/v1/categories/find/all';
+  static readonly FindAll13Path = '/tradeManagement/v1/categories/find/all';
 
   /**
    * obtenir la liste de tous les categories.
@@ -217,17 +217,17 @@ export class CategoryService extends BaseService {
    * cette methode permet de rechercher tous les categories
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findAll12()` instead.
+   * To access only the response body, use `findAll13()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll12$Response(params?: {
+  findAll13$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<Array<CategoryDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryService.FindAll12Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CategoryService.FindAll13Path, 'get');
     if (params) {
     }
 
@@ -249,25 +249,25 @@ export class CategoryService extends BaseService {
    * cette methode permet de rechercher tous les categories
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findAll12$Response()` instead.
+   * To access the full response (for headers, for example), `findAll13$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll12(params?: {
+  findAll13(params?: {
   },
   context?: HttpContext
 
 ): Observable<Array<CategoryDto>> {
 
-    return this.findAll12$Response(params,context).pipe(
+    return this.findAll13$Response(params,context).pipe(
       map((r: StrictHttpResponse<Array<CategoryDto>>) => r.body as Array<CategoryDto>)
     );
   }
 
   /**
-   * Path part for operation delete12
+   * Path part for operation delete13
    */
-  static readonly Delete12Path = '/tradeManagement/v1/categories/delete/{id}';
+  static readonly Delete13Path = '/tradeManagement/v1/categories/delete/{id}';
 
   /**
    * supprimer un categorie.
@@ -275,18 +275,18 @@ export class CategoryService extends BaseService {
    * cette methode permet de supprimer un categorie par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `delete12()` instead.
+   * To access only the response body, use `delete13()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete12$Response(params: {
+  delete13$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryService.Delete12Path, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, CategoryService.Delete13Path, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -309,18 +309,18 @@ export class CategoryService extends BaseService {
    * cette methode permet de supprimer un categorie par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `delete12$Response()` instead.
+   * To access the full response (for headers, for example), `delete13$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete12(params: {
+  delete13(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<void> {
 
-    return this.delete12$Response(params,context).pipe(
+    return this.delete13$Response(params,context).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

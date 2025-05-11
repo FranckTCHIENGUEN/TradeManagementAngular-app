@@ -88,9 +88,9 @@ export class FournisseurService extends BaseService {
   }
 
   /**
-   * Path part for operation findAll6
+   * Path part for operation findAll7
    */
-  static readonly FindAll6Path = '/tradeManagement/v1/fournisseurs/';
+  static readonly FindAll7Path = '/tradeManagement/v1/fournisseurs/';
 
   /**
    * rechercher un fournisseur.
@@ -98,17 +98,17 @@ export class FournisseurService extends BaseService {
    * cette methode permet de rechercher la liste des fournisseurs elle retourne la liste de tous les fournisseurs
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findAll6()` instead.
+   * To access only the response body, use `findAll7()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll6$Response(params?: {
+  findAll7$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<Array<FournisseurDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, FournisseurService.FindAll6Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, FournisseurService.FindAll7Path, 'get');
     if (params) {
     }
 
@@ -130,25 +130,25 @@ export class FournisseurService extends BaseService {
    * cette methode permet de rechercher la liste des fournisseurs elle retourne la liste de tous les fournisseurs
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findAll6$Response()` instead.
+   * To access the full response (for headers, for example), `findAll7$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll6(params?: {
+  findAll7(params?: {
   },
   context?: HttpContext
 
 ): Observable<Array<FournisseurDto>> {
 
-    return this.findAll6$Response(params,context).pipe(
+    return this.findAll7$Response(params,context).pipe(
       map((r: StrictHttpResponse<Array<FournisseurDto>>) => r.body as Array<FournisseurDto>)
     );
   }
 
   /**
-   * Path part for operation save5
+   * Path part for operation save6
    */
-  static readonly Save5Path = '/tradeManagement/v1/fournisseurs/';
+  static readonly Save6Path = '/tradeManagement/v1/fournisseurs/';
 
   /**
    * enregistrer un fournisseur.
@@ -156,18 +156,18 @@ export class FournisseurService extends BaseService {
    * cette methode permet de enregistrer un fournisseur
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `save5()` instead.
+   * To access only the response body, use `save6()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save5$Response(params: {
+  save6$Response(params: {
     body: FournisseurDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<FournisseurDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, FournisseurService.Save5Path, 'post');
+    const rb = new RequestBuilder(this.rootUrl, FournisseurService.Save6Path, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -190,26 +190,26 @@ export class FournisseurService extends BaseService {
    * cette methode permet de enregistrer un fournisseur
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `save5$Response()` instead.
+   * To access the full response (for headers, for example), `save6$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save5(params: {
+  save6(params: {
     body: FournisseurDto
   },
   context?: HttpContext
 
 ): Observable<FournisseurDto> {
 
-    return this.save5$Response(params,context).pipe(
+    return this.save6$Response(params,context).pipe(
       map((r: StrictHttpResponse<FournisseurDto>) => r.body as FournisseurDto)
     );
   }
 
   /**
-   * Path part for operation findById6
+   * Path part for operation findById7
    */
-  static readonly FindById6Path = '/tradeManagement/v1/fournisseurs/{id}';
+  static readonly FindById7Path = '/tradeManagement/v1/fournisseurs/{id}';
 
   /**
    * rechercher un fournisseur.
@@ -217,18 +217,18 @@ export class FournisseurService extends BaseService {
    * cette methode permet de rechercher un fournisseur par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById6()` instead.
+   * To access only the response body, use `findById7()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById6$Response(params: {
+  findById7$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<FournisseurDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, FournisseurService.FindById6Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, FournisseurService.FindById7Path, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -251,26 +251,26 @@ export class FournisseurService extends BaseService {
    * cette methode permet de rechercher un fournisseur par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById6$Response()` instead.
+   * To access the full response (for headers, for example), `findById7$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById6(params: {
+  findById7(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<FournisseurDto> {
 
-    return this.findById6$Response(params,context).pipe(
+    return this.findById7$Response(params,context).pipe(
       map((r: StrictHttpResponse<FournisseurDto>) => r.body as FournisseurDto)
     );
   }
 
   /**
-   * Path part for operation delete6
+   * Path part for operation delete7
    */
-  static readonly Delete6Path = '/tradeManagement/v1/fournisseurs/{id}';
+  static readonly Delete7Path = '/tradeManagement/v1/fournisseurs/{id}';
 
   /**
    * supprimer un fournisseur.
@@ -278,18 +278,18 @@ export class FournisseurService extends BaseService {
    * cette methode permet de supprimer un fournisseur par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `delete6()` instead.
+   * To access only the response body, use `delete7()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete6$Response(params: {
+  delete7$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, FournisseurService.Delete6Path, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, FournisseurService.Delete7Path, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -312,18 +312,18 @@ export class FournisseurService extends BaseService {
    * cette methode permet de supprimer un fournisseur par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `delete6$Response()` instead.
+   * To access the full response (for headers, for example), `delete7$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete6(params: {
+  delete7(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<void> {
 
-    return this.delete6$Response(params,context).pipe(
+    return this.delete7$Response(params,context).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

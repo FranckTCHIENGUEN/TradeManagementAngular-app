@@ -1,0 +1,24 @@
+.containt{
+  display: flex;
+
+}
+.side{
+  flex: 3;
+  height: 100vh;
+  overflow: scroll;
+  //line-height: 300px;
+}
+
+.content{
+  flex: 9;
+  height: 100%;
+  overflow: scroll;
+  //line-height: 300px;
+}
+
+.content2{
+  flex: 12;
+  height: 100%;
+  //overflow: scroll;
+  //line-height: 300px;
+}

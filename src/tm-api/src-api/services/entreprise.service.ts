@@ -27,9 +27,9 @@ export class EntrepriseService extends BaseService {
   }
 
   /**
-   * Path part for operation save6
+   * Path part for operation save7
    */
-  static readonly Save6Path = '/tradeManagement/v1/entreprises/create';
+  static readonly Save7Path = '/tradeManagement/v1/entreprises/create';
 
   /**
    * enregistrer une entreprise.
@@ -37,18 +37,18 @@ export class EntrepriseService extends BaseService {
    * cette methode permet de enregistrer une entreprise
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `save6()` instead.
+   * To access only the response body, use `save7()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save6$Response(params: {
+  save7$Response(params: {
     body: EntrepriseDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<EntrepriseDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, EntrepriseService.Save6Path, 'post');
+    const rb = new RequestBuilder(this.rootUrl, EntrepriseService.Save7Path, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -71,18 +71,18 @@ export class EntrepriseService extends BaseService {
    * cette methode permet de enregistrer une entreprise
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `save6$Response()` instead.
+   * To access the full response (for headers, for example), `save7$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save6(params: {
+  save7(params: {
     body: EntrepriseDto
   },
   context?: HttpContext
 
 ): Observable<EntrepriseDto> {
 
-    return this.save6$Response(params,context).pipe(
+    return this.save7$Response(params,context).pipe(
       map((r: StrictHttpResponse<EntrepriseDto>) => r.body as EntrepriseDto)
     );
   }
@@ -149,9 +149,9 @@ export class EntrepriseService extends BaseService {
   }
 
   /**
-   * Path part for operation findAll7
+   * Path part for operation findAll8
    */
-  static readonly FindAll7Path = '/tradeManagement/v1/entreprisesfind/all';
+  static readonly FindAll8Path = '/tradeManagement/v1/entreprisesfind/all';
 
   /**
    * rechercher une entreprise.
@@ -159,17 +159,17 @@ export class EntrepriseService extends BaseService {
    * cette methode permet de rechercher la liste des entreprises elle retourne la liste de tous les entreprises
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findAll7()` instead.
+   * To access only the response body, use `findAll8()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll7$Response(params?: {
+  findAll8$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<Array<EntrepriseDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, EntrepriseService.FindAll7Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, EntrepriseService.FindAll8Path, 'get');
     if (params) {
     }
 
@@ -191,17 +191,17 @@ export class EntrepriseService extends BaseService {
    * cette methode permet de rechercher la liste des entreprises elle retourne la liste de tous les entreprises
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findAll7$Response()` instead.
+   * To access the full response (for headers, for example), `findAll8$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll7(params?: {
+  findAll8(params?: {
   },
   context?: HttpContext
 
 ): Observable<Array<EntrepriseDto>> {
 
-    return this.findAll7$Response(params,context).pipe(
+    return this.findAll8$Response(params,context).pipe(
       map((r: StrictHttpResponse<Array<EntrepriseDto>>) => r.body as Array<EntrepriseDto>)
     );
   }
@@ -454,9 +454,9 @@ export class EntrepriseService extends BaseService {
   }
 
   /**
-   * Path part for operation findById7
+   * Path part for operation findById8
    */
-  static readonly FindById7Path = '/tradeManagement/v1/entreprises/find/id/{id}';
+  static readonly FindById8Path = '/tradeManagement/v1/entreprises/find/id/{id}';
 
   /**
    * rechercher une entreprise.
@@ -464,18 +464,18 @@ export class EntrepriseService extends BaseService {
    * cette methode permet de rechercher une entreprise par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById7()` instead.
+   * To access only the response body, use `findById8()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById7$Response(params: {
+  findById8$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<EntrepriseDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, EntrepriseService.FindById7Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, EntrepriseService.FindById8Path, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -498,18 +498,18 @@ export class EntrepriseService extends BaseService {
    * cette methode permet de rechercher une entreprise par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById7$Response()` instead.
+   * To access the full response (for headers, for example), `findById8$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById7(params: {
+  findById8(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<EntrepriseDto> {
 
-    return this.findById7$Response(params,context).pipe(
+    return this.findById8$Response(params,context).pipe(
       map((r: StrictHttpResponse<EntrepriseDto>) => r.body as EntrepriseDto)
     );
   }
@@ -576,9 +576,9 @@ export class EntrepriseService extends BaseService {
   }
 
   /**
-   * Path part for operation delete7
+   * Path part for operation delete8
    */
-  static readonly Delete7Path = '/tradeManagement/v1/entreprises/delete/{id}';
+  static readonly Delete8Path = '/tradeManagement/v1/entreprises/delete/{id}';
 
   /**
    * supprimer une entreprise.
@@ -586,18 +586,18 @@ export class EntrepriseService extends BaseService {
    * cette methode permet de supprimer une entreprise par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `delete7()` instead.
+   * To access only the response body, use `delete8()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete7$Response(params: {
+  delete8$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, EntrepriseService.Delete7Path, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, EntrepriseService.Delete8Path, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -620,18 +620,18 @@ export class EntrepriseService extends BaseService {
    * cette methode permet de supprimer une entreprise par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `delete7$Response()` instead.
+   * To access the full response (for headers, for example), `delete8$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete7(params: {
+  delete8(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<void> {
 
-    return this.delete7$Response(params,context).pipe(
+    return this.delete8$Response(params,context).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

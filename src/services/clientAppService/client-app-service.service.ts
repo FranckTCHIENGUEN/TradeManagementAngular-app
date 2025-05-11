@@ -11,16 +11,16 @@ export class ClientAppServiceService {
   constructor(private clientService:ClientService,) { }
 
   save(client:ClientDto):Observable<ClientDto>{
-    return this.clientService.save9({body:client})
+    return this.clientService.save10({body:client})
   }
 
   findAll():Observable<Array<ClientDto>>{
-    return this.clientService.findAll11();
+    return this.clientService.findAll12();
   }
   findById(id:number):Observable<ClientDto>{
-    return this.clientService.findById11({id:id});
+    return this.clientService.findById12({id:id});
   }
   delete(id:number){
-    return this.clientService.delete11({id:id})
+    return this.clientService.delete12({id:id})
   }
 }

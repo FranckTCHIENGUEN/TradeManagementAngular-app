@@ -13,12 +13,12 @@
 
 </div>
 <div class="containt">
-  <div *ngIf="isChecked==true" class="side">
+  <div *ngIf="isChecked" class="side">
       <app-filter (objetFiltre)="filter($event)" typeEnregistrement="commande client"></app-filter>
   </div>
   <div *ngIf="permission.includes('COM_CLIENT: LIRE') || permission.includes('COM_CLIENT: SUPPRIMER')
   || permission.includes('COM_CLIENT: FILTRER')" [class]="isChecked ? 'content' : 'content2'">
-    <app-list-view *ngIf="display==true" type="commande client"
+    <app-list-view *ngIf="display" type="commande client"
                    [tableColumns]="columns" [tableData]="listeCommande"></app-list-view>
 
   </div>

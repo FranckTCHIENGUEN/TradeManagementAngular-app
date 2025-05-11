@@ -9,6 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { CategoriesSearchDto } from '../models/categories-search-dto';
 import { CommandSearch } from '../models/command-search';
 
 
@@ -89,6 +90,75 @@ export class FiltreCommandeService extends BaseService {
 }> {
 
     return this.filterCommand$Response(params,context).pipe(
+      map((r: StrictHttpResponse<{
+}>) => r.body as {
+})
+    );
+  }
+
+  /**
+   * Path part for operation filterCategories
+   */
+  static readonly FilterCategoriesPath = '/tradeManagement/v1/filtreCategories/{context}';
+
+  /**
+   * rechercher un article.
+   *
+   * cette methode permet de mettre a jour la photo d'une entité par son ID
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `filterCategories()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  filterCategories$Response(params: {
+    context: string;
+    body: CategoriesSearchDto
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<{
+}>> {
+
+    const rb = new RequestBuilder(this.rootUrl, FiltreCommandeService.FilterCategoriesPath, 'post');
+    if (params) {
+      rb.path('context', params.context, {});
+      rb.body(params.body, 'application/json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<{
+        }>;
+      })
+    );
+  }
+
+  /**
+   * rechercher un article.
+   *
+   * cette methode permet de mettre a jour la photo d'une entité par son ID
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `filterCategories$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  filterCategories(params: {
+    context: string;
+    body: CategoriesSearchDto
+  },
+  context?: HttpContext
+
+): Observable<{
+}> {
+
+    return this.filterCategories$Response(params,context).pipe(
       map((r: StrictHttpResponse<{
 }>) => r.body as {
 })

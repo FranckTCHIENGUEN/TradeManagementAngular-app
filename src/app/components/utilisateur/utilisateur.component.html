@@ -1,4 +1,7 @@
-<div class="row">
+<div class="row mb-3">
+  <div class="col-2" *ngIf="permission.includes('UTILISATEUR: FILTRER')">
+    <mat-slide-toggle [(ngModel)]="isChecked" style="color: white !important;">Recherche avancée</mat-slide-toggle>
+  </div>
   <div class="col-4" *ngIf="permission.includes('UTILISATEUR: CRÉER_MODIFIER')">
     <button mat-raised-button color="primary" (click)="openDialogSave()">Ajouter</button>
   </div>
@@ -19,6 +22,12 @@
 <!--  </div>-->
 </div>
 
-<div  *ngIf="permission.includes('UTILISATEUR: LIRE')">
-  <app-list-view [tableColumns]="columns" [tableData]="listeUtilisateur" type="utilisateur"></app-list-view>
+<div class="containt  h-100">
+  <div *ngIf="isChecked" class="side">
+    <app-filter-person (objetFiltre)="filter('utilisateur', $event)" typeEnregistrement="utilisateur"></app-filter-person>
+  </div>
+  <div  *ngIf="permission.includes('UTILISATEUR: LIRE')" [class]="isChecked ? 'content' : 'content2'">
+    <app-list-view [tableColumns]="columns" [tableData]="listeUtilisateur" type="utilisateur"></app-list-view>
+  </div>
 </div>
+

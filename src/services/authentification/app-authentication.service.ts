@@ -47,36 +47,38 @@ export class AppAuthenticationService {
     sessionStorage.setItem("connectedUser", JSON.stringify(authenticationResponse));
   }
 
-  loadRegister(authRequest: AuthentificationRequest){
+  loadRegister(utilisateurDto: UtilisateurDto){
     if (sessionStorage.getItem("connectedUser")){
+      sessionStorage.setItem("userData", JSON.stringify(utilisateurDto))
 
-      this.appUtilisateurService.findByEmail(authRequest?.login as string)
-        .subscribe(utilisateurDto=>{
-          sessionStorage.setItem("userData", JSON.stringify(utilisateurDto))
+      if (utilisateurDto.passwordState == "DEFAULT"){
 
-          if (utilisateurDto.passwordState == "DEFAULT"){
+        this.router.navigate(["register"])
+      }
+      else if (utilisateurDto.passwordState == "PERSONAL"){
 
-            this.router.navigate(["register"])
-          }
-          else if (utilisateurDto.passwordState == "PERSONAL"){
+        this.router.navigate(["mainPage"])
+      }
+      else {
+        this.router.navigate(['']);
 
-            this.router.navigate(["mainPage"])
-          }
-          else {
-            this.router.navigate(['']);
+      }
+      this.dataLinkTransfert.userConnected = sessionStorage.getItem('userData') as UtilisateurDto;
+      return true;
 
-          }
-          this.dataLinkTransfert.userConnected = sessionStorage.getItem('userData') as UtilisateurDto;
-          return true;
-        }, error => {
-          return false;
-        })
+      // this.appUtilisateurService.findByEmail(authRequest?.login as string)
+      //   .subscribe(utilisateurDto=>{
+      //
+      //   }, error => {
+      //     return false;
+      //   })
 
     }
+    return false;
   }
 
   isUserLogedAndTokenValid(){
-    let authResponse:AuthentificationResponse = {};
+    let authResponse:AuthentificationResponse;
     authResponse = JSON.parse(sessionStorage.getItem('connectedUser') as string);
     if (authResponse.accessToken !=null){
       const expiry = (JSON.parse(atob(authResponse.accessToken!.split('.')[1]))).exp;

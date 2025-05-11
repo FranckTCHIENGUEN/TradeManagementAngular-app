@@ -60,7 +60,7 @@ export class LoginPageComponent {
             this.error=false;
             this.authService.setConnectedUser(data);
             if (this.authService.isUserLogedAndTokenValid()){
-              this.authService.loadRegister(this.authRequest);
+              this.authService.loadRegister(data.user!);
             }
           },
           error =>{

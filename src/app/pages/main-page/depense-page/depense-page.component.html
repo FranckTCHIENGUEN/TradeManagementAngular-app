@@ -4,6 +4,12 @@
     <div class="col-4" *ngIf="permission.includes('DEPENSE: CRÉER_MODIFIER')">
       <button mat-raised-button color="primary"  (click)="openDialogSave()">Nouvelle depense</button>
     </div>
+    <div class="col-3" *ngIf="permission.includes('DEPENSE: FILTRER')">
+      <mat-slide-toggle [(ngModel)]="isChecked">Recherche avancée</mat-slide-toggle>
+    </div>
+    <div class="col-3" *ngIf="permission.includes('DEPENSE: VOIR_TOUT')">
+      <mat-slide-toggle [(ngModel)]="voirTout">Voir tout</mat-slide-toggle>
+    </div>
     <div class="col-4" *ngIf="permission.includes('DEPENSE: LIRE')">
       <button  mat-raised-button color="accent"  (click)="findAllDepenses()">
         <mat-icon>
@@ -19,7 +25,14 @@
   </div>
 </div>
 
-<div class="content-second mt-5" *ngIf="permission.includes('DEPENSE: LIRE')">
-  <app-list-view *ngIf="display==true" [tableColumns]="columns" [tableData]="listeVente"></app-list-view>
+<div class="containt">
+  <div *ngIf="isChecked" class="side">
+    <app-filter-categories (objetFiltre)="filter($event)" typeEnregistrement="{{ContextCategorie.DEPENSE}}"></app-filter-categories>
+  </div>
+  <div *ngIf="permission.includes('DEPENSE: LIRE') || permission.includes('DEPENSE: SUPPRIMER')
+  || permission.includes('DEPENSE: FILTRER')" [class]="isChecked ? 'content' : 'content2'">
+    <app-list-view *ngIf="display" [tableColumns]="columns" [tableData]="listeVente"></app-list-view>
+
+  </div>
 </div>
 

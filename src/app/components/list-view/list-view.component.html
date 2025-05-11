@@ -2,12 +2,10 @@
 <div>
   <table
     mat-table matSort (matSortChange)="announceSortChange($event)"
-    [dataSource]="dataSource"
-    class="mat-elevation-z8">
+    [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <ng-container
-      *ngFor="let disCol of tableColumns let colIndex = index;"
-      matColumnDef="{{disCol.columnDef}}">
+    <ng-container *ngFor="let disCol of tableColumns let colIndex = index;"
+                  matColumnDef="{{disCol.columnDef}}">
       <th class="mat-header-cell" mat-header-cell mat-sort-header=""
           *matHeaderCellDef>
         {{ disCol.header }}
@@ -25,13 +23,12 @@
           <a [routerLink]="[disCol.url]">
             {{ disCol.cell(element) }}
           </a>
+
         </ng-template>
 
-        <ng-template *ngIf="!disCol.isDownlable; ">
-          <button mat-icon-button aria-label="expand row" (click)="viewFacture(disCol.cell(element));">
-            Voir la facture
-          </button>
-        </ng-template>
+<!--        <ng-template >-->
+<!--          -->
+<!--        </ng-template>-->
       </td>
     </ng-container>
 
@@ -41,11 +38,11 @@
     </tr>
 
     <tr class="mat-row"
-      mat-row  (click)= "navigate(row)" [class.demo-row-is-clicked]
-      *matRowDef="let row; columns: displayedColumns;">
+        mat-row (click)= "navigate(row)"
+        *matRowDef="let row; columns: displayedColumns;">
     </tr>
     <tr  class="mat-row" *matNoDataRow>
-        <td  class = "mat-cell"  [colSpan]="tableColumns.length" > Aucune donnée trouvée </td>-->
+      <td  class = "mat-cell"  [colSpan]="tableColumns.length" > Aucune donnée trouvée </td>-->
     </tr>
   </table>
 

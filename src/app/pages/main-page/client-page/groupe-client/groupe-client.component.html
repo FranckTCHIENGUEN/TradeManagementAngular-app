@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-4" *ngIf="permission.includes('GROUPE_CLIENT: CRÉER_MODIFIER')">
+    <button mat-raised-button color="primary" (click)="openDialogSave()">Ajouter un groupe</button>
+  </div>
+  <div class="col-4">
+    <button  mat-raised-button color="accent" (click)="findAll()">
+      <mat-icon>
+              <span class="material-symbols-outlined">
+              refresh
+            </span></mat-icon>
+    </button>
+  </div>
+  <!--  <div class="col-4">-->
+  <!--    <button mat-raised-button color="primary" (click)="delete()">Supprimer</button>-->
+  <!--    &lt;!&ndash;  </div>&ndash;&gt;-->
+  <!--    &lt;!&ndash;  <div class="col-4">&ndash;&gt;-->
+  <!--    &lt;!&ndash;    <button mat-raised-button color="primary">Envoyer un sms</button>&ndash;&gt;-->
+  <!--    &lt;!&ndash;  </div>&ndash;&gt;-->
+  <!--  </div>-->
+</div>
+
+
+
+<div class="containt">
+
+  <div class="side">
+    <mat-list>
+      <div mat-subheader>Groupe clients</div>
+      <mat-list-item  *ngFor="let role of listGroupe">
+        <mat-icon class="active-role" (click)="updatePermission(role)" matListItemIcon>folder</mat-icon>
+        <div class="d-flex align-items-center" matListItemTitle>
+          <div>
+            <span style="color: black">{{role.nom}}</span>
+            <p>
+              {{role.description}}
+            </p>
+          </div>
+          <div class="ms-2">
+              <mat-icon style="cursor: pointer" (click)="openDialogEdit(role)" >edit</mat-icon>
+              <mat-icon style="cursor: pointer" class="ms-2"  (click)="removeClient(role)">
+                <span class="material-symbols-outlined">
+                   delete
+                </span>
+              </mat-icon>
+              <mat-icon style="cursor: pointer" size="25" class="ms-2"  color="primary" (click)="addClient(role)">
+                          <span class="material-symbols-outlined">
+                            add_circle
+                          </span>
+              </mat-icon>
+          </div>
+
+        </div>
+        <!--      <div matListItemLine>{{role.updated | date}}</div>-->
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="content" *ngIf="listClient?.length!=0">
+    <mat-list>
+      <div mat-subheader>
+        Liste Client
+      </div>
+      <mat-list-item *ngFor="let option of listClient">
+        {{option.nom}} {{option.prenom}} | <span [style]="option.compteClientDto?.solde!<0 ? 'color:red;' : 'color:black;'" >Solde : {{option.compteClientDto?.solde || 0}}</span>
+        | Groupe : <span *ngFor=" let groupe of option.groupeClientDtos" >{{groupe.nom}}, </span>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

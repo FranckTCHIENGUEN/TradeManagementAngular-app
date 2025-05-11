@@ -2,56 +2,21 @@
   <mat-toolbar color="accent">
     <span>Facture {{type}} </span>
     <span class="example-spacer"></span>
-    <button mat-icon-button printSectionId="content" ngxPrint  class="example-icon favorite-icon" printTitle="FACURE NUMERO {{donnees.code}}">
+    <button mat-icon-button (click)="printPdf()" printSectionId="content" ngxPrint  class="example-icon favorite-icon" printTitle="FACURE NUMERO {{donnees.code}}">
       <mat-icon>print</mat-icon>
     </button>
-    <button mat-icon-button (click)="download()" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <button mat-icon-button (click)="downloadPdf()" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>download</mat-icon>
     </button>
   </mat-toolbar>
 </div>
 <div mat-dialog-content #printSection id="content">
-  <div class="text-end mb-5" id="date">
-    Date : {{date | date: "EEEE dd MMMM yyyy"}}
-  </div>
-
-  <div class="text-center mb-5" id="facture">
-      FACURE NUMERO {{donnees.code}}
-  </div>
-
-  <div class="row mb-5">
-    <div class="col important">
-      Client : <span class="important">{{donnees.client?.nom}} {{donnees.client?.prenom}}</span>
-    </div>
-  </div>
-
-  <app-list-view [tableData]="elements" [tableColumns]="columns"></app-list-view>
-
-  <div class="row mb-5">
-    <div class="col important">
-      Montant Total : <span class="important">{{donnees.montantTotal}} FCFA</span>
-    </div>
-  </div>
-  <div class="row mb-5">
-    <div class="col important">
-      Avance : <span class="important">{{donnees.avance}} FCFA</span>
-    </div>
-  <div class="row mb-5">
-    <div class="col important">
-      Reste : <span class="important">{{donnees.resteApayer}} FCFA</span>
-    </div>
-  </div>
-  <div class="end mb-5">
-    <div class=" signature">
-      Le client
-    </div>
-    <div class=" signature">
-      La caisse
-    </div>
+  <div class="pdf-viewer">
+    <!-- Affichez le PDF dans un iframe -->
+    <iframe [src]="pdfUrl" width="100%" height="600px"></iframe>
   </div>
 </div>
 
 <div mat-dialog-actions>
-  <button mat-raised-button color="accent" (click)="closeDialog()" cdkFocusInitial>Fermer</button>
-</div>
+  <button mat-raised-button color="accent" (click)="closeDialog()" >Fermer</button>
 </div>

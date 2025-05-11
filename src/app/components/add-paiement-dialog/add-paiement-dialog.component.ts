@@ -4,13 +4,7 @@ import {CompteClientDto} from "../../../tm-api/src-api/models/compte-client-dto"
 import {map, Observable} from "rxjs";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ArticleDto} from "../../../tm-api/src-api/models/article-dto";
-import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data-link-transfert.service";
-import {
-  AppCommandFournisseurService
-} from "../../../services/commandFournisseurService/app-command-fournisseur.service";
-import {AppCommandClientService} from "../../../services/commandClientService/app-command-client.service";
-import {AppProductService} from "../../../services/productService/app-product.service";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {ClientAppServiceService} from "../../../services/clientAppService/client-app-service.service";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 import {PaiementDto} from "../../../tm-api/src-api/models/paiement-dto";
@@ -46,14 +40,9 @@ export class AddPaiementDialogComponent {
   filteredElement: Observable<ArticleDto[]> | undefined;
 
   constructor(private formBuilder:FormBuilder,
-              private dataLinkTransfert:DataLinkTransfertService,
-              private comFournisseurService:AppCommandFournisseurService,
-              private comClientService:AppCommandClientService,
               private paiementService:AppPaiementServiceService,
-              private produitService:AppProductService,
               private clientService:ClientAppServiceService,
               private dialog: MatDialog,
-              private dialogRef: MatDialogRef<AddPaiementDialogComponent>,
               @Inject(MAT_DIALOG_DATA) private data: any) {
 
     if (this.data !=null){
@@ -137,10 +126,20 @@ export class AddPaiementDialogComponent {
         }
 
         if (this._type=="commande client"){
-          objet = "CC"
+
+          if(new Date(this.donnees.datecommande).setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0)){
+            objet = "CC_OLD"
+          }else{
+            objet = "CC"
+          }
+
         }
         else if (this._type=="commande fournisseur"){
-          objet = "CF"
+          if(new Date(this.donnees.datecommande).setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0)){
+            objet = "CF_OLD"
+          }else{
+            objet = "CF"
+          }
         }
 
         const pai:PaiementDto = {

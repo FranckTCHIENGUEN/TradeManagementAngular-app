@@ -11,6 +11,8 @@ import {UpdateEtatDialogComponent} from "../update-etat-dialog/update-etat-dialo
 import {PaiementDto} from "../../../tm-api/src-api/models/paiement-dto";
 import {AppPaiementServiceService} from "../../../services/paiementService/app-paiement-service.service";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
+import {FactureDialogComponent} from "../facture-dialog/facture-dialog.component";
+import {FactureService} from "../../../services/factureService/facture.service";
 
 @Component({
   selector: 'app-list-view-detail-dialog',
@@ -27,6 +29,7 @@ export class ListViewDetailDialogComponent {
 
   constructor(private dialogRef: MatDialogRef<ListViewDetailDialogComponent>,
               private venteService:AppVenbteServiceService,
+              private factureService: FactureService,
               private comFournisseurService:AppCommandFournisseurService,
               private paiementService:AppPaiementServiceService,
               private comClientService:AppCommandClientService,
@@ -128,7 +131,20 @@ export class ListViewDetailDialogComponent {
     );
     dialogRef.close();
   }
-
+  viewFacture(id: any) {
+    if (this.type =="commande client" ||
+      this.type == "commande fournisseur" || this.type=="vente"){
+      this.dialog.open(FactureDialogComponent, {
+        height: '1122px',
+        width: '793px',
+        disableClose:false,
+        data: {
+          donnees: id,
+          type: this.type,
+        },
+      });
+    }
+  }
   openDialogAddLigne(element?:any) {
     const dialogConfig = new MatDialogConfig();
 
@@ -156,6 +172,16 @@ export class ListViewDetailDialogComponent {
       }
     );
     dialogRef.close();
+  }
+
+  loadFacture(id: number) {
+    this.factureService.downloadFacture(id).subscribe(response => {
+      // this.pdfBlob = response;
+      // this.pdfUrl = URL.createObjectURL(response);
+      // const file = new Blob([response], { type: 'application/pdf' });
+      // const fileURL = URL.createObjectURL(file);
+      // this.pdfUrl = fileURL;
+    });
   }
 
   openDialogUpdateEtat() {

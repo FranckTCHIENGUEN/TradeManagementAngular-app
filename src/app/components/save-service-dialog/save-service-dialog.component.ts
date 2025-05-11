@@ -65,7 +65,7 @@ export class SaveServiceDialogComponent implements OnInit{
     return this._matcher;
   }
 
-  closeDialog(p: { etat: string }) {
+  closeDialog(p: { etat: string, data:any|null }) {
     this.dialogRef.close();
   }
 
@@ -84,11 +84,11 @@ export class SaveServiceDialogComponent implements OnInit{
 
       this.serviceService.save(this.service).subscribe(
         value => {
-          this.closeDialog({etat :'ok'});
+          this.closeDialog({etat :'ok', data:value});
           this.dialog.open(ConfirmDialogComponent, {
             disableClose:false,
             data: {
-              message: "Service"+ this.service.nom + " enregisgré avec succé",
+              message: "Service "+ this.service.nom + " enregisgré avec succé",
             },
           });
         }

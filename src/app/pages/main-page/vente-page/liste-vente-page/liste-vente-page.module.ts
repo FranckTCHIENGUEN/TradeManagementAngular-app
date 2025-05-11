@@ -17,16 +17,19 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatIconModule} from "@angular/material/icon";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {FilterCategoriesComponent} from "../../../../components/filter-categories/filter-categories.component";
 
 
 @NgModule({
   declarations: [
     ListeVentePageComponent,
     ListViewComponent,
+    FilterCategoriesComponent,
     FilterComponent
   ],
   exports: [
     ListViewComponent,
+    FilterCategoriesComponent,
     FilterComponent
   ],
   imports: [

@@ -76,12 +76,12 @@ export class ListCommandeClientComponent implements OnInit{
       header: 'Etat',
       cell: (element: CommandeClientDto) => `${element.etatCommande}`,
     },
-    {
-      columnDef: 'facture',
-      isDownlable:true,
-      header: 'Facture',
-      cell: (element: CommandeClientDto) => `${element.id}`,
-    },
+    // {
+    //   columnDef: 'facture',
+    //   isDownlable:true,
+    //   header: 'Facture',
+    //   cell: (element: CommandeClientDto) => `${element.id}`,
+    // },
   ];
   isChecked = false;
 
@@ -110,11 +110,11 @@ export class ListCommandeClientComponent implements OnInit{
 
   findAll(){
     this.display=false;
-    if (this.permission.includes('COM_CLIENT: LIRE')){
-      this.commandeClientService.findAll().subscribe(
+    if (this.permission.includes('COM_CLIENT: LIRE') || this.permission.includes('COM_CLIENT: FILTRER')){
+      this.commandeSearcServjce.filterCommand({datecommande1:new Date(new Date().setHours(0, 0, 0, 0)).toISOString(), datecommande2:new Date(new Date().setHours(23, 59, 59, 999)).toISOString()}, 'client').subscribe(
         value => {
           this.listeCommande = value;
-          this.display = true
+          this.display = true;
         });
     }
 

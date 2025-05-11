@@ -1,0 +1,7 @@
+<div class="containt">
+
+  <div *ngIf="permission.includes('CLIENT: LIRE') || permission.includes('CLIENT: SUPPRIMER')
+  || permission.includes('CLIENT: FILTRER') || permission.includes('CLIENT: CRÉER_MODIFIER')" >
+    <app-person typePersonne="client" [permission]="permission"></app-person>
+  </div>
+</div>

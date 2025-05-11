@@ -1,0 +1,23 @@
+<div class="row mt-2 justify-content-center text-center">
+  <h2>Ajouter le groupe au client</h2>
+</div>
+<form [formGroup]="saveForm">
+  <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+    <mat-label class="">Groupe</mat-label>
+    <mat-select formControlName="idGroupe" [errorStateMatcher]="matcher">
+      <mat-option *ngFor="let cat of groupe" [value]="cat.id">
+        {{cat.nom}}
+      </mat-option>
+    </mat-select>
+    <mat-error class="errorMessage" *ngIf="saveForm.controls['idGroupe'].hasError('required')">
+      le groupe est requis
+    </mat-error>
+    <button matSuffix mat-button color="accent" (click)="findAllGroupeClient()">
+      <mat-icon color="primary">
+            <span class="material-symbols-outlined">
+            refresh
+          </span></mat-icon>
+    </button>
+    <button *ngIf=" permission.includes('CAT_PRODUIT: CRÉER_MODIFIER')" matSuffix mat-raised-button color="primary" (click)="nouveauGroupe()">Nouveau Groupe</button>
+  </mat-form-field>
+</form>

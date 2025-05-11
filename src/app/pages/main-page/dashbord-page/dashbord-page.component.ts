@@ -55,13 +55,13 @@ export class DashbordPageComponent implements OnInit{
       header: 'Etat',
       cell: (element: CommandeClientDto) => `${element.etatCommande}`,
     },
-
-    {
-      columnDef: 'facture',
-      isDownlable:true,
-      header: 'Facture',
-      cell: (element: CommandeClientDto) => `${element.id}`,
-    },
+    //
+    // {
+    //   columnDef: 'facture',
+    //   isDownlable:true,
+    //   header: 'Facture',
+    //   cell: (element: CommandeClientDto) => `${element.id}`,
+    // },
   ];
 
   constructor(private dataLinkTransfer: DataLinkTransfertService,

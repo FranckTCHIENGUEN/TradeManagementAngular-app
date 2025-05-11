@@ -11,18 +11,18 @@ export class AppProductService {
   constructor(private produitService:ArticleService) { }
 
   save (cat:ArticleDto):Observable<ArticleDto>{
-    return this.produitService.save13({body:cat});
+    return this.produitService.save14({body:cat});
   }
 
   findAll ():Observable<Array<ArticleDto>>{
-    return this.produitService.findAll15();
+    return this.produitService.findAll16();
   }
 
   findById (id:number):Observable<ArticleDto>{
-    return this.produitService.findById15({id:id});
+    return this.produitService.findById16({id:id});
   }
 
   delete (id:number){
-    return this.produitService.delete15({idArticle:id});
+    return this.produitService.delete16({idArticle:id});
   }
 }

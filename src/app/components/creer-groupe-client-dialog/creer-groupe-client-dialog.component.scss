@@ -1,0 +1,26 @@
+.filter-input{
+  margin: 1rem;
+  border-radius: 20px;
+  height: 3rem;
+  padding: 5px;
+  border: 1px solid red;
+}
+
+.containt{
+  display: flex;
+
+}
+
+.side{
+  flex: 6;
+  height: 100vh;
+  overflow: scroll;
+  //line-height: 300px;
+}
+
+.content{
+  flex: 6;
+  height: 100vh;
+  overflow: scroll;
+  //line-height: 300px;
+}

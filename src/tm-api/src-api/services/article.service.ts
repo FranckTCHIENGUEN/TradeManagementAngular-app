@@ -27,9 +27,9 @@ export class ArticleService extends BaseService {
   }
 
   /**
-   * Path part for operation save13
+   * Path part for operation save14
    */
-  static readonly Save13Path = '/tradeManagement/v1/articles/create';
+  static readonly Save14Path = '/tradeManagement/v1/articles/create';
 
   /**
    * enregistrer un article.
@@ -37,18 +37,18 @@ export class ArticleService extends BaseService {
    * cette methode permet d'enregistrer ou de modifier un article
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `save13()` instead.
+   * To access only the response body, use `save14()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save13$Response(params: {
+  save14$Response(params: {
     body: ArticleDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<ArticleDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ArticleService.Save13Path, 'post');
+    const rb = new RequestBuilder(this.rootUrl, ArticleService.Save14Path, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -71,26 +71,26 @@ export class ArticleService extends BaseService {
    * cette methode permet d'enregistrer ou de modifier un article
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `save13$Response()` instead.
+   * To access the full response (for headers, for example), `save14$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  save13(params: {
+  save14(params: {
     body: ArticleDto
   },
   context?: HttpContext
 
 ): Observable<ArticleDto> {
 
-    return this.save13$Response(params,context).pipe(
+    return this.save14$Response(params,context).pipe(
       map((r: StrictHttpResponse<ArticleDto>) => r.body as ArticleDto)
     );
   }
 
   /**
-   * Path part for operation findById15
+   * Path part for operation findById16
    */
-  static readonly FindById15Path = '/tradeManagement/v1/articles/{idArticle}';
+  static readonly FindById16Path = '/tradeManagement/v1/articles/{idArticle}';
 
   /**
    * rechercher un article.
@@ -98,17 +98,17 @@ export class ArticleService extends BaseService {
    * cette methode permet de rechercher un article par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findById15()` instead.
+   * To access only the response body, use `findById16()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById15$Response(params?: {
+  findById16$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<ArticleDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ArticleService.FindById15Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, ArticleService.FindById16Path, 'get');
     if (params) {
     }
 
@@ -130,25 +130,25 @@ export class ArticleService extends BaseService {
    * cette methode permet de rechercher un article par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findById15$Response()` instead.
+   * To access the full response (for headers, for example), `findById16$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findById15(params?: {
+  findById16(params?: {
   },
   context?: HttpContext
 
 ): Observable<ArticleDto> {
 
-    return this.findById15$Response(params,context).pipe(
+    return this.findById16$Response(params,context).pipe(
       map((r: StrictHttpResponse<ArticleDto>) => r.body as ArticleDto)
     );
   }
 
   /**
-   * Path part for operation delete15
+   * Path part for operation delete16
    */
-  static readonly Delete15Path = '/tradeManagement/v1/articles/{idArticle}';
+  static readonly Delete16Path = '/tradeManagement/v1/articles/{idArticle}';
 
   /**
    * supprimer un article.
@@ -156,18 +156,18 @@ export class ArticleService extends BaseService {
    * cette methode permet de supprimer un article par son ID
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `delete15()` instead.
+   * To access only the response body, use `delete16()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete15$Response(params: {
+  delete16$Response(params: {
     idArticle: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ArticleService.Delete15Path, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, ArticleService.Delete16Path, 'delete');
     if (params) {
       rb.path('idArticle', params.idArticle, {});
     }
@@ -190,18 +190,18 @@ export class ArticleService extends BaseService {
    * cette methode permet de supprimer un article par son ID
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `delete15$Response()` instead.
+   * To access the full response (for headers, for example), `delete16$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  delete15(params: {
+  delete16(params: {
     idArticle: number;
   },
   context?: HttpContext
 
 ): Observable<void> {
 
-    return this.delete15$Response(params,context).pipe(
+    return this.delete16$Response(params,context).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
@@ -268,9 +268,9 @@ export class ArticleService extends BaseService {
   }
 
   /**
-   * Path part for operation findAll15
+   * Path part for operation findAll16
    */
-  static readonly FindAll15Path = '/tradeManagement/v1/articles/';
+  static readonly FindAll16Path = '/tradeManagement/v1/articles/';
 
   /**
    * obtenir la liste de tous les articles.
@@ -278,17 +278,17 @@ export class ArticleService extends BaseService {
    * cette methode permet de rechercher tous les articles
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findAll15()` instead.
+   * To access only the response body, use `findAll16()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll15$Response(params?: {
+  findAll16$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<Array<ArticleDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ArticleService.FindAll15Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, ArticleService.FindAll16Path, 'get');
     if (params) {
     }
 
@@ -310,17 +310,17 @@ export class ArticleService extends BaseService {
    * cette methode permet de rechercher tous les articles
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findAll15$Response()` instead.
+   * To access the full response (for headers, for example), `findAll16$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAll15(params?: {
+  findAll16(params?: {
   },
   context?: HttpContext
 
 ): Observable<Array<ArticleDto>> {
 
-    return this.findAll15$Response(params,context).pipe(
+    return this.findAll16$Response(params,context).pipe(
       map((r: StrictHttpResponse<Array<ArticleDto>>) => r.body as Array<ArticleDto>)
     );
   }
