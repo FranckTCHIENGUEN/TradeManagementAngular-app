@@ -1,0 +1,39 @@
+.app-breadcrumb {
+  padding: 8px 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif; /* Style Material Design */
+}
+
+.breadcrumb-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.54); /* Couleur par défaut */
+}
+
+.breadcrumb-item a {
+  color: #3f51b5; /* Couleur des liens, ex: bleu Material */
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  margin: 0 8px; /* Espace entre les éléments */
+  color: rgba(0, 0, 0, 0.38); /* Couleur du séparateur */
+}
+
+/* Style pour le dernier élément (non cliquable) */
+.breadcrumb-item:last-child span {
+  font-weight: 500; /* Plus gras pour l'élément actuel */
+  color: rgba(0, 0, 0, 0.87); /* Couleur plus foncée pour l'élément actuel */
+}

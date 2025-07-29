@@ -66,6 +66,7 @@ import {
 } from './components/creer-groupe-client-dialog/creer-groupe-client-dialog.component';
 import {AddgroupetoclientComponent} from './components/addgroupetoclient/addgroupetoclient.component';
 import {RemoveClientToGroupeComponent} from './components/remove-client-to-groupe/remove-client-to-groupe.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 @NgModule({
     declarations: [
@@ -98,6 +99,7 @@ import {RemoveClientToGroupeComponent} from './components/remove-client-to-group
         CreerGroupeClientDialogComponent,
         AddgroupetoclientComponent,
         RemoveClientToGroupeComponent,
+        BreadcrumbComponent,
     ],
     imports: [
         BrowserModule,

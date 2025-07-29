@@ -44,7 +44,18 @@ export class UpdateEtatDialogComponent {
       this.donnees.etatCommande = this.saveForm.controls.etatCommande.value;
 
       if (this.type =='commande client'){
-        this.comClientService.save(this.donnees).subscribe(
+        // this.comClientService.save(this.donnees).subscribe(
+        //   value => {
+        //     this.closeDialog({etat :'ok'});
+        //     this.dialog.open(ConfirmDialogComponent, {
+        //       disableClose:false,
+        //       data: {
+        //         message:"Etat commande modifié avec succé",
+        //       },
+        //     });
+        //   }
+        // )
+        this.comClientService.updateEtat(this.donnees.id, this.donnees.etatCommande).subscribe(
           value => {
             this.closeDialog({etat :'ok'});
             this.dialog.open(ConfirmDialogComponent, {
@@ -57,7 +68,18 @@ export class UpdateEtatDialogComponent {
         )
       }
       if (this.type =='commande fournisseur'){
-        this.comFournisseurService.save(this.donnees).subscribe(
+        // this.comFournisseurService.save(this.donnees).subscribe(
+        //   value => {
+        //     this.closeDialog({etat :'ok'});
+        //     this.dialog.open(ConfirmDialogComponent, {
+        //       disableClose:false,
+        //       data: {
+        //         message:"Etat commande modifié avec succé",
+        //       },
+        //     });
+        //   }
+        // )
+        this.comClientService.updateEtat(this.donnees.id, this.donnees.etatCommande).subscribe(
           value => {
             this.closeDialog({etat :'ok'});
             this.dialog.open(ConfirmDialogComponent, {

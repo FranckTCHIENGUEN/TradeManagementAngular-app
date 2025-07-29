@@ -3,7 +3,7 @@ import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort, Sort} from "@angular/material/sort";
-import {Router} from "@angular/router";
+import {NavigationExtras, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ListViewDetailDialogComponent} from "../list-view-detail-dialog/list-view-detail-dialog.component";
 import {ViewDetailBilanDialogComponent} from "../view-detail-bilan-dialog/view-detail-bilan-dialog.component";
@@ -81,15 +81,23 @@ export class ListViewComponent implements OnInit, AfterViewInit, OnChanges{
   navigate(row:any) {
     if (this.type =="commande client" ||
         this.type == "commande fournisseur" || this.type=="vente"){
-      this.dialog.open(ListViewDetailDialogComponent, {
-        height: '90%',
-        width: '90%',
-        disableClose:false,
-        data: {
-          donnees: row,
-          type: this.type,
-        },
-      });
+
+        let navigationExtras: NavigationExtras = {
+          state: {
+            donnees: row,
+            type: this.type,
+          }
+        };
+        this.router.navigate(['/detail-commande',], navigationExtras);
+      // this.dialog.open(ListViewDetailDialogComponent, {
+      //   height: '90%',
+      //   width: '90%',
+      //   disableClose:false,
+      //   data: {
+      //     donnees: row,
+      //     type: this.type,
+      //   },
+      // });
     }
     else if (this.type =="bilan comptable" ){
       this.dialog.open(ViewDetailBilanDialogComponent, {

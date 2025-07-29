@@ -1,13 +1,13 @@
 <div id="appbar" >
   <h1>Produits</h1>
   <div class="row">
-    <div class="col-4" *ngIf="permission.includes('PRODUIT: CRÉER_MODIFIER')">
+    <div class="col-3" *ngIf="permission.includes('PRODUIT: CRÉER_MODIFIER')">
       <button mat-raised-button color="primary"  (click)="openDialogSave()">Ajouter</button>
     </div>
     <div class="col-3" *ngIf="permission.includes('DEPENSE: FILTRER')">
       <mat-slide-toggle [(ngModel)]="isChecked">Recherche avancée</mat-slide-toggle>
     </div>
-    <div class="col-4" *ngIf="permission.includes('PRODUIT: LIRE')">
+    <div class="col-3" *ngIf="permission.includes('PRODUIT: LIRE')">
       <button  mat-raised-button color="accent"  (click)="findAllProduit()">
         <mat-icon>
             <span class="material-symbols-outlined">
@@ -15,7 +15,7 @@
           </span></mat-icon>
       </button>
     </div>
-    <div class="col-4" *ngIf="permission.includes('CAT_PRODUIT: LIRE')">
+    <div class="col-3" *ngIf="permission.includes('CAT_PRODUIT: LIRE')">
       <button  mat-raised-button color="primary" (click)="opendoalogCategorie()">Voir les categories</button>
     </div>
   </div>

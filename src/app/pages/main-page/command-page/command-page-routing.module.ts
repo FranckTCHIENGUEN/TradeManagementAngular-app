@@ -19,7 +19,8 @@ const routes: Routes = [
             path:'',
             loadChildren: () => import('./save-commande-client/save-commande-client.module').then(m => m.SaveCommandeClientModule)
           },
-        ]
+        ],
+        data: { breadcrumb: 'Détails du produit' }
       },
       {
         path: 'list-commande',

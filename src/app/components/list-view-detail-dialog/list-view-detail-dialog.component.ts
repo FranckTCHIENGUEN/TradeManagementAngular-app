@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {AppVenbteServiceService} from "../../../services/venteService/app-venbte-service.service";
 import {
@@ -13,15 +13,16 @@ import {AppPaiementServiceService} from "../../../services/paiementService/app-p
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 import {FactureDialogComponent} from "../facture-dialog/facture-dialog.component";
 import {FactureService} from "../../../services/factureService/facture.service";
+import {inputNames} from "@angular/cdk/schematics";
 
 @Component({
   selector: 'app-list-view-detail-dialog',
   templateUrl: './list-view-detail-dialog.component.html',
   styleUrls: ['./list-view-detail-dialog.component.scss']
 })
-export class ListViewDetailDialogComponent {
-  donnees: any;
-  type?: string;
+export class ListViewDetailDialogComponent implements OnInit{
+  @Input() donnees: any;
+  @Input() type?: string;
   elements: any;
 
   paiementList?: Array<PaiementDto>;
@@ -40,57 +41,66 @@ export class ListViewDetailDialogComponent {
     if (this.data!=null){
       this.donnees = this.data.donnees;
       this.type = this.data.type;
-
-      if (this.type=='vente'){
-        this.venteService.findLigneVente(this.donnees.id).subscribe(
-          value => {
-            this.elements = value;
-          }
-        )
-        if (this.permission.includes('PAIEMENT: LIRE')){
-          this.paiementService.findByObjetAndIdObjet("VENTE",this.donnees.id).subscribe(
-            value => {
-              this.paiementList = value;
-            }
-          );
-        }
-
-      }
-      if (this.type=='commande client'){
-        this.comClientService.findLigneCommande(this.donnees.id).subscribe(
-          value => {
-            this.elements = value;
-          }
-        )
-        if (this.permission.includes('PAIEMENT: LIRE')){
-          this.paiementService.findByObjetAndIdObjet('CC',this.donnees.id).subscribe(
-            value => {
-              this.paiementList = value;
-            }
-          );
-        }
-
-      }
-      if (this.type=='commande fournisseur'){
-        this.comFournisseurService.findLigneCommande(this.donnees.id).subscribe(
-          value => {
-            this.elements = value;
-          }
-        );
-        if (this.permission.includes('PAIEMENT: LIRE')){
-          this.paiementService.findByObjetAndIdObjet('VENTE',this.donnees.id).subscribe(
-            value => {
-              this.paiementList = value;
-            }
-          );
-        }
-
-      }
+      this.initializeOperation()
 
     }
 
   }
 
+  ngOnInit() {
+    if (this.donnees && this.type){
+      this.initializeOperation();
+    }
+  }
+
+  private initializeOperation(){
+
+    if (this.type=='vente'){
+      this.venteService.findLigneVente(this.donnees.id).subscribe(
+        value => {
+          this.elements = value;
+        }
+      )
+      if (this.permission.includes('PAIEMENT: LIRE')){
+        this.paiementService.findByObjetAndIdObjet("VENTE",this.donnees.id).subscribe(
+          value => {
+            this.paiementList = value;
+          }
+        );
+      }
+
+    }
+    if (this.type=='commande client'){
+      this.comClientService.findLigneCommande(this.donnees.id).subscribe(
+        value => {
+          this.elements = value;
+        }
+      )
+      if (this.permission.includes('PAIEMENT: LIRE')){
+        this.paiementService.findByObjetAndIdObjet('CC',this.donnees.id).subscribe(
+          value => {
+            this.paiementList = value;
+          }
+        );
+      }
+
+    }
+    if (this.type=='commande fournisseur'){
+      this.comFournisseurService.findLigneCommande(this.donnees.id).subscribe(
+        value => {
+          this.elements = value;
+        }
+      );
+      if (this.permission.includes('PAIEMENT: LIRE')){
+        this.paiementService.findByObjetAndIdObjet('VENTE',this.donnees.id).subscribe(
+          value => {
+            this.paiementList = value;
+          }
+        );
+      }
+
+    }
+  }
 
   private getPermissions(){
     let utilisateurDto: UtilisateurDto = JSON.parse(sessionStorage.getItem("userData") as string);
