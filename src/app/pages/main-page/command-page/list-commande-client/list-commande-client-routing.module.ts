@@ -9,16 +9,16 @@ const routes: Routes = [
     path: '',
     component: ListCommandeClientComponent,
     children:[
-      {
-        path: 'detail-commande',
-        children:[
-          {
-            path: 'detail-commande',
-            loadChildren: () => import('./details-commande/details-commande.module').then(m => m.DetailsCommandeModule)
-          },
-        ],
-        data: { breadcrumb: 'Détails des commandes' }
-      },
+      // {
+      //   path: 'detail-commande',
+      //   // children:[
+      //   //   {
+      //   //     path: '',
+      //       loadChildren: () => import('./details-commande/details-commande.module').then(m => m.DetailsCommandeModule),
+      //   //   },
+      //   // ],
+      //   data: { breadcrumb: 'Détails des commandes' }
+      // },
     ]
   },
 ];

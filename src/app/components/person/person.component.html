@@ -1,5 +1,5 @@
-<div id="appbar">
-  <h1 style="color: white">{{typePersonne}} </h1>
+<!--<div id="appbar">-->
+<!--  <h1 style="color: white">{{typePersonne}} </h1>-->
   <div class="row">
     <div class="col-2" *ngIf="(typePersonne =='fournisseur' && permission.includes('FOURNISSEUR: CRÉER_MODIFIER'))
                               || (typePersonne =='client' && permission.includes('CLIENT: CRÉER_MODIFIER'))
@@ -34,10 +34,10 @@
 
 <!--  </div>-->
   </div>
-</div>
+<!--</div>-->
 
 
-<div class="content-second containt  h-100">
+<div class=" containt  h-100">
 
   <div *ngIf="isChecked" class="side">
     <app-filter-person (objetFiltre)="filter(typePersonne, $event)" typeEnregistrement="{{typePersonne}}"></app-filter-person>

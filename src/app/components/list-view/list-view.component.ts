@@ -3,7 +3,7 @@ import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort, Sort} from "@angular/material/sort";
-import {NavigationExtras, Router} from "@angular/router";
+import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ListViewDetailDialogComponent} from "../list-view-detail-dialog/list-view-detail-dialog.component";
 import {ViewDetailBilanDialogComponent} from "../view-detail-bilan-dialog/view-detail-bilan-dialog.component";
@@ -39,7 +39,9 @@ export class ListViewComponent implements OnInit, AfterViewInit, OnChanges{
   displayedColumns: Array<string> = [];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
+
   constructor(private router:Router,
+              private route: ActivatedRoute,
               private _liveAnnouncer: LiveAnnouncer,
               private dialog: MatDialog) {
   }
@@ -82,13 +84,15 @@ export class ListViewComponent implements OnInit, AfterViewInit, OnChanges{
     if (this.type =="commande client" ||
         this.type == "commande fournisseur" || this.type=="vente"){
 
-        let navigationExtras: NavigationExtras = {
+     const navigationExtras: NavigationExtras = {
           state: {
             donnees: row,
             type: this.type,
-          }
+          },
+          // relativeTo: this.route
         };
-        this.router.navigate(['/detail-commande',], navigationExtras);
+     console.log("navigation extras", navigationExtras);
+      this.router.navigate(['/mainPage/command-client/detail-commande'], navigationExtras);
       // this.dialog.open(ListViewDetailDialogComponent, {
       //   height: '90%',
       //   width: '90%',

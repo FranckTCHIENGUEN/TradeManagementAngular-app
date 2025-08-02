@@ -24,20 +24,23 @@ export class ListViewDetailDialogComponent implements OnInit{
   @Input() donnees: any;
   @Input() type?: string;
   elements: any;
-
+  private data: any
   paiementList?: Array<PaiementDto>;
   permission: Array<string> = [];
-
-  constructor(private dialogRef: MatDialogRef<ListViewDetailDialogComponent>,
+  // private dialogRef: MatDialogRef<ListViewDetailDialogComponent>,
+  // @Inject(MAT_DIALOG_DATA)
+  constructor(
               private venteService:AppVenbteServiceService,
               private factureService: FactureService,
               private comFournisseurService:AppCommandFournisseurService,
               private paiementService:AppPaiementServiceService,
               private comClientService:AppCommandClientService,
               private dialog: MatDialog,
-              @Inject(MAT_DIALOG_DATA) private data: any) {
+              ) {
 
     this.getPermissions();
+    this.initializeOperation();
+    console.log("type "+this.type)
     if (this.data!=null){
       this.donnees = this.data.donnees;
       this.type = this.data.type;
@@ -48,6 +51,7 @@ export class ListViewDetailDialogComponent implements OnInit{
   }
 
   ngOnInit() {
+    console.log("donnée "+this.donnees)
     if (this.donnees && this.type){
       this.initializeOperation();
     }
@@ -111,7 +115,7 @@ export class ListViewDetailDialogComponent implements OnInit{
     })
   }
   closeDialog() {
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 
   openDialogAddPaiement() {

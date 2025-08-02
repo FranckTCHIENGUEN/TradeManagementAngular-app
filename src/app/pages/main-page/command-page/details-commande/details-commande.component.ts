@@ -7,9 +7,11 @@ import {Router} from "@angular/router";
   styleUrls: ['./details-commande.component.scss']
 })
 export class DetailsCommandeComponent {
-   type: any;
-   donnees: any;
+  type: any;
+  donnees: any;
   constructor(private router: Router) {
+
+    console.log(this.router.getCurrentNavigation()?.extras)
     this.donnees = this.router.getCurrentNavigation()?.extras.state?.['donnees'];
     this.type = this.router.getCurrentNavigation()?.extras.state?.['type'];
   }

@@ -73,7 +73,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
         AppComponent,
         LoginPageComponent,
         SavePersonDialogComponent,
-        ListViewDetailDialogComponent,
+
         RegisterPageComponent,
         ProductDetailDialogComponent,
         ServiceDetailDialogComponent,
@@ -142,7 +142,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
       LoaderService
     ],
     exports: [
-        ListViewDetailDialogComponent,
+
         AppLoaderComponent,
 
     ],

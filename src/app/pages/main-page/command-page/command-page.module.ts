@@ -8,23 +8,34 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatButtonModule} from "@angular/material/button";
+import {
+  ListViewDetailDialogComponent
+} from "../../../components/list-view-detail-dialog/list-view-detail-dialog.component";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
     declarations: [
         CommandPageComponent,
-        SecondaryMenuComponent
+        SecondaryMenuComponent,
+      ListViewDetailDialogComponent,
     ],
     exports: [
-        SecondaryMenuComponent
+        SecondaryMenuComponent,
+      ListViewDetailDialogComponent,
     ],
-    imports: [
-        CommonModule,
-        CommandPageRoutingModule,
-        MatIconModule,
-        MatDividerModule,
-        MatProgressBarModule,
-        MatButtonModule
-    ]
+  imports: [
+    CommonModule,
+    CommandPageRoutingModule,
+    MatIconModule,
+    MatDividerModule,
+    MatProgressBarModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatTabsModule,
+    MatExpansionModule
+  ]
 })
 export class CommandPageModule { }
