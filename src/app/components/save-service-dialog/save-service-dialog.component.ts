@@ -15,9 +15,10 @@ import {AppServiceService} from "../../../services/serviceService/app-service.se
 import {AppCatergorieServiceService} from "../../../services/categoriService/app-catergorie-service.service";
 
 @Component({
-  selector: 'app-save-service-dialog',
-  templateUrl: './save-service-dialog.component.html',
-  styleUrls: ['./save-service-dialog.component.scss']
+    selector: 'app-save-service-dialog',
+    templateUrl: './save-service-dialog.component.html',
+    styleUrls: ['./save-service-dialog.component.scss'],
+    standalone: false
 })
 export class SaveServiceDialogComponent implements OnInit{
 

@@ -12,9 +12,10 @@ import {MatSelectionList} from "@angular/material/list";
 import {AppRoleService} from "../../../services/roleService/app-role.service";
 
 @Component({
-  selector: 'app-save-person-dialog',
-  templateUrl: './save-person-dialog.component.html',
-  styleUrls: ['./save-person-dialog.component.scss']
+    selector: 'app-save-person-dialog',
+    templateUrl: './save-person-dialog.component.html',
+    styleUrls: ['./save-person-dialog.component.scss'],
+    standalone: false
 })
 export class SavePersonDialogComponent {
 

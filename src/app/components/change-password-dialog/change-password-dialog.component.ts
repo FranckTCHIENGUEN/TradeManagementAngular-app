@@ -8,9 +8,10 @@ import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-change-password-dialog',
-  templateUrl: './change-password-dialog.component.html',
-  styleUrls: ['./change-password-dialog.component.scss']
+    selector: 'app-change-password-dialog',
+    templateUrl: './change-password-dialog.component.html',
+    styleUrls: ['./change-password-dialog.component.scss'],
+    standalone: false
 })
 export class ChangePasswordDialogComponent {
 

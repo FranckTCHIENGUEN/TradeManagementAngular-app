@@ -13,9 +13,10 @@ import {CategoriesSearchDto, ContextCategorie} from "../../../../tm-api/src-api/
 
 
 @Component({
-  selector: 'app-depense-page',
-  templateUrl: './depense-page.component.html',
-  styleUrls: ['./depense-page.component.scss']
+    selector: 'app-depense-page',
+    templateUrl: './depense-page.component.html',
+    styleUrls: ['./depense-page.component.scss'],
+    standalone: false
 })
 export class DepensePageComponent implements OnInit{
 

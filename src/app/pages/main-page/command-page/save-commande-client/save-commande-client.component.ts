@@ -2,9 +2,10 @@ import {Component} from '@angular/core';
 import {UtilisateurDto} from "../../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-save-commande-client',
-  templateUrl: './save-commande-client.component.html',
-  styleUrls: ['./save-commande-client.component.scss']
+    selector: 'app-save-commande-client',
+    templateUrl: './save-commande-client.component.html',
+    styleUrls: ['./save-commande-client.component.scss'],
+    standalone: false
 })
 export class SaveCommandeClientComponent {
 

@@ -4,9 +4,10 @@ import {AppProductService} from "../../../services/productService/app-product.se
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-viewenterprise-dialog',
-  templateUrl: './viewenterprise-dialog.component.html',
-  styleUrls: ['./viewenterprise-dialog.component.scss']
+    selector: 'app-viewenterprise-dialog',
+    templateUrl: './viewenterprise-dialog.component.html',
+    styleUrls: ['./viewenterprise-dialog.component.scss'],
+    standalone: false
 })
 export class ViewenterpriseDialogComponent {
   entreprise: EntrepriseDto = {};

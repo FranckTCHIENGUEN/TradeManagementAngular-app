@@ -11,9 +11,10 @@ import {CommandSearch} from "../../../../../tm-api/src-api/models/command-search
 import {UtilisateurDto} from "../../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-list-com-fournisseur-page',
-  templateUrl: './list-com-fournisseur-page.component.html',
-  styleUrls: ['./list-com-fournisseur-page.component.scss']
+    selector: 'app-list-com-fournisseur-page',
+    templateUrl: './list-com-fournisseur-page.component.html',
+    styleUrls: ['./list-com-fournisseur-page.component.scss'],
+    standalone: false
 })
 export class ListComFournisseurPageComponent implements OnInit{
 

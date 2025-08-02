@@ -2,9 +2,10 @@ import {Component} from '@angular/core';
 import {objetFiltreStat} from "../../../../components/filtre-stat/filtre-stat.component";
 
 @Component({
-  selector: 'app-achat-page',
-  templateUrl: './achat-page.component.html',
-  styleUrls: ['./achat-page.component.scss']
+    selector: 'app-achat-page',
+    templateUrl: './achat-page.component.html',
+    styleUrls: ['./achat-page.component.scss'],
+    standalone: false
 })
 export class AchatPageComponent {
 

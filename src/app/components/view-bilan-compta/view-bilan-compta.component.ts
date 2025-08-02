@@ -14,9 +14,10 @@ import {DepensesDto} from "../../../tm-api/src-api/models/depenses-dto";
 import {AppDepenseService} from "../../../services/depenseService/app-depense.service";
 
 @Component({
-  selector: 'app-view-bilan-compta',
-  templateUrl: './view-bilan-compta.component.html',
-  styleUrls: ['./view-bilan-compta.component.scss']
+    selector: 'app-view-bilan-compta',
+    templateUrl: './view-bilan-compta.component.html',
+    styleUrls: ['./view-bilan-compta.component.scss'],
+    standalone: false
 })
 export class ViewBilanComptaComponent implements OnInit, OnChanges{
 

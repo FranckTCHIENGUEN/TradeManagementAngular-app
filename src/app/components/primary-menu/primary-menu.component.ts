@@ -5,9 +5,10 @@ import {menuList} from "../../../menuList";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-primary-menu',
-  templateUrl: './primary-menu.component.html',
-  styleUrls: ['./primary-menu.component.scss']
+    selector: 'app-primary-menu',
+    templateUrl: './primary-menu.component.html',
+    styleUrls: ['./primary-menu.component.scss'],
+    standalone: false
 })
 export class PrimaryMenuComponent {
   navData = menuList;

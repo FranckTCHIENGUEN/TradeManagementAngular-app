@@ -14,9 +14,10 @@ class menuProperties {
 }
 
 @Component({
-  selector: 'app-secondary-menu',
-  templateUrl: './secondary-menu.component.html',
-  styleUrls: ['./secondary-menu.component.scss']
+    selector: 'app-secondary-menu',
+    templateUrl: './secondary-menu.component.html',
+    styleUrls: ['./secondary-menu.component.scss'],
+    standalone: false
 })
 export class SecondaryMenuComponent implements OnInit{
   data = menuList;

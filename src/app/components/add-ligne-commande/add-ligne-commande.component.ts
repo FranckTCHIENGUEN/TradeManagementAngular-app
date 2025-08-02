@@ -15,9 +15,10 @@ import {SaveServiceDialogComponent} from "../save-service-dialog/save-service-di
 import {SaveProductDialogComponent} from "../save-product-dialog/save-product-dialog.component";
 
 @Component({
-  selector: 'app-add-ligne-commande',
-  templateUrl: './add-ligne-commande.component.html',
-  styleUrls: ['./add-ligne-commande.component.scss']
+    selector: 'app-add-ligne-commande',
+    templateUrl: './add-ligne-commande.component.html',
+    styleUrls: ['./add-ligne-commande.component.scss'],
+    standalone: false
 })
 export class AddLigneCommandeComponent {
   saveForm= this.formBuilder.group({

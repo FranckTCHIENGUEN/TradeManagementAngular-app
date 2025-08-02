@@ -9,9 +9,10 @@ import {CommandSearch} from "../../../../../tm-api/src-api/models/command-search
 import {UtilisateurDto} from "../../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-list-commande-client',
-  templateUrl: './list-commande-client.component.html',
-  styleUrls: ['./list-commande-client.component.scss']
+    selector: 'app-list-commande-client',
+    templateUrl: './list-commande-client.component.html',
+    styleUrls: ['./list-commande-client.component.scss'],
+    standalone: false
 })
 export class ListCommandeClientComponent implements OnInit{
 

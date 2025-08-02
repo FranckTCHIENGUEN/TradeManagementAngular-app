@@ -10,9 +10,10 @@ import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-add-categorie-dialog',
-  templateUrl: './add-categorie-dialog.component.html',
-  styleUrls: ['./add-categorie-dialog.component.scss']
+    selector: 'app-add-categorie-dialog',
+    templateUrl: './add-categorie-dialog.component.html',
+    styleUrls: ['./add-categorie-dialog.component.scss'],
+    standalone: false
 })
 export class AddCategorieDialogComponent {
 

@@ -8,9 +8,10 @@ import {AppUserService} from "../../../services/appUserServices/app-user.service
 import {CategoriesSearchDto, ContextCategorie} from "../../../tm-api/src-api/models/categories-search-dto";
 
 @Component({
-  selector: 'app-filter-categories',
-  templateUrl: './filter-categories.component.html',
-  styleUrls: ['./filter-categories.component.scss']
+    selector: 'app-filter-categories',
+    templateUrl: './filter-categories.component.html',
+    styleUrls: ['./filter-categories.component.scss'],
+    standalone: false
 })
 export class FilterCategoriesComponent {
 

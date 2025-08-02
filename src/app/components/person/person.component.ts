@@ -12,9 +12,10 @@ import {AppPersonSearchService} from "../../../services/personSearch/app-person-
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-person',
-  templateUrl: './person.component.html',
-  styleUrls: ['./person.component.scss']
+    selector: 'app-person',
+    templateUrl: './person.component.html',
+    styleUrls: ['./person.component.scss'],
+    standalone: false
 })
 export class PersonComponent implements OnInit{
   typesOfShoes: any;

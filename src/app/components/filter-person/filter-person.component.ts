@@ -10,9 +10,10 @@ import {AdresseDto} from "../../../tm-api/src-api/models/adresse-dto";
 import {CompteClientDto} from "../../../tm-api/src-api/models/compte-client-dto";
 
 @Component({
-  selector: 'app-filter-person',
-  templateUrl: './filter-person.component.html',
-  styleUrls: ['./filter-person.component.scss']
+    selector: 'app-filter-person',
+    templateUrl: './filter-person.component.html',
+    styleUrls: ['./filter-person.component.scss'],
+    standalone: false
 })
 export class FilterPersonComponent {
   saveForm = this.formBuilder.group({

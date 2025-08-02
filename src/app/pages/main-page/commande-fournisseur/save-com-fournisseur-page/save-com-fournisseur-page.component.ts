@@ -2,9 +2,10 @@ import {Component} from '@angular/core';
 import {UtilisateurDto} from "../../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-save-com-fournisseur-page',
-  templateUrl: './save-com-fournisseur-page.component.html',
-  styleUrls: ['./save-com-fournisseur-page.component.scss']
+    selector: 'app-save-com-fournisseur-page',
+    templateUrl: './save-com-fournisseur-page.component.html',
+    styleUrls: ['./save-com-fournisseur-page.component.scss'],
+    standalone: false
 })
 export class SaveComFournisseurPageComponent {
   permission: Array<string> = [];

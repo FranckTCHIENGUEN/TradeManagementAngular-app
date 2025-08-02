@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-details-commande',
-  templateUrl: './details-commande.component.html',
-  styleUrls: ['./details-commande.component.scss']
+    selector: 'app-details-commande',
+    templateUrl: './details-commande.component.html',
+    styleUrls: ['./details-commande.component.scss'],
+    standalone: false
 })
 export class DetailsCommandeComponent {
   type: any;

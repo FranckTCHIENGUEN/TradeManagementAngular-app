@@ -4,9 +4,10 @@ import {Column} from "../list-view/list-view.component";
 import {DetailsBilan} from "../../../tm-api/src-api/models/details-bilan";
 
 @Component({
-  selector: 'app-view-detail-bilan-dialog',
-  templateUrl: './view-detail-bilan-dialog.component.html',
-  styleUrls: ['./view-detail-bilan-dialog.component.scss']
+    selector: 'app-view-detail-bilan-dialog',
+    templateUrl: './view-detail-bilan-dialog.component.html',
+    styleUrls: ['./view-detail-bilan-dialog.component.scss'],
+    standalone: false
 })
 export class ViewDetailBilanDialogComponent {
   donnees: any;

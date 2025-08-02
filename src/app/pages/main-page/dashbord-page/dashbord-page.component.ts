@@ -8,9 +8,10 @@ import {CommandSearch, EtatFinancier, UtilisateurDto} from "../../../../tm-api/s
 import {AppStatService} from "../../../../services/statSservice/app-stat.service";
 
 @Component({
-  selector: 'app-dashbord-page',
-  templateUrl: './dashbord-page.component.html',
-  styleUrls: ['./dashbord-page.component.scss']
+    selector: 'app-dashbord-page',
+    templateUrl: './dashbord-page.component.html',
+    styleUrls: ['./dashbord-page.component.scss'],
+    standalone: false
 })
 export class DashbordPageComponent implements OnInit{
 

@@ -11,9 +11,10 @@ import {CreerGroupeClientDialogComponent} from "../creer-groupe-client-dialog/cr
 import {AppGroupeClientService} from "../../../services/groupeClientService/app-groupe-client.service";
 
 @Component({
-  selector: 'app-addgroupetoclient',
-  templateUrl: './addgroupetoclient.component.html',
-  styleUrls: ['./addgroupetoclient.component.scss']
+    selector: 'app-addgroupetoclient',
+    templateUrl: './addgroupetoclient.component.html',
+    styleUrls: ['./addgroupetoclient.component.scss'],
+    standalone: false
 })
 export class AddgroupetoclientComponent implements OnInit{
 

@@ -24,23 +24,24 @@ export interface objetFiltreStat{
   mois?:number| null
 }
 @Component({
-  selector: 'app-filtre-stat',
-  templateUrl: './filtre-stat.component.html',
-  styleUrls: ['./filtre-stat.component.scss'],
-  providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'pt' },
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE],
-    },
-    { provide: MAT_DATE_FORMATS, useValue: YEAR_MODE_FORMATS },
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FiltreStatComponent),
-      multi: true,
-    },
-  ],
+    selector: 'app-filtre-stat',
+    templateUrl: './filtre-stat.component.html',
+    styleUrls: ['./filtre-stat.component.scss'],
+    providers: [
+        { provide: MAT_DATE_LOCALE, useValue: 'pt' },
+        {
+            provide: DateAdapter,
+            useClass: MomentDateAdapter,
+            deps: [MAT_DATE_LOCALE],
+        },
+        { provide: MAT_DATE_FORMATS, useValue: YEAR_MODE_FORMATS },
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FiltreStatComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class FiltreStatComponent {
 

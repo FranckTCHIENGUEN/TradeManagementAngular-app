@@ -9,9 +9,10 @@ import {FactureService} from "../../../services/factureService/facture.service";
 
 
 @Component({
-  selector: 'app-facture-dialog',
-  templateUrl: './facture-dialog.component.html',
-  styleUrls: ['./facture-dialog.component.scss']
+    selector: 'app-facture-dialog',
+    templateUrl: './facture-dialog.component.html',
+    styleUrls: ['./facture-dialog.component.scss'],
+    standalone: false
 })
 export class FactureDialogComponent {
   donnees: any;

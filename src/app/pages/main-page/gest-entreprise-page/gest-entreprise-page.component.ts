@@ -2,9 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {UtilisateurDto} from "../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-gest-entreprise-page',
-  templateUrl: './gest-entreprise-page.component.html',
-  styleUrls: ['./gest-entreprise-page.component.scss']
+    selector: 'app-gest-entreprise-page',
+    templateUrl: './gest-entreprise-page.component.html',
+    styleUrls: ['./gest-entreprise-page.component.scss'],
+    standalone: false
 })
 export class GestEntreprisePageComponent implements OnInit{
   permission: Array<string> = [];

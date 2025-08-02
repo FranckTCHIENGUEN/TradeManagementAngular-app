@@ -2,9 +2,10 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-confirm-delete-dialog',
-  templateUrl: './confirm-delete-dialog.component.html',
-  styleUrls: ['./confirm-delete-dialog.component.scss']
+    selector: 'app-confirm-delete-dialog',
+    templateUrl: './confirm-delete-dialog.component.html',
+    styleUrls: ['./confirm-delete-dialog.component.scss'],
+    standalone: false
 })
 export class ConfirmDeleteDialogComponent {
   message: any;

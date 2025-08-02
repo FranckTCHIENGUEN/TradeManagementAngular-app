@@ -12,9 +12,10 @@ import {FactureDialogComponent} from "../facture-dialog/facture-dialog.component
 import {Column} from "../list-view/list-view.component";
 
 @Component({
-  selector: 'app-compta-list-view',
-  templateUrl: './compta-list-view.component.html',
-  styleUrls: ['./compta-list-view.component.scss']
+    selector: 'app-compta-list-view',
+    templateUrl: './compta-list-view.component.html',
+    styleUrls: ['./compta-list-view.component.scss'],
+    standalone: false
 })
 export class ComptaListViewComponent implements OnInit, AfterViewInit, OnChanges{
 

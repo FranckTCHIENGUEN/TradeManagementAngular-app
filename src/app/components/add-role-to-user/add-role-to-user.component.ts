@@ -8,9 +8,10 @@ import {MatSelectionList} from "@angular/material/list";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 
 @Component({
-  selector: 'app-add-role-to-user',
-  templateUrl: './add-role-to-user.component.html',
-  styleUrls: ['./add-role-to-user.component.scss']
+    selector: 'app-add-role-to-user',
+    templateUrl: './add-role-to-user.component.html',
+    styleUrls: ['./add-role-to-user.component.scss'],
+    standalone: false
 })
 export class AddRoleToUserComponent {
   private person: UtilisateurDto;

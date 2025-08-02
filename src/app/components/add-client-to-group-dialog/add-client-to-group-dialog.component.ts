@@ -13,9 +13,10 @@ import {SavePersonDialogComponent} from "../save-person-dialog/save-person-dialo
 import {placeObjectAtFirstPosition} from "../../utils/sort";
 
 @Component({
-  selector: 'app-add-client-to-group-dialog',
-  templateUrl: './add-client-to-group-dialog.component.html',
-  styleUrls: ['./add-client-to-group-dialog.component.scss']
+    selector: 'app-add-client-to-group-dialog',
+    templateUrl: './add-client-to-group-dialog.component.html',
+    styleUrls: ['./add-client-to-group-dialog.component.scss'],
+    standalone: false
 })
 export class AddClientToGroupDialogComponent implements OnInit{
 

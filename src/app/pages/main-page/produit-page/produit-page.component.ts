@@ -9,9 +9,10 @@ import {CategoriesSearchDto, ContextCategorie} from "../../../../tm-api/src-api/
 import {FilterCategoriesService} from "../../../../services/filterCategorieService/filter-categories.service";
 
 @Component({
-  selector: 'app-produit-page',
-  templateUrl: './produit-page.component.html',
-  styleUrls: ['./produit-page.component.scss']
+    selector: 'app-produit-page',
+    templateUrl: './produit-page.component.html',
+    styleUrls: ['./produit-page.component.scss'],
+    standalone: false
 })
 export class ProduitPageComponent implements OnInit{
   listProduiut: Array<ArticleDto> = [];

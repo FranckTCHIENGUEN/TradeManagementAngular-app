@@ -8,11 +8,11 @@ import {CookieService} from "ngx-cookie-service";
 import {OverlayContainer} from "@angular/cdk/overlay";
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss'],
-  providers:
-    [CookieService],
+    selector: 'app-login-page',
+    templateUrl: './login-page.component.html',
+    styleUrls: ['./login-page.component.scss'],
+    providers: [CookieService],
+    standalone: false
 })
 export class LoginPageComponent {
   loginForm = this.formBuilder.nonNullable.group({

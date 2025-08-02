@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-bilan-journalier-page',
-  templateUrl: './bilan-journalier-page.component.html',
-  styleUrls: ['./bilan-journalier-page.component.scss']
+    selector: 'app-bilan-journalier-page',
+    templateUrl: './bilan-journalier-page.component.html',
+    styleUrls: ['./bilan-journalier-page.component.scss'],
+    standalone: false
 })
 export class BilanJournalierPageComponent {
 

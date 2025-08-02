@@ -9,9 +9,10 @@ import {AppCommandClientService} from "../../../services/commandClientService/ap
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 
 @Component({
-  selector: 'app-update-etat-dialog',
-  templateUrl: './update-etat-dialog.component.html',
-  styleUrls: ['./update-etat-dialog.component.scss']
+    selector: 'app-update-etat-dialog',
+    templateUrl: './update-etat-dialog.component.html',
+    styleUrls: ['./update-etat-dialog.component.scss'],
+    standalone: false
 })
 export class UpdateEtatDialogComponent {
   saveForm = this.formBuilder.group({

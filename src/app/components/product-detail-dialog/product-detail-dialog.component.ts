@@ -6,9 +6,10 @@ import {AppProductService} from "../../../services/productService/app-product.se
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-product-detail-dialog',
-  templateUrl: './product-detail-dialog.component.html',
-  styleUrls: ['./product-detail-dialog.component.scss']
+    selector: 'app-product-detail-dialog',
+    templateUrl: './product-detail-dialog.component.html',
+    styleUrls: ['./product-detail-dialog.component.scss'],
+    standalone: false
 })
 export class ProductDetailDialogComponent implements OnInit{
 

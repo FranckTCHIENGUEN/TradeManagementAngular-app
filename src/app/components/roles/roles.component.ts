@@ -7,9 +7,10 @@ import {SaveRoleDialogComponent} from "../save-role-dialog/save-role-dialog.comp
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-compo-roles',
-  templateUrl: './roles.component.html',
-  styleUrls: ['./roles.component.scss']
+    selector: 'app-compo-roles',
+    templateUrl: './roles.component.html',
+    styleUrls: ['./roles.component.scss'],
+    standalone: false
 })
 export class RolesComponent {
   listRoles: Array<RoleDto> =[] ;

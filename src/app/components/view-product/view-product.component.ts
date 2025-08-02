@@ -7,9 +7,10 @@ import {SaveServiceDialogComponent} from "../save-service-dialog/save-service-di
 import {AppServiceService} from "../../../services/serviceService/app-service.service";
 
 @Component({
-  selector: 'app-view-product',
-  templateUrl: './view-product.component.html',
-  styleUrls: ['./view-product.component.scss']
+    selector: 'app-view-product',
+    templateUrl: './view-product.component.html',
+    styleUrls: ['./view-product.component.scss'],
+    standalone: false
 })
 export class ViewProductComponent {
   @Input() listOfData: Array<any> = [];

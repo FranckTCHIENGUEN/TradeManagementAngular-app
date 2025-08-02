@@ -2,9 +2,10 @@ import {Component} from '@angular/core';
 import {UtilisateurDto} from "../../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-save-vente-page',
-  templateUrl: './save-vente-page.component.html',
-  styleUrls: ['./save-vente-page.component.scss']
+    selector: 'app-save-vente-page',
+    templateUrl: './save-vente-page.component.html',
+    styleUrls: ['./save-vente-page.component.scss'],
+    standalone: false
 })
 export class SaveVentePageComponent {
   permission: Array<string> = [];

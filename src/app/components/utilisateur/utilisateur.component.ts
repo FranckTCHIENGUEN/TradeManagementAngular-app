@@ -8,9 +8,10 @@ import {PersonSearchDto} from "../../../tm-api/src-api/models/person-search-dto"
 import {AppPersonSearchService} from "../../../services/personSearch/app-person-search.service";
 
 @Component({
-  selector: 'app-utilisateur',
-  templateUrl: './utilisateur.component.html',
-  styleUrls: ['./utilisateur.component.scss']
+    selector: 'app-utilisateur',
+    templateUrl: './utilisateur.component.html',
+    styleUrls: ['./utilisateur.component.scss'],
+    standalone: false
 })
 export class UtilisateurComponent implements OnInit{
 

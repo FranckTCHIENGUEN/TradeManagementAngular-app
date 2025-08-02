@@ -12,9 +12,10 @@ import {AppPaiementServiceService} from "../../../services/paiementService/app-p
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 
 @Component({
-  selector: 'app-add-paiement-dialog',
-  templateUrl: './add-paiement-dialog.component.html',
-  styleUrls: ['./add-paiement-dialog.component.scss']
+    selector: 'app-add-paiement-dialog',
+    templateUrl: './add-paiement-dialog.component.html',
+    styleUrls: ['./add-paiement-dialog.component.scss'],
+    standalone: false
 })
 export class AddPaiementDialogComponent {
 

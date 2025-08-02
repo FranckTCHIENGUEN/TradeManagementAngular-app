@@ -13,11 +13,11 @@ import {AppAuthenticationService} from "../../../services/authentification/app-a
 import {CookieService} from "ngx-cookie-service";
 
 @Component({
-  selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss'],
-  providers:
-    [CookieService],
+    selector: 'app-main-page',
+    templateUrl: './main-page.component.html',
+    styleUrls: ['./main-page.component.scss'],
+    providers: [CookieService],
+    standalone: false
 })
 export class MainPageComponent {
   // userConnected:UtilisateursDto =  {};

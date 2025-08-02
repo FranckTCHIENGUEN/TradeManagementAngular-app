@@ -9,9 +9,10 @@ import {AppSearchCommandService} from "../../../../../services/searchCommand/app
 import {UtilisateurDto} from "../../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-liste-vente-page',
-  templateUrl: './liste-vente-page.component.html',
-  styleUrls: ['./liste-vente-page.component.scss']
+    selector: 'app-liste-vente-page',
+    templateUrl: './liste-vente-page.component.html',
+    styleUrls: ['./liste-vente-page.component.scss'],
+    standalone: false
 })
 export class ListeVentePageComponent implements OnInit{
 

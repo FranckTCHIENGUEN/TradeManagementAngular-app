@@ -4,9 +4,10 @@ import {objetFiltreStat} from "../../../../components/filtre-stat/filtre-stat.co
 import {EtatFinancier} from "../../../../../tm-api/src-api/models/etat-financier";
 
 @Component({
-  selector: 'app-etat-financier-page',
-  templateUrl: './etat-financier-page.component.html',
-  styleUrls: ['./etat-financier-page.component.scss']
+    selector: 'app-etat-financier-page',
+    templateUrl: './etat-financier-page.component.html',
+    styleUrls: ['./etat-financier-page.component.scss'],
+    standalone: false
 })
 export class EtatFinancierPageComponent {
 

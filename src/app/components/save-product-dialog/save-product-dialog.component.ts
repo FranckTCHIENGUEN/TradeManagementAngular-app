@@ -14,9 +14,10 @@ import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-save-product-dialog',
-  templateUrl: './save-product-dialog.component.html',
-  styleUrls: ['./save-product-dialog.component.scss']
+    selector: 'app-save-product-dialog',
+    templateUrl: './save-product-dialog.component.html',
+    styleUrls: ['./save-product-dialog.component.scss'],
+    standalone: false
 })
 export class SaveProductDialogComponent implements OnInit{
 

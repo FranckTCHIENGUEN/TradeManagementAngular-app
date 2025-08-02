@@ -3,9 +3,10 @@ import {Subject} from "rxjs";
 import {LoaderService} from "../../../services/loader/loader.service";
 
 @Component({
-  selector: 'app-app-loader',
-  templateUrl: './app-loader.component.html',
-  styleUrls: ['./app-loader.component.scss']
+    selector: 'app-app-loader',
+    templateUrl: './app-loader.component.html',
+    styleUrls: ['./app-loader.component.scss'],
+    standalone: false
 })
 export class AppLoaderComponent {
   color = 'primary';

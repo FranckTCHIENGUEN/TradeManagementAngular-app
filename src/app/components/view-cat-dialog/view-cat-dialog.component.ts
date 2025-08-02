@@ -10,9 +10,10 @@ import {AppCategorieDepenseService} from "../../../services/categorieDepenseServ
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-view-cat-dialog',
-  templateUrl: './view-cat-dialog.component.html',
-  styleUrls: ['./view-cat-dialog.component.scss']
+    selector: 'app-view-cat-dialog',
+    templateUrl: './view-cat-dialog.component.html',
+    styleUrls: ['./view-cat-dialog.component.scss'],
+    standalone: false
 })
 export class ViewCatDialogComponent implements OnInit{
 

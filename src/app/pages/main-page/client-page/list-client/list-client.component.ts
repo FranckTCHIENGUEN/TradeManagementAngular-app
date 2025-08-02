@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import {UtilisateurDto} from "../../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-list-client',
-  templateUrl: './list-client.component.html',
-  styleUrls: ['./list-client.component.scss']
+    selector: 'app-list-client',
+    templateUrl: './list-client.component.html',
+    styleUrls: ['./list-client.component.scss'],
+    standalone: false
 })
 export class ListClientComponent {
 

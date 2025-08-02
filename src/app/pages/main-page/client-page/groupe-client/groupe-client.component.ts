@@ -15,9 +15,10 @@ import {
 } from "../../../../components/remove-client-to-groupe/remove-client-to-groupe.component";
 
 @Component({
-  selector: 'app-groupe-client',
-  templateUrl: './groupe-client.component.html',
-  styleUrls: ['./groupe-client.component.scss']
+    selector: 'app-groupe-client',
+    templateUrl: './groupe-client.component.html',
+    styleUrls: ['./groupe-client.component.scss'],
+    standalone: false
 })
 export class GroupeClientComponent {
   listGroupe: Array<GroupeClientDto> =[] ;

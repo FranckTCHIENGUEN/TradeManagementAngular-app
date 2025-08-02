@@ -2,9 +2,10 @@ import {Component} from '@angular/core';
 import {UtilisateurDto} from "../../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-fournisseur-page',
-  templateUrl: './fournisseur-page.component.html',
-  styleUrls: ['./fournisseur-page.component.scss']
+    selector: 'app-fournisseur-page',
+    templateUrl: './fournisseur-page.component.html',
+    styleUrls: ['./fournisseur-page.component.scss'],
+    standalone: false
 })
 export class FournisseurPageComponent {
   isChecked: boolean=false;

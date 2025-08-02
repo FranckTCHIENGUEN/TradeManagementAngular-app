@@ -8,9 +8,10 @@ import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {confirmPassValidator, createPasswordStrengthValidator} from "../../../validation";
 
 @Component({
-  selector: 'app-register-page',
-  templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss']
+    selector: 'app-register-page',
+    templateUrl: './register-page.component.html',
+    styleUrls: ['./register-page.component.scss'],
+    standalone: false
 })
 export class RegisterPageComponent {
   registerForm = this.formBuilder.nonNullable.group({

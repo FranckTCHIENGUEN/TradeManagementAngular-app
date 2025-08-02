@@ -10,9 +10,10 @@ import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component
 import {MatSelectionList} from "@angular/material/list";
 
 @Component({
-  selector: 'app-save-role-dialog',
-  templateUrl: './save-role-dialog.component.html',
-  styleUrls: ['./save-role-dialog.component.scss']
+    selector: 'app-save-role-dialog',
+    templateUrl: './save-role-dialog.component.html',
+    styleUrls: ['./save-role-dialog.component.scss'],
+    standalone: false
 })
 export class SaveRoleDialogComponent implements OnInit{
 

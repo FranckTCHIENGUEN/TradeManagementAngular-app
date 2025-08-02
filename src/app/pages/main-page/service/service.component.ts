@@ -9,9 +9,10 @@ import {CategoriesSearchDto, ContextCategorie} from "../../../../tm-api/src-api/
 import {FilterCategoriesService} from "../../../../services/filterCategorieService/filter-categories.service";
 
 @Component({
-  selector: 'app-service',
-  templateUrl: './service.component.html',
-  styleUrls: ['./service.component.scss']
+    selector: 'app-service',
+    templateUrl: './service.component.html',
+    styleUrls: ['./service.component.scss'],
+    standalone: false
 })
 export class ServiceComponent implements OnInit{
   listService: Array<StatServiceDto> = [];

@@ -16,9 +16,10 @@ import {FactureService} from "../../../services/factureService/facture.service";
 import {inputNames} from "@angular/cdk/schematics";
 
 @Component({
-  selector: 'app-list-view-detail-dialog',
-  templateUrl: './list-view-detail-dialog.component.html',
-  styleUrls: ['./list-view-detail-dialog.component.scss']
+    selector: 'app-list-view-detail-dialog',
+    templateUrl: './list-view-detail-dialog.component.html',
+    styleUrls: ['./list-view-detail-dialog.component.scss'],
+    standalone: false
 })
 export class ListViewDetailDialogComponent implements OnInit{
   @Input() donnees: any;

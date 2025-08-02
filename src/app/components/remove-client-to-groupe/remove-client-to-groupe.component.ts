@@ -13,9 +13,10 @@ import {placeObjectAtFirstPosition} from "../../utils/sort";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 
 @Component({
-  selector: 'app-remove-client-to-groupe',
-  templateUrl: './remove-client-to-groupe.component.html',
-  styleUrls: ['./remove-client-to-groupe.component.scss']
+    selector: 'app-remove-client-to-groupe',
+    templateUrl: './remove-client-to-groupe.component.html',
+    styleUrls: ['./remove-client-to-groupe.component.scss'],
+    standalone: false
 })
 export class RemoveClientToGroupeComponent implements OnInit{
 

@@ -6,9 +6,10 @@ import {SaveServiceDialogComponent} from "../save-service-dialog/save-service-di
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
 
 @Component({
-  selector: 'app-service-detail-dialog',
-  templateUrl: './service-detail-dialog.component.html',
-  styleUrls: ['./service-detail-dialog.component.scss']
+    selector: 'app-service-detail-dialog',
+    templateUrl: './service-detail-dialog.component.html',
+    styleUrls: ['./service-detail-dialog.component.scss'],
+    standalone: false
 })
 export class ServiceDetailDialogComponent {
   service:StatServiceDto = {}

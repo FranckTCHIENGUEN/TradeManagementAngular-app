@@ -16,9 +16,10 @@ import {TemplatePortal} from "@angular/cdk/portal";
 import {filter} from "rxjs/operators";
 
 @Component({
-  selector: 'app-person-view-detail',
-  templateUrl: './person-view-detail.component.html',
-  styleUrls: ['./person-view-detail.component.scss']
+    selector: 'app-person-view-detail',
+    templateUrl: './person-view-detail.component.html',
+    styleUrls: ['./person-view-detail.component.scss'],
+    standalone: false
 })
 export class PersonViewDetailComponent implements OnInit{
   person: any;
