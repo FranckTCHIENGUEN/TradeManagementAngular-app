@@ -6,7 +6,6 @@ import {ViewenterpriseDialogComponent} from "./viewenterprise-dialog.component";
 describe('ViewenterpriseDialogComponent', () => {
   let component: ViewenterpriseDialogComponent;
   let fixture: ComponentFixture<ViewenterpriseDialogComponent>;
-
   beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
       declarations: [ViewenterpriseDialogComponent]

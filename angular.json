@@ -8,6 +8,9 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
+        },
+        "@angular/material:theme": {
+          "version": 2
         }
       },
       "root": "",
@@ -37,7 +40,12 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "moment"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            }
           },
           "configurations": {
             "production": {
@@ -102,7 +110,12 @@
               "src/styles.scss",
               "src/styles/custom-theme.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            }
           }
         }
       }

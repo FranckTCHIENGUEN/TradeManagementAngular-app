@@ -6,8 +6,8 @@ describe('AddPaiementDialogComponent', () => {
   let component: AddPaiementDialogComponent;
   let fixture: ComponentFixture<AddPaiementDialogComponent>;
 
-  beforeEach(waitForAsync(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       declarations: [ AddPaiementDialogComponent ]
     })
     .compileComponents();
