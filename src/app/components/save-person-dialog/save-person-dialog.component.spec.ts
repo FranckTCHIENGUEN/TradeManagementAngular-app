@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {SavePersonDialogComponent} from './save-person-dialog.component';
 
@@ -6,16 +6,16 @@ describe('SavePersonDialogComponent', () => {
   let component: SavePersonDialogComponent;
   let fixture: ComponentFixture<SavePersonDialogComponent>;
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SavePersonDialogComponent ]
+      declarations: [SavePersonDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SavePersonDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

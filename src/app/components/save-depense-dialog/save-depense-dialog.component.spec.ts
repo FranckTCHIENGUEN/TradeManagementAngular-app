@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {SaveDepenseDialogComponent} from './save-depense-dialog.component';
 
@@ -6,16 +6,16 @@ describe('SaveDepenseDialogComponent', () => {
   let component: SaveDepenseDialogComponent;
   let fixture: ComponentFixture<SaveDepenseDialogComponent>;
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SaveDepenseDialogComponent ]
+      declarations: [SaveDepenseDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SaveDepenseDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

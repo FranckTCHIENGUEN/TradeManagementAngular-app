@@ -1,21 +1,22 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {ViewenterpriseDialogComponent} from './viewenterprise-dialog.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {ViewenterpriseDialogComponent} from "./viewenterprise-dialog.component";
+  beforeEach(waitForAsync(async () => {
+  }));
 
 describe('ViewenterpriseDialogComponent', () => {
   let component: ViewenterpriseDialogComponent;
   let fixture: ComponentFixture<ViewenterpriseDialogComponent>;
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewenterpriseDialogComponent ]
+      declarations: [ViewenterpriseDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ViewenterpriseDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

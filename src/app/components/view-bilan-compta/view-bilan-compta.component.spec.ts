@@ -1,23 +1,24 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ViewBilanComptaComponent} from "./view-bilan-compta.component";
 
-import {ViewBilanComptaComponent} from './view-bilan-compta.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+  beforeEach(waitForAsync(async () => {
 
 describe('ViewBilanComptaComponent', () => {
   let component: ViewBilanComptaComponent;
   let fixture: ComponentFixture<ViewBilanComptaComponent>;
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewBilanComptaComponent ]
+      declarations: [ViewBilanComptaComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ViewBilanComptaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
+})}));

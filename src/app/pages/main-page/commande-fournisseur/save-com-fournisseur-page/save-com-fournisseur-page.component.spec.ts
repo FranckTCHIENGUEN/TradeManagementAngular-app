@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {SaveComFournisseurPageComponent} from './save-com-fournisseur-page.component';
 
@@ -6,16 +6,16 @@ describe('SaveComFournisseurPageComponent', () => {
   let component: SaveComFournisseurPageComponent;
   let fixture: ComponentFixture<SaveComFournisseurPageComponent>;
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SaveComFournisseurPageComponent ]
+      declarations: [SaveComFournisseurPageComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SaveComFournisseurPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

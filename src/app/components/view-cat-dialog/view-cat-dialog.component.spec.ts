@@ -1,21 +1,22 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {ViewCatDialogComponent} from './view-cat-dialog.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {ViewCatDialogComponent} from "./view-cat-dialog.component";
+  beforeEach(waitForAsync(async () => {
+  }));
 
 describe('ViewCatDialogComponent', () => {
   let component: ViewCatDialogComponent;
   let fixture: ComponentFixture<ViewCatDialogComponent>;
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewCatDialogComponent ]
+      declarations: [ViewCatDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ViewCatDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

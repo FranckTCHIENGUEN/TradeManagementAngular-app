@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {SaveServiceDialogComponent} from './save-service-dialog.component';
 
@@ -6,16 +6,16 @@ describe('SaveServiceDialogComponent', () => {
   let component: SaveServiceDialogComponent;
   let fixture: ComponentFixture<SaveServiceDialogComponent>;
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SaveServiceDialogComponent ]
+      declarations: [SaveServiceDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SaveServiceDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

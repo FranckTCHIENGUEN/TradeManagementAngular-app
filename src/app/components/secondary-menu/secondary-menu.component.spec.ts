@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {SecondaryMenuComponent} from './secondary-menu.component';
 
@@ -6,16 +6,16 @@ describe('SecondaryMenuComponent', () => {
   let component: SecondaryMenuComponent;
   let fixture: ComponentFixture<SecondaryMenuComponent>;
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SecondaryMenuComponent ]
+      declarations: [SecondaryMenuComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SecondaryMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

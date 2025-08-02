@@ -1,21 +1,22 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {UtilisateurComponent} from './utilisateur.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {UtilisateurComponent} from "./utilisateur.component";
+  beforeEach(waitForAsync(async () => {
+  }));
 
 describe('UtilisateurComponent', () => {
   let component: UtilisateurComponent;
   let fixture: ComponentFixture<UtilisateurComponent>;
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UtilisateurComponent ]
+      declarations: [UtilisateurComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(UtilisateurComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

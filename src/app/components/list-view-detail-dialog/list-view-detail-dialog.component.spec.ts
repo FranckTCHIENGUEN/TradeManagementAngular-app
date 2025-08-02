@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {ListViewDetailDialogComponent} from './list-view-detail-dialog.component';
 
@@ -6,16 +6,16 @@ describe('ListViewDetailDialogComponent', () => {
   let component: ListViewDetailDialogComponent;
   let fixture: ComponentFixture<ListViewDetailDialogComponent>;
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListViewDetailDialogComponent ]
+      declarations: [ListViewDetailDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ListViewDetailDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
