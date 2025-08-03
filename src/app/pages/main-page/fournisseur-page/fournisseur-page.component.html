@@ -1,7 +1,9 @@
 <h1>Fournisseurs</h1>
 
-<div class="h-100" *ngIf="permission.includes('FOURNISSEUR: LIRE') || permission.includes('FOURNISSEUR: SUPPRIMER')
-  || permission.includes('FOURNISSEUR: FILTRER') || permission.includes('FOURNISSEUR: CRÉER_MODIFIER')">
-  <app-person [permission]="permission" typePersonne="fournisseur"></app-person>
-</div>
+@if (permission.includes('FOURNISSEUR: LIRE') || permission.includes('FOURNISSEUR: SUPPRIMER')
+  || permission.includes('FOURNISSEUR: FILTRER') || permission.includes('FOURNISSEUR: CRÉER_MODIFIER')) {
+  <div class="h-100">
+    <app-person [permission]="permission" typePersonne="fournisseur"></app-person>
+  </div>
+}
 

@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@import "custom-theme";
-:root { --color-config:    mat.get-color-config($my-custom-dark-theme)};
+@use "custom-theme";
+:root { --color-config:    mat.m2-get-color-config($my-custom-dark-theme)};
 
 :root { --primary-palette: map.get(var(--color-config), 'primary')};
 :root { --accent-palette:  map.get(var(--color-config), 'accent')};

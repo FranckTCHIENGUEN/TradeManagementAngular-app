@@ -11,9 +11,11 @@
         <div class="row mt-2 ">
           <div class="col-12 d-flex justify-content-center">
             <mat-radio-group formControlName="type" value="SERVICE">
-              <mat-radio-button *ngIf="type!='commande fournisseur'" value="SERVICE">
-                SERVICE
-              </mat-radio-button>
+              @if (type!='commande fournisseur') {
+                <mat-radio-button value="SERVICE">
+                  SERVICE
+                </mat-radio-button>
+              }
               <mat-radio-button value="PRODUIT">
                 PRODUIT
               </mat-radio-button>
@@ -22,31 +24,38 @@
 
         </div>
       </div>
-      <div *ngIf="saveForm.controls.type.value=='PRODUIT'" class="col">
-        <mat-form-field class="mat-form-field example-full-width" appearance="fill">
-          <mat-label>{{saveForm.controls.type.value}}</mat-label>
-
-          <input type="text" matInput formControlName="objet" (input)="manageChangeFilter()" [matAutocomplete]="autoElement">
-          <mat-autocomplete  #autoElement="matAutocomplete" [displayWith]="displayFnElement">
-            <mat-option  *ngFor="let option of filteredElement | async" [value]="option">
-              {{option.designation}}
-            </mat-option>
-          </mat-autocomplete>
-          <button matSuffix mat-raised-button color="primary" (click)="nouveau()">Nouveau</button>
-        </mat-form-field>
-      </div>
-      <div *ngIf="saveForm.controls.type.value=='SERVICE²'" class="col">
-        <mat-form-field class="mat-form-field example-full-width" appearance="fill">
-          <mat-label>{{saveForm.controls.type.value}}</mat-label>
-          <input type="text" matInput formControlName="objet" [matAutocomplete]="autoElement2">
-          <mat-autocomplete  #autoElement2="matAutocomplete" [displayWith]="displayFnElementService">
-            <mat-option  *ngFor="let option of filteredElement2 | async" [value]="option.serviceDto">
-              {{option.serviceDto?.nom}}
-            </mat-option>
-          </mat-autocomplete>
-          <button matSuffix mat-raised-button color="primary" (click)="nouveau()">Nouveau</button>
-        </mat-form-field>
-      </div>
+      @if (saveForm.controls.type.value=='PRODUIT') {
+        <div class="col">
+          <mat-form-field class="mat-form-field example-full-width" appearance="fill">
+            <mat-label>{{saveForm.controls.type.value}}</mat-label>
+            <input type="text" matInput formControlName="objet" (input)="manageChangeFilter()" [matAutocomplete]="autoElement">
+            <mat-autocomplete  #autoElement="matAutocomplete" [displayWith]="displayFnElement">
+              @for (option of filteredElement | async; track option) {
+                <mat-option  [value]="option">
+                  {{option.designation}}
+                </mat-option>
+              }
+            </mat-autocomplete>
+            <button matSuffix mat-raised-button color="primary" (click)="nouveau()">Nouveau</button>
+          </mat-form-field>
+        </div>
+      }
+      @if (saveForm.controls.type.value=='SERVICE²') {
+        <div class="col">
+          <mat-form-field class="mat-form-field example-full-width" appearance="fill">
+            <mat-label>{{saveForm.controls.type.value}}</mat-label>
+            <input type="text" matInput formControlName="objet" [matAutocomplete]="autoElement2">
+            <mat-autocomplete  #autoElement2="matAutocomplete" [displayWith]="displayFnElementService">
+              @for (option of filteredElement2 | async; track option) {
+                <mat-option  [value]="option.serviceDto">
+                  {{option.serviceDto?.nom}}
+                </mat-option>
+              }
+            </mat-autocomplete>
+            <button matSuffix mat-raised-button color="primary" (click)="nouveau()">Nouveau</button>
+          </mat-form-field>
+        </div>
+      }
 
       <div class="col">
         <mat-form-field appearance="fill" floatLabel="always">

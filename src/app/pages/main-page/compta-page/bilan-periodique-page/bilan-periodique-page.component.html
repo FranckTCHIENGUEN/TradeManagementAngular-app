@@ -21,11 +21,13 @@
   </div>
   <div class="row">
     <button [disabled]="!saveForm.valid" (click)="formSubmit()" (keydown.enter)="formSubmit()"
-            mat-raised-button color="primary">Rechercher</button>
+    mat-raised-button color="primary">Rechercher</button>
   </div>
 </form>
 
 <div class="mt-5">
-  <app-view-bilan-compta *ngIf="display==true" [date1]="date1" [date2]="date2"></app-view-bilan-compta>
+  @if (display==true) {
+    <app-view-bilan-compta [date1]="date1" [date2]="date2"></app-view-bilan-compta>
+  }
 </div>
 

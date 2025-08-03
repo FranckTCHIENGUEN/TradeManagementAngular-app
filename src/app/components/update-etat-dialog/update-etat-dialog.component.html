@@ -5,12 +5,14 @@
   <form class="w-50" #form  [formGroup]="saveForm" >
     <div class="col">
       <div class="row mt-2 justify-content-center">
-          <mat-form-field appearance="fill">
-            <mat-label>Etat commande</mat-label>
-            <mat-select formControlName="etatCommande"  placeholder="choisir un mode">
-              <mat-option *ngFor="let etat of etatCommande " [value]="etat" >{{etat}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Etat commande</mat-label>
+          <mat-select formControlName="etatCommande"  placeholder="choisir un mode">
+            @for (etat of etatCommande ; track etat) {
+              <mat-option [value]="etat" >{{etat}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
     <div class="row mt-5">

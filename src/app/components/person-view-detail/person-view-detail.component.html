@@ -5,19 +5,27 @@
   <mat-toolbar color="accent">
     <span>Details {{typePersonne}}</span>
     <span class="example-spacer"></span>
-    <button mat-raised-button *ngIf="typePersonne=='utilisateur' && samePerson() && permission.includes('UTILISATEUR: UTILISATEUR: CHANGER_PASS')" color="primary" (click)="openDialogPass()" class="ms-5 example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    @if (typePersonne=='utilisateur' && samePerson() && permission.includes('UTILISATEUR: UTILISATEUR: CHANGER_PASS')) {
+      <button mat-raised-button color="primary" (click)="openDialogPass()" class="ms-5 example-icon favorite-icon" aria-label="Example icon-button with heart icon">
         changer mon mot de passe
-    </button>
+      </button>
+    }
     <span class="example-spacer"></span>
-    <button mat-raised-button *ngIf="typePersonne=='utilisateur' && permission.includes('UTILISATEUR: RESET_PASS')" color="primary" (click)="openDialogRenewPass()" class="ms-5 example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    @if (typePersonne=='utilisateur' && permission.includes('UTILISATEUR: RESET_PASS')) {
+      <button mat-raised-button color="primary" (click)="openDialogRenewPass()" class="ms-5 example-icon favorite-icon" aria-label="Example icon-button with heart icon">
         reinitialiser le mot de passe
-    </button>
+      </button>
+    }
     <span class="example-spacer"></span>
-    <mat-slide-toggle *ngIf="typePersonne=='utilisateur' && permission.includes('UTILISATEUR: CHANGER_ETAT')" [formControl]="toggleControl" class="mr-8">Bloqué</mat-slide-toggle>
+    @if (typePersonne=='utilisateur' && permission.includes('UTILISATEUR: CHANGER_ETAT')) {
+      <mat-slide-toggle [formControl]="toggleControl" class="mr-8">Bloqué</mat-slide-toggle>
+    }
     <span class="example-spacer"></span>
-    <button *ngIf="typePersonne=='utilisateur' && permission.includes('UTILISATEUR: CRÉER_MODIFIER')" mat-icon-button (click)="openDialogEdit(person)" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>edit</mat-icon>
-    </button>
+    @if (typePersonne=='utilisateur' && permission.includes('UTILISATEUR: CRÉER_MODIFIER')) {
+      <button mat-icon-button (click)="openDialogEdit(person)" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>edit</mat-icon>
+      </button>
+    }
   </mat-toolbar>
 </div>
 
@@ -30,21 +38,27 @@
     <span>{{person.nom}}  {{person.prenom}} - {{person.genre}}</span>
   </div>
 
-  <div *ngIf="typePersonne=='client'" class="row justify-content-center align-items-center text-center">
-    <span *ngIf="person.groupeClientDtos !=null && true ">
-             Groupe : <span *ngFor=" let groupe of person.groupeClientDtos" >{{groupe.nom}}, </span>
-            </span>
+  @if (typePersonne=='client') {
+    <div class="row justify-content-center align-items-center text-center">
+      @if (person.groupeClientDtos !=null && true ) {
+        <span>
+          Groupe : @for ( groupe of person.groupeClientDtos; track  groupe) {
+          <span >{{groupe.nom}}, </span>
+        }
+      </span>
+    }
   </div>
+}
 
-  <!--<div class="row">-->
-  <div class="col justify-content-center align-items-center text-center">
-    <mat-icon color="primary" >
-      person_pin_circle
-    </mat-icon>
-    <span>{{person.adresse?.adresse1}} - {{person.adresse?.ville}} ( {{person.adresse?.pays}} )</span>
-  </div>
-  <div class="row justify-content-center align-items-center text-center" *ngIf="person.contactDto !=null && person.contactDto !=undefined ">
-
+<!--<div class="row">-->
+<div class="col justify-content-center align-items-center text-center">
+  <mat-icon color="primary" >
+    person_pin_circle
+  </mat-icon>
+  <span>{{person.adresse?.adresse1}} - {{person.adresse?.ville}} ( {{person.adresse?.pays}} )</span>
+</div>
+@if (person.contactDto !=null && person.contactDto !=undefined ) {
+  <div class="row justify-content-center align-items-center text-center">
     <div class="col justify-content-center align-items-center text-center" >
       <mat-icon color="primary">
         phone_in_talk
@@ -53,44 +67,58 @@
     </div>
     <div class="row justify-content-center align-items-center text-center" >
       <div class="col">
-        <span *ngIf="person.contactDto.tel1 !=null && person.contactDto.tel1 !=undefined ">
-              Tel 1: {{person.contactDto.tel1}}
-        </span>
+        @if (person.contactDto.tel1 !=null && person.contactDto.tel1 !=undefined ) {
+          <span>
+            Tel 1: {{person.contactDto.tel1}}
+          </span>
+        }
       </div>
       <div class="col">
-        <span *ngIf="person.contactDto?.tel2 !=null && person.contactDto?.tel2 !=undefined ">
-              Tel 2: {{person.contactDto.tel2}}
-        </span>
+        @if (person.contactDto?.tel2 !=null && person.contactDto?.tel2 !=undefined ) {
+          <span>
+            Tel 2: {{person.contactDto.tel2}}
+          </span>
+        }
       </div>
       <div class="col">
-        <span *ngIf="person.contactDto.tel3 !=null && person.contactDto.tel3 !=undefined ">
-              Tel 3: {{person.contactDto.tel3}}
-        </span>
+        @if (person.contactDto.tel3 !=null && person.contactDto.tel3 !=undefined ) {
+          <span>
+            Tel 3: {{person.contactDto.tel3}}
+          </span>
+        }
       </div>
       <div class="col">
-        <span *ngIf="person.contactDto.tel4 !=null && person.contactDto.tel4 !=undefined ">
-              Tel 4: {{person.contactDto.tel4}}
-        </span>
+        @if (person.contactDto.tel4 !=null && person.contactDto.tel4 !=undefined ) {
+          <span>
+            Tel 4: {{person.contactDto.tel4}}
+          </span>
+        }
       </div>
     </div>
   </div>
+}
 
-  <div class="col justify-content-center align-items-center text-center" >
+<div class="col justify-content-center align-items-center text-center" >
 
-    <mat-icon color="primary">
-      mail
-    </mat-icon>
-    <span *ngIf="typePersonne=='utilisateur'">
+  <mat-icon color="primary">
+    mail
+  </mat-icon>
+  @if (typePersonne=='utilisateur') {
+    <span>
       {{person.email}}
     </span>
-    <span *ngIf="typePersonne!='utilisateur'">
+  }
+  @if (typePersonne!='utilisateur') {
+    <span>
       {{person.mail}}
     </span>
+  }
 
-  </div>
+</div>
 
-  <!--</div>-->
-  <div class="row" *ngIf="typePersonne=='client'">
+<!--</div>-->
+@if (typePersonne=='client') {
+  <div class="row">
     <div class="col">
       <span >
         CA :
@@ -109,46 +137,54 @@
       </span>
       <span>{{person.compteClientDto.solde}} </span>
     </h5>
-
   </div>
-  <div class="containt" *ngIf="typePersonne=='utilisateur'">
-
+}
+@if (typePersonne=='utilisateur') {
+  <div class="containt">
     <div class="side">
       <span>Roles</span>
-      <div class="col-4" *ngIf="typePersonne=='utilisateur' && permission.includes('UTILISATEUR: ADD_ROLE')">
-        <button mat-raised-button color="primary" (click)="openDialogAdd()">Ajouter un role</button>
-      </div>
+      @if (typePersonne=='utilisateur' && permission.includes('UTILISATEUR: ADD_ROLE')) {
+        <div class="col-4">
+          <button mat-raised-button color="primary" (click)="openDialogAdd()">Ajouter un role</button>
+        </div>
+      }
       <mat-list>
-
-        <mat-list-item (click)="updatePermission(role)" *ngFor="let role of listRoles"
-                       (contextmenu)="open($event, role); $event. preventDefault();" class="listRole">
-          <mat-icon matListItemIcon>folder</mat-icon>
-          <section matListItemTitle class="collection">
-            <div class="collection-item">
-              {{role.roleName}}
-            </div>
-          </section>
-
-          <ng-template #userMenu let-role>
-            <section class="user-menu">
-              <div *ngIf="typePersonne=='utilisateur' && permission.includes('UTILISATEUR: REMOVE_ROLE')"
-                   (click)="openDialogRemoveRole(role, person.id)">Retirer le role</div>
+        @for (role of listRoles; track role) {
+          <mat-list-item (click)="updatePermission(role)"
+            (contextmenu)="open($event, role); $event. preventDefault();" class="listRole">
+            <mat-icon matListItemIcon>folder</mat-icon>
+            <section matListItemTitle class="collection">
+              <div class="collection-item">
+                {{role.roleName}}
+              </div>
             </section>
-          </ng-template>
-          <!--      <div matListItemLine>{{role.updated | date}}</div>-->
-        </mat-list-item>
+            <ng-template #userMenu let-role>
+              <section class="user-menu">
+                @if (typePersonne=='utilisateur' && permission.includes('UTILISATEUR: REMOVE_ROLE')) {
+                  <div
+                  (click)="openDialogRemoveRole(role, person.id)">Retirer le role</div>
+                }
+              </section>
+            </ng-template>
+            <!--      <div matListItemLine>{{role.updated | date}}</div>-->
+          </mat-list-item>
+        }
       </mat-list>
     </div>
-    <div class="content" *ngIf="listPermission?.length!=0">
-      <div>Permission</div>
-      <mat-list>
-
-        <mat-list-item *ngFor="let permission of listPermission">
-          <span matListItemTitle>{{permission.permisssion}}</span>
-        </mat-list-item>
-      </mat-list>
-    </div>
+    @if (listPermission?.length!=0) {
+      <div class="content">
+        <div>Permission</div>
+        <mat-list>
+          @for (permission of listPermission; track permission) {
+            <mat-list-item>
+              <span matListItemTitle>{{permission.permisssion}}</span>
+            </mat-list-item>
+          }
+        </mat-list>
+      </div>
+    }
   </div>
+}
 </div>
 
 

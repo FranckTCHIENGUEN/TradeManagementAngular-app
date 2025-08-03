@@ -1,1 +1,3 @@
-<app-vente *ngIf="permission.includes('VENTE: CRÉER_MODIFIER')" typeEnregistrement="vente"></app-vente>
+@if (permission.includes('VENTE: CRÉER_MODIFIER')) {
+  <app-vente typeEnregistrement="vente"></app-vente>
+}

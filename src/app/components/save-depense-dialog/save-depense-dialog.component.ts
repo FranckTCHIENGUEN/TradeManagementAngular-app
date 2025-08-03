@@ -19,7 +19,7 @@ import {
   MAT_MOMENT_DATE_FORMATS,
   MomentDateAdapter
 } from "@angular/material-moment-adapter";
-import * as moment from "moment/moment";
+import moment from "moment/moment";
 import {Observable, Observer} from "rxjs";
 
 @Component({

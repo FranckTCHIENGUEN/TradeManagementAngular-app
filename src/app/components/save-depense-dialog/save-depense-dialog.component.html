@@ -6,122 +6,128 @@
     <div class="col">
       <div class="row mt-2 justify-content-center">
         <ng-container formArrayName="ligneDepense">
-          <ng-container *ngFor="let comForm of ligneDepense.controls; let i = index">
+          @for (comForm of ligneDepense.controls; track comForm; let i = $index) {
             <div class="lesson-form-row" [formGroupName]="i">
               <div class="row mt-2  justify-content-center">
                 <div class="row  sub-title justify-content-center text-center">
                   <h3>Element {{1+i}}</h3>
                 </div>
               </div>
-
               <div class="col">
                 <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
                   <mat-label class="">Nom Article</mat-label>
                   <input type="text" matInput formControlName="nom"
-                         [errorStateMatcher]="matcher">
-                  <mat-error class="errorMessage" *ngIf="ligneDepense.at(i).get('nom')?.hasError('required')">
-                    le nom est requit
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col">
-                <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
-                  <mat-label class="">Categorie</mat-label>
-                  <mat-select formControlName="categorie" [errorStateMatcher]="matcher">
-                    <mat-option *ngFor="let cat of categories | async" [value]="cat">
-                      {{cat.nom}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-error class="errorMessage" *ngIf="ligneDepense.at(i).get('categorie')?.hasError('required')">
-                    le categorie est requise
-                  </mat-error>
-                  <button matSuffix mat-button color="accent" (click)="findAllCatProduit()">
-                    <mat-icon color="primary">
-                      <span class="material-symbols-outlined">
-                        refresh
-                      </span>
-                    </mat-icon>
-                  </button>
-                  <button *ngIf=" permission.includes('CAT_DEPENSE: CRÉER_MODIFIER')" matSuffix mat-raised-button color="primary" (click)="nouvelleCategorie()">Nouvelle Categorie</button>
-                </mat-form-field>
-              </div>
-              <div class="row mt-2 justify-content-center">
-                <div class="col-8">
-                  <div  class="row mt-2 justify-content-center">
-                    <div class="col">
-                      <mat-form-field appearance="fill" floatLabel="always">
-                        <mat-label>Quantité</mat-label>
-                        <input matInput (input)="calculmontant(i)" required="true" formControlName="quantite" type="number" min="1">
-                        <!--                            <mat-hint *ngIf="saveForm.controls.type.value=='PRODUIT'">quantité en stock :  </mat-hint>-->
+                    [errorStateMatcher]="matcher">
+                    @if (ligneDepense.at(i).get('nom')?.hasError('required')) {
+                      <mat-error class="errorMessage">
+                        le nom est requit
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+                    <mat-label class="">Categorie</mat-label>
+                    <mat-select formControlName="categorie" [errorStateMatcher]="matcher">
+                      @for (cat of categories | async; track cat) {
+                        <mat-option [value]="cat">
+                          {{cat.nom}}
+                        </mat-option>
+                      }
+                    </mat-select>
+                    @if (ligneDepense.at(i).get('categorie')?.hasError('required')) {
+                      <mat-error class="errorMessage">
+                        le categorie est requise
+                      </mat-error>
+                    }
+                    <button matSuffix mat-button color="accent" (click)="findAllCatProduit()">
+                      <mat-icon color="primary">
+                        <span class="material-symbols-outlined">
+                          refresh
+                        </span>
+                      </mat-icon>
+                    </button>
+                    @if ( permission.includes('CAT_DEPENSE: CRÉER_MODIFIER')) {
+                      <button matSuffix mat-raised-button color="primary" (click)="nouvelleCategorie()">Nouvelle Categorie</button>
+                    }
+                  </mat-form-field>
+                </div>
+                <div class="row mt-2 justify-content-center">
+                  <div class="col-8">
+                    <div  class="row mt-2 justify-content-center">
+                      <div class="col">
+                        <mat-form-field appearance="fill" floatLabel="always">
+                          <mat-label>Quantité</mat-label>
+                          <input matInput (input)="calculmontant(i)" required="true" formControlName="quantite" type="number" min="1">
+                          <!--                            <mat-hint *ngIf="saveForm.controls.type.value=='PRODUIT'">quantité en stock :  </mat-hint>-->
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row mt-2 justify-content-center">
+                      <mat-form-field class="mat-form-field example-full-width" appearance="fill">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput formControlName="description" placeholder="entrez une description de l'element de la commande"></textarea>
                       </mat-form-field>
                     </div>
-                  </div>
-                  <div class="row mt-2 justify-content-center">
-                    <mat-form-field class="mat-form-field example-full-width" appearance="fill">
-                      <mat-label>Description</mat-label>
-                      <textarea matInput formControlName="description" placeholder="entrez une description de l'element de la commande"></textarea>
-                    </mat-form-field>
-                  </div>
-                  <div class="col-3">
-                    <mat-form-field appearance="fill">
-                      <mat-label>Date</mat-label>
-                      <input  matInput formControlName="date" [matDatepicker]="picker">
-                      <mat-hint>MM/DD/YYYY</mat-hint>
-                      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                  </div>
-                  <div class="row mt-2 justify-content-center">
-                    <div class="col">
+                    <div class="col-3">
                       <mat-form-field appearance="fill">
-                        <mat-label>Prix unitaire</mat-label>
-                        <input matInput required="true" (input)="calculmontant(i)" formControlName="prix" type="number" min="1">
-                        <span matSuffix>FCFA&nbsp;</span>
+                        <mat-label>Date</mat-label>
+                        <input  matInput formControlName="date" [matDatepicker]="picker">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
                       </mat-form-field>
                     </div>
-                    <div class="col">
-                      <mat-form-field appearance="fill" floatLabel="always">
-                        <mat-label>Montant</mat-label>
-                        <input matInput formControlName="montantTotal" (input)="calculPrixUnitaire(i)" type="number" min="1">
-                        <span matSuffix>FCFA&nbsp;</span>
-                      </mat-form-field>
+                    <div class="row mt-2 justify-content-center">
+                      <div class="col">
+                        <mat-form-field appearance="fill">
+                          <mat-label>Prix unitaire</mat-label>
+                          <input matInput required="true" (input)="calculmontant(i)" formControlName="prix" type="number" min="1">
+                          <span matSuffix>FCFA&nbsp;</span>
+                        </mat-form-field>
+                      </div>
+                      <div class="col">
+                        <mat-form-field appearance="fill" floatLabel="always">
+                          <mat-label>Montant</mat-label>
+                          <input matInput formControlName="montantTotal" (input)="calculPrixUnitaire(i)" type="number" min="1">
+                          <span matSuffix>FCFA&nbsp;</span>
+                        </mat-form-field>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-2">
-                  <button mat-raised-button color="warn" (click)="deleteLigneCom(i)">
-                    Supprimer l'element
-                    <mat-icon size="25" class="ms-2"  >
-                          <span class="material-symbols-outlined">
-                            delete
-                          </span>
-                    </mat-icon>
-                  </button>
+                  <div class="col-2">
+                    <button mat-raised-button color="warn" (click)="deleteLigneCom(i)">
+                      Supprimer l'element
+                      <mat-icon size="25" class="ms-2"  >
+                        <span class="material-symbols-outlined">
+                          delete
+                        </span>
+                      </mat-icon>
+                    </button>
+                  </div>
                 </div>
               </div>
+            }
+          </ng-container>
+          <div class="row mt-2  ">
+            <div class="col-12 d-flex align-items-center justify-content-center">
+              <button mat-raised-button  (click)="addLigne()">
+                Ajouter un Element
+                <mat-icon class="ms-2"  color="primary">
+                  <span class="material-symbols-outlined">
+                    add_circle
+                  </span>
+                </mat-icon>
+              </button>
 
             </div>
-          </ng-container>
-        </ng-container>
-        <div class="row mt-2  ">
-          <div class="col-12 d-flex align-items-center justify-content-center">
-            <button mat-raised-button  (click)="addLigne()">
-              Ajouter un Element
-              <mat-icon class="ms-2"  color="primary">
-                <span class="material-symbols-outlined">
-                  add_circle
-                </span>
-              </mat-icon>
-            </button>
 
           </div>
-
         </div>
       </div>
-      </div>
-    <div class="row mt-5">
-      <button [disabled]="!saveForm.valid" (click)="formSubmit()" (keydown.enter)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
+      <div class="row mt-5">
+        <button [disabled]="!saveForm.valid" (click)="formSubmit()" (keydown.enter)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
 
-    </div>
-  </form>
-</div>
+      </div>
+    </form>
+  </div>

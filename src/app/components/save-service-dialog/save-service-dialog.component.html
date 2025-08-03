@@ -8,38 +8,46 @@
         <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
           <mat-label class="">Nom</mat-label>
           <input type="text" matInput formControlName="nom"
-                 [errorStateMatcher]="matcher">
-          <mat-error class="errorMessage" *ngIf="saveForm.controls['nom'].hasError('required')">
-            le nom est requit
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
-          <mat-label class="">Categorie</mat-label>
-          <mat-select formControlName="categorie" [errorStateMatcher]="matcher">
-            <mat-option *ngFor="let cat of categories" [value]="cat">
-              {{cat.nom}}
-            </mat-option>
-          </mat-select>
-          <mat-error class="errorMessage" *ngIf="saveForm.controls['categorie'].hasError('required')">
-            le categorie est requise
-          </mat-error>
-          <button matSuffix mat-button color="accent" (click)="findAllCatProduit()">
-            <mat-icon color="primary">
-            <span class="material-symbols-outlined">
-            refresh
-          </span></mat-icon>
-          </button>
-          <button *ngIf=" permission.includes('CAT_SERVICE: CRÉER_MODIFIER')" matSuffix mat-raised-button color="primary" (click)="nouvelleCategorie()">Nouvelle Categorie</button>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row mt-5">
-      <button [disabled]="!saveForm.valid" (click)="formSubmit()" (keydown.enter)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
+            [errorStateMatcher]="matcher">
+            @if (saveForm.controls['nom'].hasError('required')) {
+              <mat-error class="errorMessage">
+                le nom est requit
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+            <mat-label class="">Categorie</mat-label>
+            <mat-select formControlName="categorie" [errorStateMatcher]="matcher">
+              @for (cat of categories; track cat) {
+                <mat-option [value]="cat">
+                  {{cat.nom}}
+                </mat-option>
+              }
+            </mat-select>
+            @if (saveForm.controls['categorie'].hasError('required')) {
+              <mat-error class="errorMessage">
+                le categorie est requise
+              </mat-error>
+            }
+            <button matSuffix mat-button color="accent" (click)="findAllCatProduit()">
+              <mat-icon color="primary">
+                <span class="material-symbols-outlined">
+                  refresh
+                </span></mat-icon>
+              </button>
+              @if ( permission.includes('CAT_SERVICE: CRÉER_MODIFIER')) {
+                <button matSuffix mat-raised-button color="primary" (click)="nouvelleCategorie()">Nouvelle Categorie</button>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <button [disabled]="!saveForm.valid" (click)="formSubmit()" (keydown.enter)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
 
+        </div>
+      </form>
     </div>
-  </form>
-</div>
 
 

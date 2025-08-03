@@ -2,10 +2,12 @@
   <mat-toolbar color="primary">
     <span>Details Service</span>
     <span class="example-spacer"></span>
-    <button *ngIf="permission.includes('SERVICE: CRÉER_MODIFIER')" mat-icon-button class="example-icon favorite-icon"
-    (click)="openDialogEdit(service)">
-      <mat-icon>edit</mat-icon>
-    </button>
+    @if (permission.includes('SERVICE: CRÉER_MODIFIER')) {
+      <button mat-icon-button class="example-icon favorite-icon"
+        (click)="openDialogEdit(service)">
+        <mat-icon>edit</mat-icon>
+      </button>
+    }
   </mat-toolbar>
 </div>
 <div mat-dialog-content class="content">
@@ -14,7 +16,7 @@
   </div>
 
   <div class="row nom justify-content-center align-items-center text-center">
-     <span>{{service.serviceDto?.nom}}  </span>
+    <span>{{service.serviceDto?.nom}}  </span>
   </div>
   <div class="row w-75">
     <mat-list class="ms-5">

@@ -6,7 +6,7 @@ import {
   MomentDateAdapter
 } from "@angular/material-moment-adapter";
 import {FormBuilder, Validators} from "@angular/forms";
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
     selector: 'app-bilan-periodique-page',

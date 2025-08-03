@@ -3,40 +3,18 @@
 @include mat.elevation-classes();
 @include mat.app-background();
 
-/* ======== Angular material custom themes ======== */
-$my-custom-light-primary: mat.m2.define-palette(mat.$blue-palette);
-$my-custom-light-accent: mat.m2.define-palette(mat.$orange-palette, 100, 500, A100);
-$my-custom-light-warn: mat.m2.define-palette(mat.$red-palette);
 
-// Use the new mat.define-theme function
-$my-custom-light-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: $my-custom-light-primary,
-    accent: $my-custom-light-accent,
-    warn: $my-custom-light-warn
-  )
-));
+html {
+  color-scheme: light;
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$blue-palette,
+      tertiary: mat.$orange-palette,
+    )
+  ));
+}
 
-$my-custom-dark-primary: mat.m2.define-palette(mat.$blue-palette);
-$my-custom-dark-accent: mat.m2.define-palette(mat.$orange-palette, 100, 500, A100);
-$my-custom-dark-warn: mat.m2.define-palette(mat.$red-palette);
-
-// Use the new mat.define-theme function
-$my-custom-dark-theme: mat.define-theme((
-  color: (
-    theme-type: dark,
-    primary: $my-custom-dark-primary,
-    accent: $my-custom-dark-accent,
-    warn: $my-custom-dark-warn
-  )
-));
-
-@include mat.all-component-themes($my-custom-light-theme);
-@include mat.strong-focus-indicators-theme($my-custom-light-theme);
-
-
-.my-dark-theme {
-  @include mat.all-component-colors($my-custom-dark-theme);
-  @include mat.strong-focus-indicators-color($my-custom-dark-theme);
+body.dark-mode {
+  color-scheme: dark;
 }

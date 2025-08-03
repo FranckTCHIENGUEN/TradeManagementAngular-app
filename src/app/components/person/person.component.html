@@ -1,26 +1,32 @@
 <!--<div id="appbar">-->
 <!--  <h1 style="color: white">{{typePersonne}} </h1>-->
-  <div class="row">
-    <div class="col-2" *ngIf="(typePersonne =='fournisseur' && permission.includes('FOURNISSEUR: CRÉER_MODIFIER'))
-                              || (typePersonne =='client' && permission.includes('CLIENT: CRÉER_MODIFIER'))
-                              || (typePersonne =='utilisateur' && permission.includes('UTILISATEUR: CRÉER_MODIFIER'))">
+<div class="row">
+  @if ((typePersonne =='fournisseur' && permission.includes('FOURNISSEUR: CRÉER_MODIFIER'))
+    || (typePersonne =='client' && permission.includes('CLIENT: CRÉER_MODIFIER'))
+    || (typePersonne =='utilisateur' && permission.includes('UTILISATEUR: CRÉER_MODIFIER'))) {
+    <div class="col-2">
       <button mat-raised-button color="primary" (click)="openDialogSave()">Ajouter</button>
     </div>
-    <div class="col-2" *ngIf="(typePersonne =='fournisseur' && permission.includes('FOURNISSEUR: FILTRER'))
-  || (typePersonne =='client' && permission.includes('CLIENT: FILTRER'))
-  || (typePersonne =='utilisateur' && permission.includes('UTILISATEUR: FILTRER'))">
-    <mat-slide-toggle [(ngModel)]="isChecked" style="color: white !important;">Recherche avancée</mat-slide-toggle>
-  </div>
-    <div class="col-2" *ngIf="(typePersonne =='fournisseur' && permission.includes('FOURNISSEUR: LIRE'))
-                              || (typePersonne =='client' && permission.includes('CLIENT: LIRE'))
-                              || (typePersonne =='utilisateur' && permission.includes('UTILISATEUR: LIRE'))">
+  }
+  @if ((typePersonne =='fournisseur' && permission.includes('FOURNISSEUR: FILTRER'))
+    || (typePersonne =='client' && permission.includes('CLIENT: FILTRER'))
+    || (typePersonne =='utilisateur' && permission.includes('UTILISATEUR: FILTRER'))) {
+    <div class="col-2">
+      <mat-slide-toggle [(ngModel)]="isChecked" style="color: white !important;">Recherche avancée</mat-slide-toggle>
+    </div>
+  }
+  @if ((typePersonne =='fournisseur' && permission.includes('FOURNISSEUR: LIRE'))
+    || (typePersonne =='client' && permission.includes('CLIENT: LIRE'))
+    || (typePersonne =='utilisateur' && permission.includes('UTILISATEUR: LIRE'))) {
+    <div class="col-2">
       <button  mat-raised-button color="accent" (click)="findAll()">
         <mat-icon>
-            <span class="material-symbols-outlined">
+          <span class="material-symbols-outlined">
             refresh
           </span></mat-icon>
-      </button>
-    </div>
+        </button>
+      </div>
+    }
 <!--    <div class="col-2" *ngIf="(typePersonne =='fournisseur' && permission.includes('FOURNISSEUR: SUPPRIMER'))-->
 <!--                              || (typePersonne =='client' && permission.includes('CLIENT: SUPPRIMER'))-->
 <!--                              || (typePersonne =='utilisateur' && permission.includes('UTILISATEUR: SUPPRIMER'))">-->
@@ -39,37 +45,56 @@
 
 <div class=" containt  h-100">
 
-  <div *ngIf="isChecked" class="side">
+  @if (isChecked) {
+<div class="side">
     <app-filter-person (objetFiltre)="filter(typePersonne, $event)" typeEnregistrement="{{typePersonne}}"></app-filter-person>
   </div>
-  <div *ngIf="person?.length==0" class="justify-content-center h-100">
+}
+  @if (person?.length==0) {
+<div class="justify-content-center h-100">
   Aucune donnée trouvée
 </div>
+}
   <mat-selection-list class="justify-content-center h-100" style="width: 90%" [class]="isChecked ? 'content' : 'content2'" [multiple]="false">
-    <mat-list-option class="mb-2" *ngFor="let person of person"  [value]="person" (click)="setSelectedPerson(person)">
+    @for (person of person; track person) {
+<mat-list-option class="mb-2"  [value]="person" (click)="setSelectedPerson(person)">
       <div style="width: 100%" class="d-flex align-items-center justify-content-center">
         <mat-card style="width: max-content" class=" example-card">
           <mat-card-header>
             <div mat-card-avatar class="example-header-image">
             </div>
             <mat-card-title class="title" >{{person.nom}}  {{person.prenom}} - {{person.adresse?.adresse1}} - {{person.adresse?.ville}} ( {{person.adresse?.pays}} )</mat-card-title>
-            <mat-card-subtitle *ngIf="person.contactDto !=null && true ">
-            <span *ngIf="person.contactDto.tel1 !=null && true ">
+            @if (person.contactDto !=null && true ) {
+<mat-card-subtitle>
+            @if (person.contactDto.tel1 !=null && true ) {
+<span>
               Tel 1: {{person.contactDto.tel1}} |
             </span>
-              <span *ngIf="person.contactDto.tel2 !=null && true ">
+}
+              @if (person.contactDto.tel2 !=null && true ) {
+<span>
               Tel 2: {{person.contactDto.tel2}} |
             </span>
-              <span *ngIf="person.contactDto.tel3 !=null && true ">
+}
+              @if (person.contactDto.tel3 !=null && true ) {
+<span>
               Tel 3: {{person.contactDto.tel3}} |
             </span>
-              <span *ngIf="person.contactDto.tel4 !=null && true ">
+}
+              @if (person.contactDto.tel4 !=null && true ) {
+<span>
               Tel 4: {{person.contactDto.tel4}}
             </span>
-              <span *ngIf="person.groupeClientDtos !=null && true ">
-              | Groupe : <span *ngFor=" let groupe of person.groupeClientDtos" >{{groupe.nom}}, </span>
+}
+              @if (person.groupeClientDtos !=null && true ) {
+<span>
+              | Groupe : @for ( groupe of person.groupeClientDtos; track  groupe) {
+<span >{{groupe.nom}}, </span>
+}
             </span>
+}
             </mat-card-subtitle>
+}
 
           </mat-card-header>
 
@@ -84,6 +109,7 @@
         </div>
       </div>
     </mat-list-option>
+}
   </mat-selection-list>
 </div>
 

@@ -8,20 +8,20 @@
         <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
           <mat-label class="">Nom</mat-label>
           <input type="text" matInput formControlName="nom"
-                 [errorStateMatcher]="matcher">
-<!--          <mat-error class="errorMessage" *ngIf="saveForm.controls['nom'].hasError('required')">-->
-<!--            le nom est requit-->
-<!--          </mat-error>-->
+            [errorStateMatcher]="matcher">
+            <!--          <mat-error class="errorMessage" *ngIf="saveForm.controls['nom'].hasError('required')">-->
+            <!--            le nom est requit-->
+          <!--          </mat-error>-->
         </mat-form-field>
       </div>
       <div class="col">
         <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
           <mat-label class="">Prenom</mat-label>
           <input type="text" matInput formControlName="prenom"
-                 [errorStateMatcher]="matcher">
-<!--          <mat-error class="errorMessage" *ngIf="saveForm.controls['prenom'].hasError('required')">-->
-<!--            le prenom est requit-->
-<!--          </mat-error>-->
+            [errorStateMatcher]="matcher">
+            <!--          <mat-error class="errorMessage" *ngIf="saveForm.controls['prenom'].hasError('required')">-->
+            <!--            le prenom est requit-->
+          <!--          </mat-error>-->
         </mat-form-field>
       </div>
       <div class="col">
@@ -29,140 +29,170 @@
           <mat-label class="">Genre</mat-label>
 
           <mat-select formControlName="genre" [errorStateMatcher]="matcher">
-            <mat-option *ngFor="let genre of personGenre" [value]="genre">
-              {{genre}}
-            </mat-option>
+            @for (genre of personGenre; track genre) {
+              <mat-option [value]="genre">
+                {{genre}}
+              </mat-option>
+            }
           </mat-select>
-          <mat-error class="errorMessage" *ngIf="saveForm.controls['genre']">
-          le genre est requit
-        </mat-error>
+          @if (saveForm.controls['genre']) {
+            <mat-error class="errorMessage">
+              le genre est requit
+            </mat-error>
+          }
         </mat-form-field>
       </div>
       <div class="col">
         <div class="row mt-2 justify-content-center">
           <ng-container formArrayName="contact">
-            <ng-container *ngFor="let contact of contact.controls; let i = index">
+            @for (contact of contact.controls; track contact; let i = $index) {
               <div class="lesson-form-row" [formGroupName]="i">
-
                 <div class="row mt-2 justify-content-center">
                   <div class="col-8">
                     <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
                       <mat-label class="">Telephone</mat-label>
                       <span matPrefix>+237 &nbsp;</span>
                       <input type="tel" matInput formControlName="tel"
-                             [errorStateMatcher]="matcher">
-                      <mat-error class="errorMessage" *ngIf="contact.get('tel')?.hasError('required')">
-                        le telephone est requit
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-                  <div class="col-2">
-                    <mat-icon color="accent" class="delete-btn" fontIcon="delete" (click)="deleteLigne(i)"></mat-icon>
+                        [errorStateMatcher]="matcher">
+                        @if (contact.get('tel')?.hasError('required')) {
+                          <mat-error class="errorMessage">
+                            le telephone est requit
+                          </mat-error>
+                        }
+                      </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                      <mat-icon color="accent" class="delete-btn" fontIcon="delete" (click)="deleteLigne(i)"></mat-icon>
+                    </div>
                   </div>
                 </div>
-              </div>
+              }
             </ng-container>
-          </ng-container>
-          <div class="row mb-2  ">
-            <div class="col-12 d-flex justify-content-center">
-              <button mat-button (click)="addLigne()" [disabled]="nombretel()">
-                Ajouter un Contact
-                <mat-icon  color="primary">
-                <span class="material-symbols-outlined">
-                  add_circle
-                </span>
-                </mat-icon>
-              </button>
+            <div class="row mb-2  ">
+              <div class="col-12 d-flex justify-content-center">
+                <button mat-button (click)="addLigne()" [disabled]="nombretel()">
+                  Ajouter un Contact
+                  <mat-icon  color="primary">
+                    <span class="material-symbols-outlined">
+                      add_circle
+                    </span>
+                  </mat-icon>
+                </button>
+
+              </div>
 
             </div>
-
           </div>
+
         </div>
+        <div class="col">
+          <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+            <mat-label class="">pays</mat-label>
+            <input type="text" matInput formControlName="pays"
+              [errorStateMatcher]="matcher">
+              @if (saveForm.controls['pays']) {
+                <mat-error class="errorMessage">
+                  le pays est requit
+                </mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+              <mat-label class="">Ville</mat-label>
+              <input type="text" matInput formControlName="ville"
+                [errorStateMatcher]="matcher">
+                @if (saveForm.controls['ville']) {
+                  <mat-error class="errorMessage">
+                    la ville est requit
+                  </mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+                <mat-label class="">Quartier</mat-label>
+                <input type="text" matInput formControlName="quartier"
+                  [errorStateMatcher]="matcher">
+                </mat-form-field>
+              </div>
+            </div>
+            @if (typePersonne!='utilisateur') {
+              <div class="col">
+                <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+                  <mat-label class="">Email</mat-label>
+                  <input type="text" matInput formControlName="mail"
+                    [errorStateMatcher]="matcher">
+                    @if (saveForm.controls['mail']) {
+                      <mat-error class="errorMessage">
+                        le mail n'est pas correct
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              }
 
-      </div>
-      <div class="col">
-        <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
-          <mat-label class="">pays</mat-label>
-          <input type="text" matInput formControlName="pays"
-                 [errorStateMatcher]="matcher">
-          <mat-error class="errorMessage" *ngIf="saveForm.controls['pays']">
-            le pays est requit
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
-          <mat-label class="">Ville</mat-label>
-          <input type="text" matInput formControlName="ville"
-                 [errorStateMatcher]="matcher">
-          <mat-error class="errorMessage" *ngIf="saveForm.controls['ville']">
-            la ville est requit
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
-          <mat-label class="">Quartier</mat-label>
-          <input type="text" matInput formControlName="quartier"
-                 [errorStateMatcher]="matcher">
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="col" *ngIf="typePersonne!='utilisateur'">
-      <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
-        <mat-label class="">Email</mat-label>
-        <input type="text" matInput formControlName="mail"
-               [errorStateMatcher]="matcher">
-        <mat-error class="errorMessage" *ngIf="saveForm.controls['mail']">
-          le mail n'est pas correct
-        </mat-error>
-      </mat-form-field>
-    </div>
 
+            </form>
+            @if (typePersonne=='utilisateur') {
+              <form class="row w-50 align-items-center justify-content-center" [formGroup]="usersaveForm" >
+                <div class="col">
+                  <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+                    <mat-label class="">Email</mat-label>
+                    <input type="text" matInput formControlName="userMail"
+                      [errorStateMatcher]="matcher">
+                      @if (saveForm.controls['mail']) {
+                        <mat-error class="errorMessage">
+                          le mail n'est pas correct
+                        </mat-error>
+                      }
+                      @if (userMail.errors?.['userExistsValidator']) {
+                        <mat-error class="field-message">
+                          l'email est déjà utilisé
+                        </mat-error>
+                      }
+                    </mat-form-field>
+                  </div>
+                  <div class="containt">
+                    <div class="side">
+                      <mat-selection-list  #shoes (selectionChange)="updateSelectedRole(shoes)">
+                        <div mat-subheader>Liste des Role disponible</div>
+                        <mat-action-list>
+                          <!--          <button mat-list-item (click)="shoes.selectAll().length==0 ? shoes.selectAll() : shoes.deselectAll()">Tout selectionner</button>-->
+                          @if (shoes.selectedOptions.selected.length==0) {
+                            <button  mat-list-item (click)="shoes.selectAll(); updateSelectedRole(shoes);">Tout selectionner</button>
+                          }
+                          @if (shoes.selectedOptions.selected.length!=0) {
+                            <button mat-list-item (click)="shoes.deselectAll(); updateSelectedRole(shoes);">Tout déselectionner</button>
+                          }
+                        </mat-action-list>
+                        @for (permissions of listRole; track permissions) {
+                          <mat-list-option [value]="permissions">
+                            {{permissions.roleName}}
+                          </mat-list-option>
+                        }
+                      </mat-selection-list>
+                    </div>
+                    @if (listSelectedRole.size!=0) {
+                      <div class="content">
+                        <mat-list>
+                          <div mat-subheader>Role de l'utilisateur</div>
+                          @for (permission of listSelectedRole; track permission) {
+                            <mat-list-item >
+                              <span matListItemTitle>{{permission.roleName}}</span>
+                              @if (permission.roleName!='USER') {
+                                <mat-icon (click)="remveSelectedRole(permission)">close</mat-icon>
+                              }
+                            </mat-list-item>
+                          }
+                        </mat-list>
+                      </div>
+                    }
+                  </div>
+                </form>
+              }
 
-  </form>
-  <form class="row w-50 align-items-center justify-content-center" *ngIf="typePersonne=='utilisateur'" [formGroup]="usersaveForm" >
-    <div class="col">
-      <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
-        <mat-label class="">Email</mat-label>
-        <input type="text" matInput formControlName="userMail"
-               [errorStateMatcher]="matcher">
-        <mat-error class="errorMessage" *ngIf="saveForm.controls['mail']">
-          le mail n'est pas correct
-        </mat-error>
-        <mat-error class="field-message" *ngIf="userMail.errors?.['userExistsValidator']">
-          l'email est déjà utilisé
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div class="containt">
-
-      <div class="side">
-        <mat-selection-list  #shoes (selectionChange)="updateSelectedRole(shoes)">
-          <div mat-subheader>Liste des Role disponible</div>
-          <mat-action-list>
-            <!--          <button mat-list-item (click)="shoes.selectAll().length==0 ? shoes.selectAll() : shoes.deselectAll()">Tout selectionner</button>-->
-            <button  mat-list-item *ngIf="shoes.selectedOptions.selected.length==0" (click)="shoes.selectAll(); updateSelectedRole(shoes);">Tout selectionner</button>
-            <button mat-list-item *ngIf="shoes.selectedOptions.selected.length!=0" (click)="shoes.deselectAll(); updateSelectedRole(shoes);">Tout déselectionner</button>
-          </mat-action-list>
-          <mat-list-option *ngFor="let permissions of listRole" [value]="permissions">
-            {{permissions.roleName}}
-          </mat-list-option>
-        </mat-selection-list>
-      </div>
-      <div class="content" *ngIf="listSelectedRole?.size!=0">
-        <mat-list>
-          <div mat-subheader>Role de l'utilisateur</div>
-          <mat-list-item  *ngFor="let permission of listSelectedRole;">
-            <span matListItemTitle>{{permission.roleName}}</span>
-            <mat-icon *ngIf="permission.roleName!='USER'" (click)="remveSelectedRole(permission)">close</mat-icon>
-          </mat-list-item>
-        </mat-list>
-      </div>
-    </div>
-  </form>
-
-  <div class="row mt-5">
-    <button (click)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
-  </div>
-</div>
+              <div class="row mt-5">
+                <button (click)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
+              </div>
+            </div>

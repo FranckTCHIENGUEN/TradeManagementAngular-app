@@ -1,7 +1,9 @@
 <!--<div class="h-100 w-100 justify-content-center align-items-center" >-->
 <!--  <mat-spinner *ngIf="isLoading | async" mode="indeterminate"></mat-spinner>-->
 <!--</div>-->
-<div *ngIf="isLoading | async" class="cssload-container">
-  <div class="cssload-speeding-wheel"></div>
-</div>
+@if (isLoading | async) {
+  <div class="cssload-container">
+    <div class="cssload-speeding-wheel"></div>
+  </div>
+}
 

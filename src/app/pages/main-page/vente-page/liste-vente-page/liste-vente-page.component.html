@@ -7,19 +7,23 @@
   <div class="col-3">
     <button  mat-raised-button color="accent" (click)="findAll()">
       <mat-icon>
-            <span class="material-symbols-outlined">
-            refresh
-          </span></mat-icon>
-    </button>
-  </div>
-
-</div>
-<div class="containt">
-  <div *ngIf="isChecked==true" class="side">
-    <app-filter (objetFiltre)="filter($event)" typeEnregistrement="commande client"></app-filter>
-  </div>
-  <div [class]="isChecked ? 'content' : 'content2'">
-    <app-list-view *ngIf="display==true" type="vente" [tableColumns]="columns" [tableData]="listeVente"></app-list-view>
+        <span class="material-symbols-outlined">
+          refresh
+        </span></mat-icon>
+      </button>
+    </div>
 
   </div>
-</div>
+  <div class="containt">
+    @if (isChecked==true) {
+      <div class="side">
+        <app-filter (objetFiltre)="filter($event)" typeEnregistrement="commande client"></app-filter>
+      </div>
+    }
+    <div [class]="isChecked ? 'content' : 'content2'">
+      @if (display==true) {
+        <app-list-view type="vente" [tableColumns]="columns" [tableData]="listeVente"></app-list-view>
+      }
+
+    </div>
+  </div>

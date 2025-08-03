@@ -1,12 +1,12 @@
 <div class="table-container">
   <mat-table matSort (matSortChange)="announceSortChange($event)"
-             [dataSource]="dataSource" class="mat-elevation-z8">
+    [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!-- En-tête principal (ligne 1) -->
-<!--    <ng-container matColumnDef="vide1" rowspan="2">-->
-<!--      <mat-header-cell *matHeaderCellDef>-->
+    <!--    <ng-container matColumnDef="vide1" rowspan="2">-->
+    <!--      <mat-header-cell *matHeaderCellDef>-->
 
-<!--      </mat-header-cell>-->
+  <!--      </mat-header-cell>-->
 <!--    </ng-container>-->
 <!--    <ng-container matColumnDef="vide2" rowspan="2">-->
 <!--      <mat-header-cell *matHeaderCellDef>-->
@@ -34,36 +34,45 @@
 <!--      </mat-header-cell>-->
 <!--    </ng-container>-->
 
-    <!-- En-tête intermédiaire (ligne 2) -->
+<!-- En-tête intermédiaire (ligne 2) -->
 
-    <ng-container *ngIf="type=='comclient' || type=='depense'" matColumnDef="subvide5">
-      <mat-header-cell  *matHeaderCellDef>
+@if (type=='comclient' || type=='depense') {
+  <ng-container matColumnDef="subvide5">
+    <mat-header-cell  *matHeaderCellDef>
+    </mat-header-cell>
+  </ng-container>
+}
+@if (type=='comclient') {
+  <ng-container matColumnDef="subheader1">
+    <mat-header-cell  *matHeaderCellDef colspan="4">
+      Nouvelle commande
+    </mat-header-cell>
+  </ng-container>
+}
 
-      </mat-header-cell>
-    </ng-container>
-    <ng-container *ngIf="type=='comclient'" matColumnDef="subheader1">
-      <mat-header-cell  *matHeaderCellDef colspan="4">
-        Nouvelle commande
-      </mat-header-cell>
-    </ng-container>
+@if (type=='comclient') {
+  <ng-container matColumnDef="subheader2">
+    <mat-header-cell  *matHeaderCellDef colspan="4">
+      Ancienne commande
+    </mat-header-cell>
+  </ng-container>
+}
 
-    <ng-container *ngIf="type=='comclient'" matColumnDef="subheader2">
-      <mat-header-cell  *matHeaderCellDef colspan="4">
-        Ancienne commande
-      </mat-header-cell>
-    </ng-container>
+@if (type=='depense') {
+  <ng-container matColumnDef="subheader4">
+    <mat-header-cell  *matHeaderCellDef colspan="4">
+      Nouvelle depense
+    </mat-header-cell>
+  </ng-container>
+}
 
-    <ng-container *ngIf="type=='depense'" matColumnDef="subheader4">
-      <mat-header-cell  *matHeaderCellDef colspan="4">
-        Nouvelle depense
-      </mat-header-cell>
-    </ng-container>
-
-    <ng-container *ngIf="type=='depense'" matColumnDef="subheader5">
-      <mat-header-cell  *matHeaderCellDef colspan="4">
-        Ancienne depense
-      </mat-header-cell>
-    </ng-container>
+@if (type=='depense') {
+  <ng-container matColumnDef="subheader5">
+    <mat-header-cell  *matHeaderCellDef colspan="4">
+      Ancienne depense
+    </mat-header-cell>
+  </ng-container>
+}
 
 <!--    <ng-container matColumnDef="subvide2">-->
 <!--      <mat-header-cell *matHeaderCellDef>-->
@@ -71,87 +80,85 @@
 <!--      </mat-header-cell>-->
 <!--    </ng-container>-->
 
-    <!-- En-tête des colonnes (ligne 3) -->
-    <ng-container *ngFor="let disCol of tableColumns let colIndex = index;">
-      <ng-container matColumnDef="{{disCol.columnDef}}" >
-        <mat-header-cell  *matHeaderCellDef> {{ disCol.header | titlecase }} </mat-header-cell>
-        <mat-cell class = "mat-cell" *matCellDef="let element">
-          <span>
-              {{ disCol.cell(element) }}
-          </span>
-
-<!--          <ng-template #link >-->
-<!--            <a [routerLink]="[disCol.url]">-->
-<!--              {{ disCol.cell(element) }}-->
-<!--            </a>-->
-<!--          </ng-template>-->
-
-<!--          <ng-template *ngIf="!disCol.isDownlable; ">-->
-<!--            <button mat-icon-button aria-label="expand row" (click)="viewFacture(disCol.cell(element));">-->
-<!--              Voir la facture-->
+<!-- En-tête des colonnes (ligne 3) -->
+@for (disCol of tableColumns; track disCol) {
+  <ng-container matColumnDef="{{disCol.columnDef}}" >
+    <mat-header-cell  *matHeaderCellDef> {{ disCol.header | titlecase }} </mat-header-cell>
+    <mat-cell class = "mat-cell" *matCellDef="let element">
+      <span>
+        {{ disCol.cell(element) }}
+      </span>
+      <!--          <ng-template #link >-->
+      <!--            <a [routerLink]="[disCol.url]">-->
+      <!--              {{ disCol.cell(element) }}-->
+    <!--            </a>-->
+  <!--          </ng-template>-->
+  <!--          <ng-template *ngIf="!disCol.isDownlable; ">-->
+  <!--            <button mat-icon-button aria-label="expand row" (click)="viewFacture(disCol.cell(element));">-->
+  <!--              Voir la facture-->
 <!--            </button>-->
 <!--          </ng-template>-->
-        </mat-cell>
-      </ng-container>
-    </ng-container>
+</mat-cell>
+</ng-container>
+}
 
-    <!-- Déclaration des lignes d'en-tête -->
+<!-- Déclaration des lignes d'en-tête -->
 <!--    <mat-header-row *matHeaderRowDef="[ 'header3', 'vide3', 'header5', 'vide4']; sticky:true;"></mat-header-row>-->
-    <ng-container *ngIf="type=='comclient'">
-      <mat-header-row  *matHeaderRowDef="['subheader1', 'subheader2',]; sticky:true;"></mat-header-row>
-    </ng-container>
-    <ng-container *ngIf="type=='depense'">
-      <mat-header-row  *matHeaderRowDef="['subheader4', 'subheader5']; sticky:true;" ></mat-header-row>
-    </ng-container>
+@if (type=='comclient') {
+  <mat-header-row  *matHeaderRowDef="['subheader1', 'subheader2',]; sticky:true;"></mat-header-row>
+}
+@if (type=='depense') {
+  <mat-header-row  *matHeaderRowDef="['subheader4', 'subheader5']; sticky:true;" ></mat-header-row>
+}
 
-    <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true;"></mat-header-row>
+<mat-header-row *matHeaderRowDef="displayedColumns; sticky:true;"></mat-header-row>
 
-    <!--<ng-container *ngFor="let disCol of tableColumns let colIndex = index;" matColumnDef="{{disCol.columnDef}}">
-      <th  mat-header-cell mat-sort-header=""
-          *matHeaderCellDef>
-        {{ disCol.header }}
-      </th>
+<!--<ng-container *ngFor="let disCol of tableColumns let colIndex = index;" matColumnDef="{{disCol.columnDef}}">
+<th  mat-header-cell mat-sort-header=""
+  *matHeaderCellDef>
+  {{ disCol.header }}
+</th>
 
-      <td
-        mat-cell class="cell"
-        *matCellDef="let element">
-        <span
-          *ngIf="!disCol.isLink; else link">
-            {{ disCol.cell(element) }}
-        </span>
+<td
+  mat-cell class="cell"
+  *matCellDef="let element">
+  <span
+    *ngIf="!disCol.isLink; else link">
+    {{ disCol.cell(element) }}
+  </span>
 
-        <ng-template #link >
-          <a [routerLink]="[disCol.url]">
-            {{ disCol.cell(element) }}
-          </a>
-        </ng-template>
+  <ng-template #link >
+    <a [routerLink]="[disCol.url]">
+      {{ disCol.cell(element) }}
+    </a>
+  </ng-template>
 
-        <ng-template *ngIf="!disCol.isDownlable; ">
-          <button mat-icon-button aria-label="expand row" (click)="viewFacture(disCol.cell(element));">
-            Voir la facture
-          </button>
-        </ng-template>
-      </td>
-    </ng-container>-->
+  <ng-template *ngIf="!disCol.isDownlable; ">
+    <button mat-icon-button aria-label="expand row" (click)="viewFacture(disCol.cell(element));">
+      Voir la facture
+    </button>
+  </ng-template>
+</td>
+</ng-container>-->
 
-    <!--    <tr-->
-    <!--      mat-header-row-->
-    <!--      *matHeaderRowDef="displayedColumns; sticky:true;">-->
-    <!--    </tr>-->
+<!--    <tr-->
+<!--      mat-header-row-->
+<!--      *matHeaderRowDef="displayedColumns; sticky:true;">-->
+<!--    </tr>-->
 
-    <!-- Lignes de données -->
-    <mat-row class="mat-row" *matRowDef="let row; columns: displayedColumns;" [class.demo-row-is-clicked]></mat-row>
-    <!--    <tr class="mat-row"-->
-    <!--      mat-row  (click)= "navigate(row)" [class.demo-row-is-clicked]-->
-    <!--      *matRowDef="let row; columns: displayedColumns;">-->
-    <!--    </tr>-->
-    <tr  class="mat-row" *matNoDataRow>
-      <td  class = "mat-cell"  [colSpan]="tableColumns.length" > Aucune donnée trouvée </td>-->
-    </tr>
-  </mat-table>
+<!-- Lignes de données -->
+<mat-row class="mat-row" *matRowDef="let row; columns: displayedColumns;" [class.demo-row-is-clicked]></mat-row>
+<!--    <tr class="mat-row"-->
+<!--      mat-row  (click)= "navigate(row)" [class.demo-row-is-clicked]-->
+<!--      *matRowDef="let row; columns: displayedColumns;">-->
+<!--    </tr>-->
+<tr  class="mat-row" *matNoDataRow>
+  <td  class = "mat-cell"  [colSpan]="tableColumns.length" > Aucune donnée trouvée </td>-->
+</tr>
+</mat-table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                 showFirstLastButtons
-                 aria-label="Selectioner le nombre d'élement par page">
-  </mat-paginator>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+  aria-label="Selectioner le nombre d'élement par page">
+</mat-paginator>
 </div>

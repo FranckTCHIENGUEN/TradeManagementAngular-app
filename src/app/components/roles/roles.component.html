@@ -1,47 +1,58 @@
 <div class="row">
-  <div class="col-4" *ngIf="permission.includes('ROLE: CRÉER_MODIFIER')">
-    <button mat-raised-button color="primary" (click)="openDialogSave()">Ajouter</button>
-  </div>
+  @if (permission.includes('ROLE: CRÉER_MODIFIER')) {
     <div class="col-4">
-      <button  mat-raised-button color="accent" (click)="findAll()">
-        <mat-icon>
-              <span class="material-symbols-outlined">
-              refresh
-            </span></mat-icon>
+      <button mat-raised-button color="primary" (click)="openDialogSave()">Ajouter</button>
+    </div>
+  }
+  <div class="col-4">
+    <button  mat-raised-button color="accent" (click)="findAll()">
+      <mat-icon>
+        <span class="material-symbols-outlined">
+          refresh
+        </span></mat-icon>
       </button>
     </div>
-  <!--  <div class="col-4">-->
-  <!--    <button mat-raised-button color="primary" (click)="delete()">Supprimer</button>-->
+    <!--  <div class="col-4">-->
+    <!--    <button mat-raised-button color="primary" (click)="delete()">Supprimer</button>-->
   <!--    &lt;!&ndash;  </div>&ndash;&gt;-->
   <!--    &lt;!&ndash;  <div class="col-4">&ndash;&gt;-->
   <!--    &lt;!&ndash;    <button mat-raised-button color="primary">Envoyer un sms</button>&ndash;&gt;-->
-  <!--    &lt;!&ndash;  </div>&ndash;&gt;-->
-  <!--  </div>-->
+<!--    &lt;!&ndash;  </div>&ndash;&gt;-->
+<!--  </div>-->
 </div>
 
 
 
-<div class="containt"  *ngIf="permission.includes('ROLE: LIRE')">
-
-  <div class="side">
-    <mat-list>
-      <div mat-subheader>Roles</div>
-      <mat-list-item  *ngFor="let role of listRoles">
-        <mat-icon class="active-role" (click)="updatePermission(role)" matListItemIcon>folder</mat-icon>
-        <div matListItemTitle>
-          {{role.roleName}}
-          <mat-icon *ngIf="role.roleName!='USER' && role.roleName!='ADMIN'" style="cursor: pointer" (click)="openDialogEdit(role)" >edit</mat-icon>
-        </div>
-        <!--      <div matListItemLine>{{role.updated | date}}</div>-->
-      </mat-list-item>
-    </mat-list>
+@if (permission.includes('ROLE: LIRE')) {
+  <div class="containt" >
+    <div class="side">
+      <mat-list>
+        <div mat-subheader>Roles</div>
+        @for (role of listRoles; track role) {
+          <mat-list-item >
+            <mat-icon class="active-role" (click)="updatePermission(role)" matListItemIcon>folder</mat-icon>
+            <div matListItemTitle>
+              {{role.roleName}}
+              @if (role.roleName!='USER' && role.roleName!='ADMIN') {
+                <mat-icon style="cursor: pointer" (click)="openDialogEdit(role)" >edit</mat-icon>
+              }
+            </div>
+            <!--      <div matListItemLine>{{role.updated | date}}</div>-->
+          </mat-list-item>
+        }
+      </mat-list>
+    </div>
+    @if (listPermission?.length!=0) {
+      <div class="content">
+        <mat-list>
+          <div mat-subheader>Permission</div>
+          @for (permission of listPermission; track permission) {
+            <mat-list-item>
+              <span matListItemTitle>{{permission.permisssion}}</span>
+            </mat-list-item>
+          }
+        </mat-list>
+      </div>
+    }
   </div>
-  <div class="content" *ngIf="listPermission?.length!=0">
-    <mat-list>
-      <div mat-subheader>Permission</div>
-      <mat-list-item *ngFor="let permission of listPermission">
-        <span matListItemTitle>{{permission.permisssion}}</span>
-      </mat-list-item>
-    </mat-list>
-  </div>
-</div>
+}

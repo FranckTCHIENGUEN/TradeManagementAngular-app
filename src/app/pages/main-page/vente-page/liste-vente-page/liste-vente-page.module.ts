@@ -11,12 +11,17 @@ import {FilterComponent} from "../../../../components/filter/filter.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatSelectModule} from "@angular/material/select";
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerModule,
+  MatDatepickerToggle
+} from "@angular/material/datepicker";
+import {MatOption, MatSelect, MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatIconModule} from "@angular/material/icon";
-import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatAutocomplete, MatAutocompleteModule, MatAutocompleteTrigger} from "@angular/material/autocomplete";
 import {FilterCategoriesComponent} from "../../../../components/filter-categories/filter-categories.component";
 
 
@@ -41,13 +46,17 @@ import {FilterCategoriesComponent} from "../../../../components/filter-categorie
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatDatepickerModule,
-    MatSelectModule,
     MatSlideToggleModule,
     FormsModule,
     MatIconModule,
     MatButtonModule,
-    MatAutocompleteModule
+    MatOption,
+    MatAutocomplete,
+    MatAutocompleteTrigger,
+    MatDatepickerToggle,
+    MatDatepicker,
+    MatDatepickerInput,
+    MatSelect,
   ]
 })
 export class ListeVentePageModule { }

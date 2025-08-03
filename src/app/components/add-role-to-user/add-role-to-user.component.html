@@ -13,19 +13,25 @@
       <mat-selection-list #shoes (selectionChange)="updateSelectedRole(shoes)" >
         <div mat-subheader>Liste des Roles</div>
         <mat-action-list>
-          <button  mat-list-item *ngIf="shoes.selectedOptions.selected.length==0" (click)="shoes.selectAll(); updateSelectedRole(shoes);">Tout selectionner</button>
-          <button mat-list-item *ngIf="shoes.selectedOptions.selected.length!=0" (click)="shoes.deselectAll(); updateSelectedRole(shoes);">Tout déselectionner</button>        </mat-action-list>
-        <mat-list-option *ngFor="let role of listRole" [value]="role">
-          {{role.roleName}}
-        </mat-list-option>
-      </mat-selection-list>
+          @if (shoes.selectedOptions.selected.length==0) {
+            <button  mat-list-item (click)="shoes.selectAll(); updateSelectedRole(shoes);">Tout selectionner</button>
+          }
+          @if (shoes.selectedOptions.selected.length!=0) {
+            <button mat-list-item (click)="shoes.deselectAll(); updateSelectedRole(shoes);">Tout déselectionner</button>
+          }        </mat-action-list>
+          @for (role of listRole; track role) {
+            <mat-list-option [value]="role">
+              {{role.roleName}}
+            </mat-list-option>
+          }
+        </mat-selection-list>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <button [disabled]="shoes.selectedOptions.isEmpty()" (click)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
     </div>
   </div>
-  <div class="row mt-5">
-    <button [disabled]="shoes.selectedOptions.isEmpty()" (click)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
-  </div>
-</div>
 
-<div mat-dialog-actions>
-  <button mat-raised-button color="accent"  >Fermer</button>
-</div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="accent"  >Fermer</button>
+  </div>

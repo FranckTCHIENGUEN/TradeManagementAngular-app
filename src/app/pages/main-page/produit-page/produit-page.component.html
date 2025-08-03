@@ -1,37 +1,51 @@
 <div id="appbar" >
   <h1>Produits</h1>
   <div class="row">
-    <div class="col-3" *ngIf="permission.includes('PRODUIT: CRÉER_MODIFIER')">
-      <button mat-raised-button color="primary"  (click)="openDialogSave()">Ajouter</button>
-    </div>
-    <div class="col-3" *ngIf="permission.includes('DEPENSE: FILTRER')">
-      <mat-slide-toggle [(ngModel)]="isChecked">Recherche avancée</mat-slide-toggle>
-    </div>
-    <div class="col-3" *ngIf="permission.includes('PRODUIT: LIRE')">
-      <button  mat-raised-button color="accent"  (click)="findAllProduit()">
-        <mat-icon>
+    @if (permission.includes('PRODUIT: CRÉER_MODIFIER')) {
+      <div class="col-3">
+        <button mat-raised-button color="primary"  (click)="openDialogSave()">Ajouter</button>
+      </div>
+    }
+    @if (permission.includes('DEPENSE: FILTRER')) {
+      <div class="col-3">
+        <mat-slide-toggle [(ngModel)]="isChecked">Recherche avancée</mat-slide-toggle>
+      </div>
+    }
+    @if (permission.includes('PRODUIT: LIRE')) {
+      <div class="col-3">
+        <button  mat-raised-button color="accent"  (click)="findAllProduit()">
+          <mat-icon>
             <span class="material-symbols-outlined">
-            refresh
-          </span></mat-icon>
-      </button>
-    </div>
-    <div class="col-3" *ngIf="permission.includes('CAT_PRODUIT: LIRE')">
-      <button  mat-raised-button color="primary" (click)="opendoalogCategorie()">Voir les categories</button>
+              refresh
+            </span></mat-icon>
+          </button>
+        </div>
+      }
+      @if (permission.includes('CAT_PRODUIT: LIRE')) {
+        <div class="col-3">
+          <button  mat-raised-button color="primary" (click)="opendoalogCategorie()">Voir les categories</button>
+        </div>
+      }
     </div>
   </div>
-</div>
 
-<div class="containt">
-  <div *ngIf="isChecked" class="side">
-    <app-filter-categories (objetFiltre)="filter($event)" typeEnregistrement="{{ContextCategorie.DEPENSE}}"></app-filter-categories>
+  <div class="containt">
+    @if (isChecked) {
+      <div class="side">
+        <app-filter-categories (objetFiltre)="filter($event)" typeEnregistrement="{{ContextCategorie.DEPENSE}}"></app-filter-categories>
+      </div>
+    }
+    @if (permission.includes('PRODUIT: LIRE') || permission.includes('PRODUIT: SUPPRIMER')
+      || permission.includes('PRODUIT: FILTRER')) {
+      <div [class]="isChecked ? 'content' : 'content2'">
+        @if (display) {
+          <app-view-product [listOfData]="listProduiut" typeAffichage="produit"></app-view-product>
+        }
+      </div>
+    }
   </div>
-  <div *ngIf="permission.includes('PRODUIT: LIRE') || permission.includes('PRODUIT: SUPPRIMER')
-  || permission.includes('PRODUIT: FILTRER')" [class]="isChecked ? 'content' : 'content2'">
-    <app-view-product *ngIf="display" [listOfData]="listProduiut" typeAffichage="produit"></app-view-product>
-  </div>
-</div>
-<!--<div class="content-second" *ngIf="permission.includes('PRODUIT: LIRE')">-->
-<!--  <app-view-product [listOfData]="listProduiut" typeAffichage="produit"></app-view-product>-->
+  <!--<div class="content-second" *ngIf="permission.includes('PRODUIT: LIRE')">-->
+  <!--  <app-view-product [listOfData]="listProduiut" typeAffichage="produit"></app-view-product>-->
 <!--</div>-->
 
 

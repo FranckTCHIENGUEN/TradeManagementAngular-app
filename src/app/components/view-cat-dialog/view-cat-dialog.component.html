@@ -2,33 +2,37 @@
   <h2>Liste des categories de {{typeAffichage}}</h2>
 </div>
 <div class="row ms-5">
-  <div class="col-4" *ngIf=" (typeAffichage=='produit' && permission.includes('CAT_PRODUIT: CRÉER_MODIFIER'))  || (typeAffichage=='service' && permission.includes('CAT_SERVICE: CRÉER_MODIFIER')) ||
-   (typeAffichage=='depense' && permission.includes('CAT_DEPENSE: CRÉER_MODIFIER'))">
-    <button mat-raised-button color="primary"  (click)="nouvelleCategorie()">Nouvelle categorie</button>
-  </div>
+  @if ( (typeAffichage=='produit' && permission.includes('CAT_PRODUIT: CRÉER_MODIFIER'))  || (typeAffichage=='service' && permission.includes('CAT_SERVICE: CRÉER_MODIFIER')) ||
+    (typeAffichage=='depense' && permission.includes('CAT_DEPENSE: CRÉER_MODIFIER'))) {
+    <div class="col-4">
+      <button mat-raised-button color="primary"  (click)="nouvelleCategorie()">Nouvelle categorie</button>
+    </div>
+  }
   <div class="col-4">
     <button  mat-raised-button color="accent" (click)="findAllCatProduit()">
       <mat-icon>
-            <span class="material-symbols-outlined">
-            refresh
-          </span></mat-icon>
-    </button>
-  </div>
-<!--  <div class="col-4">-->
-<!--    <button  mat-raised-button color="primary" (click)="openDialogDeleteCat(cat.selectedOptions.selected.at(0)?.value)">Supprimer</button>-->
-<!--  </div>-->
+        <span class="material-symbols-outlined">
+          refresh
+        </span></mat-icon>
+      </button>
+    </div>
+    <!--  <div class="col-4">-->
+    <!--    <button  mat-raised-button color="primary" (click)="openDialogDeleteCat(cat.selectedOptions.selected.at(0)?.value)">Supprimer</button>-->
+  <!--  </div>-->
 </div>
 
 <mat-list class="ms-5">
   <div mat-subheader>Categories</div>
-  <mat-list-item *ngFor="let categorie of categories">
-    <mat-icon matListItemIcon> folder </mat-icon>
-    <div matListItemTitle>{{categorie.nom}}
-      <button matSuffix mat-button color="accent" (click)="openDialogEditCat(categorie)">
-        <mat-icon color="primary">
-          <span class="material-symbols-outlined">edit</span>
-        </mat-icon>
-      </button>
-    </div>
-  </mat-list-item>
+  @for (categorie of categories; track categorie) {
+    <mat-list-item>
+      <mat-icon matListItemIcon> folder </mat-icon>
+      <div matListItemTitle>{{categorie.nom}}
+        <button matSuffix mat-button color="accent" (click)="openDialogEditCat(categorie)">
+          <mat-icon color="primary">
+            <span class="material-symbols-outlined">edit</span>
+          </mat-icon>
+        </button>
+      </div>
+    </mat-list-item>
+  }
 </mat-list>

@@ -2,26 +2,33 @@
   <div class="col-3">
     <mat-slide-toggle [(ngModel)]="isChecked">Afficher compta global</mat-slide-toggle>
   </div>
-  <div class="col-2" *ngIf="permission.includes('COMPTA: LIRE_UTILISATEUR_BILAN_JOURNALIER') ">
-    <mat-slide-toggle [disabled]="forUser" [(ngModel)]="voirTout">Voir tout</mat-slide-toggle>
-  </div>
-  <div class="col-3" *ngIf="permission.includes('COMPTA: LIRE_TOUT_LES_BILAN_JOURNALIER') ">
-    <mat-slide-toggle [disabled]="voirTout" [(ngModel)]="forUser">Par utilisateur</mat-slide-toggle>
-  </div>
-  <div class="col-3" *ngIf="permission.includes('COMPTA: LIRE_UTILISATEUR_BILAN_JOURNALIER') && forUser">
-    <mat-form-field appearance="fill">
-      <mat-label>Utilisateur</mat-label>
-      <mat-select [(ngModel)]="userName"  placeholder="choisir un mode" [value]="lisUser.at(0)">
-        <mat-option *ngFor="let etat of lisUser " [value]="etat.nom + ' '+etat.prenom" >{{etat.nom}} {{etat.prenom}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-  </div>
+  @if (permission.includes('COMPTA: LIRE_UTILISATEUR_BILAN_JOURNALIER') ) {
+    <div class="col-2">
+      <mat-slide-toggle [disabled]="forUser" [(ngModel)]="voirTout">Voir tout</mat-slide-toggle>
+    </div>
+  }
+  @if (permission.includes('COMPTA: LIRE_TOUT_LES_BILAN_JOURNALIER') ) {
+    <div class="col-3">
+      <mat-slide-toggle [disabled]="voirTout" [(ngModel)]="forUser">Par utilisateur</mat-slide-toggle>
+    </div>
+  }
+  @if (permission.includes('COMPTA: LIRE_UTILISATEUR_BILAN_JOURNALIER') && forUser) {
+    <div class="col-3">
+      <mat-form-field appearance="fill">
+        <mat-label>Utilisateur</mat-label>
+        <mat-select [(ngModel)]="userName"  placeholder="choisir un mode" [value]="lisUser.at(0)">
+          @for (etat of lisUser ; track etat) {
+            <mat-option [value]="etat.nom + ' '+etat.prenom" >{{etat.nom}} {{etat.prenom}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+  }
   <button class="mt-5" mat-raised-button  (click)="find(); findSaving()">
     <mat-icon class="ms-2"  color="primary">
-                  <span class="material-symbols-outlined">
-                    search
-                  </span>
+      <span class="material-symbols-outlined">
+        search
+      </span>
     </mat-icon> Recherche
   </button>
 </div>
@@ -30,35 +37,37 @@
 
   <mat-tab label="Bilan financier">
     <div class="containt">
-      <div class="ms-15 side" *ngIf="isChecked">
-        <div class=" divider divider-boder">
-          CA : <span class="important">{{bilan.ca}} Fcfa</span>
+      @if (isChecked) {
+        <div class="ms-15 side">
+          <div class=" divider divider-boder">
+            CA : <span class="important">{{bilan.ca}} Fcfa</span>
+          </div>
+          <div class=" divider divider-boder">
+            Depense Enregistrées : <span class="important">{{bilan.depense}} Fcfa</span>
+          </div>
+          <div class=" divider divider-boder">
+            Encaissement Commande : <span class="important">{{bilan.encaissementCommande}} Fcfa</span>
+          </div>
+          <div class=" divider divider-boder">
+            Depense effective : <span class="important">{{bilan.depenseEffective}} Fcfa</span>
+          </div>
+          <div class=" divider divider-boder">
+            Rembourssement Client : <span class="important">{{bilan.rembourssement}} Fcfa</span>
+          </div>
+          <div class=" divider divider-boder">
+            Rembourssement sur depense : <span class="important">{{bilan.rembourssementDepense}} Fcfa</span>
+          </div>
+          <div class=" divider divider-boder">
+            Reste a payer : <span class="important">{{bilan.resteApayer}} Fcfa</span>
+          </div>
+          <div class=" divider divider-boder">
+            Reste a payer sur depense : <span class="important">{{bilan.resteApayerDepense}} Fcfa</span>
+          </div>
+          <div class=" divider divider-boder">
+            Argent en caisse : <span class="important">{{bilan.encaissementCommande! - bilan.depenseEffective!}} Fcfa</span>
+          </div>
         </div>
-        <div class=" divider divider-boder">
-          Depense Enregistrées : <span class="important">{{bilan.depense}} Fcfa</span>
-        </div>
-        <div class=" divider divider-boder">
-          Encaissement Commande : <span class="important">{{bilan.encaissementCommande}} Fcfa</span>
-        </div>
-        <div class=" divider divider-boder">
-          Depense effective : <span class="important">{{bilan.depenseEffective}} Fcfa</span>
-        </div>
-        <div class=" divider divider-boder">
-          Rembourssement Client : <span class="important">{{bilan.rembourssement}} Fcfa</span>
-        </div>
-        <div class=" divider divider-boder">
-          Rembourssement sur depense : <span class="important">{{bilan.rembourssementDepense}} Fcfa</span>
-        </div>
-        <div class=" divider divider-boder">
-          Reste a payer : <span class="important">{{bilan.resteApayer}} Fcfa</span>
-        </div>
-        <div class=" divider divider-boder">
-          Reste a payer sur depense : <span class="important">{{bilan.resteApayerDepense}} Fcfa</span>
-        </div>
-        <div class=" divider divider-boder">
-          Argent en caisse : <span class="important">{{bilan.encaissementCommande! - bilan.depenseEffective!}} Fcfa</span>
-        </div>
-      </div>
+      }
 
       <div [class]="isChecked ? 'content' : 'content2'">
         <mat-accordion class="example-headers-align">
@@ -102,81 +111,86 @@
           </mat-expansion-panel>
 
           <!--<mat-expansion-panel [expanded]="step() === 3" (opened)="setStep(3)" hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title> Depense / Achats </mat-panel-title>
-            </mat-expansion-panel-header>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Depense / Achats </mat-panel-title>
+          </mat-expansion-panel-header>
 
 
-            <mat-action-row>
-              <button mat-button (click)="prevStep()">Precedent</button>
-              <button mat-button (click)="nextStep()">Fin</button>
-            </mat-action-row>
+          <mat-action-row>
+            <button mat-button (click)="prevStep()">Precedent</button>
+            <button mat-button (click)="nextStep()">Fin</button>
+          </mat-action-row>
 
-          </mat-expansion-panel>-->
+        </mat-expansion-panel>-->
 
-        </mat-accordion>
-      </div>
+      </mat-accordion>
     </div>
-  </mat-tab>
+  </div>
+</mat-tab>
 
-  <mat-tab label="Bilan des enregistrements">
-    <mat-accordion class="example-headers-align">
-      <mat-expansion-panel *ngIf="permission.includes('COM_CLIENT: LIRE') || permission.includes('COM_CLIENT: SUPPRIMER')
-                                || permission.includes('COM_CLIENT: FILTRER')" [expanded]="step() === 0" (opened)="setStep(0); openComClient.set(true); findSaving()"  (closed)="openComClient.set(false)" hideToggle>
+<mat-tab label="Bilan des enregistrements">
+  <mat-accordion class="example-headers-align">
+    @if (permission.includes('COM_CLIENT: LIRE') || permission.includes('COM_CLIENT: SUPPRIMER')
+      || permission.includes('COM_CLIENT: FILTRER')) {
+      <mat-expansion-panel [expanded]="step() === 0" (opened)="setStep(0); openComClient.set(true); findSaving()"  (closed)="openComClient.set(false)" hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title> Commandes clients </mat-panel-title>
         </mat-expansion-panel-header>
-
-          <app-list-view *ngIf="openComClient()" type="commande client"
-                         [tableColumns]="columnsComClient" [tableData]="listeComClient"></app-list-view>
-
+        @if (openComClient()) {
+          <app-list-view type="commande client"
+          [tableColumns]="columnsComClient" [tableData]="listeComClient"></app-list-view>
+        }
         <mat-action-row>
           <button mat-button color="primary" (click)="nextStep()">Suivant</button>
         </mat-action-row>
       </mat-expansion-panel>
+    }
 
-      <mat-expansion-panel *ngIf="permission.includes('VENTE: LIRE') || permission.includes('VENTE: SUPPRIMER')
-      || permission.includes('VENTE: FILTRER')" [expanded]="step() === 1" (opened)="setStep(1); openVente.set(true); findSaving()" (closed)="openVente.set(false)" hideToggle>
+    @if (permission.includes('VENTE: LIRE') || permission.includes('VENTE: SUPPRIMER')
+      || permission.includes('VENTE: FILTRER')) {
+      <mat-expansion-panel [expanded]="step() === 1" (opened)="setStep(1); openVente.set(true); findSaving()" (closed)="openVente.set(false)" hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title> Vente </mat-panel-title>
         </mat-expansion-panel-header>
-
-        <app-list-view *ngIf="openVente()" type="vente" [tableColumns]="columnsVente" [tableData]="listeVente"></app-list-view>
-
+        @if (openVente()) {
+          <app-list-view type="vente" [tableColumns]="columnsVente" [tableData]="listeVente"></app-list-view>
+        }
         <mat-action-row>
           <button mat-raised-button (click)="prevStep()">Precedent</button>
           <button mat-raised-button (click)="nextStep()">Suivant</button>
         </mat-action-row>
       </mat-expansion-panel>
+    }
 
-      <mat-expansion-panel *ngIf="permission.includes('COM_FOURNISSEUR: LIRE') || permission.includes('COM_FOURNISSEUR: SUPPRIMER')
-      || permission.includes('COM_FOURNISSEUR: FILTRER')" [expanded]="step() === 2" (opened)="setStep(2); openComFournisseur.set(true); findSaving()" (closed)="openComFournisseur.set(false)" hideToggle>
+    @if (permission.includes('COM_FOURNISSEUR: LIRE') || permission.includes('COM_FOURNISSEUR: SUPPRIMER')
+      || permission.includes('COM_FOURNISSEUR: FILTRER')) {
+      <mat-expansion-panel [expanded]="step() === 2" (opened)="setStep(2); openComFournisseur.set(true); findSaving()" (closed)="openComFournisseur.set(false)" hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title> Commandes fournisseurs </mat-panel-title>
         </mat-expansion-panel-header>
-
-          <app-list-view *ngIf="openComFournisseur()" type="commande fournisseur" [tableColumns]="columnsComFournisseur" [tableData]="listeComFournisseur"></app-list-view>
-
+        @if (openComFournisseur()) {
+          <app-list-view type="commande fournisseur" [tableColumns]="columnsComFournisseur" [tableData]="listeComFournisseur"></app-list-view>
+        }
         <mat-action-row>
           <button mat-button (click)="prevStep()">Precedent</button>
           <button mat-button (click)="nextStep()">Fin</button>
         </mat-action-row>
-
       </mat-expansion-panel>
+    }
 
-      <!--<mat-expansion-panel [expanded]="step() === 3" (opened)="setStep(3)" hideToggle>
-        <mat-expansion-panel-header>
-          <mat-panel-title> Depense / Achats </mat-panel-title>
-        </mat-expansion-panel-header>
+    <!--<mat-expansion-panel [expanded]="step() === 3" (opened)="setStep(3)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Depense / Achats </mat-panel-title>
+    </mat-expansion-panel-header>
 
 
-        <mat-action-row>
-          <button mat-button (click)="prevStep()">Precedent</button>
-          <button mat-button (click)="nextStep()">Fin</button>
-        </mat-action-row>
+    <mat-action-row>
+      <button mat-button (click)="prevStep()">Precedent</button>
+      <button mat-button (click)="nextStep()">Fin</button>
+    </mat-action-row>
 
-      </mat-expansion-panel>-->
+  </mat-expansion-panel>-->
 
-    </mat-accordion>
-  </mat-tab>
+</mat-accordion>
+</mat-tab>
 </mat-tab-group>

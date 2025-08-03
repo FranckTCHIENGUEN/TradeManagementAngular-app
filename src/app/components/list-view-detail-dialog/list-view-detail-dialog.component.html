@@ -5,166 +5,202 @@
   </mat-toolbar>
 </div>
 <div mat-dialog-content>
-  <div class="row" *ngIf="type != 'commande fournisseur'">
-    <div class="row mb-5">
-      <div class="col important">
-        Client : <span class="important">{{donnees.client?.nom}} {{donnees.client?.prenom}}</span>
+  @if (type != 'commande fournisseur') {
+    <div class="row">
+      <div class="row mb-5">
+        <div class="col important">
+          Client : <span class="important">{{donnees.client?.nom}} {{donnees.client?.prenom}}</span>
+        </div>
+        <div class="col important">
+          adresse : <span class="important">{{donnees.client.adresse?.ville}}</span>
+        </div>
+        <div class="col ">
+          Tel : <span class="important">{{donnees.client.contactDto?.tel1}}</span>
+        </div>
       </div>
-      <div class="col important">
-        adresse : <span class="important">{{donnees.client.adresse?.ville}}</span>
+      <div class="row">
+        <div class="col divider">
+          Montant total : <span class="important">{{donnees.montantTotal}} Fcfa</span>
+        </div>
+        <div class="col divider divider-boder">
+          Avance : <span class="important">{{donnees.avance}} Fcfa</span>
+        </div>
+        <div class="col divider divider-boder">
+          Reste a payer : <span class="important">{{donnees.resteApayer}} Fcfa</span>
+        </div>
+        <div class="col divider divider-boder">
+          Reste a donner : <span class="important">{{donnees.resteAdonner}} Fcfa</span>
+        </div>
       </div>
-      <div class="col ">
-        Tel : <span class="important">{{donnees.client.contactDto?.tel1}}</span>
+      <div class="row">
+        @if (type != 'vente') {
+          <div class="col divider">
+            Date commande : <span class="important">{{donnees.datecommande | date:"EEEE dd MMMM yyyy"}} </span>
+          </div>
+        }
+        @if (type == 'vente') {
+          <div class="col divider">
+            Date vente : <span class="important">{{donnees.datevente | date:"EEEE dd MMMM yyyy"}} </span>
+          </div>
+        }
+        @if (type != 'vente') {
+          <div class="col divider divider-boder">
+            Date retrait : <span class="important">{{donnees.dateRetrait | date:"EEEE dd MMMM yyyy"}}</span>
+          </div>
+        }
+        @if (type != 'vente') {
+          <div class="col divider divider-boder">
+            Date livraison : <span class="important">{{donnees.dateLivraison | date:"EEEE dd MMMM yyyy"}} </span>
+          </div>
+        }
+        @if (type!='vente' && (permission.includes('COM_FOURNISSEUR: CRÉER_MODIFIER') || permission.includes('COM_CLIENT: CRÉER_MODIFIER')) ) {
+          <div class="col divider divider-boder">
+            Etat : <span class="important">{{donnees.etatCommande}} </span>
+            <button mat-raised-button color="primary" (click)="openDialogUpdateEtat()" class="justify-content-center align-items-center example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+              Modifier etat
+            </button>
+          </div>
+        }
+        <div  class="col divider divider-boder">
+          <button  mat-raised-button aria-label="expand row" (click)="loadFacture(donnees.id);">
+            Telecharger la facture
+          </button>
+        </div>
       </div>
     </div>
+  }
+  @if (type != 'vente' && type !='commande client') {
     <div class="row">
-      <div class="col divider">
-        Montant total : <span class="important">{{donnees.montantTotal}} Fcfa</span>
-      </div>
-      <div class="col divider divider-boder">
-        Avance : <span class="important">{{donnees.avance}} Fcfa</span>
-      </div>
-      <div class="col divider divider-boder">
-        Reste a payer : <span class="important">{{donnees.resteApayer}} Fcfa</span>
-      </div>
-      <div class="col divider divider-boder">
-        Reste a donner : <span class="important">{{donnees.resteAdonner}} Fcfa</span>
-      </div>
+      <div class="row mb-5">
+        <div class="col important">
+          Fournisseur : <span class="important">{{donnees.fournisseur?.nom}} {{donnees.fournisseur?.prenom}}</span>
+        </div>
+        <div class="col important">
+          adresse : <span class="important">{{donnees.fournisseur.adresse?.ville}}</span>
+        </div>
+        <div class="col ">
+          Tel : <span class="important">{{donnees.fournisseur.contactDto?.tel1}}</span>
+        </div>
+        <!--      <div class="row">-->
+        <!--        <div class="col-4">-->
+        <!--          <button mat-raised-button color="primary" (click)="openDialogChangeClient()">Modifier client</button>-->
+      <!--        </div>-->
+    <!--      </div>-->
+  </div>
+  <div class="row">
+    <div class="col divider">
+      Montant total : <span class="important">{{donnees.montantTotal}} Fcfa</span>
     </div>
-    <div class="row">
-      <div *ngIf="type != 'vente'" class="col divider">
-        Date commande : <span class="important">{{donnees.datecommande | date:"EEEE dd MMMM yyyy"}} </span>
-      </div>
-      <div *ngIf="type == 'vente'" class="col divider">
-        Date vente : <span class="important">{{donnees.datevente | date:"EEEE dd MMMM yyyy"}} </span>
-      </div>
-      <div *ngIf="type != 'vente'" class="col divider divider-boder">
-        Date retrait : <span class="important">{{donnees.dateRetrait | date:"EEEE dd MMMM yyyy"}}</span>
-      </div>
-      <div *ngIf="type != 'vente'" class="col divider divider-boder">
-        Date livraison : <span class="important">{{donnees.dateLivraison | date:"EEEE dd MMMM yyyy"}} </span>
-      </div>
-      <div *ngIf="type!='vente' && (permission.includes('COM_FOURNISSEUR: CRÉER_MODIFIER') || permission.includes('COM_CLIENT: CRÉER_MODIFIER')) " class="col divider divider-boder">
-        Etat : <span class="important">{{donnees.etatCommande}} </span>
-        <button mat-raised-button color="primary" (click)="openDialogUpdateEtat()" class="justify-content-center align-items-center example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-         Modifier etat
-        </button>
-      </div>
-      <div  class="col divider divider-boder">
-        <button  mat-raised-button aria-label="expand row" (click)="loadFacture(donnees.id);">
-          Telecharger la facture
-        </button>
-      </div>
+    <div class="col divider divider-boder">
+      Avance : <span class="important">{{donnees.avance}} Fcfa</span>
+    </div>
+    <div class="col divider divider-boder">
+      Reste a payer : <span class="important">{{donnees.resteApayer}} Fcfa</span>
+    </div>
+    <div class="col divider divider-boder">
+      Reste a donner : <span class="important">{{donnees.resteAdonner}} Fcfa</span>
     </div>
   </div>
-  <div class="row" *ngIf="type != 'vente' && type !='commande client'">
-    <div class="row mb-5">
-      <div class="col important">
-        Fournisseur : <span class="important">{{donnees.fournisseur?.nom}} {{donnees.fournisseur?.prenom}}</span>
-      </div>
-      <div class="col important">
-        adresse : <span class="important">{{donnees.fournisseur.adresse?.ville}}</span>
-      </div>
-      <div class="col ">
-        Tel : <span class="important">{{donnees.fournisseur.contactDto?.tel1}}</span>
-      </div>
-<!--      <div class="row">-->
-<!--        <div class="col-4">-->
-<!--          <button mat-raised-button color="primary" (click)="openDialogChangeClient()">Modifier client</button>-->
-<!--        </div>-->
-<!--      </div>-->
-    </div>
-    <div class="row">
+  <div class="row" >
+    @if (type != 'vente') {
       <div class="col divider">
-        Montant total : <span class="important">{{donnees.montantTotal}} Fcfa</span>
-      </div>
-      <div class="col divider divider-boder">
-        Avance : <span class="important">{{donnees.avance}} Fcfa</span>
-      </div>
-      <div class="col divider divider-boder">
-        Reste a payer : <span class="important">{{donnees.resteApayer}} Fcfa</span>
-      </div>
-      <div class="col divider divider-boder">
-        Reste a donner : <span class="important">{{donnees.resteAdonner}} Fcfa</span>
-      </div>
-    </div>
-    <div class="row" >
-      <div *ngIf="type != 'vente'" class="col divider">
         Date commande : <span class="important">{{donnees.dateCommande | date:"EEE dd MMM yyyy" }} </span>
       </div>
-      <div *ngIf="type == 'vente'" class="col divider">
+    }
+    @if (type == 'vente') {
+      <div class="col divider">
         Date vente : <span class="important">{{donnees.datevente}} </span>
       </div>
-      <div *ngIf="type != 'vente'" class="col divider divider-boder">
+    }
+    @if (type != 'vente') {
+      <div class="col divider divider-boder">
         Date retrait : <span class="important">{{donnees.dateRetrait | date:"EEE dd MMM yyyy"}}</span>
       </div>
-      <div *ngIf="type != 'vente'" class="col divider divider-boder">
+    }
+    @if (type != 'vente') {
+      <div class="col divider divider-boder">
         Date livraison : <span class="important">{{donnees.dateLivraison | date:"EEE dd MMM yyyy"}} </span>
       </div>
-      <div *ngIf="type!='vente'" class="col divider divider-boder">
+    }
+    @if (type!='vente') {
+      <div class="col divider divider-boder">
         Etat : <span class="important">{{donnees.etatCommande}} </span>
         <button mat-raised-button color="primary" (click)="openDialogUpdateEtat()" >
           Modifier
         </button>
       </div>
-    </div>
+    }
   </div>
-  <div class="row">
-<!--    <div class="col-4">-->
-<!--      <button mat-raised-button color="primary" (click)="openDialogAddLigne()">Ajouter un element-</button>-->
+</div>
+}
+<div class="row">
+  <!--    <div class="col-4">-->
+  <!--      <button mat-raised-button color="primary" (click)="openDialogAddLigne()">Ajouter un element-</button>-->
 <!--    </div>-->
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
-      <mat-tab label="Element de la commande / vente">
-        <mat-accordion class="accordion" *ngFor="let element of elements">
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title class="important" *ngIf="element.type=='PRODUIT'">
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+  <mat-tab label="Element de la commande / vente">
+    @for (element of elements; track element) {
+      <mat-accordion class="accordion">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            @if (element.type=='PRODUIT') {
+              <mat-panel-title class="important">
                 {{element.type}} : {{element.object.designation}}
               </mat-panel-title>
-              <mat-panel-title class="important" *ngIf="element.type=='SERVICE'">
+            }
+            @if (element.type=='SERVICE') {
+              <mat-panel-title class="important">
                 {{element.type}} : {{element.object.serviceDto?.nom}}
               </mat-panel-title>
+            }
+            <mat-panel-description>
+              <span class="important divider ">Quantite : {{element.quantite}} </span> <span class="important divider divider-boder"> Prix unitaire : {{element.prixunitaire}} </span>
+              <span class="important divider divider-boder"> Prix total : {{element.prixTotal}} </span>
+              <!--                <button (click)="openDialogAddLigne(element)" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">-->
+              <!--                  <mat-icon>pencil</mat-icon>-->
+            <!--                </button>-->
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p class="important-Desription">{{element.description}}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  }
+</mat-tab>
+<mat-tab label="Paiement">
+  @if (donnees.resteApayer > 0 && permission.includes('PAIEMENT: CRÉER_MODIFIER')) {
+    <div class="col-4">
+      <button mat-raised-button color="primary" (click)="openDialogAddPaiement()">Ajouter un paiement-</button>
+    </div>
+  }
+  @if ( permission.includes('PAIEMENT: LIRE')) {
+    <div class="row">
+      @for (paiement of paiementList; track paiement) {
+        <mat-accordion class="accordion">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title class="important">
+                Montant : {{paiement.montant}} Fcfa
+              </mat-panel-title>
               <mat-panel-description>
-                 <span class="important divider ">Quantite : {{element.quantite}} </span> <span class="important divider divider-boder"> Prix unitaire : {{element.prixunitaire}} </span>
-                <span class="important divider divider-boder"> Prix total : {{element.prixTotal}} </span>
-<!--                <button (click)="openDialogAddLigne(element)" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">-->
-<!--                  <mat-icon>pencil</mat-icon>-->
-<!--                </button>-->
+                <span class="important divider">Date paiement : {{paiement.datepaiement | date:"EEE dd MMM yyyy"}} </span>  <span class="important divider divider-boder">Mode paiement : {{paiement.mode}} </span>
+                <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                  <mat-icon>pencil</mat-icon>
+                </button>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <p class="important-Desription">{{element.description}}</p>
+            <p class="important-Desription">Compte payeur : {{paiement.comptePayeur}}</p>
+            <p class="important-Desription">Reference paiement: {{paiement.ref}}</p>
+            <p class="important-Desription">Reste a donner : {{paiement.resteAdonner}}</p>
+            <p class="important-Desription">Reste a payer : {{paiement.resteApayer}}</p>
           </mat-expansion-panel>
         </mat-accordion>
-      </mat-tab>
-      <mat-tab label="Paiement">
-        <div *ngIf="donnees.resteApayer > 0 && permission.includes('PAIEMENT: CRÉER_MODIFIER')" class="col-4">
-          <button mat-raised-button color="primary" (click)="openDialogAddPaiement()">Ajouter un paiement-</button>
-        </div>
-        <div class="row" *ngIf=" permission.includes('PAIEMENT: LIRE')">
-          <mat-accordion class="accordion" *ngFor="let paiement of paiementList">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title class="important">
-                 Montant : {{paiement.montant}} Fcfa
-                </mat-panel-title>
-                <mat-panel-description>
-                  <span class="important divider">Date paiement : {{paiement.datepaiement | date:"EEE dd MMM yyyy"}} </span>  <span class="important divider divider-boder">Mode paiement : {{paiement.mode}} </span>
-                  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-                    <mat-icon>pencil</mat-icon>
-                  </button>
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <p class="important-Desription">Compte payeur : {{paiement.comptePayeur}}</p>
-              <p class="important-Desription">Reference paiement: {{paiement.ref}}</p>
-              <p class="important-Desription">Reste a donner : {{paiement.resteAdonner}}</p>
-              <p class="important-Desription">Reste a payer : {{paiement.resteApayer}}</p>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
+      }
+    </div>
+  }
 
-      </mat-tab>
-    </mat-tab-group>
-  </div>
+</mat-tab>
+</mat-tab-group>
+</div>
 </div>
 
 <div mat-dialog-actions>

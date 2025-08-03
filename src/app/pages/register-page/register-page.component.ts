@@ -48,7 +48,7 @@ export class RegisterPageComponent {
 
   ngOnInit(): void {
     this.responsive.observe(Breakpoints.HandsetPortrait)
-      .subscribe(result => {
+      .subscribe((result:any) => {
 
         this._isPhonePortrait = result.matches;
 

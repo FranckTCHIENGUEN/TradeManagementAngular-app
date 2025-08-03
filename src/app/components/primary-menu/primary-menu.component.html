@@ -1,11 +1,15 @@
 <mat-nav-list >
-  <div  *ngFor="let data of navData">
-    <a class="link" *ngIf="getView(data.role)" href="javascript:void(0)" routerLink="{{data.routerLink}}"
-       routerLinkActive="active-link"
-       mat-list-item  (click)="activeLink = data.routerLink && addNewItem(data.label)">
-<!--      <img src='{{data.icon}}' height="30" alt="">-->
-      <mat-icon>{{data.icon}}</mat-icon>
-      <span class="menuLabel">{{data.label}}</span>
-    </a>
-  </div>
+  @for (data of navData; track data) {
+    <div >
+      @if (getView(data.role)) {
+        <a class="link" href="javascript:void(0)" routerLink="{{data.routerLink}}"
+          routerLinkActive="active-link"
+          mat-list-item  (click)="activeLink = data.routerLink && addNewItem(data.label)">
+          <!--      <img src='{{data.icon}}' height="30" alt="">-->
+          <mat-icon>{{data.icon}}</mat-icon>
+          <span class="menuLabel">{{data.label}}</span>
+        </a>
+      }
+    </div>
+  }
 </mat-nav-list>

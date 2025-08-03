@@ -1,24 +1,24 @@
-<div class="row mt-2 justify-content-center text-center">
-  <h2>Enregistrer categorie {{typeCat}}</h2>
-</div>
-<div class="row h-100 align-items-center justify-content-center">
-  <form class="w-50" #form  [formGroup]="saveForm" >
-    <div class="col">
+<h2 mat-dialog-title>Enregistrer categorie {{typeCat}}</h2>
+<div mat-dialog-content>
+  <div class="row h-100 align-items-center justify-content-center">
+    <form class="w-50" #form [formGroup]="saveForm">
       <div class="col">
-        <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
-          <mat-label class="">Nom</mat-label>
-          <input type="text" matInput formControlName="nom" [errorStateMatcher]="matcher">
-          <mat-error class="errorMessage" *ngIf="saveForm.controls['nom'].hasError('required')">
-            le nom est requit
-          </mat-error>
-        </mat-form-field>
+        <div class="col">
+          <mat-form-field class="mat-form-field d-flex justify-content-center" appearance="fill">
+            <mat-label>Nom</mat-label>
+            <input type="text" matInput formControlName="nom" [errorStateMatcher]="matcher">
+            @if (nom?.hasError('required')) {
+              <mat-error class="errorMessage">
+                Le nom est requis.
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
       </div>
-    </div>
-    <div class="row mt-5">
-      <button [disabled]="!saveForm.valid" (click)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
-
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
-
-
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog({etat:'ko', data:null})">Annuler</button>
+  <button [disabled]="!saveForm.valid" (click)="formSubmit()" mat-raised-button color="primary">Enregistrer</button>
+</div>

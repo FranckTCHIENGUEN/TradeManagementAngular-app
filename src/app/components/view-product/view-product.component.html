@@ -1,70 +1,87 @@
 <div class="mt-5 h-100">
-  <div *ngIf="listOfData.length==0" class=" w-100 d-flex justify-content-center align-items-center">
-    <p> Aucune données trouvées</p>
-  </div>
+  @if (listOfData.length==0) {
+    <div class=" w-100 d-flex justify-content-center align-items-center">
+      <p> Aucune données trouvées</p>
+    </div>
+  }
   <div class="row me-3" >
-    <div class="col-lg-3 col-xl-4 col-md-6 col-sm-6 mb-3" *ngFor="let data of listOfData; let i = index">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <mat-card-title-group *ngIf="typeAffichage=='produit'">
-            <mat-card-title>{{data.designation}}</mat-card-title>
-            <mat-card-subtitle>{{data.category?.nom}}</mat-card-subtitle>
-            <img mat-card-sm-image src="{{data.photo}}"  alt="">
-          </mat-card-title-group>
-          <mat-card-title-group *ngIf="typeAffichage=='service'">
-            <mat-card-title>{{data.serviceDto?.nom}}</mat-card-title>
-            <mat-card-subtitle>{{data.serviceDto?.category?.nom}}</mat-card-subtitle>
-            <img mat-card-sm-image  src="{{data.serviceDto?.photo}}"  alt="">
-          </mat-card-title-group>
-        </mat-card-header>
-        <mat-card-content>
-          <div *ngIf="typeAffichage=='produit'">
-<!--            <p >-->
-<!--              Prix-->
-<!--            </p>-->
-            <p class="mt-3 d-flex justify-content-center align-items-center montant">
-        <span >
-         {{data.prixunitairettc}} FCFA
-        </span>
-            </p>
-
-          </div>
-          <div *ngIf="typeAffichage=='service'">
-            <p >
-              Montant generer :
-            </p>
-            <p class="mt-3 d-flex justify-content-center align-items-center montant">
-              <span>
-                {{data.ca}} FCFA
-              </span>
-            </p>
-
-          </div>
+    @for (data of listOfData; track data; let i = $index) {
+      <div class="col-lg-3 col-xl-4 col-md-6 col-sm-6 mb-3">
+        <mat-card class="example-card">
+          <mat-card-header>
+            @if (typeAffichage=='produit') {
+              <mat-card-title-group>
+                <mat-card-title>{{data.designation}}</mat-card-title>
+                <mat-card-subtitle>{{data.category?.nom}}</mat-card-subtitle>
+                <img mat-card-sm-image src="{{data.photo}}"  alt="">
+              </mat-card-title-group>
+            }
+            @if (typeAffichage=='service') {
+              <mat-card-title-group>
+                <mat-card-title>{{data.serviceDto?.nom}}</mat-card-title>
+                <mat-card-subtitle>{{data.serviceDto?.category?.nom}}</mat-card-subtitle>
+                <img mat-card-sm-image  src="{{data.serviceDto?.photo}}"  alt="">
+              </mat-card-title-group>
+            }
+          </mat-card-header>
+          <mat-card-content>
+            @if (typeAffichage=='produit') {
+              <div>
+                <!--            <p >-->
+                <!--              Prix-->
+              <!--            </p>-->
+              <p class="mt-3 d-flex justify-content-center align-items-center montant">
+                <span >
+                  {{data.prixunitairettc}} FCFA
+                </span>
+              </p>
+            </div>
+          }
+          @if (typeAffichage=='service') {
+            <div>
+              <p >
+                Montant generer :
+              </p>
+              <p class="mt-3 d-flex justify-content-center align-items-center montant">
+                <span>
+                  {{data.ca}} FCFA
+                </span>
+              </p>
+            </div>
+          }
         </mat-card-content>
         <mat-card-actions class=" h-25 footer">
-          <div *ngIf="typeAffichage=='produit'">
-            <p style="font-size: large; font-weight: bold">
-              Quantité :
-              <span>
-                {{data.quantite}}
-              </span>
-            </p>
-          </div>
-          <div *ngIf="typeAffichage=='service'">
-            <p style="font-size: large; font-weight: bold">
-              Nombre d'utilisation :
-              <span>
-                {{data.useNumber}}
-              </span>
-            </p>
-          </div>
-
-          <button *ngIf="typeAffichage=='service'" color="primary" (click)="openDialogEditService(data, i)" mat-button>Modifier</button>
-          <button *ngIf="typeAffichage=='produit'" color="primary" (click)="callDetail(data)" mat-button>Detail</button>
+          @if (typeAffichage=='produit') {
+            <div>
+              <p style="font-size: large; font-weight: bold">
+                Quantité :
+                <span>
+                  {{data.quantite}}
+                </span>
+              </p>
+            </div>
+          }
+          @if (typeAffichage=='service') {
+            <div>
+              <p style="font-size: large; font-weight: bold">
+                Nombre d'utilisation :
+                <span>
+                  {{data.useNumber}}
+                </span>
+              </p>
+            </div>
+          }
+          @if (typeAffichage=='service') {
+            <button color="primary" (click)="openDialogEditService(data, i)" mat-button>Modifier</button>
+          }
+          @if (typeAffichage=='produit') {
+            <button color="primary" (click)="callDetail(data)" mat-button>Detail</button>
+          }
         </mat-card-actions>
       </mat-card>
     </div>
-  </div>
+  }
+</div>
 </div>
 
 

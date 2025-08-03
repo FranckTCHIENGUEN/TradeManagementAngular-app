@@ -38,7 +38,7 @@ import {
   AppCommandFournisseurService
 } from "../../../services/commandFournisseurService/app-command-fournisseur.service";
 import {AppCommandClientService} from "../../../services/commandClientService/app-command-client.service";
-import * as moment from "moment/moment";
+import moment from 'moment';
 import {AppPersonSearchService} from "../../../services/personSearch/app-person-search.service";
 import {placeObjectAtFirstPosition} from "../../utils/sort";
 import {CreerGroupeClientDialogComponent} from "../creer-groupe-client-dialog/creer-groupe-client-dialog.component";

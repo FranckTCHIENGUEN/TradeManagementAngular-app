@@ -4,26 +4,32 @@
   <div class="container text-center h-100 w-100">
     <div class="row align-items-center">
       <div class="col">
-        <ng-container *ngIf="(asyncTabs | async) === null">
+        @if ((asyncTabs | async) === null) {
           <mat-progress-bar> </mat-progress-bar>
-        </ng-container>
+        }
       </div>
     </div>
   </div>
   <div class=" title">
-    <div class="me-5" *ngFor="let menu of asyncTabs | async">
-      <button *ngIf="getView(menu.role!)" mat-raised-button [ngClass]="{'active-link': menu.routerLink == activeLink,'inactive-link': menu.routerLink != activeLink}"
-              (click)="activeLink = menu.routerLink"
-              routerLink="{{menu.routerLink}}" class="raise-bouton">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="{{menu.icon}}"></mat-icon>
-        {{menu.label}}
-      </button>
-    </div>
+    @for (menu of asyncTabs | async; track menu) {
+      <div class="me-5">
+        @if (getView(menu.role!)) {
+          <button mat-raised-button [ngClass]="{'active-link': menu.routerLink == activeLink,'inactive-link': menu.routerLink != activeLink}"
+            (click)="activeLink = menu.routerLink"
+            routerLink="{{menu.routerLink}}" class="raise-bouton">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="{{menu.icon}}"></mat-icon>
+            {{menu.label}}
+          </button>
+        }
+      </div>
+    }
   </div>
 
 </div>
 
 <mat-divider style="margin-top: 10px"></mat-divider>
-<div *ngIf="(asyncTabs | async) !== null" class="container content-second" style="margin-top: 10px">
-  <router-outlet ></router-outlet>
-</div>
+@if ((asyncTabs | async) !== null) {
+  <div class="container content-second" style="margin-top: 10px">
+    <router-outlet ></router-outlet>
+  </div>
+}

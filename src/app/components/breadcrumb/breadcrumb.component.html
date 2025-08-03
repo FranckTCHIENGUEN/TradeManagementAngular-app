@@ -1,13 +1,15 @@
 <nav aria-label="breadcrumb" class="app-breadcrumb">
   <ol class="breadcrumb-list">
-    <li *ngFor="let item of history$ | async; let last = last" class="breadcrumb-item">
-      <ng-container *ngIf="!last">
-        <a [routerLink]="item.url" (click)="goBack()">{{ item.label }}</a>
-        <span class="breadcrumb-separator"> / </span>
-      </ng-container>
-      <ng-container *ngIf="last">
-        <span>{{ item.label }}</span>
-      </ng-container>
-    </li>
+    @for (item of history$ | async; track item; let last = $last) {
+      <li class="breadcrumb-item">
+        @if (!last) {
+          <a [routerLink]="item.url" (click)="goBack()">{{ item.label }}</a>
+          <span class="breadcrumb-separator"> / </span>
+        }
+        @if (last) {
+          <span>{{ item.label }}</span>
+        }
+      </li>
+    }
   </ol>
 </nav>

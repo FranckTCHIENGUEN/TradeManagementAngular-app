@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {MyErrorStateMatcher} from "../../ErrorMatcher";
 import {AppCategorieProduitService} from "../../../services/categorieProduit/app-categorie-produit.service";
 import {AppCategorieDepenseService} from "../../../services/categorieDepenseService/app-categorie-depense.service";
@@ -8,12 +8,24 @@ import {AppCatergorieServiceService} from "../../../services/categoriService/app
 import {DataLinkTransfertService} from "../../../services/dataLinkTransfert/Data-link-transfert.service";
 import {ConfirmDialogComponent} from "../confirm-dialog/confirm-dialog.component";
 import {UtilisateurDto} from "../../../tm-api/src-api/models/utilisateur-dto";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import {CommonModule} from "@angular/common";
 
 @Component({
-    selector: 'app-add-categorie-dialog',
-    templateUrl: './add-categorie-dialog.component.html',
-    styleUrls: ['./add-categorie-dialog.component.scss'],
-    standalone: false
+  selector: 'app-add-categorie-dialog',
+  templateUrl: './add-categorie-dialog.component.html',
+  styleUrls: ['./add-categorie-dialog.component.scss'],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDialogModule,
+    CommonModule
+  ]
 })
 export class AddCategorieDialogComponent {
 
@@ -43,6 +55,8 @@ export class AddCategorieDialogComponent {
     }
   }
 
+
+  get nom() { return this.saveForm.get('nom'); }
 
   get matcher(): MyErrorStateMatcher {
     return this._matcher;

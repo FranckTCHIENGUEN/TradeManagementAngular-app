@@ -4,80 +4,89 @@
       <button mat-flat-button color="primary"  (click)="formSubmit()" >Rechercher</button>
     </div>
     <div class="row">
-      <mat-form-field *ngIf="typeEnregistrement=='client'" class="example-full-width">
-        <mat-label>Nom Client</mat-label>
-        <input type="text"
-               placeholder="Saisir un nom"
-               aria-label="Nom Client"
-               matInput
-               #input
-               (input)="manageFilterPerson(input.value)"
-               formControlName="nom">
-      </mat-form-field>
-      <mat-form-field *ngIf="typeEnregistrement=='fournisseur'" class="mat-form-field example-full-width" appearance="fill">
-        <mat-label>Nom Fournisseur</mat-label>
-        <input type="text"
-               placeholder="Saisir un nom"
-               aria-label="Nom Client"
-               matInput
-               #input
-               (input)="manageFilterPerson(input.value)"
-               formControlName="nom">
-      </mat-form-field>
-      <mat-form-field *ngIf="typeEnregistrement=='utilisateur'" class="mat-form-field example-full-width" appearance="fill">
-        <mat-label>Nom Utilisateur</mat-label>
-        <input type="text"
-               placeholder="Saisir un nom"
-               aria-label="Nom Client"
-               matInput
-               #input
-               (input)="manageFilterPerson(input.value)"
-               formControlName="nom">
-
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <div class="col" *ngIf="typeEnregistrement =='client'">
-        <mat-form-field appearance="fill">
-          <mat-label>CA</mat-label>
-          <input matInput formControlName="ca" type="number">
-          <span matSuffix>FCFA&nbsp;</span>
-        </mat-form-field>
-      </div>
-      <div class="col" *ngIf="typeEnregistrement =='client'">
-        <mat-form-field appearance="fill">
-          <mat-label>Solde</mat-label>
-          <input matInput formControlName="solde" type="number">
-          <span matSuffix>FCFA&nbsp;</span>
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <mat-form-field appearance="fill">
-          <mat-label>Nombre visite</mat-label>
-          <input matInput formControlName="nbreVisite" type="number">
-          <span matSuffix>FCFA&nbsp;</span>
-        </mat-form-field>
-      </div>
-      <div class="col">
+      @if (typeEnregistrement=='client') {
         <mat-form-field class="example-full-width">
-          <mat-label>Tel</mat-label>
-          <input matInput formControlName="tel">
-        </mat-form-field>
+          <mat-label>Nom Client</mat-label>
+          <input type="text"
+            placeholder="Saisir un nom"
+            aria-label="Nom Client"
+            matInput
+            #input
+            (input)="manageFilterPerson(input.value)"
+            formControlName="nom">
+          </mat-form-field>
+        }
+        @if (typeEnregistrement=='fournisseur') {
+          <mat-form-field class="mat-form-field example-full-width" appearance="fill">
+            <mat-label>Nom Fournisseur</mat-label>
+            <input type="text"
+              placeholder="Saisir un nom"
+              aria-label="Nom Client"
+              matInput
+              #input
+              (input)="manageFilterPerson(input.value)"
+              formControlName="nom">
+            </mat-form-field>
+          }
+          @if (typeEnregistrement=='utilisateur') {
+            <mat-form-field class="mat-form-field example-full-width" appearance="fill">
+              <mat-label>Nom Utilisateur</mat-label>
+              <input type="text"
+                placeholder="Saisir un nom"
+                aria-label="Nom Client"
+                matInput
+                #input
+                (input)="manageFilterPerson(input.value)"
+                formControlName="nom">
+              </mat-form-field>
+            }
+          </div>
+          <div class="row">
+            @if (typeEnregistrement =='client') {
+              <div class="col">
+                <mat-form-field appearance="fill">
+                  <mat-label>CA</mat-label>
+                  <input matInput formControlName="ca" type="number">
+                  <span matSuffix>FCFA&nbsp;</span>
+                </mat-form-field>
+              </div>
+            }
+            @if (typeEnregistrement =='client') {
+              <div class="col">
+                <mat-form-field appearance="fill">
+                  <mat-label>Solde</mat-label>
+                  <input matInput formControlName="solde" type="number">
+                  <span matSuffix>FCFA&nbsp;</span>
+                </mat-form-field>
+              </div>
+            }
+            <div class="col">
+              <mat-form-field appearance="fill">
+                <mat-label>Nombre visite</mat-label>
+                <input matInput formControlName="nbreVisite" type="number">
+                <span matSuffix>FCFA&nbsp;</span>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="example-full-width">
+                <mat-label>Tel</mat-label>
+                <input matInput formControlName="tel">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="example-full-width">
+                <mat-label>Mail</mat-label>
+                <input matInput formControlName="mail">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field class="example-full-width">
+                <mat-label>Ville</mat-label>
+                <input matInput formControlName="ville">
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <mat-form-field class="example-full-width">
-          <mat-label>Mail</mat-label>
-          <input matInput formControlName="mail">
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <mat-form-field class="example-full-width">
-          <mat-label>Ville</mat-label>
-          <input matInput formControlName="ville">
-        </mat-form-field>
-      </div>
-    </div>
-  </form>
-</div>

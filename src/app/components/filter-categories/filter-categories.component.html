@@ -8,49 +8,57 @@
       <mat-form-field class="example-full-width">
         <mat-label>Nom</mat-label>
         <input type="text"
-               placeholder="Saisir un mot pour rechercher"
-               matInput formControlName="nom">
-      </mat-form-field>
-    </div>
-    <div class="row" *ngIf="typeEnregistrement==ContextCategorie.DEPENSE">
-      <div class="col">
-        <mat-form-field appearance="fill">
-          <mat-label>Date 1</mat-label>
-          <input  matInput formControlName="date1" [matDatepicker]="picker">
-<!--          <mat-hint>MM/DD/YYYY</mat-hint>-->
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          placeholder="Saisir un mot pour rechercher"
+          matInput formControlName="nom">
         </mat-form-field>
       </div>
-      <div class="col">
-        <mat-form-field appearance="fill">
-          <mat-label>Date 2</mat-label>
-          <input  matInput formControlName="date2" [matDatepicker]="picker2">
-<!--          <mat-hint>MM/DD/YYYY</mat-hint>-->
-          <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-          <mat-datepicker #picker2></mat-datepicker>
-        </mat-form-field>
+      @if (typeEnregistrement==ContextCategorie.DEPENSE) {
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="fill">
+              <mat-label>Date 1</mat-label>
+              <input  matInput formControlName="date1" [matDatepicker]="picker">
+              <!--          <mat-hint>MM/DD/YYYY</mat-hint>-->
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="fill">
+              <mat-label>Date 2</mat-label>
+              <input  matInput formControlName="date2" [matDatepicker]="picker2">
+              <!--          <mat-hint>MM/DD/YYYY</mat-hint>-->
+              <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      }
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="fill">
+            <mat-label>Categorie</mat-label>
+            <mat-select formControlName="cat"  placeholder="choisir une categorie">
+              @for (cat of categories ; track cat) {
+                <mat-option [value]="cat.id" >{{cat}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <mat-form-field appearance="fill">
-          <mat-label>Categorie</mat-label>
-          <mat-select formControlName="cat"  placeholder="choisir une categorie">
-            <mat-option *ngFor="let cat of categories " [value]="cat.id" >{{cat}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
-    <div *ngIf="typeEnregistrement == ContextCategorie.DEPENSE && permission.includes('UTILISATEUR: LIRE') && permission.includes('DEPENSE: VOIR_TOUT')" class="row">
-      <div class="col">
-        <mat-form-field appearance="fill">
-          <mat-label>Créer par</mat-label>
-          <mat-select formControlName="user"  placeholder="choisir un mode">
-            <mat-option *ngFor="let cat of user " [value]="cat.nom + ' '+cat.prenom" >{{cat}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
-  </form>
-</div>
+      @if (typeEnregistrement == ContextCategorie.DEPENSE && permission.includes('UTILISATEUR: LIRE') && permission.includes('DEPENSE: VOIR_TOUT')) {
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="fill">
+              <mat-label>Créer par</mat-label>
+              <mat-select formControlName="user"  placeholder="choisir un mode">
+                @for (cat of user ; track cat) {
+                  <mat-option [value]="cat.nom + ' '+cat.prenom" >{{cat}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      }
+    </form>
+  </div>
